@@ -1,0 +1,349 @@
+<?php include 'sidebar.php'; ?>
+
+<div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">Dashboard <small> > Sales Dashboard</small></h4>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <!--Top Discription -->
+                         <div class="card">
+                            <div class="card-body">
+                            	<div class="row">
+                            			<div class="col-md-3">
+                            				<div class="first" style="background-color: #252735;text-align: center;padding: 10px;">
+                            					<div class="second">
+                            						<h6><i style="font-size:19px" class="fa">&#xf083;</i>
+                            						Add Image</h6>
+                            					</div>
+                            				</div>
+                            			</div>
+                            			<div class="col-md-3">
+                            				<p>
+                            					Recorded by :<select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                <option value="">Industry sector</option>
+                                                <option value="AE">ABC</option>
+                                                <option value="VI">ABC</option>
+                                                <option value="MC">ABC</option>
+                                                <option value="DI">ABC</option>
+                                            </select><br>
+                            					Last contact date :20/march/2019<br>
+                            					Business link :12 link companies
+                            				</p>
+                            			</div>
+                            			<div class="col-md-2">
+                            				<p>Total spend : $00.0<br>
+                            					Gross Profit : $00.0<br>
+                            					Invoiced : $00.0
+                            				</p>
+                            			</div>
+                            			<div class="col-md-2">
+                            				<p>Enquiries : 01<br>
+                            					Quotes : 00<br>
+                            					Orders : 00
+                            				</p>
+                            			</div>
+                            			<div class="col-md-2">
+                            				<div class="first" style="background-color: #252735;text-align: center;border-radius: 15px;">
+                            					<P>Account</P>
+                            				</div>
+                            				<div class="first" style="background-color: #252735;text-align: center;border-radius: 15px;">
+                            					<P class="para" style="font-size: 12px;" >Enquiry Active/Order document</P>
+                            				</div>
+                            			</div>
+	                            	</div>
+	                            </div>
+	                        </div>
+                           <!--end top discription -->
+
+                           <!--Tabs start -->
+                             <div class="card">
+                                    <div class="card-body">
+                                        <h4></h4>
+                                        <ul class="nav nav-pills nav-justified" role="tablist">
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link active" data-toggle="tab" href="#home-1" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                    <span class="d-none d-sm-block">
+                                                    Record Information</span> 
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link" data-toggle="tab" href="#profile-1" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                                    <span class="d-none d-sm-block">Contact Information</span> 
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link" data-toggle="tab" href="#messages-1" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                    <span class="d-none d-sm-block">Order history</span>   
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link" data-toggle="tab" href="#settings-1" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block">Customer Summary</span>    
+                                                </a>
+                                            </li>
+                                             <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link" data-toggle="tab" href="#settings-1" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block"><i class="fa fa-comments"></i> Chat History</span>    
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                           <!--Tabs end-->
+                            
+                           <!--forms start -->
+                           <div class="content">
+		                    <div class="container-fluid">
+		                        <div class="row">
+		                            <div class="col-lg-6">
+                                        <h4 class="mt-0 header-title">About Information</h4>
+                                        <hr>
+                                        <form class="" action="#">
+                                            <div class="form-group">
+                                                <textarea class="form-control" required placeholder="write some information on customer" style="height: 100px;">
+                                                </textarea>
+                                            </div>
+        
+                                            <div class="form-group">
+                                                <div class="row">
+                                                	<div class="col-md-6">
+                                                        <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                            <option value="">Industry sector</option>
+                                                            <option value="AE">ABC</option>
+                                                            <option value="VI">ABC</option>
+                                                            <option value="MC">ABC</option>
+                                                            <option value="DI">ABC</option>
+                                                       </select>
+                                                   </div>
+                                                   <div class="col-md-6">
+                                                        <input type="password" class="form-control" required data-parsley-equalto="#pass2"
+                                                            placeholder="Secrtor free Text"/>
+                                                     </div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="form-group">
+                                                 <div class="row">
+                                                	<div class="col-md-6">
+                                                    <input type="text" id="pass2" class="form-control" required
+                                                            placeholder="Website Address pf main company site"/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                        <option value="">company record source</option>
+                                                        <option value="AE">ABC</option>
+                                                        <option value="VI">ABC</option>
+                                                        <option value="MC">ABC</option>
+                                                        <option value="DI">ABC</option>
+                                                    </select>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            <br>
+
+                                            <h4 class="mt-0 header-title">Payment information</h4>
+                                            <hr>
+
+                                            <div class="form-group">
+                                            	<p class="mt-0 header-title">Estimated requirement frequency :</p>
+                                               <div class="row">
+                                               	 <div class="col-md-2 form-control" style="height: 50px;margin: 5px;padding: 0px;">
+                                                    <p>Less than once a year</p>
+                                                </div>
+                                                <div class="col-md-2 form-control"style="margin: 5px;height: 50px">
+                                                	<p>Daily</p>
+                                                </div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>Weekly</p></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><P>Monthly</P></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>Yearly</p></div>
+                                               </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                            	<p class="mt-0 header-title">Estimated spend :</p>
+                                               <div class="row">
+                                               	 <div class="col-md-2 form-control" style="height: 50px;margin: 5px;">
+                                                    <p>Less than 50k</p>
+                                                </div>
+                                                <div class="col-md-2 form-control"style="margin: 5px;height: 50px">
+                                                	<p>50k+</p>
+                                                </div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>100k+</p></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><P>500k+</P></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>1m+</p></div>
+                                               </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                 <div class="row">
+                                                	<div class="col-md-6">
+                                                    <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                        <option value="">Advance</option>
+                                                        <option value="AE">ABC</option>
+                                                        <option value="VI">ABC</option>
+                                                        <option value="MC">ABC</option>
+                                                        <option value="DI">ABC</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                                        <option value="">Free to trade</option>
+                                                        <option value="AE">ABC</option>
+                                                        <option value="VI">ABC</option>
+                                                        <option value="MC">ABC</option>
+                                                        <option value="DI">ABC</option>
+                                                    </select>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                            	<p class="mt-0 header-title">Manufectures Used :</p>
+
+                                               <div class="row">
+                                               	 <div class="col-md-2 form-control" style="height: 50px;margin: 5px;">
+                                                    <p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control"style="margin: 5px;height: 50px">
+                                                	<p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><P>abc..</P></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                               </div>
+
+                                               <div class="row">
+                                               	 <div class="col-md-2 form-control" style="height: 50px;margin: 5px;">
+                                                    <p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control"style="margin: 5px;height: 50px">
+                                                	<p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><P>abc..</P></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                               </div>
+
+                                               <div class="row">
+                                               	 <div class="col-md-2 form-control" style="height: 50px;margin: 5px;">
+                                                    <p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control"style="margin: 5px;height: 50px">
+                                                	<p>abc..</p>
+                                                </div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><P>abc..</P></div>
+                                                <div class="col-md-2 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                               </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" name=""class="form-control" required placeholder="Other Manufectures used :">
+                                                <br>
+                                                <div class="row">
+                                               	 <div class="col-md-3 form-control" style="height: 50px;margin: 5px;">
+                                                    <p>abc..</p>
+                                                </div>
+                                                <div class="col-md-3 form-control"style="margin: 5px;height: 50px">
+                                                	<p>abc..</p>
+                                                </div>
+                                                <div class="col-md-3 form-control" style="margin: 5px;height: 50px"><p>abc..</p></div>
+                                               </div>
+                                            </div>
+                                        </form>
+                            </div> 
+                            <!-- First form End-->
+        
+                            <div class="col-lg-6">
+                                <h4 class="mt-0 header-title">Adderss</h4>
+                                <hr>    
+                                <form action="#">
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                       	 <div class="col-md-6">
+                                       	 	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="Location Number/ Name"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="Street Address"/>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                      <div class="row">
+                                       	 <div class="col-md-6">
+                                       	 	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="Town / city"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="State"/>
+                                        </div>
+                                    </div>
+                                    <br>
+
+
+                                    <div class="row">
+                                       	 <div class="col-md-6">
+                                       	 	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="Postal / Zip code"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<input type="text" class="form-control" required
+                                                    data-parsley-maxlength="6" placeholder="Country"/>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <p>If this company has more than one address , please click the button bellow to add new address.</p>
+                                    <br>
+                                    <button type="button" class="form-control" style="width: 200px;height: 60px;"><i class="fa fa-map-marker"></i>Add new Address</button>
+                                     <br>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="text-muted m-b-30">Example of google maps.</p>
+                    
+                                                    <div id="gmaps-markers" class="gmaps"></div>
+                                                </div>
+                                            </div>
+                                       </form>
+                                  </div> 
+                              </div>
+                         </div>
+                    </div>
+                    <!-- content -->
+                    <div class="card">
+                                <div class="card-body">
+                                	<div class="row">
+                                			<div class="col-md-3">
+                                				<button type="button" class="form-control" style="width: 200px;height: 60px;">Save draft</button>
+                                	         </div>
+                                             <div class="col-md-3">
+                                			    <button type="button" class="form-control" style="width: 200px;height: 60px;">Save & continue</button>
+                                			</div>
+                                	  </div>
+                                </div>
+                            </div>
+
+<?php include 'footer.php'; ?>
