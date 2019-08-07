@@ -1,5 +1,5 @@
 <?php
-class Companies_Model extends CI_Model {
+class Sales_Model extends CI_Model {
 
     //-- insert function
     public function insert($data,$table){
@@ -10,14 +10,12 @@ class Companies_Model extends CI_Model {
     }
 
     // show all sales companies
-    public function getAllSalesCompanies(){
+    public function getAllSalesContacts(){
 
-        $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
-        $this->db->from('companies comp');
-        $this->db->join('industry indus','indus.id = comp.industry');
-        $this->db->join('country cont','cont.id = comp.country');
-        $this->db->where('comp.company_type', 1);
-        $this->db->where('comp.status', 1);
+        $this->db->select('s_con.*, comp.company_name');
+        $this->db->from('sales_contacts s_con');
+        $this->db->join('companies comp','comp.id = s_con.company');
+        $this->db->where('s_con.status', '!=', 3);
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
@@ -26,10 +24,9 @@ class Companies_Model extends CI_Model {
     // show all supplier companies
     public function getAllSupplierCompanies(){
 
-        $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
+        $this->db->select('comp.*, indus.industry as industry_name');
         $this->db->from('companies comp');
         $this->db->join('supplier_industry indus','indus.id = comp.industry');
-        $this->db->join('country cont','cont.id = comp.country');
         $this->db->where('comp.company_type', 2);
         $this->db->where('comp.status', 1);
         $query = $this->db->get();

@@ -71,10 +71,13 @@
                                                     <img src="http://localhost/obsoadmin/trunk/obso/assets/images/flags/french_flag.jpg" class="cntry-flag">
                                                     <div class="col-md-12 m-l-30">
                                                         <p> 
-                                                            Company  : <?= $company['company_name']; ?> <br>
-                                                            Industry : <?= $company['industry_name']; ?> <br>
+                                                            Company  : <?= $company['company_name']; ?> 
+                                                            <br>
+                                                            Industry : <?= $company['industry_name']; ?> 
+                                                            <br>
                                                             Record Source : <?= $company['record_source']; ?>
-                                                            Country : <?= $company['country']; ?>
+                                                            <br>
+                                                            Country : <?= $company['country_name']; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -127,7 +130,8 @@
                                                             Company  : <?= $company['company_name']; ?> <br>
                                                             Industry : <?= $company['industry_name']; ?> <br>
                                                             Record Source : <?= $company['record_source']; ?>
-                                                            Country : <?= $company['country']; ?>
+                                                            <br>
+                                                            Country : <?= $company['country_name']; ?>
                                                         </p>
                                                     </div>
                                                 </div>

@@ -6,19 +6,42 @@ class Sales extends CI_Controller {
         parent::__construct();
         check_login_user();
         $this->load->model('common_model');
+        $this->load->model('Sales_Model');
         $this->load->helper('url');
         $this->load->library('session');
 
     }
 
+    /* Prem created functions */
     // show all sales
     public function index(){
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+
+        // get all sales contacts
+        $data['sales_contacts'] = $sales_contacts = $this->Sales_Model->getAllSalesContacts();
 
         $data['page_title'] = 'Sales Contact';
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/sales/index', $data);
         $this->load->view('admin/layout/footer', $data);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	 
     /*Start Customer List*/ 
     public function customer_list(){

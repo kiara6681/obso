@@ -35,9 +35,9 @@
 
                             <h4 class="mt-0 header-title">Add New Company</h4>
 
-                            <input type="radio" class="company_type" value="1" checked="checked"> &nbsp; 
+                            <input type="radio" name="comp_type" class="company_type" value="1" checked="checked"> &nbsp; 
                             Sales Company &nbsp;&nbsp;
-                            <input type="radio" class="company_type" value="2"> &nbsp; 
+                            <input type="radio" name="comp_type" class="company_type" value="2"> &nbsp; 
                             Supplier Company
 
                             <!-- sales company form -->
