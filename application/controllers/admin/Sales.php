@@ -10,6 +10,15 @@ class Sales extends CI_Controller {
         $this->load->library('session');
 
     }
+
+    // show all sales
+    public function index(){
+
+        $data['page_title'] = 'Sales Contact';
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/sales/index', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
 	 
     /*Start Customer List*/ 
     public function customer_list(){

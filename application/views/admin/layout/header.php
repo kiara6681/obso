@@ -277,6 +277,11 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
                                 <li><a href="<?//php echo base_url(); ?>admin/sales/customer_contact">Customer Contacts</a></li>
                                 </ul> -->
                             </li>
+
+                            <li>
+                                <a href="<?php echo base_url(); ?>admin/sales"><i class="far fa-address-card"></i> Sales </a>
+                            </li>
+
                             <?php endif; ?>
                             <?php if(in_array('quote_pipeline',$result)): ?>
 

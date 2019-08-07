@@ -71,10 +71,10 @@
                                                     <img src="http://localhost/obsoadmin/trunk/obso/assets/images/flags/french_flag.jpg" class="cntry-flag">
                                                     <div class="col-md-12 m-l-30">
                                                         <p> 
-                                                            Company  : <strong><?= $company['company_name']; ?></strong>
-                                                            <br>
-                                                            Industry : <strong><?= $company['industry_name']; ?></strong>
-                                                            <br>
+                                                            Company  : <?= $company['company_name']; ?> <br>
+                                                            Industry : <?= $company['industry_name']; ?> <br>
+                                                            Record Source : <?= $company['record_source']; ?>
+                                                            Country : <?= $company['country']; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -86,7 +86,10 @@
                                                                 <a href="javascript:;"></a>
                                                                 <div class="col-xl-12">
                                                                     <p>
-
+                                                                        Website : <?= $company['website']; ?> <br>
+                                                                        Dial Number : <?= $company['dial_number']; ?><br>
+                                                                        Competitor : <?= $company['competitor']; ?><br>
+                                                                        Free To Trade : <?= $company['free_to_trade']; ?><br>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -197,34 +200,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
+                                            <select name="sort_by" id="sort_by" class="form-control">
                                                 <option value="">Sort by</option>
-                                                <option value="AE">Company Name A-Z</option>
-                                                <option value="AE">Company Name Z-A</option>
-                                                <option value="AE">No. of Enquries High to Low</option>
-                                                <option value="AE">No. of Enquries Low to High</option>
-                                                <option value="AE">Last Enquiry (earliest to latest)</option>
-                                                <option value="AE">Last Enquiry( latest to earliest)</option>
-                                                <option value="AE">No. of Orders High to Low</option>
-                                                <option value="AE">No. of Orders Low to High</option>
-                                                <option value="AE">Last Order (earliest to latest)</option>
-                                                <option value="AE">Last Order( latest to earliest)</option>
-                                                <option value="AE">GP High to Low</option>
-                                                <option value="AE">GP Low to High</option>
-                                                <option value="AE">Account Status Longest First</option>
-                                                <option value="AE">Account Status Shortest First</option>
-                                                <option value="AE">County/State A-Z</option>
-                                                <option value="AE">County/State Z-A</option>
-                                                <option value="AE">Country A-Z</option>
-                                                <option value="AE">Country Z-A</option>
-                                                <option value="AE">Industry A-Z</option>
-                                                <option value="AE">Industry Z-A</option>
-                                                <option value="AE">Trader A-Z</option>
-                                                <option value="AE">Trader Z-A</option>
-                                                <option value="AE">Number of Contacts High to Low</option>
-                                                <option value="AE">Number of Contacts Low to High</option>
-                                                <option value="AE">Last Sales Note (earliest to latest)</option>
-                                                <option value="AE">Last Sales Note ( latest to earliest)</option>
+                                                <option value="1">Latest First</option>
+                                                <option value="2">Last  First</option>
+                                                <option value="3">Country A-Z</option>
+                                                <option value="4">Country Z-A</option>
+                                                <option value="5">Industry A-Z</option>
+                                                <option value="6">Industry Z-A</option>
                                             </select>
                                         </div>
 
@@ -259,26 +242,33 @@ $(document).ready(function(){
     $(document).on('change', '#sort_by_country', function(){
 
         var country_by = $(this).val();
-        //var sort_by = $('#sort_by').val();
+        var sort_by = $('#sort_by').val();
 
-        //sort_by_companies(sort_by, country_by);
-        sort_by_companies(country_by);
+        sort_by_companies(sort_by, country_by);
+        //sort_by_companies(country_by);
+    });
+
+    $(document).on('change','#sort_by' ,function(){
+                            
+        var sort_by = $(this).val();
+        var country_by = $('#sort_by_country').val();
+
+        sort_by_companies(sort_by, country_by);
     });
 
 });
 
-function sort_by_companies(country_by){
+function sort_by_companies(sort_by, country_by){
 
     $.ajax({
         url : "<?= base_url() ?>admin/companies/sort_by_companies",
         type : 'get',
-        data : {'country_by' : country_by},
+        data : {'sort_by' : sort_by, 'country_by' : country_by},
         success : function(data){
             
-            console.log(data);
-            alert(data);
-
-            //$('#myList').html(data);
+            // console.log(data);
+            // alert(data);
+            $('#show_searched_results').html(data);
         }
     });
 }

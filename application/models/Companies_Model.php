@@ -61,4 +61,53 @@ class Companies_Model extends CI_Model {
         return true;
     }
 
+    // sort by country
+    public function sort_by_companies($sort_by, $country_by)
+    {
+        $this->db->select('comp.*, indus.industry as industry_name');
+        $this->db->from('companies comp');
+        $this->db->join('industry indus','indus.id = comp.industry');
+
+        if($sort_by == 1){
+
+            $this->db->order_by('comp.id', 'DESC');
+        }
+
+        if($sort_by == 2){
+
+            $this->db->order_by('comp.id', 'ASC');
+        }
+
+        if($sort_by == 3){
+
+            $this->db->order_by('comp.company_name', 'ASC');
+        }
+        
+        if($sort_by == 4){
+
+            $this->db->order_by('comp.company_name', 'DESC');
+        }
+        
+        if($sort_by == 5){
+
+            $this->db->order_by('indus.industry', 'ASC');
+        }
+        
+        if($sort_by == 6){
+
+            $this->db->order_by('indus.industry', 'DESC');
+        }
+
+        // if county is selected
+        if( !empty( $country_by ) ){
+
+            $this->db->where('comp.country', $country_by);
+        }
+    
+        $query = $this->db->get();
+        $query = $query->result_array();  
+
+        return $query;
+    }
+
 } 
