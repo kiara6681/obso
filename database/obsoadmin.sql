@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2019 at 09:26 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Aug 08, 2019 at 09:26 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -501,7 +501,7 @@ CREATE TABLE `employee_role` (
   `name` varchar(250) NOT NULL,
   `department` varchar(250) NOT NULL,
   `permission` varchar(250) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -959,7 +959,7 @@ INSERT INTO `return_policy` (`id`, `description`, `created_at`) VALUES
 
 CREATE TABLE `sales_contacts` (
   `id` int(11) NOT NULL,
-  `trader` int(11) NOT NULL COMMENT 'created_by',
+  `trader` varchar(11) DEFAULT NULL COMMENT 'created_by',
   `company` int(11) NOT NULL,
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
@@ -974,7 +974,7 @@ CREATE TABLE `sales_contacts` (
   `payment_terms` varchar(255) DEFAULT NULL,
   `estimate_required` varchar(255) DEFAULT NULL,
   `estimate_spend` varchar(255) DEFAULT NULL,
-  `manufacturers` int(11) DEFAULT NULL,
+  `manufacturers` text,
   `invoice_reference_number` varchar(255) DEFAULT NULL,
   `pls_information` text,
   `communication` varchar(255) DEFAULT NULL,
@@ -982,6 +982,47 @@ CREATE TABLE `sales_contacts` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales_contacts`
+--
+
+INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 2, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(2, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06'),
+(3, 'admin', 3, 'Prem', 'Prakash', 'Male', NULL, 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(4, 'admin', 3, 'Amit', 'Sharma', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 2, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_contact_addresses`
+--
+
+CREATE TABLE `sales_contact_addresses` (
+  `id` int(11) NOT NULL,
+  `sales_contact_id` int(11) NOT NULL,
+  `address_type` varchar(40) DEFAULT NULL,
+  `location` text,
+  `street` text,
+  `town` varchar(200) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `zip_code` varchar(10) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales_contact_addresses`
+--
+
+INSERT INTO `sales_contact_addresses` (`id`, `sales_contact_id`, `address_type`, `location`, `street`, `town`, `state`, `zip_code`, `country`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'invoice_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(2, 1, 'delivery_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(3, 2, 'invoice_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06'),
+(4, 2, '', 'B- 53,  Balaji Tower 1st', '', '', '', '', '13', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
 
 -- --------------------------------------------------------
 
@@ -1571,6 +1612,12 @@ ALTER TABLE `sales_contacts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sales_contact_addresses`
+--
+ALTER TABLE `sales_contact_addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -1788,7 +1835,13 @@ ALTER TABLE `return_policy`
 -- AUTO_INCREMENT for table `sales_contacts`
 --
 ALTER TABLE `sales_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sales_contact_addresses`
+--
+ALTER TABLE `sales_contact_addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `settings`
