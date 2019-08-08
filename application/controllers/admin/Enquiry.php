@@ -20,8 +20,7 @@ class Enquiry extends CI_Controller {
    
    
    public function add()
-   {  
-     
+   {
       if ($_POST) {
 
          
@@ -54,9 +53,14 @@ class Enquiry extends CI_Controller {
 
         $save=$_POST['enquiry']; 
         
-        $save['company_name_front']=$this->common_model->getcompanyname($id = $_POST['enquiry']['company_id'])->company_name;
+        $save['company_name_front']=$this->common_model->getCompanyInfo($id = $_POST['enquiry']['company_id'])->company_name;
        
         $save['industry_name']=$this->common_model->getindustryname($id = $_POST['enquiry']['industry_id'])->industry;
+
+
+       // echo '<pre>';
+       // print_r($save);
+       // exit;
        
         // $data['enquiry'] = $_POST['enquiry'];
          
@@ -478,31 +482,32 @@ class Enquiry extends CI_Controller {
    public function getIndustry(){
 
       $id = $_GET['id'];   
-      $Companyhtml = "";
+      $industryhtml = "";
       $Contacthtml = "";
       $response = array();
 
       if(isset($_GET['type']) && $_GET['type'] == "contact"){
 
-         $contactInfo = $this->common_model->getContactInfoById($id);
+         $contactInfo = $this->common_model->getSalesContactInfoById($id);
 
          $response['email'] = $contactInfo->email;
          $response['number'] = $contactInfo->mobile;
 
       }elseif(isset($_GET['type']) && $_GET['type'] == "company"){
 
-         $company = $this->common_model->getCompanyById($id);
-         $contacts = $this->common_model->getContactById($id);   
+         //$company = $this->common_model->getCompanyById($id);
+         $industry = $this->common_model->getCompanyIndustry($id);
+         $contacts = $this->common_model->getSalesContactBYCompany($id);   
 
-         $Companyhtml .= "<option value=''>Select Manufacturer</option>";
-         $Companyhtml .= "<option value='".$company->id."' selected>".$company->industry_sector." </option>";
+         $industryhtml .= "<option value=''>Select Industry</option>";
+         $industryhtml .= "<option value='".$industry->id."' selected>".$industry->industry_name." </option>";
          $Contacthtml .= "<option value=''>Select Contact</option>";
 
          foreach ($contacts as $key => $contact) {
             $Contacthtml .= "<option value='".$contact['id']."'>".$contact['fname']. " " .$contact['fname']." </option>";
          }
 
-         $response['company'] = $Companyhtml;
+         $response['company'] = $industryhtml;
          $response['contact'] = $Contacthtml;
       }
       

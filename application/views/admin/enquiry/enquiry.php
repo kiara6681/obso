@@ -153,7 +153,7 @@
                                         <div class="col-xl-12"> 
                                         Company Name:
                                             <strong style="font-size: 18px;">
-                                                &nbsp <?php echo (!empty($companyname->company_name)) ? $companyname->company_name : $enq['company_name_front']; ?>
+                                                &nbsp <?php echo $enq['company_name_front']; ?>
 
                                             </strong>
                                         </div>

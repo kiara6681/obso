@@ -29,6 +29,14 @@ class Common_model extends CI_Model {
         $query = $query->row();  
         return $query; 
     }
+     function getCompanyInfo($id){
+        $this->db->select("company_name");
+        $this->db->from('companies');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        $query = $query->row();  
+        return $query; 
+    }
 
     function getCountryInfo($country_id){
         $this->db->select("*");
@@ -68,10 +76,28 @@ class Common_model extends CI_Model {
         return $query; 
     }
 
+    function getAllSalesCompanies(){
+        $this->db->select("id,company_name");
+        $this->db->from('companies');
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query; 
+    }
+
     function getCompanyById($id){
         $this->db->select("id,industry_sector");
         $this->db->from('customer_records');
         $this->db->where('id',$id);
+        $query = $this->db->get();
+        $query = $query->row();  
+        return $query; 
+    }
+
+    function getCompanyIndustry($id){
+        $this->db->select("ind.industry as industry_name, ind.id");
+        $this->db->from('companies comp');
+        $this->db->join('industry ind','ind.id = comp.industry','LEFT');
+        $this->db->where('comp.id',$id);
         $query = $this->db->get();
         $query = $query->row();  
         return $query; 
@@ -85,9 +111,28 @@ class Common_model extends CI_Model {
         $query = $query->result_array();  
         return $query; 
     }
+
+    function getSalesContactBYCompany($id){
+        $this->db->select("id,fname,lname");
+        $this->db->from('sales_contacts');
+        $this->db->where('company',$id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query; 
+    }
+
     function getContactInfoById($id){
         $this->db->select("email,mobile");
         $this->db->from('customer_contact');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        $query = $query->row();  
+        return $query; 
+    }
+
+    function getSalesContactInfoById($id){
+        $this->db->select("email,mobile");
+        $this->db->from('sales_contacts');
         $this->db->where('id',$id);
         $query = $this->db->get();
         $query = $query->row();  

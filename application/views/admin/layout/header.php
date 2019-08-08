@@ -32,6 +32,8 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
         <!-- jQuery  -->
         <script src="<?php echo base_url();?>obso/assets/js/jquery.min.js"></script>
 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
     </head>
 
     <body>
@@ -415,7 +417,8 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
 
 <?php 
 
-$allcompanies = $this->common_model->getAllCompanies();
+//$allcompanies = $this->common_model->getAllCompanies();
+$allcompanies = $this->common_model->getAllSalesCompanies();
 
 ?>
 
@@ -440,12 +443,18 @@ $allcompanies = $this->common_model->getAllCompanies();
                             <div class="row">
                             <div class="col-md-12">
                           <label>COMPANY NAME:</label>
+
                            <select name="enquiry[company_id]" data-ajax="company" class="form-control ajax-change" required>
-                            <option value="">Select Company</option>
-                            <?php foreach ($allcompanies as $allcompany){ ?>
-                            <option value="<?php echo $allcompany['id']; ?>"><?php echo $allcompany['company_name']; ?></option>
-                            <?php } ?>
+                                <option value="">Select Company</option>
+                                <?php 
+                                foreach ($allcompanies as $allcompany){ 
+                                    ?>
+                                    <option value="<?php echo $allcompany['id']; ?>"><?php echo $allcompany['company_name']; ?></option>
+                                    <?php 
+                                } 
+                                ?>
                           </select>
+
                             </div>
                             </div>
                             <div class="row">
@@ -488,13 +497,7 @@ $allcompanies = $this->common_model->getAllCompanies();
                         <button type="button" class="btn-primary btn-blockadd waves-effect waves-light btn-radius clone-row-btn" >Add New Part</button>
                         </div>
                     </div>
-
-
-
                         </div>
-
-
-
                          <div class="col-md-4">
                             <div class="row">
                              <div class="col-md-12">
@@ -502,8 +505,6 @@ $allcompanies = $this->common_model->getAllCompanies();
                            <select name="enquiry[industry_id]" type="hidden" class="form-control industry-select" required>
                             <option value="">Select Industry</option>
                             </select>
-
-                           
 
                         </div>
                         </div>
