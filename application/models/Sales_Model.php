@@ -10,14 +10,24 @@ class Sales_Model extends CI_Model {
     }
 
     // show all sales companies
-    public function getAllSalesContacts(){
+    public function getAllSalesContacts($status = null, $id = null){
 
-        $this->db->select('s_con.*, comp.company_name');
-        $this->db->from('sales_contacts s_con');
-        $this->db->join('companies comp','comp.id = s_con.company');
-        $this->db->where('s_con.status', '!=', 3);
-        $query = $this->db->get();
-        $query = $query->result_array();  
+        $this->db->select('*');
+        $this->db->from('sales_contacts');
+        if($status != null)
+        {
+            $this->db->where('status', $status);
+        }
+        if($id != null)
+        {
+            $this->db->where('id', $id);
+            $query = $this->db->get();
+            $query = $query->row();  
+
+        }else{
+            $query = $this->db->get();
+            $query = $query->result_array();  
+        }
         return $query;
     }
 
@@ -32,6 +42,13 @@ class Sales_Model extends CI_Model {
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
+    }
+
+    public function updateStatus($id, $status){
+
+        $this->db->where('id', $id);
+        $this->db->update('sales_contacts', array('status' => $status));
+        return true;
     }
 
     // get single company information

@@ -11,7 +11,7 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <!--<link rel="icon" type="image/png" sizes="16x16" href="<?//php echo base_url();?>optimum/logo.png">-->
-        <title><?//php echo $system_name; ?>OBSO</title>
+        <title>OBSO - Admin</title>
         <meta content="" name="description" />
         <meta content="" name="author" />
         <!--<link rel="shortcut icon" href="<?//php echo base_url();?>obso/assets/images/favicon.ico">-->
@@ -196,10 +196,10 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
 
             <!-- ========== Left Sidebar Start ========== -->
             <div class="left side-menu">
-                     <div class="col-md-12 text-center" style="padding: 5px;background: #393e46;"><img src="<?php echo base_url();?>obso/assets//images/users/user-4.jpg" alt="user" class="rounded-circlet" style="    margin-top: 20px;"><br>
+                     <div class="col-md-12 text-center" style="padding: 5px;background: #2a3142;"><img src="<?php echo base_url();?>obso/assets//images/users/user-4.jpg" alt="user" class="rounded-circlet" style="    margin-top: 20px;"><br>
                     <p style="margin: 10px;">Alexender Pierca, CEO</p>
                     <div class="col-md-12" style="margin-left: 50px;">
-                    <button type="button" class="btn-primary btn-blocka waves-effect waves-light btn-radius" data-toggle="modal" data-target="#enquiry-modal"><i class="mdi mdi-whatsapp"> </i>Enquiry</button>
+                    <button type="button" class="btn-primary btn-blocka btn waves-effect waves-light" data-toggle="modal" data-target="#enquiry-modal"><i class="mdi mdi-whatsapp"> </i>Enquiry</button>
                     </div>
                     </div>
                 <div class="slimscroll-menu" id="remove-scroll">

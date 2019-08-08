@@ -7,6 +7,8 @@ class Sales extends CI_Controller {
         check_login_user();
         $this->load->model('common_model');
         $this->load->model('Sales_Model');
+        $this->load->model('Companies_Model');
+        $this->load->model('Enquiry_model');
         $this->load->helper('url');
         $this->load->library('session');
 
@@ -19,8 +21,16 @@ class Sales extends CI_Controller {
         // Get all countries
         $data['countries'] = $countries = $this->common_model->select('country');
 
-        // get all sales contacts
-        $data['sales_contacts'] = $sales_contacts = $this->Sales_Model->getAllSalesContacts();
+        // get All sales contacts
+        $data['sales_lead_block'] = $sales_lead_block = $this->Sales_Model->getAllSalesContacts(1);
+        $data['sales_suspects_block'] = $sales_suspects_block = $this->Sales_Model->getAllSalesContacts(2);
+
+        $data['sales_prospects_block'] = $sales_prospects_block = $this->Sales_Model->getAllSalesContacts(3);
+
+        $data['sales_key_contact_block'] = $sales_key_contact_block = $this->Sales_Model->getAllSalesContacts(4);
+
+        // Get all sales companies
+        $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
 
         $data['page_title'] = 'Sales Contact';
         $this->load->view('admin/layout/header', $data);
@@ -28,20 +38,284 @@ class Sales extends CI_Controller {
         $this->load->view('admin/layout/footer', $data);
     }
 
+    // Add new sales
+    public function create(){
 
+        if($this->input->post()){
 
+            $company             = $this->input->post('company');
+            $trader              = $this->input->post('trader');
+            $fname               = $this->input->post('first_name');
+            $lname               = $this->input->post('last_name');
+            $gender              = $this->input->post('gender');            
+            $personal_info       = $this->input->post('personal_info');
+            $branch              = $this->input->post('branch');
+            $department          = $this->input->post('department');
+            $job_title           = $this->input->post('job_title');
+            $email               = $this->input->post('email');
+            $mobile              = $this->input->post('phone');
+            $direct_dial         = $this->input->post('direct_dial');
+            $payment_terms       = $this->input->post('payment_terms');
+            $invoice_ref_no      = $this->input->post('invoice_ref_no');
+            $pls_info            = $this->input->post('pls_info');
+            $estimated_frequency = $this->input->post('estimated_frequency');
+            $estimated_spend     = $this->input->post('estimated_spend');
+            $manufacturers       = $this->input->post('menufecturer');
+            $communication       = $this->input->post('communication');
+            $location            = $this->input->post('location');
+            $street_address      = $this->input->post('street_address');
+            $city                = $this->input->post('city');
+            $state               = $this->input->post('state');
+            $zip                 = $this->input->post('zip');
+            $country             = $this->input->post('country');
+            $address_type        = $this->input->post('address_type');
+            $date                = date('Y-m-d H:i:s');
 
+            $data = array(
+                'company'                  => $company,
+                'trader'                   => $trader,
+                'fname'                    => $fname,
+                'lname'                    => $lname,
+                'gender'                   => $gender,
+                'personal_info'            => $personal_info,
+                'branch'                   => $branch,
+                'department'               => $department,
+                'job_title'                => $job_title,
+                'email'                    => $email,
+                'mobile'                   => $mobile,
+                'direct_dial'              => $direct_dial,
+                'payment_terms'            => $payment_terms,
+                'estimate_required'        => $estimated_frequency,
+                'estimate_spend'           => $estimated_spend,
+                'manufacturers'            => json_encode($manufacturers),
+                'invoice_reference_number' => $invoice_ref_no,
+                'pls_information'          => $pls_info,
+                'communication'            => $communication,
+                'status'                   => 1,
+                'created_at'               => $date,
+                'updated_at'               => $date
+            );
 
+            //Insert Sales Data
+            $insert_id = $this->Sales_Model->insert($data, 'sales_contacts');
 
+            //Insert Address
+            foreach ($location as $key => $value) {
+                $data = array(
+                    'sales_contact_id' => $insert_id,
+                    'address_type'     => $address_type[$key],
+                    'location'         => $value,
+                    'street'           => $street_address[$key],
+                    'town'             => $city[$key],
+                    'state'            => $street_address[$key],
+                    'zip_code'         => $zip[$key],
+                    'country'          => $country[$key],
+                    'status'           => 1,
+                    'created_at'       => $date,
+                    'updated_at'       => $date
+                );
 
+                $insert = $this->Sales_Model->insert($data, 'sales_contact_addresses');
 
+            }
 
+            $this->session->set_flashdata('message', 'Sales Created Successfully');
 
+            //redirect to some function
+            redirect("admin/sales");
+        }
 
+        $data = array();
+        $data['page_title'] = 'Add New Sales';
 
+        // Get all sales companies
+        $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
 
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
 
+        // Get all Menufecturer
+        $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
 
+        // echo '<pre>';
+        // print_r($countries);
+        // exit;
+        
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/sales/create', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
+    
+    // Add new sales
+    public function edit_sales(){
+
+        $id = $this->uri->segment(4);
+        if($this->input->post()){
+
+            $company             = $this->input->post('company');
+            $trader              = $this->input->post('trader');
+            $fname               = $this->input->post('first_name');
+            $lname               = $this->input->post('last_name');
+            $gender              = $this->input->post('gender');            
+            $personal_info       = $this->input->post('personal_info');
+            $branch              = $this->input->post('branch');
+            $department          = $this->input->post('department');
+            $job_title           = $this->input->post('job_title');
+            $email               = $this->input->post('email');
+            $mobile              = $this->input->post('phone');
+            $direct_dial         = $this->input->post('direct_dial');
+            $payment_terms       = $this->input->post('payment_terms');
+            $invoice_ref_no      = $this->input->post('invoice_ref_no');
+            $pls_info            = $this->input->post('pls_info');
+            $estimated_frequency = $this->input->post('estimated_frequency');
+            $estimated_spend     = $this->input->post('estimated_spend');
+            $manufacturers       = $this->input->post('menufecturer');
+            $communication       = $this->input->post('communication');
+            $location            = $this->input->post('location');
+            $street_address      = $this->input->post('street_address');
+            $city                = $this->input->post('city');
+            $state               = $this->input->post('state');
+            $zip                 = $this->input->post('zip');
+            $country             = $this->input->post('country');
+            $address_type        = $this->input->post('address_type');
+            $date                = date('Y-m-d H:i:s');
+
+            $data = array(
+                'company'                  => $company,
+                'trader'                   => $trader,
+                'fname'                    => $fname,
+                'lname'                    => $lname,
+                'gender'                   => $gender,
+                'personal_info'            => $personal_info,
+                'branch'                   => $branch,
+                'department'               => $department,
+                'job_title'                => $job_title,
+                'email'                    => $email,
+                'mobile'                   => $mobile,
+                'direct_dial'              => $direct_dial,
+                'payment_terms'            => $payment_terms,
+                'estimate_required'        => $estimated_frequency,
+                'estimate_spend'           => $estimated_spend,
+                'manufacturers'            => json_encode($manufacturers),
+                'invoice_reference_number' => $invoice_ref_no,
+                'pls_information'          => $pls_info,
+                'communication'            => $communication,
+                'updated_at'               => $date
+            );
+
+            //Insert Sales Data
+            $insert_id = $this->Sales_Model->insert($data, 'sales_contacts');
+
+            //Insert Address
+            foreach ($location as $key => $value) {
+                $data = array(
+                    'sales_contact_id' => $insert_id,
+                    'address_type'     => $address_type[$key],
+                    'location'         => $value,
+                    'street'           => $street_address[$key],
+                    'town'             => $city[$key],
+                    'state'            => $street_address[$key],
+                    'zip_code'         => $zip[$key],
+                    'country'          => $country[$key],
+                    'status'           => 1,
+                    'created_at'       => $date,
+                    'updated_at'       => $date
+                );
+
+                $insert = $this->Sales_Model->insert($data, 'sales_contact_addresses');
+
+            }
+
+            $this->session->set_flashdata('message', 'Sales Created Successfully');
+
+            //redirect to some function
+            redirect("admin/sales");
+        }
+
+        $data = array();
+        $data['page_title'] = 'Edit Sales';
+
+        // Get all sales companies
+        $data['sales_contact'] = $contact = $this->Sales_Model->getAllSalesContacts(null, $id);
+
+        // Get all sales companies
+        $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+
+        // Get all Menufecturer
+        $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
+
+        // echo '<pre>';
+        // print_r($countries);
+        // exit;
+        
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/sales/edit', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
+
+    // Check Sales Profile Information by AJAX
+    public function checkInformation()
+    {
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+
+        //Get user details
+        $data = $this->Sales_Model->getAllSalesContacts(null, $id);
+
+        //Get Company Id 
+        $company_details = $this->Sales_Model->getCompanyByID($data->company);
+
+        //Get Enquiry 
+        $enquires = $this->Enquiry_model->getEnquiryByContactId($data->id);
+
+        if($status == 1)
+        {
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry))
+            {
+                echo 0;
+            }else{
+                echo 1;
+            }
+        }else if($status == 2)
+        {
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry))
+            {
+                echo 0;
+            }else{
+                echo 1;
+            }
+        }else if($status == 3)
+        {
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || empty($enquires->enquiry) || empty($data->manufacturers))
+            {
+                echo 0;
+            }else{
+                echo 1;
+            }
+        }else if($status == 4)
+        {
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || empty($enquires->enquiry) || empty($data->manufacturers))
+            {
+                echo 0;
+            }else{
+                echo 1;
+            }
+        }
+    }
+
+    // Update Sales Status by AJAX
+    public function updateSalesStatus()
+    {
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+       
+        //Get user details
+        $data = $this->Sales_Model->updateStatus($id, $status);
+        echo 1;
+    }
 	 
     /*Start Customer List*/ 
     public function customer_list(){

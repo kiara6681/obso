@@ -2,7 +2,7 @@
 class Enquiry_model extends CI_Model {
 
     //-- insert function
-    public function insert_enwuiry($enquiry_data){
+    //public function insert_enwuiry($enquiry_data){
 
     //     $data = array(
     //         'company_id' => ,
@@ -44,5 +44,13 @@ class Enquiry_model extends CI_Model {
         return $query; 
     }
 
-
+    //Get Enquiry by Contact Person Id
+    public function getEnquiryByContactId($contact_id){
+        $this->db->select();
+        $this->db->from('enquiry');
+        $this->db->where('contact_id', $contact_id);
+        $query = $this->db->get();
+        $query = $query->row();  
+        return $query; 
+    }
 } 
