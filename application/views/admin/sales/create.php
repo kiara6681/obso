@@ -359,17 +359,6 @@
 <script>
     $(document).ready(function(){
 
-        //Show Add Button on change
-        /*$('#address_type').on('change', function(){
-            var data = $(this).val();
-            if(data == 'invoice_address' || data == 'delivery_address')
-            {
-                $('#add_address').show();
-            }else{                
-                $('#add_address').hide();
-            }
-        });*/
-
         //Add new Address
         //var max_fields      = 10; //maximum input boxes allowed
         var service_wrap         = $(".service_wrap"); //Fields wrapper

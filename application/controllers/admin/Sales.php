@@ -32,9 +32,37 @@ class Sales extends CI_Controller {
         // Get all sales companies
         $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
 
+        // Get all sales companies
+        $data['sales_address'] = $sales_address = $this->Sales_Model->getAllSalesAddress();
+
         $data['page_title'] = 'Sales Contact';
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/sales/index', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
+
+    // show all Archieved
+    public function archieved(){
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+
+        $status = 0;
+        // get All sales contacts
+        $data['archieved_contacts'] = $archieved_contacts = $this->Sales_Model->getAllSalesContacts($status);
+
+        // Get all sales companies
+        $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
+
+        // Get all Menufecturer
+        $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
+
+        // Get all sales companies
+        $data['sales_address'] = $sales_address = $this->Sales_Model->getAllSalesAddress();
+
+        $data['page_title'] = 'Sales Contact';
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/sales/archieved', $data);
         $this->load->view('admin/layout/footer', $data);
     }
 
@@ -321,11 +349,43 @@ class Sales extends CI_Controller {
     // Archieve Sales
     public function archieve()
     {
-        $id = $this->uri->segment(4);
+        $id = $this->input->post('id');
+
+        $archieved_resoan = $this->input->post('archieved_resoan');
+
+        $data = array(
+            'archieved_resoan' => $archieved_resoan
+        );
+
+        //Update Reason
+        $update = $this->Sales_Model->updateContact($data, $id);
 
         //Update Status
         $data = $this->Sales_Model->updateStatus($id, 0);
-        $this->session->set_flashdata('msg', 'Sales Archieved Successfully');
+
+        $this->session->set_flashdata('msg', 'Sales contact archieved successfully');
+        redirect('admin/sales');        
+    }
+
+    // Archieve Sales
+    public function deleteContact()
+    {
+        $id = $this->uri->segment(4);
+
+        //Update Status
+        $this->common_model->delete($id,'sales_contacts'); 
+        $this->session->set_flashdata('msg', 'Sales contact permanently deleted successfully.');
+        redirect(base_url('admin/sales'));        
+    }
+
+    // Archieve Sales
+    public function backToLeads()
+    {
+        $id = $this->uri->segment(4);
+
+        //Update Status
+        $data = $this->Sales_Model->updateStatus($id, 1);
+        $this->session->set_flashdata('msg', 'Sales contact back on lead successfully.');
         redirect(base_url('admin/sales'));        
     }
 

@@ -12,17 +12,15 @@ class Sales_Model extends CI_Model {
     // show all sales companies
     public function getAllSalesContacts($status = null, $id = null){
 
-        $this->db->select('contact.*, company.company_name, address.address_type, address.location, address.street, address.town, address.state, address.zip_code, address.zip_code, countries.name county_name');
+        $this->db->select('contact.*, company.company_name');
         $this->db->from('sales_contacts contact');
         $this->db->join('companies company','company.id = contact.company','left');
-        $this->db->join('sales_contact_addresses address','address.sales_contact_id = contact.id', 'left');
-        $this->db->join('country countries','countries.id = address.country', 'left');
-        if($status != null)
+        if(!is_null($status))
         {
             $this->db->where('contact.status', $status);
         }
 
-        if($id != null)
+        if(!is_null($id))
         {
             $this->db->where('contact.id', $id);
             $this->db->group_by('contact.id');
@@ -34,6 +32,18 @@ class Sales_Model extends CI_Model {
             $query = $this->db->order_by('contact.id desc')->get();
             $query = $query->result_array();  
         }
+        return $query;
+    }
+
+    // Show All Contact Address
+    public function getAllSalesAddress(){
+
+        $this->db->select('address.*, cntry.name as country_name, cntry.flag');
+        $this->db->from('sales_contact_addresses address');
+        $this->db->join('country cntry','cntry.id = address.country');
+         $this->db->group_by('address.id');
+        $query = $this->db->get();
+        $query = $query->result_array();  
         return $query;
     }
 
