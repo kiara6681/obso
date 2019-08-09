@@ -178,8 +178,6 @@
                                                             Dial : <?= $company['dial_number']; ?>
                                                             <br>
                                                             Information : <?= $company['information']; ?>
-                                                            <br>
-                                                            Competitor : <?= $company['competitor']; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -197,21 +195,20 @@
                                                                         </span>
                                                                             <br>
 
-                                                                        Total Enquiry : 
+                                                                        Stock Products : 
                                                                             <span style="color: red;">
-                                                                            <?= count($enquiries) - $quoted_enqiries; ?>
+                                                                            
                                                                             </span> 
-                                                                            / 
-                                                                            <?= count($enquiries); ?>
+                                                                            
                                                                             <br>
 
-                                                                        Quoted : 
-                                                                        <span style="color: #0cad0c;"><?= $quoted_enqiries; ?>
+                                                                        Order : 
+                                                                        <span style="color: #0cad0c;">
+
                                                                         </span>
                                                                         <br>
 
-                                                                        Ordered : <br>
-                                                                        Total Spent : <br>
+                                                                        Total Order : <br>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -333,46 +330,40 @@
         $(document).on('change', '#show_only_companies', function(){
 
             var show_only = $(this).val();
+            var country_by = $('#sort_by_country').val();
+            var sort_by = $('#sort_by').val();
 
-            $.ajax({
-                url : "<?= base_url() ?>admin/companies/show_only_companies",
-                type : 'get',
-                data : {'sort_by' : sort_by, 'country_by' : country_by},
-                success : function(data){
-                    
-                    // console.log(data);
-                    // alert(data);
-                    $('#show_searched_results').html(data);
-                }
-            });
+            sort_by_companies(sort_by, country_by, show_only);
         });
 
         // Sort companies by country
         $(document).on('change', '#sort_by_country', function(){
 
+            var show_only = $('#show_only_companies').val();
             var country_by = $(this).val();
             var sort_by = $('#sort_by').val();
 
-            sort_by_companies(sort_by, country_by);
+            sort_by_companies(sort_by, country_by, show_only);
         });
 
         // Sort by others
         $(document).on('change','#sort_by' ,function(){
-                                
-            var sort_by = $(this).val();
+            
+            var show_only = $('#show_only_companies').val();
             var country_by = $('#sort_by_country').val();
+            var sort_by = $(this).val();
 
-            sort_by_companies(sort_by, country_by);
+            sort_by_companies(sort_by, country_by, show_only);
         });
     });
 
     // Sorting function
-    function sort_by_companies(sort_by, country_by){
+    function sort_by_companies(sort_by, country_by, show_only){
 
         $.ajax({
             url : "<?= base_url() ?>admin/companies/sort_by_companies",
             type : 'get',
-            data : {'sort_by' : sort_by, 'country_by' : country_by},
+            data : {'sort_by' : sort_by, 'country_by' : country_by, 'show_only' : show_only},
             success : function(data){
                 
                 console.log(data);

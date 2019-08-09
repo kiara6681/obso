@@ -25,7 +25,7 @@ class Companies_Model extends CI_Model {
     }
 
     // Sort By sales companies
-    public function sortBySalesCompanies($sort_by = null, $country_by = null){
+    public function sortBySalesCompanies($sort_by = null, $country_by = null, $show_only = null){
 
         $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
         $this->db->from('companies comp');
@@ -65,7 +65,7 @@ class Companies_Model extends CI_Model {
     }
 
     // Sort By supplier companies
-    public function sortBySupplierCompanies($sort_by = null, $country_by = null){
+    public function sortBySupplierCompanies($sort_by = null, $country_by = null, $show_only = null){
 
         $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
         $this->db->from('companies comp');

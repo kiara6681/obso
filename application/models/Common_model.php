@@ -984,6 +984,20 @@ class Common_model extends CI_Model {
         return  $query;  
     }
 
+    function getLastEnquiryOFCompanies()
+    {
+        $this->db->select('company_id');
+        $this->db->group_by('company_id'); 
+        $this->db->order_by('id', 'desc'); 
+        $this->db->from('enquiry');
+        
+        //$this->db->where('status', 'waiting'); 
+        //$this->db->or_where('company_id', $company_id);
+        $query = $this->db->get();
+        $query = $query->result_array();
+        return  $query;  
+    }
+
     function unqailifidInquiry()
     {
         $this->db->select();

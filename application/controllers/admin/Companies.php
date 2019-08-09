@@ -203,6 +203,7 @@ class Companies extends CI_Controller {
 
         $sort_by = null;
         $country_by = null;
+        $show_only = null;
         
         // if sort by is not empty
         if($_GET['sort_by']){
@@ -216,20 +217,108 @@ class Companies extends CI_Controller {
             $country_by = $_GET['country_by'];
         }
 
+        // if coutry is not empty
+        if($_GET['show_only']){
+
+            $show_only = $_GET['show_only'];
+        }
+
         $html = '';
 
         // Get all sales companies
-        $sales_companies = $this->Companies_Model->sortBySalesCompanies($sort_by, $country_by);
+        $all_sales_companies = $this->Companies_Model->sortBySalesCompanies($sort_by, $country_by, $show_only);
 
         // Get all supplier companies
-        $supplier_companies = $this->Companies_Model->sortBySupplierCompanies($sort_by, $country_by);
+        $supplier_companies = $this->Companies_Model->sortBySupplierCompanies($sort_by, $country_by, $show_only);
 
-        // Get number of enquiries of all companies
-        $all_enquiries = $this->common_model->getAllEnquiryCountOFCompanies();
+        $sales_companies = array();
 
-        // echo '<pre>';
-        // print_r($all_enquiries);
-        // print_r($sales_companies);
+        // If sorting by number of enquiries hight to low / low to high then rearrange sales companies
+        if($sort_by == 3 || $sort_by == 4){
+
+            // Get number of enquiries of all companies
+            $all_enquiries = $this->common_model->getAllEnquiryCountOFCompanies();
+
+            // If sorting by enquiry low to high
+            if($sort_by == 4){
+                $all_enquiries = array_reverse($all_enquiries);
+            }
+
+            foreach ($all_enquiries as $ae_key => $value) {
+            
+                foreach ($all_sales_companies as $key => $sal_comp) {
+                    
+                    if($value['company_id'] == $sal_comp['id']){
+
+                        $sales_companies[$ae_key] = $all_sales_companies[$key];
+                    }
+                }
+            }
+        }elseif($sort_by == 5 || $sort_by == 6){
+
+            // if sort by last enquiry of company then
+            // Get last enquiry of companies
+            $last_company_enquiries = $this->common_model->getLastEnquiryOFCompanies();
+
+            // If sorting by enquiry low to high
+            if($sort_by == 5){
+                $last_company_enquiries = array_reverse($last_company_enquiries);
+            }
+
+            foreach ($last_company_enquiries as $lce_key => $value) {
+                
+                foreach ($all_sales_companies as $key => $sal_comp) {
+                    
+                    if($value['company_id'] == $sal_comp['id']){
+
+                        $sales_companies[$lce_key] = $all_sales_companies[$key];
+                    }
+                }
+            }
+        }else{
+
+            // all companies as it is
+            $sales_companies = $all_sales_companies;
+        }
+
+        // sory by (show only sales company)
+        // show only sales companies
+        if($show_only == 2){
+
+            $supplier_companies = array();
+        }
+        // show only supplier companies
+        if($show_only == 3){
+
+            $sales_companies = array();
+        }
+
+        // check if number of contact are between 10 to 99
+        if($show_only == 4 || $show_only == 5){
+
+            foreach ($sales_companies as $key => $sale_comp){
+                
+                // Get number of contact of this company
+                $company_contacts = $this->Companies_Model->getCompanyContacts($sale_comp['id']);
+
+                if($show_only == 4){
+
+                    // if number of contacts are not between 10 to 99
+                    if(count($company_contacts) < 10 && count($company_contacts) > 99){
+
+                        unset($sales_companies[$key]);
+                    }
+                }
+                if($show_only == 5){
+
+                    // if number of contacts are less than 100
+                    if(count($company_contacts) <= 100){
+
+                        unset($sales_companies[$key]);
+                    }
+                }                
+            }
+        }
 
         foreach ($sales_companies as $key => $sale_comp) {
             
@@ -367,8 +456,6 @@ class Companies extends CI_Controller {
                                             Dial : '.$sup_comp["dial_number"].'
                                             <br>
                                             Information : '.$sup_comp["information"].'
-                                            <br>
-                                            Competitor : '.$sup_comp["competitor"].'
                                         </p>
                                     </div>
                                 </div>
@@ -384,20 +471,15 @@ class Companies extends CI_Controller {
                                                         <span style="color: #00fb00;">'.$company_contacts_count.'</span>
                                                             <br>
 
-                                                        Total Enquiry : 
+                                                        Stock Products : 
                                                             <span style="color: red;">
-                                                            '.$unquoted_enquiries.'
                                                             </span> 
-                                                            / 
-                                                            '.$total_enqs.'
                                                             <br>
-
-                                                        Quoted : 
+                                                        Order : 
                                                         <span style="color: #00fb00;">'.$quoted_enqiries.'
                                                         </span>
                                                         <br>
-                                                        Ordered : <br>
-                                                        Total Spent : <br>
+                                                        Total Order : 
                                                     </p>
                                                 </div>
                                             </div>
@@ -405,7 +487,7 @@ class Companies extends CI_Controller {
 
                                         <div class="col-xl-2">
                                             <div class="test" id="menu1" data-toggle="dropdown"></div>
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="background-color: #dedede;color: #000;">
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="background-color: rgb(50, 58, 78);color: #000;">
                                                 <a role="menuitem" tabindex="-1" href="'.base_url().'admin/companies/edit_company/'.$sup_comp["id"].'">
                                                   <li role="presentation">Edit</li>
                                                 </a>
@@ -420,65 +502,6 @@ class Companies extends CI_Controller {
                         </div>
                     </div>';
         }
-
-        // $companies = $this->Companies_Model->sort_by_companies($sort_by, $country_by);
-
-        // $html = '';
-
-        // foreach ($companies as $key => $company) {
-
-        //     $country_info = $this->common_model->getCountryInfo($company['country']); 
-            
-        //     $html .= '<div class="card">
-        //                 <div class="card-body">
-        //                     <div class="row p-9">
-        //                         <div class="col-xl-6 col-md-4 col-sm-6 border-rgt p-top12">
-        //                             <img src="http://localhost/obsoadmin/trunk/obso/assets/images/flags/french_flag.jpg" class="cntry-flag">
-        //                             <div class="col-md-12 m-l-30">
-        //                                 <p> 
-        //                                     Company  : <strong>'.$company["company_name"].'</strong>
-        //                                     <br>
-        //                                     Industry : <strong>'.$company["industry_name"].'</strong>
-        //                                     <br>
-        //                                     Record Source : '.$company["record_source"].'
-        //                                     Country : '.$country_info->name.'
-        //                                 </p>
-        //                             </div>
-        //                         </div>
-
-        //                         <div class="col-xl-6 col-md-4 col-sm-6 p-0">
-        //                             <div class="row">
-        //                                 <div class="col-xl-10 col-md-4 col-sm-6 p-l-30 p-top12">
-        //                                     <div class="row">
-        //                                         <a href="javascript:;"></a>
-        //                                         <div class="col-xl-12">
-        //                                             <p>
-        //                                                 Website : '.$company["website"].' <br>
-        //                                                 Dial Number : '.$company["dial_number"].'<br>
-        //                                                 Competitor : '.$company["competitor"].'<br>
-        //                                                 Free To Trade : '.$company["free_to_trade"].'<br>
-        //                                             </p>
-        //                                         </div>
-        //                                     </div>
-        //                                 </div>
-
-        //                                 <div class="col-xl-2">
-        //                                     <div class="test" id="menu1" data-toggle="dropdown"></div>
-        //                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-        //                                         <a role="menuitem" tabindex="-1" href="'.base_url().'admin/companies/edit_company/'.$company["id"].'">
-        //                                           <li role="presentation">Edit</li>
-        //                                         </a>
-        //                                         <a href="'.base_url().'admin/companies/archieve/'.$company["id"].'" onclick="return confirm("Are you sure you want to remove the company?"")" role="menuitem" tabindex="-1">
-        //                                             <li role="presentation">Archieve</li>
-        //                                         </a>
-        //                                     </ul>
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>';
-        // }
 
         echo $html;
     }
