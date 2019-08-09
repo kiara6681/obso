@@ -25,12 +25,13 @@ class Sales_Model extends CI_Model {
         if($id != null)
         {
             $this->db->where('contact.id', $id);
-
-            $query = $this->db->order_by('id desc')->get();
+            $this->db->group_by('contact.id');
+            $query = $this->db->order_by('contact.id desc')->get();
             $query = $query->row();  
 
         }else{
-            $query = $this->db->order_by('id desc')->get();
+            $this->db->group_by('contact.id');
+            $query = $this->db->order_by('contact.id desc')->get();
             $query = $query->result_array();  
         }
         return $query;
