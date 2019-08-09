@@ -81,6 +81,16 @@ class Sales_Model extends CI_Model {
         return $query;
     }
 
+    // get Enqury by Sales Contact ID
+    public function getSalesEnqury($contact_id){
+        $this->db->select('*');
+        $this->db->from('enquiry');
+        $this->db->where('contact_id', $contact_id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
     // get single company information
     function getCompanyByID($id){
         $this->db->select('*');
@@ -161,6 +171,42 @@ class Sales_Model extends CI_Model {
         $query = $this->db->get();
         $query = $query->result_array();  
 
+        return $query;
+    }
+
+    // Sort By sales companies
+    public function sortBySalesContacts($sort_by = null, $show_only = null)
+    {
+
+        $this->db->select('contacts.*, indus.industry as industry_name, comp.company_name');
+        $this->db->from('sales_contacts contacts');
+        $this->db->join('companies comp','comp.id = contacts.company');
+        $this->db->join('companies company','company.id = contact.company','left');
+        $this->db->join('industry indus','indus.id = comp.industry');
+        $this->db->where('contacts.status', '!=', 0);
+
+        if(!is_null($sort_by)){
+            if($sort_by == 1){
+                $this->db->order_by('contacts.fname', 'asc');
+            }
+            if($sort_by == 2){
+                $this->db->order_by('contacts.fname', 'desc');
+            }
+            if($sort_by == 13){
+                $this->db->order_by('contacts.created_at', 'asc');
+            }
+            if($sort_by == 14){
+                $this->db->order_by('contacts.created_at', 'desc');
+            }if($sort_by == 15){
+                $this->db->order_by('indus.industry', 'asc');
+            }
+            if($sort_by == 16){
+                $this->db->order_by('indus.industry', 'desc');
+            }
+        }
+
+        $query = $this->db->get();
+        $query = $query->result_array();  
         return $query;
     }
 

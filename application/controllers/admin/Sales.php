@@ -16,8 +16,8 @@ class Sales extends CI_Controller {
 
     /* Prem created functions */
     // show all sales
-    public function index(){
-
+    public function index()
+    {
         // Get all countries
         $data['countries'] = $countries = $this->common_model->select('country');
 
@@ -650,6 +650,109 @@ class Sales extends CI_Controller {
         }
         redirect(base_url('admin/sales'));
     }
+
+    // Sales Filter
+    public function sales_filter(){
+
+        $sort_by = null;
+        $show_only = null;
+        
+        // if sort by is not empty
+        if($_GET['sort_by']){
+
+            $sort_by = $_GET['sort_by'];
+        }
+
+        // if coutry is not empty
+        if($_GET['show_only']){
+
+            $show_only = $_GET['show_only'];
+        }
+
+        $html = '';
+
+        // Get all sales companies
+        $all_sales_contacts = $this->Sales_Model->sortBySalesContacts($sort_by, $show_only);
+
+        // check if number of contact are between 10 to 99
+        if($show_only == 10 || $show_only == 11)
+        {
+            foreach ($all_sales_contacts as $key => $sale_contact)
+            {
+                
+                // Get number of sales contact
+                $contact_enquiry = $this->Sales_Model->getSalesEnqury($sale_contact['id']);
+
+                if($show_only == 7){
+
+                    // if number of contacts are less than 100
+                    if(count($contact_enquiry) > 1){
+
+                        unset($all_sales_contacts[$key]);
+                    }
+                } 
+
+                if($show_only == 8){
+
+                    // if number of contacts are less than 100
+                    if(count($contact_enquiry) > 1){
+
+                        unset($all_sales_contacts[$key]);
+                    }
+                }  
+
+                if($show_only == 10){
+
+                    // if number of contacts are not between 10 to 99
+                    if(count($contact_enquiry) < 10 && count($contact_enquiry) > 99){
+
+                        unset($all_sales_contacts[$key]);
+                    }
+                }
+
+                if($show_only == 11){
+
+                    // if number of contacts are less than 100
+                    if(count($contact_enquiry) <= 100){
+
+                        unset($all_sales_contacts[$key]);
+                    }
+                }                
+            }
+        }
+
+        foreach ($sales_companies as $key => $contact) 
+        {
+            foreach($sales_address as $address)
+            {
+                if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                {
+                    $flag = $address['flag'];
+                }
+            }
+            
+            $html = '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                        
+            $add_count = 0;
+            foreach($sales_address as $address)
+            {
+                if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
+                {
+                    $html .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                
+                }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                {
+                    $add_count++;
+                }
+            }
+            $html .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="javascript:;" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                </div><div class="test action_button" id="menu1" data-toggle="dropdown"></div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+        }
+        echo $html;
+    }
+
+
 
 
 

@@ -170,29 +170,29 @@
                             <div class="card">
                                 <div class="card-body">
                                     <form role="search">
-                                        <select class="form-control" name="only_show" id="only_show">
+                                        <select class="form-control" id="show_only">
                                             <option value="">Only Show</option>
-                                            <option value="All Contacts">All Contacts</option>
-                                            <option value="Single Order Contacts">Single Order Contacts</option>
-                                            <option value="Repeat customer contacts 2-9">Repeat customer contacts 2-9</option>
-                                            <option value="10-99 Order contacts">10-99 Order contacts</option>
-                                            <option value="100+ Order contacts">100+ Order contacts</option>
-                                            <option value="Account customer contacts">Account customer contacts</option>
-                                            <option value="Advance payment Contacts">Advance payment Contacts</option>
-                                            <option value="Never Enquired">Never Enquired</option>
-                                            <option value="Single Enquiry Records">Single Enquiry Records</option>
-                                            <option value="Repeat Enquiry Records 2-9">Repeat Enquiry Records 2-9</option>
-                                            <option value="10-99 Enquiry Records">10-99 Enquiry Records</option>
-                                            <option value="100+ Enquiry Records">100+ Enquiry Records</option>
-                                            <option value="Single Contact Records">Single Contact Records</option>
-                                            <option value="Companies over 50% Quote to Order">Companies over 50% Quote to Order</option>
-                                            <option value="Companies under 50% Quote to Order">Companies under 50% Quote to Order</option>
-                                            <option value="Contacts require Siemens">Contacts require Siemens</option>
-                                            <option value="Contacts require Allen Bradley">Contacts require Allen Bradley</option>
-                                            <option value="Contacts require Mitsubishi">Contacts require Mitsubishi</option>
-                                            <option value="Contacts require Nidec (Control Tehniques/Leroy Somer)">Contacts require Nidec (Control Tehniques/Leroy Somer)</option>
-                                            <option value="Contacts require Lenze">Contacts require Lenze</option>
-                                            <option value="Contacts require Bosch Rexroth / Bosch Indramat">Contacts require Bosch Rexroth / Bosch Indramat</option>
+                                            <option value="">All Contacts</option>
+                                            <option value="1">Single Order Contacts</option>
+                                            <option value="2">Repeat customer contacts 2-9</option>
+                                            <option value="3">10-99 Order contacts</option>
+                                            <option value="4">100+ Order contacts</option>
+                                            <option value="5">Account customer contacts</option>
+                                            <option value="6">Advance payment Contacts</option>
+                                            <option value="7">Never Enquired</option>
+                                            <option value="8">Single Enquiry Records</option>
+                                            <option value="9">Repeat Enquiry Records 2-9</option>
+                                            <option value="10">10-99 Enquiry Records</option>
+                                            <option value="11">100+ Enquiry Records</option>
+                                            <option value="12">Single Contact Records</option>
+                                            <option value="13">Companies over 50% Quote to Order</option>
+                                            <option value="14">Companies under 50% Quote to Order</option>
+                                            <option value="15">Contacts require Siemens</option>
+                                            <option value="16">Contacts require Allen Bradley</option>
+                                            <option value="17">Contacts require Mitsubishi</option>
+                                            <option value="18">Contacts require Nidec (Control Tehniques/Leroy Somer)</option>
+                                            <option value="19">Contacts require Lenze</option>
+                                            <option value="20">Contacts require Bosch Rexroth / Bosch Indramat</option>
                                         </select>
                                     </form>
                                 </div>
@@ -202,28 +202,28 @@
                             <div class="card">
                                 <div class="card-body">
                                     <form role="search">
-                                        <select class="form-control" id="sort_by" name="sort_by">
+                                        <select class="form-control" id="sort_by" >
                                             <option value="">Sort By</option>
-                                            <option value="Contact Name A-Z">Contact Name A-Z</option>
-                                            <option value="Contact Name Z-A">Contact Name Z-A</option>
-                                            <option value="No. of Enquries High to Low">No. of Enquries High to Low</option>
-                                            <option value="No. of Enquries Low to High">No. of Enquries Low to High</option>
-                                            <option value="Last Enquiry (earliest to latest)">Last Enquiry (earliest to latest)</option>
-                                            <option value="Last Enquiry( latest to earliest)">Last Enquiry( latest to earliest)</option>
-                                            <option value="No. of Orders High to Low">No. of Orders High to Low</option>
-                                            <option value="No. of Orders Low to High">No. of Orders Low to High</option>
-                                            <option value="Last Order (earliest to latest)">Last Order (earliest to latest)</option>
-                                            <option value="Last Order( latest to earliest)">Last Order( latest to earliest)</option>
-                                            <option value="GP High to Low">GP High to Low</option>
-                                            <option value="GP Low to High">GP Low to High</option>
-                                            <option value="Account Status Longest Terms First">Account Status Longest Terms First</option>
-                                            <option value="Account Status Shortest Terms First">Account Status Shortest Terms First</option>
-                                            <option value="Industry A-Z">Industry A-Z</option>
-                                            <option value="Industry Z-A">Industry Z-A</option>
-                                            <option value="Hottest to Coldest Data">Hottest to Coldest Data</option>
-                                            <option value="Coldest to Hottest Data">Coldest to Hottest Data</option>
-                                            <option value="Last Sales Note (earliest to latest)">Last Sales Note (earliest to latest)</option>
-                                            <option value="Last Sales Note ( latest to earliest)">Last Sales Note ( latest to earliest)</option>
+                                            <option value="1">Contact Name A-Z</option>
+                                            <option value="2">Contact Name Z-A</option>
+                                            <option value="3">No. of Enquries High to Low</option>
+                                            <option value="4">No. of Enquries Low to High</option>
+                                            <option value="5">Last Enquiry (earliest to latest)</option>
+                                            <option value="6">Last Enquiry( latest to earliest)</option>
+                                            <option value="7">No. of Orders High to Low</option>
+                                            <option value="8">No. of Orders Low to High</option>
+                                            <option value="9">Last Order (earliest to latest)</option>
+                                            <option value="10">Last Order( latest to earliest)</option>
+                                            <option value="11">GP High to Low</option>
+                                            <option value="12">GP Low to High</option>
+                                            <option value="13">Account Status Longest Terms First</option>
+                                            <option value="14">Account Status Shortest Terms First</option>
+                                            <option value="15">Industry A-Z</option>
+                                            <option value="16">Industry Z-A</option>
+                                            <option value="17">Hottest to Coldest Data</option>
+                                            <option value="18">Coldest to Hottest Data</option>
+                                            <option value="19">Last Sales Note (earliest to latest)</option>
+                                            <option value="20">Last Sales Note ( latest to earliest)</option>
                                         </select>
                                     </form>
                                 </div>
@@ -547,7 +547,7 @@
                     <?php $this->load->helper('form'); ?>
                     <?php echo form_open(base_url() . 'admin/sales/uploadCSV' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
                         <div class="form-group">
-                            <input type="file" name="file"  class="form-control" style="background: none;padding: 0;margin-top: 15px;">
+                            <input type="file" name="file"  class="form-control" style="background: none;padding: 0;margin-top: 15px;" required>
                         </div>
                         <button type="submit" name="import" class="btn btn-primary btn-block waves-effect waves-light">Import CSV</button>
                         <?php echo form_close();?>
@@ -576,9 +576,7 @@
                     <label>Resoan</label>
                     <select class="form-control" name="archieved_resoan" required>
                         <option value="">Select Archieve Reason</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="Record not Available">Record not Available</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -592,6 +590,40 @@
 
 <script>
 $(document).ready(function(){
+
+    /*-------  Filter Functions -----------*/
+    $(document).on('change', '#show_only', function(){
+
+        var show_only = $(this).val();
+        var sort_by = $('#sort_by').val();
+
+        sort_by_companies(sort_by, show_only);
+    });
+
+    // Sort companies by country
+    $(document).on('change', '#sort_by', function(){
+
+        var sort_by = $(this).val();
+        var show_only = $('#show_only').val();
+
+        sort_by_companies(sort_by, show_only);
+    });
+
+    // Sorting function
+    function sort_by_companies(sort_by, show_only){
+
+        $.ajax({
+            url : "<?= base_url() ?>admin/sales/sales_filter",
+            type : 'get',
+            data : {'sort_by' : sort_by, 'show_only' : show_only},
+            success : function(data){                
+                //console.log(data);
+                // alert(data);
+                //$('#show_searched_results').html(data);
+            }
+        });
+    }
+
 
     $('.import_csv').on('click', function(){
         $('#import_contact').modal('show');
