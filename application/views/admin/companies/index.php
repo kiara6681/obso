@@ -195,7 +195,7 @@
                                                                         </span>
                                                                             <br>
 
-                                                                        Stock Products : 
+                                                                        Number of Products : 
                                                                             <span style="color: red;">
                                                                             
                                                                             </span> 
@@ -208,7 +208,7 @@
                                                                         </span>
                                                                         <br>
 
-                                                                        Total Order : <br>
+                                                                        Total Amount of Order : <br>
                                                                     </p>
                                                                 </div>
                                                             </div>

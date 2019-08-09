@@ -471,7 +471,7 @@ class Companies extends CI_Controller {
                                                         <span style="color: #00fb00;">'.$company_contacts_count.'</span>
                                                             <br>
 
-                                                        Stock Products : 
+                                                        Number of Product : 
                                                             <span style="color: red;">
                                                             </span> 
                                                             <br>
@@ -479,7 +479,7 @@ class Companies extends CI_Controller {
                                                         <span style="color: #00fb00;">'.$quoted_enqiries.'
                                                         </span>
                                                         <br>
-                                                        Total Order : 
+                                                        Total Amount of Order : 
                                                     </p>
                                                 </div>
                                             </div>
