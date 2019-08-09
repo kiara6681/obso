@@ -12,9 +12,13 @@
                 <div class="row align-items-center">                    
                     <div class="col-sm-10">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Companies</a></li>
-                            <li class="breadcrumb-item active">Add New Company</li>
+                            <li class="breadcrumb-item ">
+                                <a href="<?= base_url(); ?>admin/dashboard">Home</a>
+                            </li>
+                            <li class="breadcrumb-item ">
+                                <a href="<?= base_url(); ?>admin/companies">Companies</a>
+                            </li>
+                            <li class="breadcrumb-item"><b>Add New Company</b></li>
                         </ol>
                     </div>
                     <div class="col-sm-2">                    
@@ -33,12 +37,13 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="mt-0 header-title">Add New Company</h4>
-
                             <input type="radio" name="comp_type" class="company_type" value="1" checked="checked"> &nbsp; 
                             Sales Company &nbsp;&nbsp;
                             <input type="radio" name="comp_type" class="company_type" value="2"> &nbsp; 
                             Supplier Company
+
+                            <br />
+                            <br />
 
                             <!-- sales company form -->
                             <div id="sales_company_form">
@@ -135,8 +140,8 @@
                                             <textarea class="form-control" name="information" cols="30" rows="2"></textarea>
                                         </div>
 
-                                        <div class="col-sm-4">
-                                            <input type="submit" name="add_company" value="Add Company" class="btn btn-primary waves-effect btn-lg btn-block waves-light" style="margin-top: 35px;">
+                                        <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
+                                            <input type="submit" name="add_company" value="Add Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
                                         </div>
                                     </div>
                                 </form>
@@ -223,9 +228,12 @@
                                             <textarea class="form-control" name="information" cols="30" rows="2"></textarea>
                                         </div>
 
-                                        <div class="col-sm-4">
-                                            <input type="submit" name="add_company" value="Add Company" class="btn btn-primary waves-effect btn-lg btn-block waves-light" style="margin-top: 35px;">
+                                        <div class="col-sm-12 text-center">
+                                            <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
+                                                <input type="submit" name="add_company" value="Add Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
+                                            </div>
                                         </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -257,91 +265,3 @@
         });
     });
 </script>
-
-
-<!-- <div class="modal fade bs-example-modal-lg show" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-modal="true" style="display: none; padding-right: 17px;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add New Company</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-        
-                <form action="">                        
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">Text</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-email-input" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-url-input" class="col-sm-2 col-form-label">URL</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-tel-input" class="col-sm-2 col-form-label">Telephone</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-password-input" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="password" value="hunter2" id="example-password-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-number-input" class="col-sm-2 col-form-label">Number</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="number" value="42" id="example-number-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-datetime-local-input" class="col-sm-2 col-form-label">Date and time</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-date-input" class="col-sm-2 col-form-label">Date</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Select</label>
-                        <div class="col-sm-10">
-                            <select class="form-control">
-                                <option>Select</option>
-                                <option>Large select</option>
-                                <option>Small select</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Custom Select</label>
-                        <div class="col-sm-10">
-                            <select class="custom-select">
-                                <option selected="">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>/.modal-content
-    </div>/.modal-dialog
-</div> -->

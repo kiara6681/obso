@@ -12,10 +12,14 @@
                 <div class="row align-items-center">                    
                     <div class="col-sm-10">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Companies</a></li>
-                            <li class="breadcrumb-item active">Edit Company</li>
-                        </ol>
+                            <li class="breadcrumb-item ">
+                                <a href="<?= base_url(); ?>admin/dashboard">Home</a>
+                            </li>
+                            <li class="breadcrumb-item ">
+                                <a href="<?= base_url(); ?>admin/companies">Companies</a>
+                            </li>
+                            <li class="breadcrumb-item"> <b>Edit Company</b></li>
+                        </ol> 
                     </div>
                     <div class="col-sm-2">                    
                         <div class="float-right d-none d-md-block">
@@ -32,8 +36,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-
-                            <h4 class="mt-0 header-title">Edit Company</h4>
 
                                 <?php
                                 // sales company update
@@ -149,8 +151,8 @@
                                                 <textarea class="form-control" name="information" id="information" cols="30" rows="2"><?= $company->information; ?></textarea>
                                             </div>
 
-                                            <div class="col-sm-4">
-                                                <input type="submit" name="edit_company" value="Edit Company" class="btn btn-primary waves-effect btn-lg btn-block waves-light" style="margin-top: 35px;">
+                                            <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
+                                                <input type="submit" name="edit_company" value="Edit Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
                                             </div>
                                         </div>
                                     </form>
@@ -254,9 +256,12 @@
                                                 <textarea class="form-control" name="information" id="information" cols="30" rows="2"><?= $company->information; ?></textarea>
                                             </div>
 
-                                            <div class="col-sm-4">
-                                                <input type="submit" name="edit_company" value="Edit Company" class="btn btn-primary waves-effect btn-lg btn-block waves-light" style="margin-top: 35px;">
+                                            <div class="col-sm-12 text-center">
+                                                <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
+                                                    <input type="submit" name="edit_company" value="Edit Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
+                                                </div>
                                             </div>
+
                                             </div>
                                         </form>
                                     <?php

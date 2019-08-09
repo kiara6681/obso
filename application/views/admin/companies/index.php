@@ -10,16 +10,18 @@
         <div class="container-fluid">
             <div class="page-title-box">
                 <div class="row align-items-center">                    
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Companies</li>
+                            <li class="breadcrumb-item ">
+                                <a href="<?= base_url(); ?>admin/dashboard">Home</a>
+                            </li>
+                            <li class="breadcrumb-item"> <b>Companies</b> </li>
                         </ol>
                     </div>
-                    <div class="col-sm-2">                    
+                    <div class="col-sm-3">                    
                         <div class="float-right d-none d-md-block">
                             <a href="<?= base_url(); ?>admin/companies/create" class="btn btn-primary waves-effect waves-light">
-                                Add New Company
+                                Add Company
                             </a>
                             <!-- <button class="btn btn-primary waves-effect waves-light" type="button" data-toggle="modal" data-target=".bs-example-modal-lg">
                                 Add New Company
@@ -45,12 +47,6 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mt-0 header-title">Show all companies</h4>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
                             <form role="search">                                
                                 <input type="text" class="form-control" id="search_companies" placeholder="Search..">
                             </form>
@@ -63,6 +59,21 @@
                                 <?php
                                 // show sales companies
                                 foreach ($sales_companies as $key => $company) {
+
+                                    // Get company contact
+                                    $company_contacts = $this->Companies_Model->getCompanyContacts($company['id']);
+
+                                    // Get total enquiry of this company
+                                    $enquiries = $this->common_model->getAllEnquiryOFCompany($company['id']);
+
+                                    $quoted_enqiries = 0;
+                                    foreach ($enquiries as $key => $enquiry) {
+                                        if($enquiry['suspus'] == 1){
+
+                                            $quoted_enqiries++;
+                                        }
+                                    }
+
                                     ?>
                                     <div class="card">
                                         <div class="card-body">
@@ -75,9 +86,13 @@
                                                             <br>
                                                             Industry : <?= $company['industry_name']; ?> 
                                                             <br>
-                                                            Record Source : <?= $company['record_source']; ?>
+                                                            Website : <?= $company['website']; ?>
                                                             <br>
-                                                            Country : <?= $company['country_name']; ?>
+                                                            Dial : <?= $company['dial_number']; ?>
+                                                            <br>
+                                                            Information : <?= $company['information']; ?>
+                                                            <br>
+                                                            Competitor : <?= $company['competitor']; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -89,10 +104,27 @@
                                                                 <a href="javascript:;"></a>
                                                                 <div class="col-xl-12">
                                                                     <p>
-                                                                        Website : <?= $company['website']; ?> <br>
-                                                                        Dial Number : <?= $company['dial_number']; ?><br>
-                                                                        Competitor : <?= $company['competitor']; ?><br>
-                                                                        Free To Trade : <?= $company['free_to_trade']; ?><br>
+                                                                        Contacts : 
+                                                                        <span style="color: green;">
+                                                                            <?= (count($company_contacts) > 0) ? count($company_contacts) : '0'; ?>
+                                                                        </span>
+                                                                            <br>
+
+                                                                        Total Enquiry : 
+                                                                            <span style="color: red;">
+                                                                            <?= count($enquiries) - $quoted_enqiries; ?>
+                                                                            </span> 
+                                                                            / 
+                                                                            <?= count($enquiries); ?>
+                                                                            <br>
+
+                                                                        Quoted : 
+                                                                        <span style="color: green;"><?= $quoted_enqiries; ?>
+                                                                        </span>
+                                                                        <br>
+
+                                                                        Ordered : <br>
+                                                                        Total Spent : <br>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -100,7 +132,7 @@
 
                                                         <div class="col-xl-2">
                                                             <div class="test" id="menu1" data-toggle="dropdown"></div>
-                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="background-color: grey;">
                                                                 <a role="menuitem" tabindex="-1" href="<?= base_url('admin/companies/edit_company/'.$company['id']) ?>">
                                                                   <li role="presentation">Edit</li>
                                                                 </a>
@@ -119,19 +151,40 @@
 
                                 // show supplier companies
                                 foreach ($supplier_companies as $key => $company) {
+
+                                    // Get company contact
+                                    $company_contacts = $this->Companies_Model->getCompanyContacts($company['id']);
+
+                                    // Get total enquiry of this company
+                                    $enquiries = $this->common_model->getAllEnquiryOFCompany($company['id']);
+
+                                    $quoted_enqiries = 0;
+                                    foreach ($enquiries as $key => $enquiry) {
+                                        if($enquiry['suspus'] == 1){
+
+                                            $quoted_enqiries++;
+                                        }
+                                    }
+
                                     ?>
-                                    <div class="card">
+                                    <div class="card" style="background-color: grey !important;">
                                         <div class="card-body">
                                             <div class="row p-9">
                                                 <div class="col-xl-6 col-md-4 col-sm-6 border-rgt p-top12">
                                                     <img src="http://localhost/obsoadmin/trunk/obso/assets/images/flags/french_flag.jpg" class="cntry-flag">
                                                     <div class="col-md-12 m-l-30">
                                                         <p> 
-                                                            Company  : <?= $company['company_name']; ?> <br>
-                                                            Industry : <?= $company['industry_name']; ?> <br>
-                                                            Record Source : <?= $company['record_source']; ?>
+                                                            Company  : <?= $company['company_name']; ?> 
                                                             <br>
-                                                            Country : <?= $company['country_name']; ?>
+                                                            Industry : <?= $company['industry_name']; ?> 
+                                                            <br>
+                                                            Website : <?= $company['website']; ?>
+                                                            <br>
+                                                            Dial : <?= $company['dial_number']; ?>
+                                                            <br>
+                                                            Information : <?= $company['information']; ?>
+                                                            <br>
+                                                            Competitor : <?= $company['competitor']; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -143,10 +196,27 @@
                                                                 <a href="javascript:;"></a>
                                                                 <div class="col-xl-12">
                                                                     <p>
-                                                                        Website : <?= $company['website']; ?> <br>
-                                                                        Dial Number : <?= $company['dial_number']; ?><br>
-                                                                        Competitor : <?= $company['competitor']; ?><br>
-                                                                        Free To Trade : <?= $company['free_to_trade']; ?><br>
+                                                                        Contacts : 
+                                                                        <span style="color: green;">
+                                                                            <?= (count($company_contacts) > 0) ? count($company_contacts) : '0'; ?>
+                                                                        </span>
+                                                                            <br>
+
+                                                                        Total Enquiry : 
+                                                                            <span style="color: red;">
+                                                                            <?= count($enquiries) - $quoted_enqiries; ?>
+                                                                            </span> 
+                                                                            / 
+                                                                            <?= count($enquiries); ?>
+                                                                            <br>
+
+                                                                        Quoted : 
+                                                                        <span style="color: green;"><?= $quoted_enqiries; ?>
+                                                                        </span>
+                                                                        <br>
+
+                                                                        Ordered : <br>
+                                                                        Total Spent : <br>
                                                                     </p>
                                                                 </div>
                                                             </div>

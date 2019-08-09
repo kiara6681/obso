@@ -18,6 +18,7 @@ class Companies_Model extends CI_Model {
         $this->db->join('country cont','cont.id = comp.country');
         $this->db->where('comp.company_type', 1);
         $this->db->where('comp.status', 1);
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
@@ -32,6 +33,21 @@ class Companies_Model extends CI_Model {
         $this->db->join('country cont','cont.id = comp.country');
         $this->db->where('comp.company_type', 2);
         $this->db->where('comp.status', 1);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    // show all supplier companies
+    public function getCompanyContacts($company_id){
+
+        $this->db->select('*');
+        $this->db->from('sales_contacts');
+        //$this->db->join('supplier_industry indus','indus.id = comp.industry');
+        //$this->db->join('country cont','cont.id = comp.country');
+        $this->db->where('company', $company_id);
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
