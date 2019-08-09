@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2019 at 09:26 PM
+-- Generation Time: Aug 09, 2019 at 09:33 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -978,6 +978,7 @@ CREATE TABLE `sales_contacts` (
   `invoice_reference_number` varchar(255) DEFAULT NULL,
   `pls_information` text,
   `communication` varchar(255) DEFAULT NULL,
+  `contact_status` varchar(50) DEFAULT NULL,
   `status` tinyint(1) NOT NULL COMMENT '1 for active and 2 for inactive and 3 for archieve',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -987,11 +988,11 @@ CREATE TABLE `sales_contacts` (
 -- Dumping data for table `sales_contacts`
 --
 
-INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 2, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(2, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06'),
-(3, 'admin', 3, 'Prem', 'Prakash', 'Male', NULL, 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(4, 'admin', 3, 'Amit', 'Sharma', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'SMS', 2, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
+INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 2, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(2, 'admin', 3, 'Ravi', 'Kumar', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', '90 Days DOI', 'monthly', 'lessthen50k', '{\"3\":\"4\",\"4\":\"5\",\"7\":\"8\",\"10\":\"11\",\"13\":\"14\",\"14\":\"15\",\"16\":\"17\",\"17\":\"18\",\"20\":\"21\",\"23\":\"25\"}', 'INV121REF13', 'No PLS Information', 'both', 'do_not_contact', 1, '2019-08-08 01:41:06', '2019-08-09 12:09:14'),
+(3, 'admin', 3, 'Prem', 'Prakash', 'Male', NULL, 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
+(4, 'admin', 3, 'Amit', 'Sharma', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 2, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
 
 -- --------------------------------------------------------
 
@@ -1019,10 +1020,7 @@ CREATE TABLE `sales_contact_addresses` (
 --
 
 INSERT INTO `sales_contact_addresses` (`id`, `sales_contact_id`, `address_type`, `location`, `street`, `town`, `state`, `zip_code`, `country`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'invoice_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(2, 1, 'delivery_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(3, 2, 'invoice_address', 'B- 53,  Balaji Tower 1st', 'Sikar Road, Vidhyadhar Nagar', 'Jaipur', 'Sikar Road, Vidhyadhar Nagar', '302039', '76', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06'),
-(4, 2, '', 'B- 53,  Balaji Tower 1st', '', '', '', '', '13', 1, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
+(27, 2, 'head_office_address', 'B- 53,  Balaji Tower 1st', 'Vidhyadhar Nagar', 'Jaipur', 'Vidhyadhar Nagar', '302039', '76', 1, '2019-08-09 12:09:14', '2019-08-09 12:09:14');
 
 -- --------------------------------------------------------
 
@@ -1841,7 +1839,7 @@ ALTER TABLE `sales_contacts`
 -- AUTO_INCREMENT for table `sales_contact_addresses`
 --
 ALTER TABLE `sales_contact_addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `settings`

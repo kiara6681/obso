@@ -36,7 +36,7 @@
                     <div class="col-sm-10">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">Home</li>
-                            <li class="breadcrumb-item active">Sales</li>
+                            <li class="breadcrumb-item active"><a href="<?= base_url();?>admin/sales">Sales</a></li>
                             <li class="breadcrumb-item "><a html="javascript:;">Add New Sales</a></li>
                         </ol>
                     </div>
@@ -80,12 +80,12 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label>First Name</label>
-                                                    <input class="form-control" type="text" name="first_name" placeholder="Sales First Name" required="required">
+                                                    <input class="form-control" type="text" name="first_name" placeholder="First Name" required="required">
                                                 </div>    
 
                                                 <div class="col-sm-6">
                                                     <label>Last Name</label>
-                                                    <input class="form-control" type="text" name="last_name" placeholder="Sales Last Name" required="required">
+                                                    <input class="form-control" type="text" name="last_name" placeholder="Last Name" required="required">
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <label>Gender</label>
@@ -211,7 +211,7 @@
                                                         foreach ($menufecturer as $key => $mnfr) {
                                                             ?>
                                                                 <label class="btn btn-primary btn-sm" style="margin-bottom: 15px;">
-                                                                    <input type="checkbox" name="menufecturer[]" value="<?= $mnfr['manufacturer']; ?>"> <?= $mnfr['manufacturer']; ?> 
+                                                                    <input type="checkbox" name="menufecturer[<?= $mnfr['id']; ?>]" value="<?= $mnfr['id']; ?>"> <?= $mnfr['manufacturer']; ?> 
                                                                 </label>&nbsp;&nbsp;&nbsp;
                                                             <?php
                                                         }
@@ -295,22 +295,20 @@
                                             <label>Address Type</label>
                                             <select name="address_type[0]" id="address_type" class="form-control">
                                                 <option value="">Address Type</option>
-                                                <option value="invoice_address">Invoice Address</option>
-                                                <option value="delivery_address">Delivery Address</option>
                                                 <option value="head_office_address">Head Office Location</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-3" id="add_address">
-                                            <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add New Address</button>
+                                            <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add Other Address</button>
                                         </div>                                      
                                     </div>
                                     <br />
                                     <div class="row">
                                          <div class="col-sm-6 text-center">
                                             <div class="card marbtmm" >
-                                                <h4>
+                                                <h5>
                                                     Communication 
-                                                </h4>
+                                                </h5>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-default btn-lg">
                                                         <input type="radio" name="communication" value="email"> Use Email
@@ -326,24 +324,24 @@
                                         </div>
                                          <div class="col-sm-6 text-center">
                                             <div class="card marbtmm" >
-                                                <h4>
+                                                <h5>
                                                     Contact Status 
-                                                </h4>
+                                                </h5>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                    <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="status" value="active"> Active
+                                                    <label class="btn btn-default btn-lg active">
+                                                        <input type="radio" name="contact_status" value="active" checked> Active
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="status" value="do_not_contact"> Do Not Contact
+                                                        <input type="radio" name="contact_status" value="do_not_contact"> Do Not Contact
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="status" value="in_active"> In-Active
+                                                        <input type="radio" name="contact_status" value="in_active"> In-Active
                                                     </label> 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
-                                            <input type="submit" name="add_company" value="Add Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
+                                            <input type="submit" name="add_company" value="Add Contact" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
                                         </div>
                                     </div>
                                 </form>

@@ -12,20 +12,25 @@ class Sales_Model extends CI_Model {
     // show all sales companies
     public function getAllSalesContacts($status = null, $id = null){
 
-        $this->db->select('*');
-        $this->db->from('sales_contacts');
+        $this->db->select('contact.*, company.company_name, address.address_type, address.location, address.street, address.town, address.state, address.zip_code, address.zip_code, countries.name county_name');
+        $this->db->from('sales_contacts contact');
+        $this->db->join('companies company','company.id = contact.company','left');
+        $this->db->join('sales_contact_addresses address','address.sales_contact_id = contact.id', 'left');
+        $this->db->join('country countries','countries.id = address.country', 'left');
         if($status != null)
         {
-            $this->db->where('status', $status);
+            $this->db->where('contact.status', $status);
         }
+
         if($id != null)
         {
-            $this->db->where('id', $id);
-            $query = $this->db->get();
+            $this->db->where('contact.id', $id);
+
+            $query = $this->db->order_by('id desc')->get();
             $query = $query->row();  
 
         }else{
-            $query = $this->db->get();
+            $query = $this->db->order_by('id desc')->get();
             $query = $query->result_array();  
         }
         return $query;
@@ -50,6 +55,20 @@ class Sales_Model extends CI_Model {
         $this->db->update('sales_contacts', array('status' => $status));
         return true;
     }
+    
+    public function deleteAddress($id, $table){
+        return $this->db->delete($table, array('sales_contact_id' => $id));
+    }
+
+    // get Sales Address
+    public function getContactsAddress($id){
+        $this->db->select('*');
+        $this->db->from('sales_contact_addresses');
+        $this->db->where('sales_contact_id', $id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
 
     // get single company information
     function getCompanyByID($id){
@@ -66,6 +85,14 @@ class Sales_Model extends CI_Model {
 
         $this->db->where('id', $id);
         $this->db->update('companies', $data);
+        return;
+    }
+
+    // Edit Contact
+    public function updateContact($data, $id){
+
+        $this->db->where('id', $id);
+        $this->db->update('sales_contacts', $data);
         return;
     }
 

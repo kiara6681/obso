@@ -9,6 +9,13 @@
         color: #fff;
         padding: 0px 4px;
     }
+    .c-b p{
+        font-size: 13px;
+        margin-bottom: 0rem;
+    }
+    .c-b strong{
+        font-size: 13px;
+    }
     .p-d-5{
         padding: 0px 10px;
     }
@@ -41,7 +48,17 @@
     .f-w-700{
         font-weight: 700;
     }
+    .dropdown-menu.show {
+        background-color: gray;
+    }
+    .contact_search{
+        float: right;
+    }
+    .contact_filter{
+        float: left;
+    }
 </style>
+
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -77,13 +94,13 @@
                         <?php
                     }
                     ?>
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body">
                             <form role="search">                                
                                 <input type="text" class="form-control" id="search_companies" placeholder="Search..">
                             </form>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row">
                         <div class="col-md-3 main_card">                                
@@ -92,7 +109,7 @@
                                     <div class="card-body">
                                         <div class="row connectedSortable" id="lead_block" data-id="1">
                                             <div class="col-md-12 p-d-5"> 
-                                                <h5 class="text-center" >Lead</h5>
+                                                <h5 class="text-center" ><a href="javascript:;" class="contact_filter"><i class="fa fa-filter"></i></a>Lead <a href="javascript:;" class="contact_search"><i class="fa fa-search"></i></a></h5>
                                             </div>
                                             <?php
                                             // show sales companies
@@ -100,15 +117,23 @@
                                                 ?>
                                                 <div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="<?= $contact['id']; ?>">
                                                     <div class="col-md-12 c-b">
-                                                        <h5 class="f-w-400"> Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?= $contact['company']; ?></b> 
-                                                        </h5>
+                                                        <h6 class="f-w-400"><img src="" /> Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
+                                                        </h6>
+                                                        <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
+                                                        <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                        <p>Location: <?=  $contact['location'].', '.$contact['street'].', '.$contact['town'].', '.$contact['state'].', '.$contact['county_name'].' '.$contact['zip_code']; ?></p><br />
+    
+                                                        <p>Email: <a href="javascript:;"><?=  $contact['email']; ?></a></p>
+                                                        <p>Trader: <?=  $contact['trader']; ?></p>
+                                                        <p>Spend: <?=  0; ?> | Enquiry: <?=  0; ?></p>
+                                                        <p>Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                     </div>
                                                     <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                         <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                             <li role="presentation">Edit</li>
                                                         </a>
-                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to remove the contact?')" role="menuitem" tabindex="-1">
+                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to archieved this contact?')" role="menuitem" tabindex="-1">
                                                             <li role="presentation">Archieve</li>
                                                        </a>
                                                    </ul>
@@ -127,7 +152,7 @@
                                     <div class="card-body">
                                         <div class="row connectedSortable" id="suspects_block" data-id="2">
                                             <div class="col-md-12 p-d-5"> 
-                                                <h5 class="text-center">Suspects</h5>
+                                                <h5 class="text-center" ><a href="javascript:;" class="contact_filter"><i class="fa fa-filter"></i></a>   Suspects <a href="javascript:;" class="contact_search"><i class="fa fa-search"></i></a></h5>
                                             </div>
                                             <?php
                                             // show sales companies
@@ -136,18 +161,23 @@
                                                 ?>
                                                 <div class="col-md-12 m-b-3 move ui-state-default" data-id="2" id="<?= $contact['id']; ?>">
                                                     <div class="col-md-12 c-b">
-                                                        <p> 
-                                                            Name  : <?= $contact['fname'].' '.$contact['lname']; ?> 
-                                                            <br>
-                                                            Company : <?= $contact['company']; ?> 
-                                                        </p>
+                                                        <h6 class="f-w-400"><img src="" /> Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
+                                                        </h6>
+                                                        <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
+                                                        <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                        <p>Location: <?=  $contact['location'].', '.$contact['street'].', '.$contact['town'].', '.$contact['state'].', '.$contact['county_name'].' '.$contact['zip_code']; ?></p><br />
+    
+                                                        <p>Email: <a href="javascript:;"><?=  $contact['email']; ?></a></p>
+                                                        <p>Trader: <?=  $contact['trader']; ?></p>
+                                                        <p>Spend: <?=  0; ?> | Enquiry: <?=  0; ?></p>
+                                                        <p>Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                     </div>
                                                     <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                         <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                             <li role="presentation">Edit</li>
                                                         </a>
-                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to remove the contact?')" role="menuitem" tabindex="-1">
+                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to archieved this contact?')" role="menuitem" tabindex="-1">
                                                             <li role="presentation">Archieve</li>
                                                        </a>
                                                    </ul>
@@ -165,25 +195,33 @@
                                 <div class="card c-card">
                                     <div class="card-body">
                                         <div class="row connectedSortable" data-id="3" id="prospects_block">
-                                            <div class="col-md-12 p-d-5"> <h5 class="text-center">Prospects</h5></div>
+                                            <div class="col-md-12 p-d-5"> 
+                                                 <h5 class="text-center" ><a href="javascript:;" class="contact_filter"><i class="fa fa-filter"></i></a>  Prospects <a href="javascript:;" class="contact_search"><i class="fa fa-search"></i></a></h5>
+                                            </div>
+
                                             <?php
                                             // show sales companies
                                             foreach ($sales_prospects_block as $key => $contact) {
                                                 ?>
                                                 <div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="<?= $contact['id']; ?>">
                                                     <div class="col-md-12 c-b">
-                                                        <p> 
-                                                            Name  : <?= $contact['fname'].' '.$contact['lname']; ?> 
-                                                            <br>
-                                                            Company : <?= $contact['company']; ?> 
-                                                        </p>
+                                                        <h6 class="f-w-400"><img src="" /> Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
+                                                        </h6>
+                                                        <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
+                                                        <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                        <p>Location: <?=  $contact['location'].', '.$contact['street'].', '.$contact['town'].', '.$contact['state'].', '.$contact['county_name'].' '.$contact['zip_code']; ?></p><br />
+    
+                                                        <p>Email: <a href="javascript:;"><?=  $contact['email']; ?></a></p>
+                                                        <p>Trader: <?=  $contact['trader']; ?></p>
+                                                        <p>Spend: <?=  0; ?> | Enquiry: <?=  0; ?></p>
+                                                        <p>Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                     </div>
                                                     <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                         <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                             <li role="presentation">Edit</li>
                                                         </a>
-                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to remove the contact?')" role="menuitem" tabindex="-1">
+                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to archieved this contact?')" role="menuitem" tabindex="-1">
                                                             <li role="presentation">Archieve</li>
                                                        </a>
                                                    </ul>
@@ -201,7 +239,9 @@
                                 <div class="card c-card">
                                     <div class="card-body">
                                         <div class="row connectedSortable" data-id="4" id="key_contact_block">
-                                            <div class="col-md-12 p-d-5"> <h5 class="text-center">Key Contacts</h5></div>
+                                            <div class="col-md-12 p-d-5"> 
+                                                <h5 class="text-center" ><a href="javascript:;" class="contact_filter"><i class="fa fa-filter"></i></a> Key Contacts <a href="javascript:;" class="contact_search"><i class="fa fa-search"></i></a></h5>
+                                            </div>
                                             <?php
                                             // show sales companies
                                             foreach ($sales_key_contact_block as $key => $contact) 
@@ -209,18 +249,23 @@
                                                 ?>
                                                 <div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="<?= $contact['id']; ?>">
                                                     <div class="col-md-12 c-b">
-                                                        <p> 
-                                                            Name  : <?= $contact['fname'].' '.$contact['lname']; ?> 
-                                                            <br>
-                                                            Company : <?= $contact['company']; ?> 
-                                                        </p>
+                                                        <h6 class="f-w-400"><img src="" /> Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
+                                                        </h6>
+                                                        <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
+                                                        <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                        <p>Location: <?=  $contact['location'].', '.$contact['street'].', '.$contact['town'].', '.$contact['state'].', '.$contact['county_name'].' '.$contact['zip_code']; ?></p><br />
+    
+                                                        <p>Email: <a href="javascript:;"><?=  $contact['email']; ?></a></p>
+                                                        <p>Trader: <?=  $contact['trader']; ?></p>
+                                                        <p>Spend: <?=  0; ?> | Enquiry: <?=  0; ?></p>
+                                                        <p>Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                     </div>
                                                     <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                         <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                             <li role="presentation">Edit</li>
                                                         </a>
-                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to remove the contact?')" role="menuitem" tabindex="-1">
+                                                       <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to archieved this contact?')" role="menuitem" tabindex="-1">
                                                             <li role="presentation">Archieve</li>
                                                        </a>
                                                    </ul>
@@ -233,66 +278,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--  <div class="col-xl-3 col-md-3 col-sm-3 col-xs-6  p-0">
-                                                   <div class="row">
-                                                       <div class="col-xl-2">
-                                                           <div class="test" id="menu1" data-toggle="dropdown"></div>
-                                                           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                               <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
-                                                                 <li role="presentation">Edit</li>
-                                                               </a>
-                                                               <a href="<?= base_url('admin/sales/archieve/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to remove the contact?')" role="menuitem" tabindex="-1">
-                                                                   <li role="presentation">Archieve</li>
-                                                               </a>
-                                                           </ul>
-                                                       </div>
-                                                   </div>
-                                               </div> -->
-
-                        <!-- <div class="col-md-4">                            
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-xl-12 col-md-4 col-sm-6 sup-bg p-0"><h6>Search Filter</h6></div>
-                        
-                                    <div class="col-xl-12 col-md-4 col-sm-6 p-0">
-                                    
-                                        <div class="form-group">
-                                            <select id="ddlCreditCardType" name="ddlCreditCardType" class="form-control">
-                                                <option value="">Only Show</option>
-                                            </select>
-                                        </div>
-                        
-                                        <div class="form-group">                                    
-                        
-                                            <select name="country" id="sort_by_country" class="form-control adv-common-filter">
-                                                <option value="">Region/Country Select</option>
-                                                <?php 
-                                                foreach($countries as $c => $country): 
-                                                    ?>
-                                                    <option value="<?= $country['id'] ?>"><?= $country['name'] ?></option>
-                                                    <?php 
-                                                endforeach; 
-                                                ?>
-                                            </select>
-                                        </div>
-                        
-                                        <div class="form-group">
-                                            <select name="sort_by" id="sort_by" class="form-control">
-                                                <option value="">Sort by</option>
-                                                <option value="1">Latest First</option>
-                                                <option value="2">Last  First</option>
-                                                <option value="3">Country A-Z</option>
-                                                <option value="4">Country Z-A</option>
-                                                <option value="5">Industry A-Z</option>
-                                                <option value="6">Industry Z-A</option>
-                                            </select>
-                                        </div>
-                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
                     </div>
                 </div> <!-- end col -->
@@ -334,7 +319,7 @@ $(document).ready(function(){
 
                 if(check == 0)
                 {
-                    alert('not dropable');
+                    alert('Please provide all mendatory information.');
                     $(this).sortable('cancel');
                 }
                 else

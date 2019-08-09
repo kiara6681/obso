@@ -62,6 +62,7 @@ class Sales extends CI_Controller {
             $estimated_spend     = $this->input->post('estimated_spend');
             $manufacturers       = $this->input->post('menufecturer');
             $communication       = $this->input->post('communication');
+            $contact_status      = $this->input->post('contact_status');
             $location            = $this->input->post('location');
             $street_address      = $this->input->post('street_address');
             $city                = $this->input->post('city');
@@ -91,6 +92,7 @@ class Sales extends CI_Controller {
                 'invoice_reference_number' => $invoice_ref_no,
                 'pls_information'          => $pls_info,
                 'communication'            => $communication,
+                'contact_status'           => $contact_status,
                 'status'                   => 1,
                 'created_at'               => $date,
                 'updated_at'               => $date
@@ -147,11 +149,11 @@ class Sales extends CI_Controller {
     }
     
     // Add new sales
-    public function edit_sales(){
-
-        $id = $this->uri->segment(4);
-        if($this->input->post()){
-
+    public function edit_sales()
+    {
+        if($this->input->post())
+        {
+            $id                  = $this->input->post('id');
             $company             = $this->input->post('company');
             $trader              = $this->input->post('trader');
             $fname               = $this->input->post('first_name');
@@ -169,8 +171,9 @@ class Sales extends CI_Controller {
             $pls_info            = $this->input->post('pls_info');
             $estimated_frequency = $this->input->post('estimated_frequency');
             $estimated_spend     = $this->input->post('estimated_spend');
-            $manufacturers       = $this->input->post('menufecturer');
+            $manufacturer        = $this->input->post('menufecturer');
             $communication       = $this->input->post('communication');
+            $contact_status      = $this->input->post('contact_status');
             $location            = $this->input->post('location');
             $street_address      = $this->input->post('street_address');
             $city                = $this->input->post('city');
@@ -196,20 +199,24 @@ class Sales extends CI_Controller {
                 'payment_terms'            => $payment_terms,
                 'estimate_required'        => $estimated_frequency,
                 'estimate_spend'           => $estimated_spend,
-                'manufacturers'            => json_encode($manufacturers),
+                'manufacturers'            => json_encode($manufacturer),
                 'invoice_reference_number' => $invoice_ref_no,
                 'pls_information'          => $pls_info,
                 'communication'            => $communication,
+                'contact_status'           => $contact_status,
                 'updated_at'               => $date
             );
 
             //Insert Sales Data
-            $insert_id = $this->Sales_Model->insert($data, 'sales_contacts');
+            $insert_id = $this->Sales_Model->updateContact($data, $id);
+
+            //Delete Address 
+            $delete = $this->Sales_Model->deleteAddress($id,'sales_contact_addresses'); 
 
             //Insert Address
             foreach ($location as $key => $value) {
                 $data = array(
-                    'sales_contact_id' => $insert_id,
+                    'sales_contact_id' => $id,
                     'address_type'     => $address_type[$key],
                     'location'         => $value,
                     'street'           => $street_address[$key],
@@ -226,17 +233,22 @@ class Sales extends CI_Controller {
 
             }
 
-            $this->session->set_flashdata('message', 'Sales Created Successfully');
+            $this->session->set_flashdata('message', 'Sales Updated Successfully');
 
             //redirect to some function
             redirect("admin/sales");
         }
+
+        $id = $this->uri->segment(4);
 
         $data = array();
         $data['page_title'] = 'Edit Sales';
 
         // Get all sales companies
         $data['sales_contact'] = $contact = $this->Sales_Model->getAllSalesContacts(null, $id);
+
+        // Get all sales companies
+        $data['contact_address'] = $contact_address = $this->Sales_Model->getContactsAddress($id);
 
         // Get all sales companies
         $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
@@ -306,6 +318,17 @@ class Sales extends CI_Controller {
         }
     }
 
+    // Archieve Sales
+    public function archieve()
+    {
+        $id = $this->uri->segment(4);
+
+        //Update Status
+        $data = $this->Sales_Model->updateStatus($id, 0);
+        $this->session->set_flashdata('msg', 'Sales Archieved Successfully');
+        redirect(base_url('admin/sales'));        
+    }
+
     // Update Sales Status by AJAX
     public function updateSalesStatus()
     {
@@ -338,8 +361,6 @@ class Sales extends CI_Controller {
         $this->session->set_flashdata('msg', 'Customer Data Deleted Successfully');
         redirect(base_url('admin/sales/customer_list'));
     }
-
-  
 
     public function prospects(){
         $data = array();
