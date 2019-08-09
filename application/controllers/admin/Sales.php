@@ -446,6 +446,216 @@ class Sales extends CI_Controller {
         $this->load->view('admin/layout/footer', $data);
 
     }
+
+    public function uploadCSV()
+    {
+        if(isset($_POST["import"]))
+        {
+            $file = $_FILES['file']['tmp_name'];
+            $handle = fopen($file, "r");
+            $i = 0;
+            $j = 0;
+            $all_is_well = 0;
+            $all_data = array();
+
+            $department = ['Purchasing','Workshop / Factory / Production / Engineering','Stores','Finance','Sales / Customer Service','Reception','Unknown'];
+
+            $estimated_requirement = ['Less then 1 year','Daily','Weekly','Monthly','Yearly'];
+            $estimated_spend = ['Less then 50k','50k+','100k+','500k+','1m+'];
+            $communication = ['Email','SMS','Both'];
+            $contact_status = ['Active','Do not Contact','In-Active'];
+            $payment_tearms = ['Advance','50/50 Advance','75/25 Advance','Pay to ship','Pay on Delivery','7 Days DOI','14 Days DOI','30 Days DOI','60 Days DOI','90 Days DOI','EOM','30 EOM','60 EOM','90 '];
+
+            //Get Companies
+            $sales_companies = $this->Companies_Model->getAllSalesCompanies();
+
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+            {
+                if($j > 0)
+                {
+                    if(!empty($filesop[0]))
+                    {
+                        $check_company = 0;
+                        foreach ($sales_companies as $k => $company) {
+                            if($company['company_name'] == $filesop[0])
+                            {
+                                $check_company = 1;
+                            }
+                            
+                        }
+                        if($check_company == 1)
+                        {
+                            if(!empty($filesop[1]))
+                            {
+                                if(!empty($filesop[2]))
+                                {
+                                    if(in_array($filesop[6], $department))
+                                    {
+                                        if(preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $filesop[8]))
+                                        {
+                                            if(in_array($filesop[11], $estimated_requirement))
+                                            {
+                                                if(in_array($filesop[12], $estimated_spend))
+                                                {
+                                                    if(in_array($filesop[13], $payment_tearms))
+                                                    {
+                                                        if(in_array($filesop[22], $communication))
+                                                        {
+                                                            if(in_array($filesop[23], $contact_status))
+                                                            {
+                                                                $all_data[$j] = $filesop;
+                                                                $all_is_well = 1; 
+
+                                                            }else{
+                                                                $all_is_well = 0; 
+                                                                $msg = 'Contact Status is wrong in row number '.$j.'';
+                                                                break;
+                                                            }
+                                                        }else{
+                                                            $all_is_well = 0; 
+                                                            $msg = 'Communication Detail is wrong in row number '.$j.'';
+                                                            break;
+                                                        }
+                                                    }else{
+                                                        $all_is_well = 0; 
+                                                        $msg = 'Payment Tearms is wrong in row number '.$j.'';
+                                                        break;
+                                                    }
+
+                                                }else{
+                                                    $all_is_well = 0; 
+                                                    $msg = 'Estimated Spend is wrong in row number '.$j.'';
+                                                    break;
+                                                }
+                                            }else{
+                                                $all_is_well = 0; 
+                                                $msg = 'Estimated Requirement name is wrong in row number '.$j.'';
+                                                break;
+
+                                            }
+                                        }else{
+                                            $all_is_well = 0; 
+                                            $msg = 'email is not valid email in row number '.$j.'';
+                                            break;
+                                        }
+                                    }else{
+                                        $all_is_well = 0; 
+                                        $msg = 'Department name is wrong in row number '.$j.'';
+                                        break;
+
+                                    }
+                                }else{
+                                    $all_is_well = 0; 
+                                    $msg = 'please fill last name in row number '.$j.'';
+                                    break;
+                                }
+
+                            }else{
+                                $all_is_well = 0; 
+                                $msg = 'please fill first name in row number '.$j.'';
+                                break;
+                            } 
+                        }else{
+                             $all_is_well = 0; 
+                            $msg = 'please fill correct company name in row number '.$j.'';
+                            break;
+                        }
+                    }else{
+                        $all_is_well = 0; 
+                        $msg = 'please fill company name in row number '.$j.'';
+                        break;
+                    }
+                }
+                $j++;
+            }
+
+            if($all_is_well == 1)
+            {
+                //Get All Country
+                $countries = $this->common_model->select('country');
+                $date      = date('Y-m-d H:i:s');
+
+                foreach($all_data as $key => $value)
+                {
+                    $company_id = '';
+                    foreach ($sales_companies as $k => $company) {
+                        if($company['company_name'] == $value[0])
+                        {
+                            $company_id = $company['id'];
+                        }
+                    }
+
+                    $data = array(
+                        'company'                  => (!empty($company_id)) ? $company_id : "",
+                        'trader'                   => 'admin',
+                        'fname'                    => (!empty($value[1])) ? $value[1] : "",
+                        'lname'                    => (!empty($value[2])) ? $value[2] : "",
+                        'gender'                   => (!empty($value[3])) ? $value[3] : "",
+                        'personal_info'            => (!empty($value[4])) ? $value[4] : "",
+                        'branch'                   => (!empty($value[5])) ? $value[5] : "",
+                        'department'               => (!empty($value[6])) ? $value[6] : "",
+                        'job_title'                => (!empty($value[7])) ? $value[7] : "",
+                        'email'                    => (!empty($value[8])) ? $value[8] : "",
+                        'mobile'                   => (!empty($value[9])) ? $value[9] : "",
+                        'direct_dial'              => (!empty($value[10])) ? $value[10] : "",
+                        'estimate_required'        => (!empty($value[11])) ? $value[11] : "",
+                        'estimate_spend'           => (!empty($value[12])) ? $value[12] : "",
+                        'payment_terms'            => (!empty($value[13])) ? $value[13] : "",
+                        'pls_information'          => (!empty($value[14])) ? $value[14] : "",
+                        'invoice_reference_number' => (!empty($value[15])) ? $value[15] : "",
+                        'communication'            => (!empty($value[22])) ? $value[22] : "",
+                        'contact_status'           => (!empty($value[23])) ? $value[23] : "",
+                        'status'                   => 1,
+                        'created_at'               => $date,
+                        'updated_at'               => $date
+                    );
+
+                     //Insert Sales Data
+                    $insert_id = $this->Sales_Model->insert($data, 'sales_contacts');
+                    $country_name = '';
+
+                    foreach ($countries as $key => $country) {
+                        if($value[21] == $country['name'])
+                        {
+                            $country_id = $country['id'];
+                        }
+                    }
+
+                    //Insert Address
+                    $data = array(
+                        'sales_contact_id' => $insert_id,
+                        'address_type'     => 'head_office_address',
+                        'location'         => (!empty($value[16])) ? $value[16] : "",
+                        'street'           => (!empty($value[17])) ? $value[17] : "",
+                        'town'             => (!empty($value[18])) ? $value[18] : "",
+                        'state'            => (!empty($value[19])) ? $value[19] : "",
+                        'zip_code'         => (!empty($value[20])) ? $value[20] : "",
+                        'country'          => (!empty($country_id)) ? $country_id : "",
+                        'status'           => 1,
+                        'created_at'       => $date,
+                        'updated_at'       => $date
+                    );
+
+                    $insert = $this->Sales_Model->insert($data, 'sales_contact_addresses');
+                }
+                $this->session->set_flashdata('msg', 'Sales contact imported successfully.');
+                redirect(base_url('admin/sales'));
+            }
+            else
+            {
+
+                $this->session->set_flashdata('msg', $msg);
+                redirect('admin/sales');
+            }
+        }
+        redirect(base_url('admin/sales'));
+    }
+
+
+
+
+
+
     
 
 

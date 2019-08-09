@@ -154,19 +154,19 @@
                                                 <div class="card-body">
                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_frequency" value="lessthenoneyear"> Less then 1 year
+                                                            <input type="radio" name="estimated_frequency" value="Less then 1 year"> Less then 1 year
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_frequency" value="daily"> Daily
+                                                            <input type="radio" name="estimated_frequency" value="Daily"> Daily
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_frequency" value="weekly"> Weekly
+                                                            <input type="radio" name="estimated_frequency" value="Weekly"> Weekly
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_frequency" value="monthly"> Monthly
+                                                            <input type="radio" name="estimated_frequency" value="Monthly"> Monthly
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_frequency" value="yearly"> Yearly
+                                                            <input type="radio" name="estimated_frequency" value="Yearly"> Yearly
                                                         </label>
                                                     </div>
                                                 </div>
@@ -181,19 +181,19 @@
                                                 <div class="card-body">
                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_spend" value="lessthen50k"> Less then 50k
+                                                            <input type="radio" name="estimated_spend" value="Less then 50k"> Less then 50k
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_spend" value="daily"> 50k+
+                                                            <input type="radio" name="estimated_spend" value="50k+"> 50k+
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_spend" value="100kplus"> 100k+
+                                                            <input type="radio" name="estimated_spend" value="100k+"> 100k+
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_spend" value="500kplus"> 500k+
+                                                            <input type="radio" name="estimated_spend" value="500k+"> 500k+
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="estimated_spend" value="1mplus"> 1m+
+                                                            <input type="radio" name="estimated_spend" value="1m+"> 1m+
                                                         </label>
                                                     </div>
                                                 </div>
@@ -227,10 +227,10 @@
                                                 <select name="payment_terms" class="form-control">
                                                     <option value="">Select Payment Tearms</option>
                                                     <option value="Advance">Advance</option>
-                                                    <option value="5050 Advance">50/50 Advance</option>
-                                                    <option value="7525 Advance">75/25 Advance</option>
-                                                    <option value="Pay To Ship">Pay to ship</option>
-                                                    <option value="Pay On Delivery">Pay on Delivery</option>
+                                                    <option value="50/50 Advance">50/50 Advance</option>
+                                                    <option value="75/25 Advance">75/25 Advance</option>
+                                                    <option value="Pay To Ship">Pay To Ship</option>
+                                                    <option value="Pay On Delivery">Pay On Delivery</option>
                                                     <option value="7 Days DOI">7 Days DOI</option>
                                                     <option value="14 Days DOI">14 Days DOI</option>
                                                     <option value="30 Days DOI">30 Days DOI</option>

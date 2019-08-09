@@ -14,6 +14,7 @@
         background-color: #2a3142 !important;
         color: #fff;
         padding: 0px 4px;
+        min-height: 300px;
     }
     .c-b p{
         font-size: 13px;
@@ -27,26 +28,26 @@
     }
     .p-d-5 .h5-g{
         background: #e6b8af;
-        color:#737871;
-        padding: 10px;
+        color:#000;
+        padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-y{
         background: #fffd77;
-        color:#737871;
-        padding: 10px;
+        color:#000;
+        padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-grn{
         background: #b7d7a8;
-        color:#737871;
-        padding: 10px;
+        color:#000;
+        padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-r{
         background: #d9d2e9;
-        color:#737871;
-        padding: 10px;
+        color:#000;
+        padding: 15px;
         margin: 5px;
     }
     .m-b-3{
@@ -81,6 +82,9 @@
     }
     .f-w-700{
         font-weight: 700;
+    }
+    .connectedSortable{
+        min-height: 10px;
     }
     .dropdown-menu.show {
         background-color: gray;
@@ -234,8 +238,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                <h5 class="text-center h5-g p-0" >Lead </h5>
-                                                <strong class="f-c-b">& Qualified Leads</strong>
+                                                <h5 class="text-center h5-g" >Lead </h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="lead_block" data-id="1">
                                                 <?php
@@ -307,8 +310,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                <h5 class="text-center h5-y p-0" >Suspects</h5>
-                                                <strong class="f-c-b">& Suspects Awaiting</strong>
+                                                <h5 class="text-center h5-y" >Suspects</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="suspects_block" data-id="2">
                                                 <?php
@@ -382,8 +384,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                 <h5 class="text-center h5-grn p-0" >Prospects</h5>
-                                                 <strong class="f-c-b">& Qualified Prospects & Closable Prospects</strong>
+                                                 <h5 class="text-center h5-grn" >Prospects</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="prospects_block" data-id="3">
                                                 <?php
@@ -456,9 +457,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                <h5 class="text-center p-0 h5-r
+                                                <h5 class="text-center h5-r
                                                 color:#000;" >Account Contacts</h5>
-                                                <strong class="f-c-b">& Key Account Contacts</strong>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="key_contact_block" data-id="4">
                                                 <?php
@@ -541,24 +541,22 @@
                 <h5 class="modal-title mt-0">Import Sales Contact</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="<?= base_url('admin/sales/archieve'); ?>" method="post">
-                <div class="card">
-                    <div class="col-xl-12 col-md-4 col-sm-6 sup-bg">
-                        <div class="button-items">
-                        <?php $this->load->helper('form'); ?>
-                        <?php echo form_open(base_url() . 'admin/product/importdata' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
-                            <div class="form-group">
-                                <input type="file" name="file"  class="form-control" style="background: none;padding: 0;margin-top: 15px;">
-                            </div>
-                            <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block waves-effect waves-light btn-radius">Import CSV</button>
-                            <?php echo form_close();?>
-                            <div class="download-sample text-center">
-                                <a download class="btn btn-link" href="<?= base_url() ?>uploads/sample/samplesalescontact.csv">Download Sample CSV</a>
-                            </div>
+            <div class="card">
+                <div class="col-xl-12 col-md-4 col-sm-6 sup-bg">
+                    <div class="button-items">
+                    <?php $this->load->helper('form'); ?>
+                    <?php echo form_open(base_url() . 'admin/sales/uploadCSV' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
+                        <div class="form-group">
+                            <input type="file" name="file"  class="form-control" style="background: none;padding: 0;margin-top: 15px;">
+                        </div>
+                        <button type="submit" name="import" class="btn btn-primary btn-block waves-effect waves-light">Import CSV</button>
+                        <?php echo form_close();?>
+                        <div class="download-sample text-center">
+                            <a download class="btn btn-link" href="<?= base_url() ?>uploads/sample/samplesalescontact.csv">Download Sample CSV</a>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -568,7 +566,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0">Are you sure ? you want to archieve this contact !</h5>
+                <h6 class="modal-title mt-0">Are you sure ?  you want to archieve this contact !</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form action="<?= base_url('admin/sales/archieve'); ?>" method="post">
@@ -576,7 +574,12 @@
                 <input type="hidden" class="contact_id" name="id">
                 <div class="modal-body">
                     <label>Resoan</label>
-                    <textarea placeholder="Resoan" class="form-control" rows="4" name="archieved_resoan" required></textarea>
+                    <select class="form-control" name="archieved_resoan" required>
+                        <option value="">Select Archieve Reason</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>

@@ -34,6 +34,12 @@
     p{
         margin-bottom: 0px;
     }
+    .red-box{
+        background-color: red;
+        color: #fff;
+        padding: 10px;
+        border-radius: 1px;
+    }
 </style>
 
 <div class="content-page">
@@ -116,18 +122,12 @@
                                                             <p>Trader: <strong><?=  $contact['trader']; ?></strong> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <h6>Menufectures :</h6>
+                                                            <h6>Reason :</h6>
+                                                            <div class="red-box">
                                                             <?php
-                                                            foreach ($menufecturer as $key => $mnfr)
-                                                            {
-                                                                $temp = json_decode($contact['manufacturers']);
-                                                                $arr = (array)$temp;
-                                                                if(in_array($mnfr['id'], $arr))
-                                                                {
-                                                                    echo "<p>".$mnfr['manufacturer']."</p>";
-                                                                }
-                                                            }
+                                                                echo $contact['archieved_resoan'];
                                                             ?>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-1 text-center c-b">
                                                             <div class="test action_button" id="menu1" data-toggle="dropdown"></div>

@@ -26,6 +26,10 @@
         background-color: #323a4e;
         color: #fff;
     }
+    .label label{
+        font-size: 16px;
+        padding: 0px 20px;
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -55,6 +59,7 @@
                                     <div class="row">
                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                                         <input type="hidden" name="id" value="<?= $sales_contact->id; ?>">
+                                        <input class="form-control" type="hidden" name="trader" value="<?= $sales_contact->trader; ?>" readonly placeholder="Trader Name">
 
                                         <div class="col-sm-6">
                                             <select class="form-control" style="height: 50px;" name="company" required="required">
@@ -68,8 +73,10 @@
                                                 ?>
                                             </select>
                                         </div> 
-                                        <div class="col-sm-6">
-                                            <input class="form-control" type="hidden" name="trader" value="<?= $sales_contact->trader; ?>" readonly placeholder="Trader Name">
+                                        <div class="col-sm-6 label">
+                                            <label>Enquiry : <strong>0</strong></label> | 
+                                            <label>Quoted : <strong>0</strong> </label> | 
+                                            <label>Order : <strong>0</strong> </label>
                                         </div> 
                                     </div>
                                     <br>
@@ -154,20 +161,20 @@
                                                 </label>
                                                 <div class="card-body">
                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'lessthenoneyear')? 'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_frequency" value="lessthenoneyear" <?= ($sales_contact->estimate_required == 'lessthenoneyear') ?'checked' : ''; ?>> Less then 1 year
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'Less then 1 year')? 'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_frequency" value="Less then 1 year" <?= ($sales_contact->estimate_required == 'Less then 1 year') ?'checked' : ''; ?>> Less then 1 year
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'daily')? 'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_frequency" value="daily" <?= ($sales_contact->estimate_required == 'daily') ?'checked' : ''; ?>> Daily
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'Daily')? 'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_frequency" value="Daily" <?= ($sales_contact->estimate_required == 'Daily') ?'checked' : ''; ?>> Daily
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'weekly')? 'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_frequency" value="weekly" <?= ($sales_contact->estimate_required == 'weekly') ?'checked' : ''; ?>> Weekly
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'Weekly')? 'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_frequency" value="Weekly" <?= ($sales_contact->estimate_required == 'Weekly') ?'checked' : ''; ?>> Weekly
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'monthly')? 'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_frequency" value="monthly" <?= ($sales_contact->estimate_required == 'monthly') ?'checked' : ''; ?>> Monthly
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'Monthly')? 'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_frequency" value="Monthly" <?= ($sales_contact->estimate_required == 'Monthly') ?'checked' : ''; ?>> Monthly
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'yearly')? 'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_frequency" value="yearly" <?= ($sales_contact->estimate_required == 'yearly') ?'checked' : ''; ?>> Yearly
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_required == 'Yearly')? 'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_frequency" value="Yearly" <?= ($sales_contact->estimate_required == 'Yearly') ?'checked' : ''; ?>> Yearly
                                                         </label>
                                                     </div>
                                                 </div>
@@ -181,20 +188,20 @@
                                                 </label>
                                                 <div class="card-body">
                                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == 'lessthen50k') ?'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_spend" value="lessthen50k" <?= ($sales_contact->estimate_spend == 'lessthen50k') ?'checked' : ''; ?>> Less then 50k
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == 'Less then 50k') ?'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_spend" value="Less then 50k" <?= ($sales_contact->estimate_spend == 'Less then 50k') ?'checked' : ''; ?>> Less then 50k
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == 'daily') ?'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_spend" value="daily" <?= ($sales_contact->estimate_spend == 'daily') ?'checked' : ''; ?>> 50k+
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '50k+') ?'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_spend" value="50k+" <?= ($sales_contact->estimate_spend == '50k+') ?'checked' : ''; ?>> 50k+
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '100kplus') ?'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_spend" value="100kplus" <?= ($sales_contact->estimate_spend == '100kplus') ?'checked' : ''; ?>> 100k+
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '100k+') ?'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_spend" value="100k+" <?= ($sales_contact->estimate_spend == '100k+') ?'checked' : ''; ?>> 100k+
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '500kplus') ?'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_spend" value="500kplus" <?= ($sales_contact->estimate_spend == '500kplus') ?'checked' : ''; ?>> 500k+
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '500k+') ?'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_spend" value="500k+" <?= ($sales_contact->estimate_spend == '500k+') ?'checked' : ''; ?>> 500k+
                                                         </label> &nbsp;&nbsp;&nbsp;
-                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '1mplus') ?'active' : ''; ?>">
-                                                            <input type="radio" name="estimated_spend" value="1mplus" <?= ($sales_contact->estimate_spend == '1mplus') ?'checked' : ''; ?>> 1m+
+                                                        <label class="btn btn-primary btn-sm <?= ($sales_contact->estimate_spend == '1m+') ?'active' : ''; ?>">
+                                                            <input type="radio" name="estimated_spend" value="1m+" <?= ($sales_contact->estimate_spend == '1m+') ?'checked' : ''; ?>> 1m+
                                                         </label>
                                                     </div>
                                                 </div>
@@ -242,9 +249,9 @@
                                                 <select name="payment_terms" class="form-control">
                                                 <option value="">Select Payment Tearms</option>
                                                 <option value="Advance" <?= ($sales_contact->payment_terms == 'Advance') ?'selected' : ''; ?>>Advance</option>
-                                                <option value="5050 Advance" <?= ($sales_contact->payment_terms == '5050 Advance') ?'selected' : ''; ?>>50/50 Advance</option>
-                                                <option value="7525 Advance" <?= ($sales_contact->payment_terms == '7525 Advance') ?'selected' : ''; ?>>75/25 Advance</option>
-                                                <option value="Pay To Ship" <?= ($sales_contact->payment_terms == 'Pay To Ship') ?'selected' : ''; ?>>Pay to ship</option>
+                                                <option value="50/50 Advance" <?= ($sales_contact->payment_terms == '50/50 Advance') ?'selected' : ''; ?>>50/50 Advance</option>
+                                                <option value="75/25 Advance" <?= ($sales_contact->payment_terms == '75/25 Advance') ?'selected' : ''; ?>>75/25 Advance</option>
+                                                <option value="Pay To Ship" <?= ($sales_contact->payment_terms == 'Pay To Ship') ?'selected' : ''; ?>>Pay To ship</option>
                                                 <option value="Pay On Delivery" <?= ($sales_contact->payment_terms == 'Pay On Delivery') ?'selected' : ''; ?>>Pay on Delivery</option>
                                                 <option value="7 Days DOI" <?= ($sales_contact->payment_terms == '7 Days DOI') ?'selected' : ''; ?>>7 Days DOI</option>
                                                 <option value="14 Days DOI" <?= ($sales_contact->payment_terms == '14 Days DOI') ?'selected' : ''; ?>>14 Days DOI</option>
