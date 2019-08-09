@@ -73,14 +73,14 @@
                                                 ?>
                                             </select>
                                         </div> 
-                                        <div class="col-sm-6 label">
-                                            <label>Enquiry : <strong>0</strong></label> | 
-                                            <label>Quoted : <strong>0</strong> </label> | 
-                                            <label>Order : <strong>0</strong> </label>
-                                        </div> 
+                                        <!-- <div class="col-sm-6 label">
+                                             <label>Enquiry : <strong>0</strong></label> | 
+                                             <label>Quoted : <strong>0</strong> </label> | 
+                                             <label>Order : <strong>0</strong> </label>
+                                         </div> --> 
                                     </div>
                                     <br>
-                                    <h4 class="mt-0 header-title">Genaral Information</h4>
+                                    <h4 class="mt-0 header-title">Basic Personal Information</h4>
                                     <hr><br>
                                     <br>
                                     <div class="row">
@@ -95,7 +95,13 @@
                                                     <label>Last Name</label>
                                                     <input class="form-control" type="text" name="last_name" value="<?= $sales_contact->lname; ?>" placeholder="Last Name" required="required">
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <label>Trader</label>
+                                                    <select class="form-control" name="trader">
+                                                        <option value="admin">Unassigned</option>
+                                                    </select>
+                                                </div> 
+                                                <div class="col-sm-6">
                                                     <label>Gender</label>
                                                     <select class="form-control" name="gender">
                                                         <option value="">Gender</option>
@@ -115,7 +121,7 @@
                                             </div> 
                                         </div> 
                                     </div>
-                                    <h4 class="mt-0 header-title">Official Information</h4>
+                                    <h4 class="mt-0 header-title">Contact Information</h4>
                                     <hr><br>
                                     <div class="row">
                                     
@@ -126,7 +132,27 @@
                                     
                                         <div class="col-sm-4">
                                             <label>Department</label>
-                                            <input class="form-control" value="<?= $sales_contact->department; ?>" type="text" name="department" placeholder="Department">
+                                            <!-- <input class="form-control" value="<?= $sales_contact->department; ?>" type="text" name="department" placeholder="Department"> -->
+
+                                            <select class="form-control" name="department">
+                                                <option value="">Department</option>
+
+                                                <option <?= ($sales_contact->department == 'Purchasing') ? 'selected' : ''; ?> value="Purchasing">Purchasing</option>
+
+                                                <option <?= ($sales_contact->department == 'Workshop / Factory /Production / Engineering') ? 'selected' : ''; ?> value="Workshop / Factory /Production / Engineering">Workshop / Factory /Production / Engineering</option>
+
+                                                <option <?= ($sales_contact->department == 'Stores') ? 'selected' : ''; ?> value="Stores">Stores</option>
+
+                                                <option <?= ($sales_contact->department == 'Finance') ? 'selected' : ''; ?> value="Finance">Finance</option>
+
+                                                <option <?= ($sales_contact->department == 'Sales / Customer Service') ? 'selected' : ''; ?> value="Sales / Customer Service">Sales / Customer Service</option>
+
+                                                <option <?= ($sales_contact->department == 'Reception') ? 'selected' : ''; ?> value="Reception">Reception</option>
+
+                                                <option <?= ($sales_contact->department == 'Unknown') ? 'selected' : ''; ?> value="Unknown">Unknown</option>
+
+                                            </select>
+
                                         </div>              
                                     
                                         <div class="col-sm-4">
@@ -136,8 +162,23 @@
                                     
                                         <div class="col-sm-4">
                                             <label>Email Address</label>
-                                            <input class="form-control" value="<?= $sales_contact->email; ?>" type="text" name="email" placeholder="Email Address">
-                                        </div>                                
+                                            <input class="form-control" value="<?= $sales_contact->email; ?>" type="text" name="email" placeholder="example@company.com">
+                                        </div>     
+
+                                        <div class="col-sm-4">
+                                            <label>Alternate Email Address</label>
+                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>LinkedIn</label>
+                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn">
+                                        </div>             
+                                    
+                                        <div class="col-sm-4">
+                                            <label>Whatsapp</label>
+                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp">
+                                        </div>                            
 
                                         <div class="col-sm-4">
                                             <label>Mobile Number</label>
@@ -150,7 +191,7 @@
                                         </div>    
                                     </div>
                                     <br>
-                                    <h4 class="mt-0 header-title">Business Information</h4>
+                                    <h4 class="mt-0 header-title">Key Sales Information</h4>
                                     <hr>
                                     <br>
                                     <div class="row">
@@ -270,8 +311,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>PLS Information</label>
-                                            <textarea class="form-control" name="pls_info" placeholder="PLS Information" rows="5"><?= $sales_contact->pls_information; ?></textarea>
+                                            <label>PSL & Portal Login Information</label>
+                                            <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"><?= $sales_contact->pls_information; ?></textarea>
                                             
                                         </div>
                                     </div>
@@ -480,6 +521,21 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-12">
+                                            <div class="row" style="padding: 10px;">
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Enquiry</a>
+                                                </div>
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Quote</a>
+                                                </div>
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Orders</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
                                             <input type="submit" name="add_company" value="Update Contact" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
                                         </div>
