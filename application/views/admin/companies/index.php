@@ -105,7 +105,7 @@
                                                                 <div class="col-xl-12">
                                                                     <p>
                                                                         Contacts : 
-                                                                        <span style="color: green;">
+                                                                        <span style="color: #00fb00;">
                                                                             <?= (count($company_contacts) > 0) ? count($company_contacts) : '0'; ?>
                                                                         </span>
                                                                             <br>
@@ -119,7 +119,7 @@
                                                                             <br>
 
                                                                         Quoted : 
-                                                                        <span style="color: green;"><?= $quoted_enqiries; ?>
+                                                                        <span style="color: #00fb00;"><?= $quoted_enqiries; ?>
                                                                         </span>
                                                                         <br>
 
@@ -197,7 +197,7 @@
                                                                 <div class="col-xl-12">
                                                                     <p>
                                                                         Contacts : 
-                                                                        <span style="color: green;">
+                                                                        <span style="color: #00fb00;">
                                                                             <?= (count($company_contacts) > 0) ? count($company_contacts) : '0'; ?>
                                                                         </span>
                                                                             <br>
@@ -211,7 +211,7 @@
                                                                             <br>
 
                                                                         Quoted : 
-                                                                        <span style="color: green;"><?= $quoted_enqiries; ?>
+                                                                        <span style="color: #00fb00;"><?= $quoted_enqiries; ?>
                                                                         </span>
                                                                         <br>
 
