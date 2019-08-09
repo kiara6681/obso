@@ -24,6 +24,86 @@ class Companies_Model extends CI_Model {
         return $query;
     }
 
+    // Sort By sales companies
+    public function sortBySalesCompanies($sort_by = null, $country_by = null){
+
+        $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
+        $this->db->from('companies comp');
+        $this->db->join('industry indus','indus.id = comp.industry');
+        $this->db->join('country cont','cont.id = comp.country');
+        $this->db->where('comp.company_type', 1);
+        $this->db->where('comp.status', 1);
+
+        if(!is_null($country_by)){
+            $this->db->where('comp.country', $country_by);
+        }
+
+        if(!is_null($sort_by)){
+            if($sort_by == 1){
+                $this->db->order_by('comp.company_name', 'asc');
+            }
+            if($sort_by == 2){
+                $this->db->order_by('comp.company_name', 'desc');
+            }
+            if($sort_by == 13){
+                $this->db->order_by('comp.created_at', 'asc');
+            }
+            if($sort_by == 14){
+                $this->db->order_by('comp.created_at', 'desc');
+            }
+            if($sort_by == 15){
+                $this->db->order_by('indus.industry', 'asc');
+            }
+            if($sort_by == 16){
+                $this->db->order_by('indus.industry', 'desc');
+            }
+        }
+
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    // Sort By supplier companies
+    public function sortBySupplierCompanies($sort_by = null, $country_by = null){
+
+        $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
+        $this->db->from('companies comp');
+        $this->db->join('supplier_industry indus','indus.id = comp.industry');
+        $this->db->join('country cont','cont.id = comp.country');
+        $this->db->where('comp.company_type', 2);
+        $this->db->where('comp.status', 1);
+
+        if(!is_null($country_by)){
+            $this->db->where('comp.country', $country_by);
+        }
+
+        if(!is_null($sort_by)){
+            if($sort_by == 1){
+                $this->db->order_by('comp.company_name', 'asc');
+            }
+            if($sort_by == 2){
+                $this->db->order_by('comp.company_name', 'desc');
+            }
+            if($sort_by == 13){
+                $this->db->order_by('comp.created_at', 'asc');
+            }
+            if($sort_by == 14){
+                $this->db->order_by('comp.created_at', 'desc');
+            }
+            if($sort_by == 15){
+                $this->db->order_by('indus.industry', 'asc');
+            }
+            if($sort_by == 16){
+                $this->db->order_by('indus.industry', 'desc');
+            }
+        }
+
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
     // show all supplier companies
     public function getAllSupplierCompanies(){
 
