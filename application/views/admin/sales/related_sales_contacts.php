@@ -51,8 +51,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Home</li>
-                            <li class="breadcrumb-item active"><a href="<?= base_url(); ?>admin/sales">All Sales Contact</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:;">All Archieved Contact</a></li>
+                            <li class="breadcrumb-item active"><a href="<?= base_url(); ?>admin/companies">Companies</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:;">Sales Contacts</a></li>
                         </ol>
                     </div>
                 </div>
@@ -75,11 +75,13 @@
                         <div class="col-md-12">                                
                             <?php
                             $flag = 'us.png';
-                            if(count($archieved_contacts) > 0)
+                            if(count($sales_contacts) > 0)
                             {
                                 // show sales companies
-                                foreach ($archieved_contacts as $key => $contact)
+                                foreach ($sales_contacts as $key => $contact)
                                 {
+                                    // Get all sales companies
+                                    $sales_address = $this->Sales_Model->getContactsAddress($contact['id']);
                                     foreach($sales_address as $address)
                                     {
                                         if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
@@ -93,7 +95,7 @@
                                             <div class="row">
                                                 <div class="col-md-12  c-b-gray">
                                                     <div class="row">
-                                                        <div class="col-md-9 c-b" style="padding-bottom: 10px;">
+                                                        <div class="col-md-11 c-b" style="padding-bottom: 10px;">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" /> 
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b> | Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
@@ -121,22 +123,15 @@
                                                             <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <strong><?=  $contact['trader']; ?></strong> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
-                                                        <div class="col-md-2">
-                                                            <h6>Reason :</h6>
-                                                            <div class="red-box">
-                                                            <?php
-                                                                echo $contact['archieved_resoan'];
-                                                            ?>
-                                                            </div>
-                                                        </div>
+
                                                         <div class="col-md-1 text-center c-b">
                                                             <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/backToLeads/'.$contact['id']) ?>">
-                                                                    <li role="presentation">Back to Lead</li>
+                                                                <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
+                                                                    <li role="presentation">Edit</li>
                                                                 </a>
-                                                               <a href="<?= base_url('admin/sales/deleteContact/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to permanently delete this contact?')" role="menuitem" tabindex="-1">
-                                                                    <li role="presentation">Permanently Delete</li>
+                                                               <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
+                                                                    <li role="presentation">Archieve</li>
                                                                </a>
                                                            </ul>
                                                         </div>
@@ -160,127 +155,43 @@
     </div><!-- content -->
 </div>
 
+<!-- Archived Modal -->
+<div class="modal fade bs-example-modal-center" id="archieved_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title mt-0">Are you sure ?  you want to archieve this contact !</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form action="<?= base_url('admin/sales/archieve'); ?>" method="post">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                <input type="hidden" class="contact_id" name="id">
+                <div class="modal-body">
+                    <label>Resoan</label>
+                    <select class="form-control" name="archieved_resoan" required>
+                        <option value="">Select Archieve Reason</option>
+                        <option value="Reason A">Reason A</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Archieve</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script>
-$(document).ready(function(){
-  $( function() {
-        $( "#lead_block, #suspects_block, #prospects_block, #key_contact_block" ).sortable({
-            connectWith: ".connectedSortable",
 
-            /*stop: function(e, ui){
-
-                var item = ui.item[0].innerHTML;
-                var from = ui.sender?"not the same sortable":"same sortable";
-                alert("dragged:" + item + " from: " + from);
-
-            },*/
-            connectWith: 'div',
-            beforeStop: function(ev, ui) {
-                var id = $(ui.item[0]).attr("id");
-                var status = $(ui.item[0]).attr("data-id");
-                var check = 0;
-                var drop_status = $('#'+id).parent().attr('data-id');
-
-                $.ajax({
-                    url : '<?= base_url(); ?>admin/sales/checkInformation',
-                    type : 'get',
-                    csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
-                    data : {"id" : id, "status" : drop_status},
-                    async:false,
-                    success: function(data){
-                        check = data;
-                    },
-                });
-
-                if(check == 0)
-                {
-                    alert('Please provide all mendatory information.');
-                    $(this).sortable('cancel');
-                }
-                else
-                {
-                    $.ajax({
-                        url : '<?= base_url(); ?>admin/sales/updateSalesStatus',
-                        type : 'get',
-                        csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
-                        data : {"id" : id, "status" : drop_status},
-                        async:false,
-                        success: function(data){
-                            console.log(data);
-                        },
-                    }); 
-                }
-            }
-
-        }).disableSelection();    
-
-    });
-});
 $(document).ready(function(){
 
-    // search sales contact
-    $("#search_companies").on("keyup", function() {
-
-        var value = $(this).val().toLowerCase();
-
-        $("#show_searched_results").filter(function() {
-
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
-    // sort sales by country
-    $(document).on('change', '#sort_by_country', function(){
-
-        var country_by = $(this).val();
-        var sort_by = $('#sort_by').val();
-
-        sort_by_companies(sort_by, country_by);
-        //sort_by_companies(country_by);
-    });
-
-    // sort by sales
-    $(document).on('change','#sort_by' ,function(){
-                            
-        var sort_by = $(this).val();
-        var country_by = $('#sort_by_country').val();
-
-        sort_by_companies(sort_by, country_by);
-    });
-
-    $("#search_contact").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#lead_block .move").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        var value = $(this).val().toLowerCase();
-        $("#suspects_block .move").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        var value = $(this).val().toLowerCase();
-        $("#prospects_block .move").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        var value = $(this).val().toLowerCase();
-        $("#key_contact_block .move").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+    $('.archieve').on('click', function(){
+        var id = $(this).attr('id');
+        $('.contact_id').val(id);
+        $('#archieved_modal').modal('show');
     });
 
 });
 
-// sort function
-function sort_by_companies(sort_by, country_by){
-
-    $.ajax({
-        url : "<?= base_url() ?>admin/sales/sort_by_companies",
-        type : 'get',
-        data : {'sort_by' : sort_by, 'country_by' : country_by},
-        success : function(data){
-            
-            // console.log(data);
-            // alert(data);
-            $('#show_searched_results').html(data);
-        }
-    });
-}
 </script>

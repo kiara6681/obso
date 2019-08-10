@@ -8,6 +8,7 @@ class Companies extends CI_Controller {
         check_login_user();
 
         $this->load->model('Companies_Model');
+        $this->load->model('Sales_Model');
         $this->load->model('common_model');
         $this->load->model('login_model');
     }
@@ -504,5 +505,16 @@ class Companies extends CI_Controller {
         }
 
         echo $html;
+    }
+
+    // show related contact of company
+    public function related_contacts($id){
+
+        // Get sales contact of this company
+        $data['sales_contacts'] = $sales_contacts = $this->Companies_Model->getCompanyContacts($id);
+        
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/sales/related_sales_contacts', $data);
+        $this->load->view('admin/layout/footer', $data);
     }
 }

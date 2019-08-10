@@ -101,9 +101,11 @@
                                                                 <div class="col-xl-12">
                                                                     <p>
                                                                         Contacts : 
-                                                                        <span style="color: #00fb00;">
+                                                                        <a href="<?= base_url(); ?>admin/companies/related_contacts/<?= $company['id']; ?>">
+                                                                            <span style="color: #00fb00;">
                                                                             <?= (count($company_contacts) > 0) ? count($company_contacts) : '0'; ?>
-                                                                        </span>
+                                                                            </span>
+                                                                        </a>
                                                                             <br>
 
                                                                         Total Enquiry : 

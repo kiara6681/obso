@@ -122,12 +122,13 @@ class Companies_Model extends CI_Model {
     // show all supplier companies
     public function getCompanyContacts($company_id){
 
-        $this->db->select('*');
-        $this->db->from('sales_contacts');
-        //$this->db->join('supplier_industry indus','indus.id = comp.industry');
+        $this->db->select('sale_c.*, comp.company_name');
+        $this->db->from('sales_contacts sale_c');
+        $this->db->join('companies comp','comp.id = sale_c.company');
         //$this->db->join('country cont','cont.id = comp.country');
-        $this->db->where('company', $company_id);
-        $this->db->order_by('id', 'desc');
+        $this->db->where('sale_c.company', $company_id);
+        $this->db->where('sale_c.status !=', 0);
+        $this->db->order_by('sale_c.id', 'desc');
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
