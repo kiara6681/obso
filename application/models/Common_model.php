@@ -77,7 +77,7 @@ class Common_model extends CI_Model {
     }
 
     function getAllSalesCompanies(){
-        $this->db->select("id,company_name");
+        $this->db->select("id,company_name,status");
         $this->db->from('companies');
         $query = $this->db->get();
         $query = $query->result_array();  

@@ -86,7 +86,7 @@
                                                             <br>
                                                             Dial : <?= $company['dial_number']; ?>
                                                             <br>
-                                                            Information : <?= $company['information']; ?>
+                                                            Information : <?php echo substr($company['information'],0, 65)."..."; ?> 
                                                             <br>
                                                             Competitor : <?= $company['competitor']; ?>
                                                         </p>

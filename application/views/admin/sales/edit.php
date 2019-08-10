@@ -324,6 +324,7 @@
                                         <?php 
                                         if(count($contact_address) > 0)
                                         {
+                                            $check = 0; 
                                             foreach($contact_address as $key => $address)
                                             {
                                                 if($address['address_type'] == 'head_office_address')
@@ -373,7 +374,56 @@
                                                         <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add New Address</button>
                                                     </div> 
                                                     <?php 
+                                                    $i++;
                                                 }
+                                            }
+                                            if($check == 0)
+                                            {
+                                                ?>
+                                                <div class="col-sm-3">
+                                                    <label>Location Number/ Name</label>
+                                                    <input type="text" name="location[0]" class="form-control" value="" placeholder="Location Number/ Name" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Street Address</label>
+                                                    <input type="text" name="street_address[0]" class="form-control" value="" placeholder="Street Address" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Town / City</label>
+                                                    <input type="text" name="city[0]" class="form-control" value="" placeholder="Town / City">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>State</label>
+                                                    <input type="text" name="state[0]" class="form-control" value="" placeholder="State" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Postal / Zip Code</label>
+                                                    <input type="text" name="zip[0]" class="form-control" value="" placeholder="Postal / Zip Code" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Country</label>
+                                                    <select class="form-control" name="country[0]">
+                                                        <option value="">Select Country</option>
+                                                        <?php
+                                                        foreach ($countries as $key => $country) {
+                                                            ?>
+                                                            <option value="<?= $country['id']; ?>"><?= $country['name']; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Address Type</label>
+                                                    <select name="address_type[0]" id="address_type" class="form-control">
+                                                        <option value="">Address Type</option>
+                                                        <option value="head_office_address">Head Office Location</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3" id="add_address">
+                                                    <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add Other Address</button>
+                                                </div>
+                                                <?php
                                             }
                                         }else{
                                             ?>

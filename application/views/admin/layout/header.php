@@ -448,9 +448,12 @@ $allcompanies = $this->common_model->getAllSalesCompanies();
                                 <option value="">Select Company</option>
                                 <?php 
                                 foreach ($allcompanies as $allcompany){ 
-                                    ?>
-                                    <option value="<?php echo $allcompany['id']; ?>"><?php echo $allcompany['company_name']; ?></option>
-                                    <?php 
+                                    if($allcompany['status'] != 0)
+                                    {
+                                        ?>
+                                        <option value="<?php echo $allcompany['id']; ?>"><?php echo $allcompany['company_name']; ?></option>
+                                        <?php 
+                                    } 
                                 } 
                                 ?>
                           </select>
@@ -494,7 +497,7 @@ $allcompanies = $this->common_model->getAllSalesCompanies();
                     <br>
                     <div class="row">
                         <div class="col-md-5">
-                        <button type="button" class="btn-primary btn-blockadd waves-effect waves-light btn-radius clone-row-btn" >Add New Part</button>
+                        <button type="button" class="btn-primary btn-blockadd waves-effect waves-light clone-row-btn" >Add New Part</button>
                         </div>
                     </div>
                         </div>
@@ -533,28 +536,19 @@ $allcompanies = $this->common_model->getAllSalesCompanies();
                         
                   </div>
                        
-                        
-
-
-                     
-                     
-                      
-
-                      
-
                       <div class="row" style="margin-top: 50px;">
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
                             
                               <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
 
-                            <button type="button" data-dismiss="modal" class="btn btn-secondary btn-sm waves-effect waves-light savebtn clr" >Cancel</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-primary waves-effect waves-light savebtn clr btn-block" >Cancel</button>
                             
                            
                         </div>
                         <div class="col-md-4">
                             
-                            <button type="submit" name="submit" class="btn btn-secondary btn-sm waves-effect waves-light savebtn clr" >Save</button>
+                            <button type="submit" name="submit" class="btn btn-primary waves-effect waves-light savebtn clr btn-block" >Save</button>
                           
                         </div>
                         <div class="col-md-2"></div>

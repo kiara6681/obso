@@ -504,7 +504,7 @@ class Enquiry extends CI_Controller {
          $Contacthtml .= "<option value=''>Select Contact</option>";
 
          foreach ($contacts as $key => $contact) {
-            $Contacthtml .= "<option value='".$contact['id']."'>".$contact['fname']. " " .$contact['fname']." </option>";
+            $Contacthtml .= "<option value='".$contact['id']."'>".$contact['fname']. " " .$contact['lname']." </option>";
          }
 
          $response['company'] = $industryhtml;

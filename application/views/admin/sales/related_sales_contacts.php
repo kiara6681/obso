@@ -74,14 +74,14 @@
                     <div class="row">
                         <div class="col-md-12">                                
                             <?php
-                            $flag = 'us.png';
+                            $flag = 'flag.png';
                             if(count($sales_contacts) > 0)
                             {
                                 // show sales companies
                                 foreach ($sales_contacts as $key => $contact)
                                 {
                                     // Get all sales companies
-                                    $sales_address = $this->Sales_Model->getContactsAddress($contact['id']);
+                                    $sales_address = $this->Sales_Model->getAllSalesAddress($contact['id']);
                                     foreach($sales_address as $address)
                                     {
                                         if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
