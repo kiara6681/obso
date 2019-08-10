@@ -70,7 +70,7 @@
                                         <div class="col-sm-6">
 
                                             <select class="form-control" style="height: 50px;" name="contact_database_status">
-                                                <option value="">Contacts Database Status</option>
+                                                <option value="1">Lead</option>
                                                 <option value="2">Suspects</option>
                                                 <option value="3">Prospects</option>
                                                 <option value="4">Account Contacts</option>     
