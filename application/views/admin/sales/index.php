@@ -644,13 +644,6 @@ $(document).ready(function(){
         $( "#lead_block, #suspects_block, #prospects_block, #key_contact_block" ).sortable({
             connectWith: ".connectedSortable",
 
-            /*stop: function(e, ui){
-
-                var item = ui.item[0].innerHTML;
-                var from = ui.sender?"not the same sortable":"same sortable";
-                alert("dragged:" + item + " from: " + from);
-
-            },*/
             connectWith: 'div',
             beforeStop: function(ev, ui) {
                 var id = $(ui.item[0]).attr("id");
