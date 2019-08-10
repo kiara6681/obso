@@ -98,6 +98,14 @@
     .f-c-b{
         color: #737871;
     }
+    .qualified
+    {
+        border: 3px solid green;
+    }
+    .closable
+    {
+        border: 3px solid yellow;
+    }
 </style>
 
 <div class="content-page">
@@ -290,7 +298,7 @@
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
@@ -364,7 +372,7 @@
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
@@ -403,9 +411,19 @@
                                                             $flag = $address['flag'];
                                                         }
                                                     }
+                                                    $qualified = '';
+                                                    if($contact['contact_prospect_status'] == 1)
+                                                    {
+                                                        $qualified = 'qualified';
+                                                    }
+
+                                                    if($contact['closable_prospect_status'] == 1)
+                                                    {
+                                                        $qualified = 'closable';
+                                                    }
                                                     ?>
                                                     <div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="<?= $contact['id']; ?>">
-                                                        <div class="col-md-12 c-b">
+                                                        <div class="col-md-12 c-b <?= $qualified; ?>">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" />  
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
@@ -437,13 +455,27 @@
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Archieve</li>
                                                            </a>
+                                                           <a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1">
+                                                                <li role="presentation">Qualified Prospect</li>
+                                                            </a>
+                                                            <?php
+                                                            if($contact['contact_prospect_status'] == 1)
+                                                            {
+                                                                ?>
+                                                                <a href="<?= base_url(); ?>admin/sales/contactClosableProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1">
+                                                                    <li role="presentation">Closable Prospect</li>
+                                                                </a>
+
+                                                                <?php
+                                                            }
+                                                            ?>
                                                        </ul>
                                                     </div>
                                                     <?php
@@ -511,7 +543,7 @@
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
@@ -641,9 +673,9 @@ $(document).ready(function(){
     });
 
     $( function() {
-        $( "#lead_block, #suspects_block, #prospects_block, #key_contact_block" ).sortable({
+        $("#lead_block, #suspects_block, #prospects_block, #key_contact_block" ).sortable(
+        {
             connectWith: ".connectedSortable",
-
             connectWith: 'div',
             beforeStop: function(ev, ui) {
                 var id = $(ui.item[0]).attr("id");
@@ -655,9 +687,10 @@ $(document).ready(function(){
                     url : '<?= base_url(); ?>admin/sales/checkInformation',
                     type : 'get',
                     csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
-                    data : {"id" : id, "status" : drop_status},
+                    data : {"id" : id, "drop_status" : drop_status, 'status' : status},
                     async:false,
                     success: function(data){
+                        console.log(data);
                         check = data;
                     },
                 });
@@ -679,6 +712,11 @@ $(document).ready(function(){
                             console.log(data);
                         },
                     }); 
+                    if(drop_status == 3)
+                    {
+                        var html = '<a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/'+id+'" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>'
+                        $('#sub_menu_'+id).append(html);
+                    }
                 }
             }
 

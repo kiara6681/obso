@@ -315,7 +315,7 @@ class Sales extends CI_Controller {
     public function checkInformation()
     {
         $id = $_GET['id'];
-        $status = $_GET['status'];
+        $status = $_GET['drop_status'];
 
         //Get user details
         $data = $this->Sales_Model->getAllSalesContacts(null, $id);
@@ -324,11 +324,11 @@ class Sales extends CI_Controller {
         $company_details = $this->Sales_Model->getCompanyByID($data->company);
 
         //Get Enquiry 
-        $enquires = $this->Enquiry_model->getEnquiryByContactId($data->id);
+        $enquires = $this->Sales_Model->getSalesEnqury($data->id);
 
         if($status == 1)
         {
-            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry))
+            if(empty($data->company) || empty($data->fname) || empty($data->lname))
             {
                 echo 0;
             }else{
@@ -336,7 +336,7 @@ class Sales extends CI_Controller {
             }
         }else if($status == 2)
         {
-            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry))
+            if(empty($data->company) || empty($data->fname) || empty($data->lname))
             {
                 echo 0;
             }else{
@@ -344,19 +344,29 @@ class Sales extends CI_Controller {
             }
         }else if($status == 3)
         {
-            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || empty($enquires->enquiry) || empty($data->manufacturers))
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || count($enquires) == 0 || empty($data->manufacturers))
             {
                 echo 0;
             }else{
-                echo 1;
+                if(!empty($data->email) || !empty($data->mobile))
+                {
+                    echo 3;
+                }else{
+                    echo 0;
+                }
             }
         }else if($status == 4)
         {
-            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || empty($enquires->enquiry) || empty($data->manufacturers))
+            if(empty($data->company) || empty($data->fname) || empty($data->lname) || empty($data->personal_info) || empty($company_details->industry) || count($enquires) == 0 || empty($data->manufacturers))
             {
                 echo 0;
             }else{
-                echo 1;
+                if(!empty($data->email) || !empty($data->mobile))
+                {
+                    echo 1;
+                }else{
+                    echo 0;
+                }
             }
         }
     }
@@ -874,9 +884,60 @@ class Sales extends CI_Controller {
         echo $html;
     }
 
+    //Contact Qualified Prospect
+    public function contactQualifiedProspect()
+    {
+        $id = $this->uri->segment(4);
 
+        //Get user details
+        $data = $this->Sales_Model->getAllSalesContacts(null, $id);
 
+        if(!empty($data->payment_terms) && !empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->invoice_reference_number) && !empty($data->manufacturers) && !empty($data->pls_information))
+        {
+             $data = array(
+                'contact_prospect_status' => 1
+            );
 
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'sales_contacts');
+
+            $this->session->set_flashdata('msg', 'Prospect Qualified Successfully.');
+        }else{
+            $this->session->set_flashdata('msg', 'Please complete contact prospect information.');
+
+        }
+
+        redirect('admin/sales');
+    }
+
+    //Contact Qualified Prospect
+    public function contactClosableProspect()
+    {
+        $id = $this->uri->segment(4);
+
+        //Get user details
+        $data = $this->Sales_Model->getAllSalesContacts(null, $id);
+
+        //Get Enquiry 
+        $enquires = $this->Sales_Model->getSalesEnqury($id);
+
+        if(!empty($data->payment_terms) && !empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->invoice_reference_number) && !empty($data->manufacturers) && !empty($data->pls_information) && count($enquires) <> 0)
+        {
+             $data = array(
+                'closable_prospect_status' => 1
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'sales_contacts');
+
+            $this->session->set_flashdata('msg', 'Prospect Closable Successfully.');
+        }else{
+            $this->session->set_flashdata('msg', 'Please complete contact prospect information.');
+
+        }
+
+        redirect('admin/sales');
+    }
 
 
 
