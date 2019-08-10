@@ -35,6 +35,20 @@ class Sales_Model extends CI_Model {
         return $query;
     }
 
+    // get sales related companies
+    public function getSalesRelatedCompany($id){
+
+        $this->db->select('company.*, indus.industry as industry_name');
+        $this->db->from('sales_contacts contact');
+        $this->db->join('companies company','company.id = contact.company');
+        $this->db->join('industry indus','indus.id = company.industry');
+        
+        $this->db->where('contact.id', $id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
     // Show All Contact Address
     public function getAllSalesAddress(){
 

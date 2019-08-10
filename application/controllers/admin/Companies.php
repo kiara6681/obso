@@ -33,6 +33,30 @@ class Companies extends CI_Controller {
         $this->load->view('admin/layout/footer', $data);
     }
 
+    // show related companies
+    public function related_company($id){
+
+        $data = array();
+        $data['page_title'] = 'Companies';
+
+        // Get all sales companies
+        $data['sales_companies'] = $sales_companies = $this->Sales_Model->getSalesRelatedCompany($id);
+
+        // echo '<pre>';
+        // print_r($sales_companies);
+        // exit;
+
+        // Get all supplier companies
+        //$data['supplier_companies'] = $supplier_companies = $this->Companies_Model->getAllSupplierCompanies();
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+        
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/companies/related_companies', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
+
     // Add new company
     public function create(){
 

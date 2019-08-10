@@ -258,7 +258,11 @@
                                                         <div class="col-md-12 c-b">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" /> 
-                                                                Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
+                                                                Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : 
+                                                                <a href="<?= base_url(); ?>admin/companies/related_company/<?= $contact['id']; ?>"> 
+                                                                    <b class="f-w-700"><?=  $contact['company_name']; ?></b>
+
+                                                                </a>
                                                             </h5>
                                                             <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
                                                             <p>Department: <strong><?=  $contact['department']; ?></strong></p>
