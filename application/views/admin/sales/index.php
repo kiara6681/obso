@@ -282,7 +282,7 @@
                                                                 <a class="badge badge-success badge-pill" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>"><?= $add_count; ?></a>
                                                             </p>
                                                             <br />
-                                                            <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                            <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
@@ -356,7 +356,7 @@
                                                             </p>
                                                             <br />
         
-                                                           <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                           <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
@@ -429,7 +429,7 @@
                                                             </p>
                                                             <br />
         
-                                                            <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                            <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
@@ -503,7 +503,7 @@
                                                             </p>
                                                             <br />
         
-                                                           <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                           <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
                                                         <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
@@ -596,7 +596,6 @@ $(document).ready(function(){
 
         var show_only = $(this).val();
         var sort_by = $('#sort_by').val();
-
         sort_by_companies(sort_by, show_only);
     });
 
@@ -605,7 +604,6 @@ $(document).ready(function(){
 
         var sort_by = $(this).val();
         var show_only = $('#show_only').val();
-
         sort_by_companies(sort_by, show_only);
     });
 
@@ -617,9 +615,12 @@ $(document).ready(function(){
             type : 'get',
             data : {'sort_by' : sort_by, 'show_only' : show_only},
             success : function(data){                
-                //console.log(data);
-                // alert(data);
-                //$('#show_searched_results').html(data);
+                console.log(data);
+                var temp = data.split('|-|');
+                $('#lead_block').html(temp[0]);
+                $('#suspects_block').html(temp[1]);
+                $('#prospects_block').html(temp[2]);
+                $('#key_contact_block').html(temp[3]);
             }
         });
     }

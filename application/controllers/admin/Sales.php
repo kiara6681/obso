@@ -166,10 +166,6 @@ class Sales extends CI_Controller {
 
         // Get all Menufecturer
         $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
-
-        // echo '<pre>';
-        // print_r($countries);
-        // exit;
         
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/sales/create', $data);
@@ -675,18 +671,16 @@ class Sales extends CI_Controller {
         $all_sales_contacts = $this->Sales_Model->sortBySalesContacts($sort_by, $show_only);
 
         // check if number of contact are between 10 to 99
-        if($show_only == 10 || $show_only == 11)
+        if($show_only == 7 || $show_only == 8 || $show_only == 9 || $show_only == 10 || $show_only == 11)
         {
             foreach ($all_sales_contacts as $key => $sale_contact)
             {
-                
                 // Get number of sales contact
                 $contact_enquiry = $this->Sales_Model->getSalesEnqury($sale_contact['id']);
-
+                
                 if($show_only == 7){
-
                     // if number of contacts are less than 100
-                    if(count($contact_enquiry) > 1){
+                    if(count($contact_enquiry) > 0){
 
                         unset($all_sales_contacts[$key]);
                     }
@@ -694,8 +688,17 @@ class Sales extends CI_Controller {
 
                 if($show_only == 8){
 
+                    // if number of contacts are less than 1
+                    if(count($contact_enquiry) != 1){
+
+                        unset($all_sales_contacts[$key]);
+                    }
+                } 
+
+                if($show_only == 9){
+
                     // if number of contacts are less than 100
-                    if(count($contact_enquiry) > 1){
+                    if(count($contact_enquiry) < 2 || count($contact_enquiry) > 9){
 
                         unset($all_sales_contacts[$key]);
                     }
@@ -704,7 +707,7 @@ class Sales extends CI_Controller {
                 if($show_only == 10){
 
                     // if number of contacts are not between 10 to 99
-                    if(count($contact_enquiry) < 10 && count($contact_enquiry) > 99){
+                    if(count($contact_enquiry) < 10 || count($contact_enquiry) > 99){
 
                         unset($all_sales_contacts[$key]);
                     }
@@ -717,38 +720,138 @@ class Sales extends CI_Controller {
 
                         unset($all_sales_contacts[$key]);
                     }
+                    echo 11;
                 }                
             }
         }
+        $lead_block = '';
+        $suspects_block = '';
+        $prospects_block = '';
+        $key_contact_block = '';
 
-        foreach ($sales_companies as $key => $contact) 
+        $sales_address = $this->Sales_Model->getAllSalesAddress();
+        $flag = 'us.png';
+
+        foreach ($all_sales_contacts as $key => $contact) 
         {
-            foreach($sales_address as $address)
+            if($contact['status'] == 1)
             {
-                if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                foreach($sales_address as $address)
                 {
-                    $flag = $address['flag'];
+                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $flag = $address['flag'];
+                    }
                 }
-            }
-            
-            $html = '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
-                        
-            $add_count = 0;
-            foreach($sales_address as $address)
-            {
-                if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
-                {
-                    $html .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
                 
-                }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                            
+                $add_count = 0;
+                foreach($sales_address as $address)
                 {
-                    $add_count++;
+                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
+                    {
+                        $lead_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    
+                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $add_count++;
+                    }
                 }
-            }
-            $html .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="javascript:;" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
                 </div><div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+            }
+
+            if($contact['status'] == 2)
+            {
+                foreach($sales_address as $address)
+                {
+                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $flag = $address['flag'];
+                    }
+                }
+                
+                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                            
+                $add_count = 0;
+                foreach($sales_address as $address)
+                {
+                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
+                    {
+                        $suspects_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    
+                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $add_count++;
+                    }
+                }
+                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                </div><div class="test action_button" id="menu1" data-toggle="dropdown"></div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+            }
+
+            if($contact['status'] == 3)
+            {
+                foreach($sales_address as $address)
+                {
+                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $flag = $address['flag'];
+                    }
+                }
+                
+                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                            
+                $add_count = 0;
+                foreach($sales_address as $address)
+                {
+                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
+                    {
+                        $prospects_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    
+                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $add_count++;
+                    }
+                }
+                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                </div><div class="test action_button" id="menu1" data-toggle="dropdown"></div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+            }
+
+            if($contact['status'] == 4)
+            {
+                foreach($sales_address as $address)
+                {
+                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $flag = $address['flag'];
+                    }
+                }
+                
+                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                            
+                $add_count = 0;
+                foreach($sales_address as $address)
+                {
+                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
+                    {
+                        $key_contact_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    
+                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    {
+                        $add_count++;
+                    }
+                }
+                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                </div><div class="test action_button" id="menu1" data-toggle="dropdown"></div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+            }
         }
+
+        $html = $lead_block."|-|".$suspects_block."|-|".$prospects_block.'|-|'.$key_contact_block;
         echo $html;
     }
 

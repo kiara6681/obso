@@ -178,12 +178,11 @@ class Sales_Model extends CI_Model {
     public function sortBySalesContacts($sort_by = null, $show_only = null)
     {
 
-        $this->db->select('contacts.*, indus.industry as industry_name, comp.company_name');
+        $this->db->select('contacts.*, indus.industry as industry_name, company.company_name');
         $this->db->from('sales_contacts contacts');
-        $this->db->join('companies comp','comp.id = contacts.company');
-        $this->db->join('companies company','company.id = contact.company','left');
-        $this->db->join('industry indus','indus.id = comp.industry');
-        $this->db->where('contacts.status', '!=', 0);
+        $this->db->join('companies company','company.id = contacts.company','left');
+        $this->db->join('industry indus','indus.id = company.industry');
+        $this->db->where('contacts.status !=', 0);
 
         if(!is_null($sort_by)){
             if($sort_by == 1){
