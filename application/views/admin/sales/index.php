@@ -147,7 +147,6 @@
 
             <div class="row">
                 <div class="col-12">
-
                     <?php
                     if($this->session->flashdata('message')){
                         ?>
