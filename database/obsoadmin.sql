@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2019 at 09:33 AM
+-- Generation Time: Aug 10, 2019 at 01:27 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -119,7 +119,8 @@ CREATE TABLE `companies` (
 
 INSERT INTO `companies` (`id`, `company_type`, `company_name`, `industry`, `website`, `dial_number`, `competitor`, `free_to_trade`, `record_source`, `information`, `country`, `status`, `created_at`, `updated_at`) VALUES
 (3, 1, 'hastag', 1, 'http://hastag.com', '9602947878', 'asd', 'Small select', 'E-mail', 'info', 1, 1, '2019-08-06 19:50:50', '2019-08-06 22:21:20'),
-(4, 2, 'dexus', 4, 'https://www.hastagsoft.com', '8005609866', NULL, NULL, 'Self Generated / Outbound Call', 'information', 5, 1, '2019-08-06 19:51:20', '2019-08-06 22:22:08');
+(4, 2, 'dexus', 4, 'https://www.hastagsoft.com', '8005609866', NULL, NULL, 'Self Generated / Outbound Call', 'information', 5, 1, '2019-08-06 19:51:20', '2019-08-06 22:22:08'),
+(5, 1, 'abcd', 3, 'http://abcd.com', '9876543210', 'abcd', 'Large select', 'E-mail', 'abcd', 2, 1, '2019-08-10 00:02:57', '2019-08-10 00:02:57');
 
 -- --------------------------------------------------------
 
@@ -548,7 +549,10 @@ INSERT INTO `enquiry` (`id`, `company_id`, `country_id`, `ref_number`, `company_
 (15, NULL, 76, 'REQ-190801-3', '', NULL, '', NULL, 'HT1001', 'Prem Saini', 'premsaini9602@gmail.com', '7014432414', NULL, 'test', 0, 'waiting', 1, '2019-08-01 01:56:11'),
 (16, NULL, 0, 'REQ-190801-4', '', NULL, '', NULL, '', '', '', '', NULL, '', 0, 'waiting', 1, '2019-08-01 12:17:34'),
 (17, NULL, 28, 'REQ-190802-1', '', NULL, '', NULL, 'Obso Ltd.', 'Leroy Spence', 'leroy.spence@obsoparts.com', '07796858283', NULL, 'o', 0, 'waiting', 1, '2019-08-02 18:42:14'),
-(18, NULL, 0, 'REQ-190802-2', '', NULL, '', NULL, 'Obso Ltd.', 'Leroy Spence', 'leroy.spence@obsoparts.com', '07796858283', NULL, 'not needed', 0, 'waiting', 1, '2019-08-02 18:47:57');
+(18, NULL, 0, 'REQ-190802-2', '', NULL, '', NULL, 'Obso Ltd.', 'Leroy Spence', 'leroy.spence@obsoparts.com', '07796858283', NULL, 'not needed', 0, 'waiting', 1, '2019-08-02 18:47:57'),
+(19, 5, NULL, 'REQ-190810-1', '', 3, 'Plastic, Rubber, Chemicals & Petroleum', 5, 'abcd', NULL, 'amit@gmail.com', '7014432414', '2019-08-10 00:03:24', '', 0, 'waiting', NULL, '2019-08-10 00:03:50'),
+(20, 5, NULL, 'REQ-190810-2', '', 3, 'Plastic, Rubber, Chemicals & Petroleum', 5, 'abcd', NULL, '', '', '2019-08-10 00:03:51', '', 0, 'waiting', NULL, '2019-08-10 00:04:06'),
+(21, 3, NULL, 'REQ-190810-3', '', 1, 'Metals & Metal Products', 3, 'hastag', NULL, 'hastagsoftwares@gmail.com', '9549494175', '2019-08-10 00:19:46', '', 0, 'waiting', NULL, '2019-08-10 00:21:15');
 
 -- --------------------------------------------------------
 
@@ -577,7 +581,10 @@ INSERT INTO `enquiry_qty` (`id`, `enquiry_id`, `qty`, `part`, `created_at`) VALU
 (22, 15, '13', '444', '2019-08-01 02:26:11'),
 (23, 16, '1', '1747-KY1', '2019-08-01 12:47:34'),
 (24, 17, '1', '1756-l551', '2019-08-02 19:12:14'),
-(25, 18, '20', '986397253 26 40- 82947 ', '2019-08-02 19:17:57');
+(25, 18, '20', '986397253 26 40- 82947 ', '2019-08-02 19:17:57'),
+(26, 19, '2', 'sdfsdfsd', '2019-08-10 00:33:50'),
+(27, 20, '6', 'dfggdfgf', '2019-08-10 00:34:06'),
+(28, 21, '56', 'sdfsdfsdfsdf', '2019-08-10 00:51:15');
 
 -- --------------------------------------------------------
 
@@ -969,6 +976,9 @@ CREATE TABLE `sales_contacts` (
   `department` varchar(255) DEFAULT NULL,
   `job_title` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `alternate_email` varchar(255) DEFAULT NULL,
+  `whatsapp` varchar(255) DEFAULT NULL,
+  `linkedin` varchar(255) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL,
   `direct_dial` varchar(20) DEFAULT NULL,
   `payment_terms` varchar(255) DEFAULT NULL,
@@ -979,6 +989,9 @@ CREATE TABLE `sales_contacts` (
   `pls_information` text,
   `communication` varchar(255) DEFAULT NULL,
   `contact_status` varchar(50) DEFAULT NULL,
+  `archieved_resoan` text,
+  `contact_prospect_status` int(11) NOT NULL DEFAULT '0',
+  `closable_prospect_status` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL COMMENT '1 for active and 2 for inactive and 3 for archieve',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -988,11 +1001,11 @@ CREATE TABLE `sales_contacts` (
 -- Dumping data for table `sales_contacts`
 --
 
-INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 2, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(2, 'admin', 3, 'Ravi', 'Kumar', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', '90 Days DOI', 'monthly', 'lessthen50k', '{\"3\":\"4\",\"4\":\"5\",\"7\":\"8\",\"10\":\"11\",\"13\":\"14\",\"14\":\"15\",\"16\":\"17\",\"17\":\"18\",\"20\":\"21\",\"23\":\"25\"}', 'INV121REF13', 'No PLS Information', 'both', 'do_not_contact', 1, '2019-08-08 01:41:06', '2019-08-09 12:09:14'),
-(3, 'admin', 3, 'Prem', 'Prakash', 'Male', NULL, 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', 'lessthen50k', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 1, '2019-08-08 01:36:25', '2019-08-08 01:36:25'),
-(4, 'admin', 3, 'Amit', 'Sharma', 'Male', 'PHP Developer', 'CS IT', 'Computer Science', 'Web Developer', 'hastagsoftwares@gmail.com', '9549494175', '7014432414', 'Advance', 'lessthenoneyear', '100kplus', '[\"Allen Bradley\",\"Bosch Rexroth\",\"Control Techniques\",\"Elau\",\"Phoenix Contact\",\"Schneider\",\"Telemecanique\"]', 'INV121REF13', 'No PLS Information', 'sms', NULL, 2, '2019-08-08 01:41:06', '2019-08-08 01:41:06');
+INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `alternate_email`, `whatsapp`, `linkedin`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `archieved_resoan`, `contact_prospect_status`, `closable_prospect_status`, `status`, `created_at`, `updated_at`) VALUES
+(6, 'admin', 3, 'Prem', 'Saini', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
+(7, 'admin', 3, 'Amit', 'Sharma', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', 'Reason A', 0, 0, 0, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
+(8, 'admin', 5, 'Ravi', 'Kumar', '', '', 'Branch', 'Purchasing', 'Developer', 'ravi@gmail.com', NULL, NULL, NULL, '9549494175', '', '30 EOM', 'Less then 1 year', '50k+', '{\"1\":\"2\",\"2\":\"3\"}', '', 'asd', 'email', 'active', NULL, 0, 0, 1, '2019-08-10 12:49:14', '2019-08-10 12:53:41'),
+(9, 'admin', 3, 'abhi', 'shek', '', '', '', 'Purchasing', '', 'abhi@gmail.com', 'alternate_abhi1232@gmail.com', 'whatsapp.com/abhi123', 'linkedin.com/abhi123', '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 2, '2019-08-10 14:48:26', '2019-08-10 15:05:59');
 
 -- --------------------------------------------------------
 
@@ -1020,7 +1033,13 @@ CREATE TABLE `sales_contact_addresses` (
 --
 
 INSERT INTO `sales_contact_addresses` (`id`, `sales_contact_id`, `address_type`, `location`, `street`, `town`, `state`, `zip_code`, `country`, `status`, `created_at`, `updated_at`) VALUES
-(27, 2, 'head_office_address', 'B- 53,  Balaji Tower 1st', 'Vidhyadhar Nagar', 'Jaipur', 'Vidhyadhar Nagar', '302039', '76', 1, '2019-08-09 12:09:14', '2019-08-09 12:09:14');
+(27, 2, 'head_office_address', 'B- 53,  Balaji Tower 1st', 'Vidhyadhar Nagar', 'Jaipur', 'Vidhyadhar Nagar', '302039', '76', 1, '2019-08-09 12:09:14', '2019-08-09 12:09:14'),
+(28, 5, '', '', '', '', '', '', '', 1, '2019-08-10 00:03:23', '2019-08-10 00:03:23'),
+(30, 3, '', '', '', '', '', '', '', 1, '2019-08-10 03:18:36', '2019-08-10 03:18:36'),
+(31, 6, '', '', '', '', '', '', '', 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
+(32, 7, '', '', '', '', '', '', '', 1, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
+(34, 8, '', 'ASD-41', 'vidhyadhar nagar', 'jaipur', 'vidhyadhar nagar', '302039', '76', 1, '2019-08-10 12:53:41', '2019-08-10 12:53:41'),
+(36, 9, '', '', '', '', '', '', '', 1, '2019-08-10 15:05:59', '2019-08-10 15:05:59');
 
 -- --------------------------------------------------------
 
@@ -1165,6 +1184,40 @@ INSERT INTO `subcategories` (`id`, `categories_name`, `subcategories`, `creation
 (64, 'Motors (AC | DC | Stepper & Servo) & Encoders', 'ABB 3GAA161101-ADC', '2019-07-08', 0),
 (65, 'Motors (AC | DC | Stepper & Servo) & Encoders', 'Siemens 1FK2102-1AG10-0CA0', '2019-07-08', 0),
 (66, 'Motors (AC | DC | Stepper & Servo) & Encoders', 'Leroy Somer LSK1604S05', '2019-07-08', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers_contacts`
+--
+
+CREATE TABLE `suppliers_contacts` (
+  `id` int(11) NOT NULL,
+  `trader` varchar(11) DEFAULT NULL COMMENT 'created_by',
+  `company` int(11) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `personal_info` longtext,
+  `branch` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `job_title` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `direct_dial` varchar(20) DEFAULT NULL,
+  `payment_terms` varchar(255) DEFAULT NULL,
+  `estimate_required` varchar(255) DEFAULT NULL,
+  `estimate_spend` varchar(255) DEFAULT NULL,
+  `manufacturers` text,
+  `invoice_reference_number` varchar(255) DEFAULT NULL,
+  `pls_information` text,
+  `communication` varchar(255) DEFAULT NULL,
+  `contact_status` varchar(50) DEFAULT NULL,
+  `archieved_resoan` text,
+  `status` tinyint(1) NOT NULL COMMENT '1 for active and 2 for inactive and 3 for archieve',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1640,6 +1693,12 @@ ALTER TABLE `subcategories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `suppliers_contacts`
+--
+ALTER TABLE `suppliers_contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `supplier_address`
 --
 ALTER TABLE `supplier_address`
@@ -1713,7 +1772,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -1761,13 +1820,13 @@ ALTER TABLE `employee_role`
 -- AUTO_INCREMENT for table `enquiry`
 --
 ALTER TABLE `enquiry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `enquiry_qty`
 --
 ALTER TABLE `enquiry_qty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `home`
@@ -1833,13 +1892,13 @@ ALTER TABLE `return_policy`
 -- AUTO_INCREMENT for table `sales_contacts`
 --
 ALTER TABLE `sales_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sales_contact_addresses`
 --
 ALTER TABLE `sales_contact_addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1864,6 +1923,12 @@ ALTER TABLE `social`
 --
 ALTER TABLE `subcategories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
+-- AUTO_INCREMENT for table `suppliers_contacts`
+--
+ALTER TABLE `suppliers_contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `supplier_address`
