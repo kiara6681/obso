@@ -167,17 +167,17 @@
 
                                         <div class="col-sm-4">
                                             <label>Alternate Email Address</label>
-                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com">
+                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com" value="<?= $sales_contact->alternate_email; ?>">
                                         </div>
 
                                         <div class="col-sm-4">
                                             <label>LinkedIn</label>
-                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn">
+                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn" value="<?= $sales_contact->linkedin; ?>">
                                         </div>             
                                     
                                         <div class="col-sm-4">
                                             <label>Whatsapp</label>
-                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp">
+                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp" value="<?= $sales_contact->whatsapp; ?>">
                                         </div>                            
 
                                         <div class="col-sm-4">
