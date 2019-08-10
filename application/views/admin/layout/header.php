@@ -33,6 +33,13 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
         <script src="<?php echo base_url();?>obso/assets/js/jquery.min.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    
+    <style>
+        .btn-primary {
+            background-color: #626ed4 !important;
+            border: 1px solid #626ed4 !important;
+        }
+    </style>
 
     </head>
 

@@ -205,6 +205,24 @@ class Companies extends CI_Controller {
         // Get all supplier industry
         $data['supplier_industries'] = $supplier_industries = $this->common_model->get_all_supplier_industry();
 
+        // Get company contact
+        $data['company_contacts'] = $company_contacts = $this->Companies_Model->getCompanyContacts($id);
+
+        // Get total enquiry of this company
+        $data['enquiries'] = $enquiries = $this->common_model->getAllEnquiryOFCompany($id);
+
+        $quoted_enqiries = 0;
+        foreach ($enquiries as $key => $enquiry) {
+            if($enquiry['suspus'] == 1){
+
+                $quoted_enqiries++;
+            }
+        }
+
+        $data['quoted_enqiries'] = $quoted_enqiries;
+
+        $data['orders'] = 0;
+
         // Get all countries
         $data['countries'] = $countries = $this->common_model->select('country');
 

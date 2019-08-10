@@ -1,9 +1,4 @@
-<style>
-    .btn-primary {
-        background-color: #626ed4 !important;
-        border: 1px solid #626ed4 !important;
-    }
-</style>
+
 <div class="content-page">
     <!-- Start content -->
     <div class="content">

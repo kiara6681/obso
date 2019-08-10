@@ -122,6 +122,10 @@
                 $today_qnuiry = 0;          
                 $i = "1"; 
 
+                // echo '<pre>';
+                // print_r($data);
+                // exit;
+
                 foreach ($data as $enq){ if($unqailifid >0)
                 {
                     $temp = explode(' ', $enq['created_at']);

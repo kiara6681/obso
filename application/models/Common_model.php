@@ -160,7 +160,7 @@ class Common_model extends CI_Model {
 
     function getcontactname($id){
         $this->db->select("fname,lname");
-        $this->db->from('customer_contact');
+        $this->db->from('sales_contacts');
         $this->db->where('id',$id);
         $query = $this->db->get();
         $query = $query->row();  

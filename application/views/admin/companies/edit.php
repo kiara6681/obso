@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="page-title-box">
                 <div class="row align-items-center">                    
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item ">
                                 <a href="<?= base_url(); ?>admin/dashboard">Home</a>
@@ -21,11 +21,12 @@
                             <li class="breadcrumb-item"> <b>Edit Company</b></li>
                         </ol> 
                     </div>
-                    <div class="col-sm-2">                    
+                    <div class="col-sm-6">                    
                         <div class="float-right d-none d-md-block">
-                            <!-- <button class="btn btn-primary waves-effect waves-light" type="button" data-toggle="modal" data-target=".bs-example-modal-lg">
-                                Add New Company
-                            </button> -->
+                            <button class="btn btn-primary" type="button"> Contacts : <?= count($company_contacts); ?></button>
+                            <button class="btn btn-primary" type="button"> Enquiry : <?= count($enquiries); ?></button>
+                            <button class="btn btn-primary" type="button"> Quote : <?= $quoted_enqiries; ?></button>
+                            <button class="btn btn-primary" type="button"> Orders : <?= $orders; ?></button>
                         </div>
                     </div>
                 </div>
