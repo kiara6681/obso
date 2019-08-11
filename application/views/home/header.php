@@ -84,6 +84,12 @@ foreach ($home as $home) {
 #enquiry_form_home_popup{
   background-color: #fee133 !important;
 }
+#mobile-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #000;
+}
+.navbar-nav .nav-item:hover{
+  background-color: #fee300 !important;
+}
 </style>
 </head>
 <body>

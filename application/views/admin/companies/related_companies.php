@@ -3,6 +3,12 @@
         background-color: #626ed4 !important;
         border: 1px solid #626ed4 !important;
     }
+    .dropdown-menu.show {
+        background-color: gray;
+        top: -25px !important;
+        padding: 5px !important;
+        left: -160px !important;
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -129,7 +135,7 @@
                                                         </div>
 
                                                         <div class="col-xl-2">
-                                                            <div class="test" id="menu1" data-toggle="dropdown"></div>
+                                                            <div id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="background-color: #dedede;color: #000;">
                                                                 <a role="menuitem" tabindex="-1" href="<?= base_url('admin/companies/edit_company/'.$company['id']) ?>" style="color: #000 !important;">
                                                                   <li role="presentation">Edit</li>
@@ -217,7 +223,7 @@
                                                         </div>
 
                                                         <div class="col-xl-2">
-                                                            <div class="test" id="menu1" data-toggle="dropdown"></div>
+                                                            <div id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                                 <a role="menuitem" tabindex="-1" href="<?= base_url('admin/companies/edit_company/'.$company['id']) ?>">
                                                                   <li role="presentation">Edit</li>

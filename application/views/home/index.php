@@ -155,7 +155,7 @@
 			height:232px!important;
 		}
 		.p-md{
-			padding:40px 0px !important;
+			padding:60px 0px !important;
 			width: 70%;
     		display: inline-block;
 		}
@@ -216,7 +216,7 @@
 			height: 158px!important;
 		}
 		.p-md{
-			padding:20px 0px !important;
+			padding:60px 31px 0px !important;
 			width: 70%;
     		display: inline-block;
 		}
@@ -246,7 +246,7 @@
 			height: 145px!important;
 		}
 		.p-md{
-			padding:20px 0px !important;
+			padding:40px 10px !important;
 		}
 		.p-md h2{
 			font-size: 20px !important;

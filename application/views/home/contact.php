@@ -6,7 +6,7 @@ foreach ($contact as $contact)
 
 <style type="text/css">
 	.contact_form{
-    	background-color: #f0f0f0;
+    	background-color: #dedede;
     }
     .form-input-parent {
 	    position: relative;
@@ -28,7 +28,7 @@ foreach ($contact as $contact)
 		width: 90% !important;
 		font-size: 14px !important;
 		height: 35px !important;
-		background-color: #dedede !important;
+		background-color: #f0f0f0 !important;
 		border-radius: 2px;
 	}
 	.form-input-parent textarea {

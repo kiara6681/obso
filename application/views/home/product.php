@@ -137,7 +137,14 @@ if(!empty($product))
 					    				</p>
 									</div>
 									<div class="col-md-8 pdl">
-					    				<p class="text-sm-sm"><strong>Description</strong> &nbsp;&nbsp; &nbsp; : <?php echo substr($products['description'],0, 65)."..."; ?>
+					    				<p class="text-sm-sm"><strong>Description</strong> &nbsp;&nbsp; &nbsp; : <?php 
+					    				if(strlen($products['description']) > 200)
+					    				{
+					    					echo substr($products['description'],0, 70)."..."; 
+					    				}else{
+					    					echo $products['description'];
+					    				}
+					    				?>
 					    				</p>
 				    				</div>
 					    		</div>
