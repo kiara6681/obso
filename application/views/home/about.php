@@ -125,11 +125,11 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <img src="<?php echo base_url(); ?>uploads/<?php echo $about['image']; ?>" alt="..." class="img-fluid">
-                <h6 style="background: #3c3c3c;color: #fff;padding: 10px 20px;">Our Offices in the UK</h6> 
+                <p style="background: #3c3c3c;color: #fff;padding: 10px 20px;">Our Offices in the UK</p> 
           	</div>
           	<div class="col-md-6">
-           	 	<img src="<?php echo base_url(); ?>uploads/<?php echo $about['image']; ?>" alt="..." class="img-fluid">
-                <h6 style="background: #3c3c3c;color: #fff;padding: 10px 20px;">Our direct stock ready to go</h6>
+           	 	<img src="<?php echo base_url(); ?>uploads/<?php echo $about['2_image']; ?>" alt="..." class="img-fluid">
+                <p style="background: #3c3c3c;color: #fff;padding: 10px 20px;">Our direct stock ready to go</p>
     	  	</div>
         </div> <!-- / .row --> 
 

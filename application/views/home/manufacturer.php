@@ -159,6 +159,9 @@ if(isset($product))
 				}
 				?>
 			</div>
+			<div style="padding-top: 40px;">
+				<b>Your enquiry is important to us so we will strive to respond promtly, usualy within an hour.</b>
+			</div>
 		</div>		
 
 			<!-- <div class="col-md-12" style="border: 1px solid rgb(245, 204, 28);padding: 15px 15px;border-radius: 30px;">

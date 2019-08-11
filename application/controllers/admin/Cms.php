@@ -132,6 +132,12 @@ public function update_about($id=""){
          move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $image);
          $data ['image'] = $image;
         }
+        if(isset($_FILES['2_image']['name'])&& !empty($_FILES['2_image']['name']))
+        {    
+        $image_2 = $_FILES['2_image']['name'];
+         move_uploaded_file($_FILES['2_image']['tmp_name'], 'uploads/' . $image_2);
+         $data ['2_image'] = $image_2;
+        }
 
         if(isset($_FILES['image1']['name'])&& !empty($_FILES['image1']['name']))
         {    
@@ -252,10 +258,13 @@ public function update_home_front($id=""){
         $data['main_description'] = $_POST['main_description'];
         $data['title'] = $_POST['title'];
         $data['description'] = $_POST['description'];
+        $data['url_one'] = $_POST['url_one'];
         $data['title_1'] = $_POST['title_1'];
         $data['description_1'] = $_POST['description_1'];
+        $data['url_two'] = $_POST['url_two'];
         $data['title_2'] = $_POST['title_2'];
         $data['description_2'] = $_POST['description_2'];
+        $data['url_three'] = $_POST['url_three'];
         $data['category_title'] = $_POST['category_title'];
         $data['category_description'] = $_POST['category_description'];
 

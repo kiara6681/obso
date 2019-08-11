@@ -325,7 +325,7 @@ foreach ($front as $front) { ?>
 		<div class="row">
 			<div class="col-md-4 col-sm-6">
 				<div class="inner_body">
-					<a href="home/about">
+					<a href="<?php echo $front['url_one']; ?>">
 						<div class="icon_section">
 							<img src="<?php echo base_url(); ?>uploads/<?php echo $front['image']; ?>" alt="img" style="height: 99px;width: 99px;">
 
@@ -337,7 +337,7 @@ foreach ($front as $front) { ?>
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<div class="inner_body">
-					<a href="home/about">
+					<a href="<?php echo $front['url_two']; ?>">
 						<div class="icon_section">
 
 							<img src="<?php echo base_url(); ?>uploads/<?php echo $front['image_1']; ?>" alt="img" style="height: 99px;width: 99px;">
@@ -356,7 +356,7 @@ foreach ($front as $front) { ?>
 			<div class="col-md-4 col-sm-6">
 
 				<div class="inner_body">
-					<a href="home/about">
+					<a href="<?php echo $front['url_three']; ?>">
 						<div class="icon_section">
 
 							<img src="<?php echo base_url(); ?>uploads/<?php echo $front['image_2']; ?>" alt="img" style="height: 99px;width: 99px;">
@@ -443,13 +443,13 @@ foreach ($front as $front) { ?>
 							    color: #f5cc1c!important;
 							}
 							.main_cat{
-							    color: gray!important;
 							    margin-bottom: 3px!important;
-							    font-size: 14px!important;
+							    font-size: 16px!important;
 							    margin-bottom: 3px!important;
 							    list-style: none!important;
 							}
 							.sub_cat{
+							    color: gray!important;
 							    margin-bottom: 3px!important;
 							    padding-top: 5px;
 							    font-size: 14px!important;

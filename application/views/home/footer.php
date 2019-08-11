@@ -48,9 +48,6 @@
 		    margin-bottom: -1px;
 		    padding: 5px;
 	    	height: 300px;
-		}
-		.footer_logo_titles h1 {
-		    font-size: 24px;
 		}	
 	}
 	@media only screen and (max-width: 600px)
@@ -98,7 +95,7 @@
 
 						<h1>100’s of Manufacturers</h1>
 
-						<p>We supply parts from all the top manufacturers </p>
+						<p style="font-size: 21px;">We supply parts from all the top manufacturers </p>
 
 						<a href="<?= base_url('home/product/');?>">View All</a>
 

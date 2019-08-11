@@ -37,6 +37,15 @@
                   <img src="<?php echo base_url(); ?>uploads/<?php echo $about['image']; ?>" height="50" width="50" />
                 </div>
                 <?php endif ?>
+                <?php if (isset($about['2_image'])&& !empty($about['2_image'])): ?>
+                <div class="col-md-12">
+                  <label>Image 2: </label>
+                  <small style="color: green">(Size: 357 x 635 Pixal)</small>
+                  <br>
+                  <input type="file" name="2_image" id="fileToUpload" >
+                  <img src="<?php echo base_url(); ?>uploads/<?php echo $about['2_image']; ?>" height="50" width="50" />
+                </div>
+                <?php endif ?>
               </div> 
             </div> 
             <br>

@@ -40,6 +40,10 @@
                   <label>Description 1:</label>
                   <textarea type="text" name="description" class="form-control" placeholder="" /><?php echo $home_front['description']; ?></textarea>
                 </div>
+                <div class="col-md-12">
+                  <label>URL:</label>
+                  <input type="url" name="url_one" class="form-control" placeholder="url" value="<?php echo $home_front['url_one']; ?>" />
+                </div>
                  <?php if (isset($home_front['image'])&& !empty($home_front['image'])): ?>
                 <div class="col-md-12">
                   <label>Image 1:</label>
@@ -60,6 +64,10 @@
                 <div class="col-md-12">
                   <label>Description 2:</label>
                   <textarea type="text" name="description_1" class="form-control" placeholder="" /><?php echo $home_front['description_1']; ?></textarea>
+                </div>
+                <div class="col-md-12">
+                  <label>URL:</label>
+                  <input type="url" name="url_two" class="form-control" placeholder="url" value="<?php echo $home_front['url_two']; ?>" />
                 </div>
                  <?php if (isset($home_front['image_1'])&& !empty($home_front['image_1'])): ?>
                 <div class="col-md-12">
@@ -84,6 +92,10 @@
                 <div class="col-md-12">
                   <label>Description 3:</label>
                   <textarea type="text" name="description_2" class="form-control" placeholder="" /><?php echo $home_front['description_2']; ?></textarea>
+                </div>
+                <div class="col-md-12">
+                  <label>URL:</label>
+                  <input type="url" name="url_three" class="form-control" placeholder="url" value="<?php echo $home_front['url_three']; ?>" />
                 </div>
                 <?php if (isset($home_front['image_2'])&& !empty($home_front['image_2'])): ?>
                 <div class="col-md-12">

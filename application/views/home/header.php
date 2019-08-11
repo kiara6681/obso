@@ -164,12 +164,12 @@ foreach ($home as $home) {
         <?php } ?>
     				<div class="dropdown">
 					    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-    					  <img src="<?php echo base_url(); ?>/assets/home/img/us.png" alt="img"><span> United States
+    					  <img src="<?php echo base_url(); ?>/assets/home/img/uk.png" alt="img"><span> UK
     					  <span class="caret"></span>
               </button>
 					    <ul class="dropdown-menu">
 					      <li>
-                  <a href="http://www.obso.co.uk">
+                  <a href="http://www.obso.com">
                     <img src="<?php echo base_url(); ?>/assets/home/img/uk.png" style="width:25px;" alt="img"> UK
                   </a>
                 </li>
@@ -391,11 +391,11 @@ foreach ($home as $home) {
 
             <div class="dropdown header_enquery_form" style="display: none;">
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background: none;border: 1px solid #fff; padding: 0px 2px;margin-top: 10px;margin-bottom: 10px;">
-                <img src="<?php echo base_url(); ?>/assets/home/img/us.png" style="width:25px;" alt="img">
+                <img src="<?php echo base_url(); ?>/assets/home/img/uk.png" style="width:25px;" alt="img">
               </button>
               <ul class="dropdown-menu" style="padding-left: 10px;">
                 <li>
-                  <a href="http://www.obso.co.uk">
+                  <a href="http://www.obso.com">
                     <img src="<?php echo base_url(); ?>/assets/home/img/uk.png" style="width:25px;" alt="img"> UK
                   </a>
                 </li>
