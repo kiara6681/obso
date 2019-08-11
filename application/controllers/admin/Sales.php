@@ -78,65 +78,73 @@ class Sales extends CI_Controller {
                 $contact_database_status = 1;
             }
 
-            $company                 = $this->input->post('company');
-            $trader                  = $this->input->post('trader');
-            $fname                   = $this->input->post('first_name');
-            $lname                   = $this->input->post('last_name');
-            $gender                  = $this->input->post('gender');            
-            $personal_info           = $this->input->post('personal_info');
-            $branch                  = $this->input->post('branch');
-            $department              = $this->input->post('department');
-            $job_title               = $this->input->post('job_title');
-            $email                   = $this->input->post('email');
-            $alternate_email         = $this->input->post('alternate_email');
-            $whatsapp                = $this->input->post('whatsapp');
-            $linkedin                = $this->input->post('linkedin');
-            $mobile                  = $this->input->post('phone');
-            $direct_dial             = $this->input->post('direct_dial');
-            $payment_terms           = $this->input->post('payment_terms');
-            $invoice_ref_no          = $this->input->post('invoice_ref_no');
-            $pls_info                = $this->input->post('pls_info');
-            $estimated_frequency     = $this->input->post('estimated_frequency');
-            $estimated_spend         = $this->input->post('estimated_spend');
-            $manufacturers           = $this->input->post('menufecturer');
-            $communication           = $this->input->post('communication');
-            $contact_status          = $this->input->post('contact_status');
-            $location                = $this->input->post('location');
-            $street_address          = $this->input->post('street_address');
-            $city                    = $this->input->post('city');
-            $state                   = $this->input->post('state');
-            $zip                     = $this->input->post('zip');
-            $country                 = $this->input->post('country');
-            $address_type            = $this->input->post('address_type');
-            $date                    = date('Y-m-d H:i:s');
+            $company             = $this->input->post('company');
+            $trader              = $this->input->post('trader');
+            $fname               = $this->input->post('first_name');
+            $lname               = $this->input->post('last_name');
+            /*$gender            = $this->input->post('gender');            */
+            $personal_info       = $this->input->post('personal_info');
+            /*$branch            = $this->input->post('branch');*/
+            $department          = $this->input->post('department');
+            $job_title           = $this->input->post('job_title');
+            $email               = $this->input->post('email');
+            $alternate_email     = $this->input->post('alternate_email');
+            $whatsapp            = $this->input->post('whatsapp');
+            $linkedin            = $this->input->post('linkedin');
+            $mobile              = $this->input->post('phone');
+            $direct_dial         = $this->input->post('direct_dial');
+            $contact_location    = $this->input->post('contact_location');
+            $contact_country     = $this->input->post('contact_country');
+            $industry            = $this->input->post('industry');
+            $competitor          = $this->input->post('competitor');
+            /*$payment_terms     = $this->input->post('payment_terms');*/
+            /*$invoice_ref_no    = $this->input->post('invoice_ref_no');*/
+            $pls_info            = $this->input->post('pls_info');
+            $estimated_frequency = $this->input->post('estimated_frequency');
+            $estimated_spend     = $this->input->post('estimated_spend');
+            $manufacturers       = $this->input->post('menufecturer');
+            $communication       = $this->input->post('communication');
+            $contact_status      = $this->input->post('contact_status');
+            $location            = $this->input->post('location');
+            $street_address      = $this->input->post('street_address');
+            $city                = $this->input->post('city');
+            $state               = $this->input->post('state');
+            $zip                 = $this->input->post('zip');
+            $country             = $this->input->post('country');
+            $address_type        = $this->input->post('address_type');
+            $date                = date('Y-m-d H:i:s');
 
             $data = array(
-                'company'                  => $company,
-                'trader'                   => $trader,
-                'fname'                    => $fname,
-                'lname'                    => $lname,
-                'gender'                   => $gender,
-                'personal_info'            => $personal_info,
-                'branch'                   => $branch,
-                'department'               => $department,
-                'job_title'                => $job_title,
-                'email'                    => $email,
-                'alternate_email'          => $alternate_email,
-                'whatsapp'                 => $whatsapp,
-                'linkedin'                 => $linkedin,
-                'mobile'                   => $mobile,
-                'direct_dial'              => $direct_dial,
-                'payment_terms'            => $payment_terms,
-                'estimate_required'        => $estimated_frequency,
-                'estimate_spend'           => $estimated_spend,
-                'manufacturers'            => json_encode($manufacturers),
-                'invoice_reference_number' => $invoice_ref_no,
-                'pls_information'          => $pls_info,
-                'communication'            => $communication,
-                'contact_status'           => $contact_status,
-                'status'                   => $contact_database_status,
-                'created_at'               => $date,
-                'updated_at'               => $date
+                'company'                    => $company,
+                'trader'                     => $trader,
+                'fname'                      => $fname,
+                'lname'                      => $lname,
+                /*'gender'                   => $gender,*/
+                'personal_info'              => $personal_info,
+                'industry'                   => $industry,
+                'contact_location'           => $contact_location,
+                'contact_country'            => $contact_country,
+                'competitor'                 => $competitor,
+                /*'branch'                   => $branch,*/
+                'department'                 => $department,
+                'job_title'                  => $job_title,
+                'email'                      => $email,
+                'alternate_email'            => $alternate_email,
+                'whatsapp'                   => $whatsapp,
+                'linkedin'                   => $linkedin,
+                'mobile'                     => $mobile,
+                'direct_dial'                => $direct_dial,
+                /*'payment_terms'            => $payment_terms,*/
+                'estimate_required'          => $estimated_frequency,
+                'estimate_spend'             => $estimated_spend,
+                'manufacturers'              => json_encode($manufacturers),
+                /*'invoice_reference_number' => $invoice_ref_no,*/
+                'pls_information'            => $pls_info,
+                'communication'              => $communication,
+                'contact_status'             => $contact_status,
+                'status'                     => $contact_database_status,
+                'created_at'                 => $date,
+                'updated_at'                 => $date
             );
 
             //Insert Sales Data
@@ -195,9 +203,9 @@ class Sales extends CI_Controller {
             $trader              = $this->input->post('trader');
             $fname               = $this->input->post('first_name');
             $lname               = $this->input->post('last_name');
-            $gender              = $this->input->post('gender');            
+            /*$gender              = $this->input->post('gender');*/
             $personal_info       = $this->input->post('personal_info');
-            $branch              = $this->input->post('branch');
+            /*$branch              = $this->input->post('branch');*/
             $department          = $this->input->post('department');
             $job_title           = $this->input->post('job_title');
             $email               = $this->input->post('email');
@@ -206,8 +214,12 @@ class Sales extends CI_Controller {
             $whatsapp            = $this->input->post('whatsapp');
             $mobile              = $this->input->post('phone');
             $direct_dial         = $this->input->post('direct_dial');
-            $payment_terms       = $this->input->post('payment_terms');
-            $invoice_ref_no      = $this->input->post('invoice_ref_no');
+            $contact_location    = $this->input->post('contact_location');
+            $contact_country     = $this->input->post('contact_country');
+            $industry            = $this->input->post('industry');
+            $competitor          = $this->input->post('competitor');
+            /*$payment_terms       = $this->input->post('payment_terms');
+            $invoice_ref_no      = $this->input->post('invoice_ref_no');*/
             $pls_info            = $this->input->post('pls_info');
             $estimated_frequency = $this->input->post('estimated_frequency');
             $estimated_spend     = $this->input->post('estimated_spend');
@@ -228,22 +240,26 @@ class Sales extends CI_Controller {
                 'trader'                   => $trader,
                 'fname'                    => $fname,
                 'lname'                    => $lname,
-                'gender'                   => $gender,
+                /*'gender'                   => $gender,*/
                 'personal_info'            => $personal_info,
-                'branch'                   => $branch,
+                /*'branch'                   => $branch,*/
                 'department'               => $department,
                 'job_title'                => $job_title,
+                'industry'                 => $industry,
+                'contact_location'         => $contact_location,
+                'contact_country'          => $contact_country,
+                'competitor'               => $competitor,
                 'email'                    => $email,
                 'alternate_email'          => $alternate_email,
                 'linkedin'                 => $linkedin,
                 'whatsapp'                 => $whatsapp,
                 'mobile'                   => $mobile,
                 'direct_dial'              => $direct_dial,
-                'payment_terms'            => $payment_terms,
+                /*'payment_terms'            => $payment_terms,*/
                 'estimate_required'        => $estimated_frequency,
                 'estimate_spend'           => $estimated_spend,
                 'manufacturers'            => json_encode($manufacturer),
-                'invoice_reference_number' => $invoice_ref_no,
+                /*'invoice_reference_number' => $invoice_ref_no,*/
                 'pls_information'          => $pls_info,
                 'communication'            => $communication,
                 'contact_status'           => $contact_status,
@@ -421,8 +437,21 @@ class Sales extends CI_Controller {
         $status = $_GET['status'];
        
         //Get user details
-        $data = $this->Sales_Model->updateStatus($id, $status);
-        echo 1;
+        $update = $this->Sales_Model->updateStatus($id, $status);
+
+        if($status < 3)
+        {
+            //Update status
+            $data = array(
+                'contact_prospect_status' => 0,
+                'closable_prospect_status' => 0
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'sales_contacts');
+        }
+
+        echo $status;
     }
 	 
     /*Start Customer List*/ 
@@ -892,7 +921,7 @@ class Sales extends CI_Controller {
         //Get user details
         $data = $this->Sales_Model->getAllSalesContacts(null, $id);
 
-        if(!empty($data->payment_terms) && !empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->invoice_reference_number) && !empty($data->manufacturers) && !empty($data->pls_information))
+        if(!empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->manufacturers) && !empty($data->pls_information))
         {
              $data = array(
                 'contact_prospect_status' => 1
@@ -921,9 +950,9 @@ class Sales extends CI_Controller {
         //Get Enquiry 
         $enquires = $this->Sales_Model->getSalesEnqury($id);
 
-        if(!empty($data->payment_terms) && !empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->invoice_reference_number) && !empty($data->manufacturers) && !empty($data->pls_information) && count($enquires) <> 0)
+        if(!empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->manufacturers) && !empty($data->pls_information) && count($enquires) <> 0)
         {
-             $data = array(
+            $data = array(
                 'closable_prospect_status' => 1
             );
 

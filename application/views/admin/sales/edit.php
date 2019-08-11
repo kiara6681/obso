@@ -30,6 +30,14 @@
         font-size: 16px;
         padding: 0px 20px;
     }
+    .ctm-label label{
+        margin-bottom: 15px !important;
+        width: 120px;
+    }
+    .ctm-label-m label{
+        margin-bottom: 15px !important;
+        width: 120px;
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -62,7 +70,7 @@
                                         <input class="form-control" type="hidden" name="trader" value="<?= $sales_contact->trader; ?>" readonly placeholder="Trader Name">
 
                                         <div class="col-sm-6">
-                                            <select class="form-control" style="height: 50px;" name="company" required="required">
+                                            <select class="form-control companies" style="height: 50px;" name="company" required="required">
                                                 <option value="">Company</option>
                                                 <?php
                                                 foreach ($sales_companies as $key => $sales_company) {
@@ -73,11 +81,18 @@
                                                 ?>
                                             </select>
                                         </div> 
-                                        <!-- <div class="col-sm-6 label">
-                                             <label>Enquiry : <strong>0</strong></label> | 
-                                             <label>Quoted : <strong>0</strong> </label> | 
-                                             <label>Order : <strong>0</strong> </label>
-                                         </div> --> 
+                                        <div class="col-sm-6">
+
+                                            <select class="form-control" style="height: 50px;" name="contact_database_status" required>
+                                                <option value="">Contacts Database Status</option>
+                                                <option value="1" <?= ($sales_contact->status == 1)? 'selected': ''; ?> >Lead</option>
+                                                <option value="2" <?= ($sales_contact->status == 2)? 'selected': ''; ?> >Suspects</option>
+                                                <option value="3" <?= ($sales_contact->status == 3)? 'selected': ''; ?> >Prospects</option>
+                                                <option value="4" <?= ($sales_contact->status == 4)? 'selected': ''; ?> >Account Contacts</option>     
+                                            </select>
+
+                                            <!-- <input class="form-control" type="hidden" name="trader" value="admin" readonly placeholder="Trader Name"> -->
+                                        </div> 
                                     </div>
                                     <br>
                                     <h4 class="mt-0 header-title">Basic Personal Information</h4>
@@ -87,36 +102,69 @@
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <label>First Name</label>
+                                                    <label>*First Name</label>
                                                     <input class="form-control" type="text" name="first_name" value="<?= $sales_contact->fname; ?>" placeholder="First Name" required="required">
                                                 </div>    
 
                                                 <div class="col-sm-6">
-                                                    <label>Last Name</label>
+                                                    <label>*Last Name</label>
                                                     <input class="form-control" type="text" name="last_name" value="<?= $sales_contact->lname; ?>" placeholder="Last Name" required="required">
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <label>Contact Location</label>
+                                                    <input type="text" name="contact_location" class="form-control" value="<?= $sales_contact->contact_location; ?>" placeholder="Enter Contact Location">
+                                                </div> 
+                                                <div class="col-sm-12">
                                                     <label>Trader</label>
                                                     <select class="form-control" name="trader">
                                                         <option value="admin">Unassigned</option>
                                                     </select>
                                                 </div> 
                                                 <div class="col-sm-6">
-                                                    <label>Gender</label>
-                                                    <select class="form-control" name="gender">
-                                                        <option value="">Gender</option>
-                                                        <option value="Male" <?= ($sales_contact->gender == 'Male') ?'selected' : ''; ?>>Male</option>
-                                                        <option value="Female" <?= ($sales_contact->gender == 'Female') ?'selected' : ''; ?>>Female</option>
-                                                        <option value="Other" <?= ($sales_contact->gender == 'Other')?'selected':''; ?>>Other</option>
+                                                    <label>*Country</label>
+                                                    <select name="contact_country" class="form-control"  required>
+                                                        <option value="">Select Country</option>
+                                                        <?php
+                                                        foreach ($countries as $key => $country) {
+                                                            ?>
+                                                            <option value="<?= $country['id']; ?>" <?= ($country['id'] == $sales_contact->contact_country)?'selected':'';?>><?= $country['name']; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                     </select>
-                                                </div> 
+                                                </div>
+                                                <!-- <div class="col-sm-6">
+                                                     <label>Gender</label>
+                                                     <select class="form-control" name="gender">
+                                                         <option value="">Gender</option>
+                                                         <option value="Male" <?= ($sales_contact->gender == 'Male') ?'selected' : ''; ?>>Male</option>
+                                                         <option value="Female" <?= ($sales_contact->gender == 'Female') ?'selected' : ''; ?>>Female</option>
+                                                         <option value="Other" <?= ($sales_contact->gender == 'Other')?'selected':''; ?>>Other</option>
+                                                     </select>
+                                                 </div> --> 
+                                                 <div class="col-sm-6">
+                                                    <label>*Industry</label>
+                                                    <select class="form-control cmp_industry" name="industry">
+                                                        <option value="">Select Industry</option>
+                                                        <?php
+                                                        foreach ($sales_companies as $key => $sales_company) {
+                                                            if($sales_company['industry_id'] == $sales_contact->industry )
+                                                            {
+                                                                ?>
+                                                                <option value="<?= $sales_company['industry_id']; ?>" <?= ($sales_contact->industry == $sales_company['industry_id']) ? 'selected':''; ?>><?= $sales_company['industry_name']; ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
                                             </div> 
                                         </div>  
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <label>Personal Information</label>
-                                                    <textarea class="form-control" name="personal_info" cols="30" placeholder="Personal Information" rows="5"><?= $sales_contact->personal_info; ?></textarea>
+                                                    <textarea class="form-control" name="personal_info" cols="30" placeholder="Personal Information" rows="13"><?= $sales_contact->personal_info; ?></textarea>
                                                 </div> 
                                             </div> 
                                         </div> 
@@ -125,14 +173,13 @@
                                     <hr><br>
                                     <div class="row">
                                     
-                                        <div class="col-sm-4">
-                                            <label>Branch Name</label>
-                                            <input class="form-control" value="<?= $sales_contact->branch; ?>" type="text" name="branch" placeholder="Branch">
-                                        </div>               
+                                        <!-- <div class="col-sm-4">
+                                                          <label>Branch Name</label>
+                                                          <input class="form-control" value="<?= $sales_contact->branch; ?>" type="text" name="branch" placeholder="Branch">
+                                                      </div>  -->              
                                     
                                         <div class="col-sm-4">
                                             <label>Department</label>
-                                            <!-- <input class="form-control" value="<?= $sales_contact->department; ?>" type="text" name="department" placeholder="Department"> -->
 
                                             <select class="form-control" name="department">
                                                 <option value="">Department</option>
@@ -155,40 +202,42 @@
 
                                         </div>              
                                     
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-8">
                                             <label>Job Title</label>
                                             <input class="form-control" value="<?= $sales_contact->job_title; ?>" type="text" name="job_title" placeholder="Job Title">
                                         </div>              
                                     
-                                        <div class="col-sm-4">
-                                            <label>Email Address</label>
-                                            <input class="form-control" value="<?= $sales_contact->email; ?>" type="text" name="email" placeholder="example@company.com">
-                                        </div>     
-
-                                        <div class="col-sm-4">
-                                            <label>Alternate Email Address</label>
-                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com" value="<?= $sales_contact->alternate_email; ?>">
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <label>LinkedIn</label>
-                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn" value="<?= $sales_contact->linkedin; ?>">
-                                        </div>             
-                                    
-                                        <div class="col-sm-4">
-                                            <label>Whatsapp</label>
-                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp" value="<?= $sales_contact->whatsapp; ?>">
-                                        </div>                            
-
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label>Mobile Number</label>
                                             <input class="form-control" value="<?= $sales_contact->mobile; ?>" type="number" name="phone" placeholder="Mobile Number">
                                         </div>
                                         
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label>Direct Dial</label>
                                             <input class="form-control" value="<?= $sales_contact->direct_dial; ?>" type="number" name="direct_dial" placeholder="Direct Dial">
-                                        </div>    
+                                        </div> 
+
+                                        <div class="col-sm-6">
+                                            <label>Email Address</label>
+                                            <input class="form-control" value="<?= $sales_contact->email; ?>" type="text" name="email" placeholder="example@company.com">
+                                        </div> 
+
+                                        <div class="col-sm-3">
+                                            <label>LinkedIn</label>
+                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn" value="<?= $sales_contact->linkedin; ?>">
+                                        </div>             
+                                    
+                                        <div class="col-sm-3">
+                                            <label>Whatsapp</label>
+                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp" value="<?= $sales_contact->whatsapp; ?>">
+                                        </div> 
+
+                                        <div class="col-sm-6">
+                                            <label>Alternate Email Address</label>
+                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com" value="<?= $sales_contact->alternate_email; ?>">
+                                        </div>                           
+
+                                           
                                     </div>
                                     <br>
                                     <h4 class="mt-0 header-title">Key Sales Information</h4>
@@ -284,7 +333,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <div class="col-sm-12">
                                                 <label>Payment Tearms</label>
                                                 <select name="payment_terms" class="form-control">
@@ -309,17 +358,49 @@
                                                 <label>Invoice Reference Number</label>
                                                 <input class="form-control" type="text" name="invoice_ref_no" value="<?= $sales_contact->invoice_reference_number; ?>" placeholder="Invoice Reference Number">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
+                                        </div> -->
+                                        <div class="col-sm-5">
                                             <label>PSL & Portal Login Information</label>
                                             <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"><?= $sales_contact->pls_information; ?></textarea>
                                             
                                         </div>
+                                        <div class="col-sm-7">
+                                            <label>Competitor & Pricing/Discount Information</label>
+                                            <textarea class="form-control" name="competitor" placeholder="Competitor & Pricing/Discount Information" rows="5"><?= $sales_contact->competitor; ?></textarea>
+                                        </div>
                                     </div>
-                                    <br />
-                                    <h4 class="mt-0 header-title">Address</h4>
+                                     <br />
+                                    <h4 class="mt-0 header-title">Enquiry, Quote & Order History</h4>
                                     <hr>
                                     <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row" style="padding: 10px;">
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Enquiry</a>
+                                                </div>
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Quote</a>
+                                                </div>
+                                                <div class="col-md-3">                         
+                                                    <a class="btn btn-info btn-block">Orders</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <br />
+                                    <h4 class="mt-0 header-title">Contact Notes & Attachments</h4>
+                                    <hr>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img src="<?= base_url(); ?>uploads/coming-soon.jpg" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <h4 class="mt-0 header-title">Asscoiated Address information</h4>
+                                    <hr>
+                                    <br /> 
                                     <div class="row service_wrap">
                                         <?php 
                                         if(count($contact_address) > 0)
@@ -374,7 +455,7 @@
                                                         <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add New Address</button>
                                                     </div> 
                                                     <?php 
-                                                    $i++;
+                                                    $check++;
                                                 }
                                             }
                                             if($check == 0)
@@ -534,54 +615,43 @@
                                         ?>                                     
                                     </div>
                                     <br />
+                                    <h4 class="mt-0 header-title">Marketing Prefrences</h4>
+                                    <hr>
+                                    <br />
                                     <div class="row">
-                                         <div class="col-sm-6 text-center">
+                                         <div class="col-sm-6">
                                             <div class="card marbtmm" >
-                                                <h5>
-                                                    Communication
-                                                </h5>
+                                                <label>
+                                                    Communication Methods 
+                                                </label>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->communication == 'email')?'active':''; ?>">
-                                                        <input type="radio" name="communication" value="email" <?= ($sales_contact->communication == 'email')?'checked':''; ?>> Use Email
+                                                        <input type="radio" name="communication" value="email" <?= ($sales_contact->communication == 'email')?'checked':''; ?>> Email
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->communication == 'active')?'checked':''; ?>">
-                                                        <input type="radio" name="communication" value="sms" <?= ($sales_contact->communication == 'sms')?'checked':''; ?>> Use SMS
+                                                        <input type="radio" name="communication" value="sms" <?= ($sales_contact->communication == 'sms')?'checked':''; ?>> SMS
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->communication == 'both')?'active':''; ?>">
-                                                        <input type="radio" name="communication" value="both" <?= ($sales_contact->communication == 'both')?'checked':''; ?>> Use Both
+                                                        <input type="radio" name="communication" value="both" <?= ($sales_contact->communication == 'both')?'checked':''; ?>> WhatsApp
                                                     </label> 
                                                 </div>
                                             </div>
                                         </div>
-                                         <div class="col-sm-6 text-center">
+                                         <div class="col-sm-6">
                                             <div class="card marbtmm" >
-                                                <h5>
+                                                <label>
                                                     Contact Status 
-                                                </h5>
+                                                </label>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->contact_status == 'active')?'active':''; ?>">
-                                                        <input type="radio" name="contact_status" value="active" <?= ($sales_contact->contact_status == 'active')?'checked':''; ?>> Active
+                                                        <input type="radio" name="contact_status" value="active" <?= ($sales_contact->contact_status == 'active')?'checked':''; ?>> Activley Market
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->contact_status == 'do_not_contact')?'active':''; ?>">
                                                         <input type="radio" name="contact_status" value="do_not_contact" <?= ($sales_contact->contact_status == 'do_not_contact')?'checked':''; ?>> Do Not Contact
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg <?= ($sales_contact->contact_status == 'in_active')?'active':''; ?>">
-                                                        <input type="radio" name="contact_status" value="in_active" <?= ($sales_contact->contact_status == 'in_active')?'checked':''; ?>> In-Active
+                                                        <input type="radio" name="contact_status" value="in_active" <?= ($sales_contact->contact_status == 'in_active')?'checked':''; ?>> In-Active Contact
                                                     </label> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="row" style="padding: 10px;">
-                                                <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Enquiry</a>
-                                                </div>
-                                                <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Quote</a>
-                                                </div>
-                                                <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Orders</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -638,6 +708,28 @@
             //$(".parent_div").remove();
             c--;
             n--;
-        })
+        });
+
+        //Get Invtors using Company id
+        $(document).on('change','.companies',function(){
+            var id = $(this).val();
+
+            var ajaxType = 'company';
+
+            $.ajax({
+                type: 'get',
+                url: "<?= base_url() ?>admin/enquiry/getIndustry",
+                data: { "id" : id, "type" : ajaxType},
+                success: function(result){
+                    if(result != ""){
+                        var obj = JSON.parse(result);
+                        console.log(result);
+                        if(obj.company){
+                            $(".cmp_industry").html(obj.company);
+                        }
+                    }
+                }
+            });
+        });
     });
 </script>

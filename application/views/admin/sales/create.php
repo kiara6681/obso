@@ -26,6 +26,14 @@
         background-color: #323a4e;
         color: #fff;
     }
+    .ctm-label label{
+        margin-bottom: 15px !important;
+        width: 120px;
+    }
+    .ctm-label-m label{
+        margin-bottom: 15px !important;
+        width: 120px;
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -56,7 +64,7 @@
                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
 
                                         <div class="col-sm-6">
-                                            <select class="form-control" style="height: 50px;" name="company" required="required">
+                                            <select class="form-control companies" style="height: 50px;" name="company" required="required">
                                                 <option value="">Company</option>
                                                 <?php
                                                 foreach ($sales_companies as $key => $sales_company) {
@@ -69,7 +77,8 @@
                                         </div> 
                                         <div class="col-sm-6">
 
-                                            <select class="form-control" style="height: 50px;" name="contact_database_status">
+                                            <select class="form-control" style="height: 50px;" name="contact_database_status" required>
+                                                <option value="">Contacts Database Status</option>
                                                 <option value="1">Lead</option>
                                                 <option value="2">Suspects</option>
                                                 <option value="3">Prospects</option>
@@ -87,23 +96,45 @@
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <label>First Name</label>
+                                                    <label>*First Name</label>
                                                     <input class="form-control" type="text" name="first_name" placeholder="First Name" required="required">
                                                 </div>    
 
                                                 <div class="col-sm-6">
-                                                    <label>Last Name</label>
+                                                    <label>*Last Name</label>
                                                     <input class="form-control" type="text" name="last_name" placeholder="Last Name" required="required">
                                                 </div>
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <label>Contact Location</label>
+                                                    <input type="text" name="contact_location" class="form-control" placeholder="Enter Contact Location">
+                                                </div> 
+
+                                                <div class="col-sm-12">
                                                     <label>Trader</label>
                                                     <select class="form-control" name="trader">
                                                         <option value="admin">Unassigned</option>
                                                     </select>
                                                 </div> 
-
                                                 <div class="col-sm-6">
+                                                    <label>*Country</label>
+                                                    <select name="contact_country" class="form-control"  required>
+                                                        <option value="">Select Country</option>
+                                                        <?php
+                                                        foreach ($countries as $key => $country) {
+                                                            ?>
+                                                            <option value="<?= $country['id']; ?>"><?= $country['name']; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>*Industry</label>
+                                                    <select class="form-control cmp_industry" name="industry"></select>
+                                                </div> 
+
+                                                <!-- <div class="col-sm-6">
                                                     <label>Gender</label>
                                                     <select class="form-control" name="gender">
                                                         <option value="">Gender</option>
@@ -111,14 +142,14 @@
                                                         <option value="Female">Female</option>
                                                         <option value="Other">Other</option>
                                                     </select>
-                                                </div> 
+                                                </div>  -->
                                             </div> 
                                         </div>  
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <label>Personal Information</label>
-                                                    <textarea class="form-control" name="personal_info" cols="30" placeholder="Personal Information" rows="5"></textarea>
+                                                    <textarea class="form-control" name="personal_info" cols="30" placeholder="Personal Information" rows="13"></textarea>
                                                 </div> 
                                             </div> 
                                         </div> 
@@ -127,10 +158,10 @@
                                     <hr><br>
                                     <div class="row">
                                     
-                                        <div class="col-sm-4">
-                                            <label>Branch Name</label>
-                                            <input class="form-control" type="text" name="branch" placeholder="Branch">
-                                        </div>               
+                                        <!-- <div class="col-sm-4">
+                                                          <label>Branch Name</label>
+                                                          <input class="form-control" type="text" name="branch" placeholder="Branch">
+                                                      </div>  -->              
                                     
                                         <div class="col-sm-4">
                                             <label>Department</label>
@@ -144,43 +175,41 @@
                                                 <option value="Reception">Reception</option>
                                                 <option value="Unknown">Unknown</option>
                                             </select>
-                                            <!-- <input class="form-control" type="text" name="department" placeholder="Department"> -->
                                         </div>              
                                     
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-8">
                                             <label>Job Title</label>
                                             <input class="form-control" type="text" name="job_title" placeholder="Job Title">
-                                        </div>              
-                                    
-                                        <div class="col-sm-4">
-                                            <label>Email Address</label>
-                                            <input class="form-control" type="text" name="email" placeholder="example@company.com">
-                                        </div>              
-                                    
-                                        <div class="col-sm-4">
-                                            <label>Alternate Email Address</label>
-                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com">
-                                        </div>             
-                                    
-                                        <div class="col-sm-4">
-                                            <label>LinkedIn</label>
-                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn">
-                                        </div>             
-                                    
-                                        <div class="col-sm-4">
-                                            <label>Whatsapp</label>
-                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp">
-                                        </div>                                
+                                        </div>
 
-                                        <div class="col-sm-4">
+                                         <div class="col-sm-3">
                                             <label>Mobile</label>
                                             <input class="form-control" type="number" name="phone" placeholder="Mobile Number">
                                         </div>
                                         
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label>Direct Dial</label>
                                             <input class="form-control" type="number" name="direct_dial" placeholder="Direct Dial">
-                                        </div>    
+                                        </div>               
+                                    
+                                        <div class="col-sm-6">
+                                            <label>Email Address</label>
+                                            <input class="form-control" type="text" name="email" placeholder="example@company.com">
+                                        </div>              
+                                    
+                                        <div class="col-sm-3">
+                                            <label>LinkedIn</label>
+                                            <input class="form-control" type="text" name="linkedin" placeholder="LinkedIn">
+                                        </div>             
+                                    
+                                        <div class="col-sm-3">
+                                            <label>Whatsapp</label>
+                                            <input class="form-control" type="text" name="whatsapp" placeholder="Whatsapp">
+                                        </div> 
+                                        <div class="col-sm-6">
+                                            <label>Alternate Email Address</label>
+                                            <input class="form-control" type="text" name="alternate_email" placeholder="example@company.com">
+                                        </div>                                    
                                     </div>
                                     <br>
                                     <h4 class="mt-0 header-title">Key Sales Information</h4>
@@ -193,7 +222,7 @@
                                                     Estimated Requirement : 
                                                 </label>
                                                 <div class="card-body">
-                                                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                   <div class="btn-group  btn-group-toggle" data-toggle="buttons" style="display: inline-block;">
                                                         <label class="btn btn-primary btn-sm">
                                                             <input type="radio" name="estimated_frequency" value="Less then 1 year"> Less then 1 year
                                                         </label> &nbsp;&nbsp;&nbsp;
@@ -220,10 +249,10 @@
                                                     Estimated Spend : 
                                                 </label>
                                                 <div class="card-body">
-                                                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                   <div class="btn-group  btn-group-toggle" data-toggle="buttons" style="display: inline-block;">
                                                         <label class="btn btn-primary btn-sm">
                                                             <input type="radio" name="estimated_spend" value="Less then 50k"> Less then 50k
-                                                        </label> &nbsp;&nbsp;&nbsp;
+                                                        </label>&nbsp;&nbsp;&nbsp; 
                                                         <label class="btn btn-primary btn-sm">
                                                             <input type="radio" name="estimated_spend" value="50k+"> 50k+
                                                         </label> &nbsp;&nbsp;&nbsp;
@@ -262,7 +291,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <div class="col-sm-12">
                                                 <label>Payment Tearms</label>
                                                 <select name="payment_terms" class="form-control">
@@ -287,17 +316,29 @@
                                                 <label>Invoice Reference Number</label>
                                                 <input class="form-control" type="text" name="invoice_ref_no" placeholder="Invoice Reference Number">
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
+                                        </div> -->
+                                        <div class="col-sm-5">
                                             <label>PSL & Portal Login Information</label>
                                             <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"></textarea>
-                                            
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <label>Competitor & Pricing/Discount Information</label>
+                                            <textarea class="form-control" name="competitor" placeholder="Competitor & Pricing/Discount Information" rows="5"></textarea>
                                         </div>
                                     </div>
                                     <br />
-                                    <h4 class="mt-0 header-title">Address</h4>
+                                    <h4 class="mt-0 header-title">Contact Notes & Attachments</h4>
                                     <hr>
                                     <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img src="<?= base_url(); ?>uploads/coming-soon.jpg" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <h4 class="mt-0 header-title">Asscoiated Address information</h4>
+                                    <hr>
+                                    <br />                                    
                                     <div class="row service_wrap">
                                         <div class="col-sm-3">
                                             <label>Location Number/ Name</label>
@@ -344,39 +385,42 @@
                                         </div>                                      
                                     </div>
                                     <br />
+                                    <h4 class="mt-0 header-title">Marketing Prefrences</h4>
+                                    <hr>
+                                    <br />
                                     <div class="row">
-                                         <div class="col-sm-6 text-center">
+                                         <div class="col-sm-6">
                                             <div class="card marbtmm" >
-                                                <h5>
-                                                    Communication 
-                                                </h5>
+                                                <label>
+                                                    Communication Methods 
+                                                </label>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="communication" value="email"> Use Email
+                                                        <input type="radio" name="communication" value="email"> Email
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="communication" value="sms"> Use SMS
+                                                        <input type="radio" name="communication" value="sms"> SMS
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="communication" value="both"> Use Both
+                                                        <input type="radio" name="communication" value="both"> WhatsApp
                                                     </label> 
                                                 </div>
                                             </div>
                                         </div>
-                                         <div class="col-sm-6 text-center">
+                                         <div class="col-sm-6">
                                             <div class="card marbtmm" >
-                                                <h5>
-                                                    Contact Status 
-                                                </h5>
+                                                <label>
+                                                    Contact Status
+                                                </label>
                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-default btn-lg active">
-                                                        <input type="radio" name="contact_status" value="active" checked> Active
+                                                        <input type="radio" name="contact_status" value="active" checked> Activley Market
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="contact_status" value="do_not_contact"> Do Not Contact
+                                                        <input type="radio" name="contact_status" value="do_not_contact"> Do not Contact
                                                     </label> &nbsp;&nbsp;&nbsp;
                                                     <label class="btn btn-default btn-lg">
-                                                        <input type="radio" name="contact_status" value="in_active"> In-Active
+                                                        <input type="radio" name="contact_status" value="in_active"> In-Active Contact
                                                     </label> 
                                                 </div>
                                             </div>
@@ -434,6 +478,29 @@
             //$(".parent_div").remove();
             c--;
             n--;
-        })
+        });
+
+
+        //Get Invtors using Company id
+        $(document).on('change','.companies',function(){
+            var id = $(this).val();
+
+            var ajaxType = 'company';
+
+            $.ajax({
+                type: 'get',
+                url: "<?= base_url() ?>admin/enquiry/getIndustry",
+                data: { "id" : id, "type" : ajaxType},
+                success: function(result){
+                    if(result != ""){
+                        var obj = JSON.parse(result);
+                        console.log(result);
+                        if(obj.company){
+                            $(".cmp_industry").html(obj.company);
+                        }
+                    }
+                }
+            });
+        });
     });
 </script>

@@ -100,11 +100,11 @@
     }
     .qualified
     {
-        border: 3px solid green;
+        border: 4px solid red;
     }
     .closable
     {
-        border: 3px solid yellow;
+        border: 4px solid blue;
     }
 </style>
 
@@ -114,29 +114,21 @@
         <div class="container-fluid">
             <div class="page-title-box">
                 <div class="row align-items-center">                    
-                    <div class="col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Home</li>
                             <li class="breadcrumb-item active"><a href="javascript:;">All Sales Contact</a></li>
                         </ol>
                     </div>
-                    <div class="col-sm-2">                    
+                    <div class="col-lg-8 col-md-8 col-sm-2">                    
                         <div class="float-right d-none d-md-block">
-                            <a href="<?= base_url(); ?>admin/sales/create" class="btn btn-primary waves-effect btn-block btn-md waves-light">
+                            <a href="<?= base_url(); ?>admin/sales/create" class="btn btn-primary waves-effect btn-md waves-light">
                                 Add New Contact
                             </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">                    
-                        <div class="float-right d-none d-md-block">
-                            <a href="javascript:;" class="import_csv btn btn-primary waves-effect btn-block btn-md waves-light">
+                            <a href="javascript:;" class="import_csv btn btn-primary waves-effect btn-md waves-light">
                                 Import Contacts
                             </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">                    
-                        <div class="float-right d-none d-md-block">
-                            <a href="<?= base_url(); ?>admin/sales/archieved" class="btn btn-primary waves-effect btn-block btn-md waves-light">
+                            <a href="<?= base_url(); ?>admin/sales/archieved" class="btn btn-danger waves-effect btn-md waves-light">
                                 Archieved Contacts
                             </a>
                         </div>
@@ -253,11 +245,11 @@
                                                 // show sales companies
                                                 foreach ($sales_lead_block as $key => $contact)
                                                 {
-                                                    foreach($sales_address as $address)
+                                                    foreach($countries as $country)
                                                     {
-                                                        if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                        if($country['id'] == $contact['contact_country'])
                                                         {
-                                                            $flag = $address['flag'];
+                                                            $flag = $country['flag'];
                                                         }
                                                     }
                                                     ?>
@@ -330,11 +322,11 @@
                                                 // show sales companies
                                                 foreach ($sales_suspects_block as $key => $contact) 
                                                 {
-                                                    foreach($sales_address as $address)
+                                                    foreach($countries as $country)
                                                     {
-                                                        if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                        if($country['id'] == $contact['contact_country'])
                                                         {
-                                                            $flag = $address['flag'];
+                                                            $flag = $country['flag'];
                                                         }
                                                     }
                                                     ?>
@@ -406,16 +398,17 @@
                                                 // show sales companies
                                                 foreach ($sales_prospects_block as $key => $contact) 
                                                 {
-                                                    foreach($sales_address as $address)
+                                                    foreach($countries as $country)
                                                     {
-                                                        if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                        if($country['id'] == $contact['contact_country'])
                                                         {
-                                                            $flag = $address['flag'];
+                                                            $flag = $country['flag'];
                                                         }
                                                     }
                                                     $qualified = '';
                                                     if($contact['contact_prospect_status'] == 1)
                                                     {
+                                                        $qualified = '';
                                                         $qualified = 'qualified';
                                                     }
 
@@ -425,7 +418,7 @@
                                                     }
                                                     ?>
                                                     <div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="<?= $contact['id']; ?>">
-                                                        <div class="col-md-12 c-b <?= $qualified; ?>">
+                                                        <div class="col-md-12 c-b <?= $qualified; ?>" id='color_id_<?= $contact['id']; ?>'>
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" />  
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : 
@@ -442,9 +435,7 @@
                                                                 {
                                                                     if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
                                                                     {
-                                                                        echo  $address['location'].', '.$address['street'].', '.$address['town'].', '.$address['state'].', '.$address['country_name'].' '.$address['zip_code']; ?>
-                                                                    
-
+                                                                        echo  $address['location'].', '.$address['street'].', '.$address['town'].', '.$address['state'].', '.$address['country_name'].' '.$address['zip_code'];?>
                                                                     <?php
                                                                     }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
                                                                     {
@@ -467,14 +458,14 @@
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Archieve</li>
                                                            </a>
-                                                           <a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1">
+                                                           <a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Qualified Prospect</li>
                                                             </a>
                                                             <?php
                                                             if($contact['contact_prospect_status'] == 1)
                                                             {
                                                                 ?>
-                                                                <a href="<?= base_url(); ?>admin/sales/contactClosableProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1">
+                                                                <a href="<?= base_url(); ?>admin/sales/contactClosableProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1" id="closable_id_<?= $contact['id'] ; ?>">
                                                                     <li role="presentation">Closable Prospect</li>
                                                                 </a>
 
@@ -507,11 +498,11 @@
                                                 // show sales companies
                                                 foreach ($sales_key_contact_block as $key => $contact) 
                                                 {
-                                                    foreach($sales_address as $address)
+                                                    foreach($countries as $country)
                                                     {
-                                                        if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                        if($country['id'] == $contact['contact_country'])
                                                         {
-                                                            $flag = $address['flag'];
+                                                            $flag = $country['flag'];
                                                         }
                                                     }
                                                     ?>
@@ -710,20 +701,31 @@ $(document).ready(function(){
                 }
                 else
                 {
-                    $.ajax({
-                        url : '<?= base_url(); ?>admin/sales/updateSalesStatus',
-                        type : 'get',
-                        csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
-                        data : {"id" : id, "status" : drop_status},
-                        async:false,
-                        success: function(data){
-                            console.log(data);
-                        },
-                    }); 
-                    if(drop_status == 3)
+                    if(drop_status != status)
                     {
-                        var html = '<a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/'+id+'" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>'
-                        $('#sub_menu_'+id).append(html);
+                        $.ajax({
+                            url : '<?= base_url(); ?>admin/sales/updateSalesStatus',
+                            type : 'get',
+                            csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
+                            data : {"id" : id, "status" : drop_status},
+                            async:false,
+                            success: function(data){
+                                console.log(data);
+                                $(ui.item[0]).attr("data-id", drop_status);
+                            },
+                        }); 
+                        
+                        if(drop_status == 3)
+                        {
+                            var html = '<a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/'+id+'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>';
+                            $('#sub_menu_'+id).append(html);
+
+                        }else{
+                            $('#sub_menu_'+id+' .qualified_prospect').remove();
+                            $('#color_id_'+id).removeClass('qualified');
+                            $('#color_id_'+id).removeClass('closable');
+                            $('#closable_id_'+id).remove();
+                        }
                     }
                 }
             }

@@ -12,7 +12,7 @@ class Companies_Model extends CI_Model {
     // show all sales companies
     public function getAllSalesCompanies(){
 
-        $this->db->select('comp.*, indus.industry as industry_name, cont.name as country_name');
+        $this->db->select('comp.*, indus.industry as industry_name, indus.id as industry_id, cont.name as country_name');
         $this->db->from('companies comp');
         $this->db->join('industry indus','indus.id = comp.industry');
         $this->db->join('country cont','cont.id = comp.country');
