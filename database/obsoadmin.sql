@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2019 at 01:27 PM
+-- Generation Time: Aug 11, 2019 at 08:39 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -167,17 +167,17 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (3, 'Europe', NULL, 1),
 (4, 'Middle East', NULL, 1),
 (5, 'Asia (incl. Australasia)', NULL, 1),
-(6, 'USA', NULL, 1),
-(7, 'Canada', NULL, 1),
-(8, 'Mexico', NULL, 1),
+(6, 'USA', 'us.png', 1),
+(7, 'Canada', 'canada.png', 1),
+(8, 'Mexico', 'mexico.png', 1),
 (9, 'Latam (Excl.MEX)\r\n', NULL, 1),
 (10, 'England', NULL, 1),
 (11, 'Scotland', NULL, 1),
 (12, 'Ireland ', NULL, 1),
 (13, 'Wales', NULL, 1),
-(14, 'Germany', NULL, 1),
+(14, 'Germany', 'germany.png', 1),
 (15, 'Spain & Portugal', NULL, 1),
-(16, 'France (incl. BENELUX)', NULL, 1),
+(16, 'France (incl. BENELUX)', 'france.png', 1),
 (17, 'Sweden', NULL, 1),
 (18, 'Denmark', NULL, 1),
 (19, 'Norway', NULL, 1),
@@ -187,7 +187,7 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (29, 'Cabo Verde', NULL, 1),
 (30, 'Cambodia', NULL, 1),
 (31, 'Cameroon', NULL, 1),
-(32, 'Canada', NULL, 1),
+(32, 'Canada', 'canada.png', 1),
 (33, 'Central African Republic', NULL, 1),
 (34, 'Chad', NULL, 1),
 (35, 'Chile', NULL, 1),
@@ -215,11 +215,11 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (57, 'Ethiopia', NULL, 1),
 (58, 'Fiji', NULL, 1),
 (59, 'Finland', NULL, 1),
-(60, 'France', NULL, 1),
+(60, 'France', 'france.png', 1),
 (61, 'Gabon', NULL, 1),
 (62, 'Gambia', NULL, 1),
 (63, 'Georgia', NULL, 1),
-(64, 'Germany', NULL, 1),
+(64, 'Germany', 'germany.png', 1),
 (65, 'Ghana', NULL, 1),
 (66, 'Greece', NULL, 1),
 (67, 'Grenada', NULL, 1),
@@ -231,12 +231,12 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (73, 'Honduras', NULL, 1),
 (74, 'Hungary', NULL, 1),
 (75, 'Iceland', NULL, 1),
-(76, 'India', NULL, 1),
+(76, 'India', 'india.png', 1),
 (77, 'Indonesia', NULL, 1),
 (78, 'Iran', NULL, 1),
 (79, 'Iraq', NULL, 1),
 (80, 'Ireland', NULL, 1),
-(81, 'Italy', NULL, 1),
+(81, 'Italy', 'italy.png', 1),
 (82, 'Jamaica', NULL, 1),
 (83, 'Japan', NULL, 1),
 (84, 'Jordan', NULL, 1),
@@ -265,7 +265,7 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (107, 'Marshall Islands', NULL, 1),
 (108, 'Mauritania', NULL, 1),
 (109, 'Mauritius', NULL, 1),
-(110, 'Mexico', NULL, 1),
+(110, 'Mexico', 'mexico.png', 1),
 (111, 'Micronesia', NULL, 1),
 (112, 'Moldova', NULL, 1),
 (113, 'Monaco', NULL, 1),
@@ -277,7 +277,7 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (119, 'Namibia', NULL, 1),
 (120, 'Nauru', NULL, 1),
 (121, 'Nepal', NULL, 1),
-(122, 'Netherlands', NULL, 1),
+(122, 'Netherlands', 'netherland.png', 1),
 (123, 'New Zealand', NULL, 1),
 (124, 'Nicaragua', NULL, 1),
 (125, 'Niger', NULL, 1),
@@ -318,7 +318,7 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (160, 'South Africa', NULL, 1),
 (161, 'South Korea', NULL, 1),
 (162, 'South Sudan', NULL, 1),
-(163, 'Spain', NULL, 1),
+(163, 'Spain', 'spain.png', 1),
 (164, 'Sri Lanka', NULL, 1),
 (165, 'Sudan', NULL, 1),
 (166, 'Suriname', NULL, 1),
@@ -341,8 +341,8 @@ INSERT INTO `country` (`id`, `name`, `flag`, `status`) VALUES
 (183, 'Uganda', NULL, 1),
 (184, 'Ukraine', NULL, 1),
 (185, 'United Arab Emirates', NULL, 1),
-(186, 'United Kingdom (UK)', NULL, 1),
-(187, 'United States of America (USA)', NULL, 1),
+(186, 'United Kingdom (UK)', 'uk.png', 1),
+(187, 'United States of America (USA)', 'us.png', 1),
 (188, 'Uruguay', NULL, 1),
 (189, 'Uzbekistan', NULL, 1),
 (190, 'Vanuatu', NULL, 1),
@@ -552,7 +552,8 @@ INSERT INTO `enquiry` (`id`, `company_id`, `country_id`, `ref_number`, `company_
 (18, NULL, 0, 'REQ-190802-2', '', NULL, '', NULL, 'Obso Ltd.', 'Leroy Spence', 'leroy.spence@obsoparts.com', '07796858283', NULL, 'not needed', 0, 'waiting', 1, '2019-08-02 18:47:57'),
 (19, 5, NULL, 'REQ-190810-1', '', 3, 'Plastic, Rubber, Chemicals & Petroleum', 5, 'abcd', NULL, 'amit@gmail.com', '7014432414', '2019-08-10 00:03:24', '', 0, 'waiting', NULL, '2019-08-10 00:03:50'),
 (20, 5, NULL, 'REQ-190810-2', '', 3, 'Plastic, Rubber, Chemicals & Petroleum', 5, 'abcd', NULL, '', '', '2019-08-10 00:03:51', '', 0, 'waiting', NULL, '2019-08-10 00:04:06'),
-(21, 3, NULL, 'REQ-190810-3', '', 1, 'Metals & Metal Products', 3, 'hastag', NULL, 'hastagsoftwares@gmail.com', '9549494175', '2019-08-10 00:19:46', '', 0, 'waiting', NULL, '2019-08-10 00:21:15');
+(21, 3, NULL, 'REQ-190810-3', '', 1, 'Metals & Metal Products', 3, 'hastag', NULL, 'hastagsoftwares@gmail.com', '9549494175', '2019-08-10 00:19:46', '', 0, 'waiting', NULL, '2019-08-10 00:21:15'),
+(22, 3, NULL, 'REQ-190810-4', '', 1, 'Metals & Metal Products', 9, 'hastag', NULL, 'ramramsark@gmail.com', '9602947878', '2019-08-10 22:36:30', '', 0, 'waiting', NULL, '2019-08-10 22:37:08');
 
 -- --------------------------------------------------------
 
@@ -584,7 +585,8 @@ INSERT INTO `enquiry_qty` (`id`, `enquiry_id`, `qty`, `part`, `created_at`) VALU
 (25, 18, '20', '986397253 26 40- 82947 ', '2019-08-02 19:17:57'),
 (26, 19, '2', 'sdfsdfsd', '2019-08-10 00:33:50'),
 (27, 20, '6', 'dfggdfgf', '2019-08-10 00:34:06'),
-(28, 21, '56', 'sdfsdfsdfsdf', '2019-08-10 00:51:15');
+(28, 21, '56', 'sdfsdfsdfsdf', '2019-08-10 00:51:15'),
+(29, 22, '2', '213245421543215', '2019-08-10 23:07:08');
 
 -- --------------------------------------------------------
 
@@ -972,8 +974,12 @@ CREATE TABLE `sales_contacts` (
   `lname` varchar(255) NOT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `personal_info` longtext,
+  `contact_location` text,
+  `contact_country` int(11) DEFAULT NULL,
+  `competitor` text,
   `branch` varchar(255) DEFAULT NULL,
   `department` varchar(255) DEFAULT NULL,
+  `industry` int(11) DEFAULT NULL,
   `job_title` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `alternate_email` varchar(255) DEFAULT NULL,
@@ -1001,11 +1007,12 @@ CREATE TABLE `sales_contacts` (
 -- Dumping data for table `sales_contacts`
 --
 
-INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `branch`, `department`, `job_title`, `email`, `alternate_email`, `whatsapp`, `linkedin`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `archieved_resoan`, `contact_prospect_status`, `closable_prospect_status`, `status`, `created_at`, `updated_at`) VALUES
-(6, 'admin', 3, 'Prem', 'Saini', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
-(7, 'admin', 3, 'Amit', 'Sharma', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', 'Reason A', 0, 0, 0, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
-(8, 'admin', 5, 'Ravi', 'Kumar', '', '', 'Branch', 'Purchasing', 'Developer', 'ravi@gmail.com', NULL, NULL, NULL, '9549494175', '', '30 EOM', 'Less then 1 year', '50k+', '{\"1\":\"2\",\"2\":\"3\"}', '', 'asd', 'email', 'active', NULL, 0, 0, 1, '2019-08-10 12:49:14', '2019-08-10 12:53:41'),
-(9, 'admin', 3, 'abhi', 'shek', '', '', '', 'Purchasing', '', 'abhi@gmail.com', 'alternate_abhi1232@gmail.com', 'whatsapp.com/abhi123', 'linkedin.com/abhi123', '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 2, '2019-08-10 14:48:26', '2019-08-10 15:05:59');
+INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `contact_location`, `contact_country`, `competitor`, `branch`, `department`, `industry`, `job_title`, `email`, `alternate_email`, `whatsapp`, `linkedin`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `archieved_resoan`, `contact_prospect_status`, `closable_prospect_status`, `status`, `created_at`, `updated_at`) VALUES
+(6, 'admin', 3, 'Prem', 'Saini', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
+(7, 'admin', 3, 'Amit', 'Sharma', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', 'Reason A', 0, 0, 0, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
+(8, 'admin', 5, 'Ravi', 'Kumar', '', '', NULL, 76, NULL, 'Branch', 'Purchasing', NULL, 'Developer', 'ravi@gmail.com', NULL, NULL, NULL, '9549494175', '', '30 EOM', 'Less then 1 year', '50k+', '{\"1\":\"2\",\"2\":\"3\"}', '', 'asd', 'email', 'active', NULL, 0, 0, 2, '2019-08-10 12:49:14', '2019-08-10 12:53:41'),
+(9, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'this is my persoal info', NULL, 76, NULL, '', 'Workshop / Factory /Production / Engineering', NULL, 'Developer', 'ramramsark@gmail.com', 'ramramsark@gmail.com', '9549494175', 'linkedin.com/abhi123', '9602947878', '01254210', 'Pay On Delivery', 'Daily', '50k+', '{\"1\":\"2\",\"2\":\"3\",\"16\":\"17\",\"17\":\"18\"}', 'INC123N120', 'demo login information', 'email', 'do_not_contact', NULL, 1, 1, 3, '2019-08-10 14:48:26', '2019-08-10 22:35:04'),
+(10, 'admin', 3, 'Michel', 'Hussy', NULL, '', 'Jaipur', 76, 'Thisd is test message', NULL, 'Purchasing', 1, 'Developer', 'michel@gmail.com', 'hussy@gmail.com', '', '', '8560031312', '201201', NULL, 'Weekly', '50k+', '{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"8\":\"9\",\"11\":\"12\",\"12\":\"13\",\"15\":\"16\",\"20\":\"21\",\"21\":\"23\",\"22\":\"24\",\"23\":\"25\"}', NULL, 'Thisd is test message', 'email', 'active', NULL, 0, 0, 2, '2019-08-11 01:29:05', '2019-08-11 02:12:39');
 
 -- --------------------------------------------------------
 
@@ -1039,7 +1046,10 @@ INSERT INTO `sales_contact_addresses` (`id`, `sales_contact_id`, `address_type`,
 (31, 6, '', '', '', '', '', '', '', 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
 (32, 7, '', '', '', '', '', '', '', 1, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
 (34, 8, '', 'ASD-41', 'vidhyadhar nagar', 'jaipur', 'vidhyadhar nagar', '302039', '76', 1, '2019-08-10 12:53:41', '2019-08-10 12:53:41'),
-(36, 9, '', '', '', '', '', '', '', 1, '2019-08-10 15:05:59', '2019-08-10 15:05:59');
+(37, 9, 'head_office_address', 'B-53, balaji tower', 'padampura road', 'Jaipur', 'padampura road', '302039', '76', 1, '2019-08-10 22:35:04', '2019-08-10 22:35:04'),
+(41, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39'),
+(42, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39'),
+(43, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39');
 
 -- --------------------------------------------------------
 
@@ -1206,13 +1216,10 @@ CREATE TABLE `suppliers_contacts` (
   `mobile` varchar(20) DEFAULT NULL,
   `direct_dial` varchar(20) DEFAULT NULL,
   `payment_terms` varchar(255) DEFAULT NULL,
-  `estimate_required` varchar(255) DEFAULT NULL,
-  `estimate_spend` varchar(255) DEFAULT NULL,
+  `delivery_lead_time` varchar(255) DEFAULT NULL,
+  `standard_delivery_lead_time` varchar(255) DEFAULT NULL,
   `manufacturers` text,
-  `invoice_reference_number` varchar(255) DEFAULT NULL,
-  `pls_information` text,
-  `communication` varchar(255) DEFAULT NULL,
-  `contact_status` varchar(50) DEFAULT NULL,
+  `payment_reference` varchar(255) DEFAULT NULL,
   `archieved_resoan` text,
   `status` tinyint(1) NOT NULL COMMENT '1 for active and 2 for inactive and 3 for archieve',
   `created_at` datetime NOT NULL,
@@ -1820,13 +1827,13 @@ ALTER TABLE `employee_role`
 -- AUTO_INCREMENT for table `enquiry`
 --
 ALTER TABLE `enquiry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `enquiry_qty`
 --
 ALTER TABLE `enquiry_qty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `home`
@@ -1892,13 +1899,13 @@ ALTER TABLE `return_policy`
 -- AUTO_INCREMENT for table `sales_contacts`
 --
 ALTER TABLE `sales_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sales_contact_addresses`
 --
 ALTER TABLE `sales_contact_addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `settings`
