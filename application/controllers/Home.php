@@ -60,6 +60,15 @@ class Home extends CI_Controller
         $config = array();
 
         $config["per_page"] = $per_page = 5;
+        if($this->input->post('per_page'))
+        {
+            $_SESSION['per_page'] = $this->input->post('per_page');
+        }
+        if(isset($_SESSION['per_page']))
+        {
+            $config["per_page"] = $per_page = $_SESSION['per_page'];
+        }
+
         $data                    = array();
         $data['manufacturer']    = $this->common_model->get_all_manufacturer();
         $data['allmanufacturer'] = $this->common_model->get_all_manufacturer();
@@ -81,12 +90,8 @@ class Home extends CI_Controller
         $config['last_tag_open'] = '<li class="btn btn-danger btn-prev">';
         $config['last_tag_close'] = '</li>&nbsp;&nbsp;';
 
-        if($this->input->post('per_page'))
-        {
-            $config["per_page"] = $per_page = $this->input->post('per_page');
-        }
-
-        if (!empty($name)) 
+        
+        if (!empty($name) && !is_numeric($name)) 
         {
             $config["uri_segment"] = 4;
             $config["base_url"] = base_url(). "home/product/".$name;
