@@ -25,8 +25,8 @@
                         <div class="float-right d-none d-md-block">
                             <button class="btn btn-primary" type="button"> Contacts : <?= count($company_contacts); ?></button>
                             <button class="btn btn-primary" type="button"> Enquiry : <?= count($enquiries); ?></button>
-                            <button class="btn btn-primary" type="button"> Quote : <?= $quoted_enqiries; ?></button>
-                            <button class="btn btn-primary" type="button"> Orders : <?= $orders; ?></button>
+                            <button class="btn btn-primary" type="button"> Quotated : <?= $quoted_enqiries; ?></button>
+                            <button class="btn btn-primary" type="button"> Ordered : <?= $orders; ?></button>
                         </div>
                     </div>
                 </div>
@@ -51,12 +51,16 @@
                                             <input type="hidden" name="company_id" value="<?= $company->id; ?>" />
                                             <input type="hidden" name="company_type" value="<?= $company->company_type; ?>" />
 
-                                            <div class="col-sm-4">                                    
+                                            <div class="col-sm-6">                                    
                                                 <label for="example-text-input" class="col-form-label">Company Name</label>
-                                                <input class="form-control" type="text" id="company_name" name="company_name" placeholder="Company Name" required="required" value="<?= $company->company_name; ?>">
-                                            </div>                                
+                                                <input class="form-control" type="text" id="company_name" name="company_name" placeholder="Company Name" required="required" value="<?= $company->company_name; ?>"><br />
+                                            </div>              
+                                            <div class="col-sm-6">
+                                                <label for="example-text-input" class="col-form-label">Company Type</label>
+                                                <input class="form-control" type="text"  placeholder="Company Type" required="required" value="Sales" disabled><br />
+                                            </div>                         
                                             
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <label class="col-form-label">Industry</label>
                                                 <select class="form-control" name="industry" id="industry" required="required">
                                                     <option value="">Select Industry</option>
@@ -70,34 +74,34 @@
                                                 </select>
                                             </div>                                
                                         
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <label for="example-url-input" class="col-form-label">Website</label>
                                                 <input class="form-control" type="url" id="website" name="website" placeholder="https://obso.com" value="<?= $company->website; ?>">
                                             </div>                                
                                             
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <label for="example-tel-input" class="col-form-label">Dial Number</label>
                                                 <input class="form-control" type="number" id="dial_number" name="dial_number" placeholder="9876543210" value="<?= $company->dial_number; ?>">
+                                                <br />
                                             </div>
 
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <label for="example-password-input" class="col-form-label">Competitor</label>
                                                 <input class="form-control" type="text" id="competitor" name="competitor" placeholder="Competitor" value="<?= $company->competitor; ?>">
                                             </div>
 
-                                            <div class="col-sm-4">
-                                                <label class="col-form-label">Free to trade</label>
-                                                <select class="form-control" name="free_to_trade" id="free_to_trade">
-                                                    <option value="">Select Trade</option>
-
-                                                    <option <?= ($company->free_to_trade == 'Large selectl') ? 'selected' : ''?> value="Large select">Large select</option>
-
-                                                    <option <?= ($company->free_to_trade == 'Small select') ? 'selected' : ''?> value="Small select">Small select</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-6">
                                                 <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="col-form-label">Free to trade</label>
+                                                        <select class="form-control" name="free_to_trade" id="free_to_trade">
+                                                            <option value="">Select Trade</option>
+
+                                                            <option <?= ($company->free_to_trade == 'Large selectl') ? 'selected' : ''?> value="Large select">Large select</option>
+
+                                                            <option <?= ($company->free_to_trade == 'Small select') ? 'selected' : ''?> value="Small select">Small select</option>
+                                                        </select><br />
+                                                    </div>
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Record Source</label>
                                                         <select class="form-control" name="record_source" required="required">
@@ -133,8 +137,8 @@
 
                                                             <option <?= ($company->record_source == 'Obso ecommerce Refer') ? 'selected' : ''?> value="Obso ecommerce Refer">Obso ecommerce Refer</option>
                                                         </select>
+                                                        <br />
                                                     </div>
-
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Country</label>
                                                         <select class="form-control" name="country">
@@ -151,9 +155,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-6">
                                                 <label for="example-number-input" class="col-form-label">Information</label>
-                                                <textarea class="form-control" name="information" id="information" rows="4"><?= $company->information; ?></textarea>
+                                                <textarea class="form-control" name="information" id="information" rows="9"><?= $company->information; ?></textarea>
                                             </div>
 
                                             <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
@@ -175,27 +179,30 @@
 
                                             <input type="hidden" name="company_id" value="<?= $company->id; ?>" />
                                             <input type="hidden" name="company_type" value="<?= $company->company_type; ?>" />
+                                            <div class="col-sm-4">             
+                                                <label for="example-text-input" class="col-form-label">Company Name</label>
+                                                <input class="form-control" type="text" id="company_name" name="company_name" placeholder="Company Name" required="required" value="<?= $company->company_name; ?>">
+                                            </div> 
+                                            <div class="col-sm-4">
+                                                <label for="example-text-input" class="col-form-label">Company Type</label>
+                                                <input class="form-control" type="text"  placeholder="Company Type" required="required" value="Supplier" disabled><br />
+                                            </div>                                
+                                            
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">Industry</label>
+                                                <select class="form-control" name="industry" id="industry" required="required">
+                                                    <option value="">Select Industry</option>
+                                                    <?php
+                                                    foreach ($supplier_industries as $key => $industry) {
+                                                        ?>
+                                                        <option <?= ($company->industry == $industry['id']) ? 'selected' : ''?> value="<?= $industry['id']; ?>"><?= $industry['industry']; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>      
                                             <div class="col-sm-8">
-                                                <div class="row">
-                                                    <div class="col-sm-6">                                    
-                                                        <label for="example-text-input" class="col-form-label">Company Name</label>
-                                                        <input class="form-control" type="text" id="company_name" name="company_name" placeholder="Company Name" required="required" value="<?= $company->company_name; ?>">
-                                                    </div>                                
-                                                    
-                                                    <div class="col-sm-6">
-                                                        <label class="col-form-label">Industry</label>
-                                                        <select class="form-control" name="industry" id="industry" required="required">
-                                                            <option value="">Select Industry</option>
-                                                            <?php
-                                                            foreach ($supplier_industries as $key => $industry) {
-                                                                ?>
-                                                                <option <?= ($company->industry == $industry['id']) ? 'selected' : ''?> value="<?= $industry['id']; ?>"><?= $industry['industry']; ?></option>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>                                
-                                                
+                                                <div class="row">                               
                                                     <div class="col-sm-6">
                                                         <label for="example-url-input" class="col-form-label">Website</label>
                                                         <input class="form-control" type="url" id="website" name="website" placeholder="https://obso.com" value="<?= $company->website; ?>">
@@ -203,7 +210,7 @@
                                                     
                                                     <div class="col-sm-6">
                                                         <label for="example-tel-input" class="col-form-label">Dial Number</label>
-                                                        <input class="form-control" type="number" id="dial_number" name="dial_number" placeholder="9876543210" value="<?= $company->dial_number; ?>">
+                                                        <input class="form-control" type="number" id="dial_number" name="dial_number" placeholder="9876543210" value="<?= $company->dial_number; ?>"><br />
                                                     </div>
 
                                                     <div class="col-sm-6">
@@ -261,12 +268,12 @@
 
                                             <div class="col-sm-4">
                                                 <label for="example-number-input" class="col-form-label">Information</label>
-                                                <textarea class="form-control" name="information" id="information" rows="8"><?= $company->information; ?></textarea>
+                                                <textarea class="form-control" name="information" id="information" rows="5"><?= $company->information; ?></textarea>
                                             </div>
 
                                             <div class="col-sm-12 text-center">
                                                 <div class="offset-sm-5 col-sm-2" style="padding:10px 0px; ">
-                                                    <input type="submit" name="edit_company" value="Edit Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
+                                                    <input type="submit" name="edit_company" value="Update Company" class="btn btn-primary waves-effect btn-md btn-block waves-light" style="margin-top: 35px;">
                                                 </div>
                                             </div>
 

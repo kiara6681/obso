@@ -312,6 +312,9 @@ class Sales extends CI_Controller {
         // Get all sales companies
         $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
 
+        //Get Enquiry 
+        $data['enquires'] = $enquires = $this->Sales_Model->getSalesEnqury($contact->id);
+
         // Get all countries
         $data['countries'] = $countries = $this->common_model->select('country');
 

@@ -377,13 +377,13 @@
                                         <div class="col-md-12">
                                             <div class="row" style="padding: 10px;">
                                                 <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Enquiry</a>
+                                                    <a class="btn btn-info btn-block">Enquiry (<?= count($enquires); ?>)</a>
                                                 </div>
                                                 <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Quote</a>
+                                                    <a class="btn btn-info btn-block">Quotated (0)</a>
                                                 </div>
                                                 <div class="col-md-3">                         
-                                                    <a class="btn btn-info btn-block">Orders</a>
+                                                    <a class="btn btn-info btn-block">Ordered (0)</a>
                                                 </div>
                                             </div>
                                         </div>
