@@ -30,7 +30,30 @@
 		padding-bottom: 10px;
 	}
 	.product_enquiry_abilitys{
-		padding-top: 8px;
+		padding-top: 18px;
+	}
+
+	.breadcrumb-c .btn-theme{
+		background-color:#fee133 !important; 
+		border:2px solid #fee133 !important; 
+	}
+
+	.breadcrumb-c .btn-default{
+		background-color: transparent  !important; 
+		border:2px solid lightgray !important; 
+	}
+
+	.breadcrumb-c .btn-prev{
+		background-color: #3c3c3c !important; 
+		border:2px solid #3c3c3c !important; 
+	}
+
+	.breadcrumb-c .btn-prev a{
+		color: lightgray !important; 
+	}
+
+	.breadcrumb-c .btn-default a{
+		color: gray !important; 
 	}
 
 	@media screen and  (max-width: 767px){	       
@@ -73,10 +96,12 @@
 </script>
 <?php
 	$p_count = 0;
-if(!empty($product))
-{
-	$p_count = count($product);
-}
+	if(!empty($product))
+	{
+		$p_count = count($product);
+	}
+	$segment = $this->uri->segment(3);
+
 ?>
 <!-- main content  start -->
 <div class="bradcums_pagination" style="background: #fee133;padding: 15px 0;">
@@ -87,11 +112,20 @@ if(!empty($product))
 	      		<span class="fas fa-angle-double-right"></span>
 	      	</li>
 	      	<li class="breadcrumb-item">
-	      		<a href="#">Showing 1-10 </a>
+	      		<a href="#">Showing 1 - <?= $per_page; ?> </a>
 	      		<span class="fas fa-angle-double-right"></span>
 	      	</li>	      	
 	      	<li class="breadcrumb-item">
-	      		<a href="#">Results per page</a> &nbsp;<input type="number" name="name" value="10" style="width: 50px;border-radius: 4px;border: 1px solid #000;font-size: 12px;padding-left: 5px;background: none;">
+	      		<a href="#">Results per page</a>&nbsp;
+	      		<form style="float:right;" method="post" id="per_page_form" action="<?= base_url(); ?>home/product/<?= $segment; ?>">
+	      			<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+					<select id="per_page" name="per_page" style="width: 50px;border-radius: 5px;border: 1px solid #000;font-size: 12px;padding-left: 5px;background: none;">
+						<option value="5" <?= ($per_page == 5)?'selected':''; ?> >5</option>
+						<option value="10" <?= ($per_page == 10)?'selected':''; ?> >10</option>
+						<option value="25" <?= ($per_page == 25)?'selected':''; ?> >25</option>
+						<option value="50" <?= ($per_page == 50)?'selected':''; ?> >50</option>
+					</select>
+				</form>
 	      	</li>
 	    </ol>
 	</div>
@@ -136,11 +170,11 @@ if(!empty($product))
 					    					<?php echo $products['part_number']; ?>
 					    				</p>
 									</div>
-									<div class="col-md-8 pdl">
-					    				<p class="text-sm-sm"><strong>Description</strong> &nbsp;&nbsp; &nbsp; : <?php 
+									<div class="col-md-12 pdl" style="float: left;">
+					    				<p class="text-sm-sm" style="margin-left: 10px;"><strong style="margin-left: 0px;">Description</strong> &nbsp;&nbsp; &nbsp; : <?php 
 					    				if(strlen($products['description']) > 200)
 					    				{
-					    					echo substr($products['description'],0, 70)."..."; 
+					    					echo substr($products['description'],0, 100)."..."; 
 					    				}else{
 					    					echo $products['description'];
 					    				}
@@ -156,38 +190,12 @@ if(!empty($product))
 						</div>
 				    </a>
 			    	<?php } ?>	
-			    	<!-- <div id="home" class="tab-pane product-add">
-			    			    						    	<div class="main_list_view_product">
-			    			    						    		<div class="product_contant">
-			    			    						    			<div class="col-md-6 pdl p-b-10">
-			    			    							    			<p><strong>Manufacturer</strong> :
-			    			    							    				<a href="http://bitzenith.com/obsoadmin/home/manufacturer/123 456-789 Abcd">
-			    			    							    					ABB					    				</a>
-			    			    							    			</p>
-			    			    							    		</div>
-			    			    							    		<div class="col-md-6 pdl">
-			    			    						    				<p class="text-sm-sm"><strong>Part Number</strong> &nbsp;&nbsp;:
-			    			    						    					<a href="http://bitzenith.com/obsoadmin/home/manufacturer/123 456-789 Abcd"> 
-			    			    						    						123 456-789 Abcd				    					</a>
-			    			    						    				</p>
-			    			    										</div>
-			    			    										<div class="col-md-8 pdl">
-			    			    						    				<p class="text-sm-sm"><strong>Description</strong> &nbsp;&nbsp; &nbsp; : 1794 Series, I/O Module, 8 pin				</p>
-			    			    					</div>
-			    			    						    		</div>
-			    			    						    		<div class="product_enquiry_abilitys">
-			    			    						    			<a href="http://bitzenith.com/obsoadmin/home/manufacturer/123 456-789 Abcd" class="stock_button gray_button">
-			    			    						    				Available
-			    			    						    			</a>
-			    			    						    		</div>
 			    			    		
-			    			    						    	</div>
-			    			    							</div>	 -->		    		
 					<input type="hidden" id="next_content" value="11">
 					<input type="hidden" id="manufecture" value="<?= $manfecture; ?>">	
-					<!-- <div class="text-center mt-2">
-						<button type="button" id="load" class="btn btn-primary">Load More</button>
-					</div> -->
+					<div class="breadcrumb-c text-right">
+						<p><?= $links; ?></p>
+					</div>
 			    </div>
 		  	</div>
 		</div>
@@ -195,6 +203,9 @@ if(!empty($product))
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#per_page").on('change' ,function(){
+			$("#per_page_form").submit();
+		});
 		$("#load").click(function(){
 			load_more();
 		});

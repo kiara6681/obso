@@ -857,6 +857,14 @@ class Common_model extends CI_Model {
         return $query;
     }
 
+     function get_all_product_rows(){
+         $this->db->select();
+        $this->db->from('product');
+        $query = $this->db->get();
+        $query = $query->num_rows();  
+        return $query;
+    }
+
      function get_all_product(){
          $this->db->select();
         $this->db->from('product');
@@ -1075,7 +1083,37 @@ class Common_model extends CI_Model {
         return $result;
     }
 
-    function get_all_product_by_manufacture($name){
+    public function get_all_product_by_manufacture_rows($name){
+        $this->db->select();
+       $this->db->from('product');
+       $this->db->where('manufacturer_name',$name);
+       $query = $this->db->get();
+       $query = $query->num_rows();  
+       return $query;
+   }
+
+    public function get_all_product_by_mnfr($limit, $start, $name){
+        $this->db->limit($limit, $start);
+        $this->db->select();
+        $this->db->from('product');
+        $this->db->where('manufacturer_name',$name);
+        $this->db->order_by('id','DESC');
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    public function get_all_products($limit, $start){
+        $this->db->limit($limit, $start);
+        $this->db->select();
+        $this->db->from('product');
+        $this->db->order_by('id','DESC');
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+    
+    public function get_all_product_by_manufacture($name){
         $this->db->select();
        $this->db->from('product');
        $this->db->where('manufacturer_name',$name);

@@ -25,6 +25,10 @@
     }
     .home_main{
         background-color: #efefef !important;
+        padding: 28px 15px !important;
+    }
+    .home_main p{
+            margin-bottom: 0rem!important;
     }
     @media only screen and (max-width: 1200px)
     {
