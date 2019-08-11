@@ -76,10 +76,10 @@ class Home extends CI_Controller
         $config['next_tag_close'] = '</li>&nbsp;&nbsp;';
         $config['prev_tag_open'] = '<li class="btn btn-danger btn-prev">';
         $config['prev_tag_close'] = '</li>&nbsp;&nbsp;';
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
+        $config['first_tag_open'] = '<li class="btn btn-danger btn-prev">';
+        $config['first_tag_close'] = '</li>&nbsp;&nbsp;';
+        $config['last_tag_open'] = '<li class="btn btn-danger btn-prev">';
+        $config['last_tag_close'] = '</li>&nbsp;&nbsp;';
 
         if($this->input->post('per_page'))
         {
