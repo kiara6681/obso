@@ -105,7 +105,17 @@
                                                     <input class="form-control" type="text" name="last_name" placeholder="Last Name" required="required">
                                                 </div>
 
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <label>Gender</label>
+                                                    <select class="form-control" name="gender">
+                                                        <option value="">Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-6">
                                                     <label>Contact Location</label>
                                                     <input type="text" name="contact_location" class="form-control" placeholder="Enter Contact Location">
                                                 </div> 
@@ -133,16 +143,6 @@
                                                     <label>*Industry</label>
                                                     <select class="form-control cmp_industry" name="industry"></select>
                                                 </div> 
-
-                                                <!-- <div class="col-sm-6">
-                                                    <label>Gender</label>
-                                                    <select class="form-control" name="gender">
-                                                        <option value="">Gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
-                                                </div>  -->
                                             </div> 
                                         </div>  
                                         <div class="col-sm-6">
@@ -291,8 +291,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-6">
-                                            <div class="col-sm-12">
+                                        <div class="col-sm-5">
                                                 <label>Payment Tearms</label>
                                                 <select name="payment_terms" class="form-control">
                                                     <option value="">Select Payment Tearms</option>
@@ -311,12 +310,11 @@
                                                     <option value="60 EOM">60 EOM</option>
                                                     <option value="90 EOM">90 EOM</option>
                                                 </select>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <label>Invoice Reference Number</label>
-                                                <input class="form-control" type="text" name="invoice_ref_no" placeholder="Invoice Reference Number">
-                                            </div>
-                                        </div> -->
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <label>Invoice Reference Number</label>
+                                            <input class="form-control" type="text" name="invoice_ref_no" placeholder="Invoice Reference Number"><br />
+                                        </div>
                                         <div class="col-sm-5">
                                             <label>PSL & Portal Login Information</label>
                                             <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"></textarea>

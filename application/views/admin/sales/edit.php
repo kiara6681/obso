@@ -110,7 +110,16 @@
                                                     <label>*Last Name</label>
                                                     <input class="form-control" type="text" name="last_name" value="<?= $sales_contact->lname; ?>" placeholder="Last Name" required="required">
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                     <label>Gender</label>
+                                                     <select class="form-control" name="gender">
+                                                         <option value="">Gender</option>
+                                                         <option value="Male" <?= ($sales_contact->gender == 'Male') ?'selected' : ''; ?>>Male</option>
+                                                         <option value="Female" <?= ($sales_contact->gender == 'Female') ?'selected' : ''; ?>>Female</option>
+                                                         <option value="Other" <?= ($sales_contact->gender == 'Other')?'selected':''; ?>>Other</option>
+                                                     </select>
+                                                 </div>
+                                                <div class="col-sm-6">
                                                     <label>Contact Location</label>
                                                     <input type="text" name="contact_location" class="form-control" value="<?= $sales_contact->contact_location; ?>" placeholder="Enter Contact Location">
                                                 </div> 
@@ -133,15 +142,6 @@
                                                         ?>
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-sm-6">
-                                                     <label>Gender</label>
-                                                     <select class="form-control" name="gender">
-                                                         <option value="">Gender</option>
-                                                         <option value="Male" <?= ($sales_contact->gender == 'Male') ?'selected' : ''; ?>>Male</option>
-                                                         <option value="Female" <?= ($sales_contact->gender == 'Female') ?'selected' : ''; ?>>Female</option>
-                                                         <option value="Other" <?= ($sales_contact->gender == 'Other')?'selected':''; ?>>Other</option>
-                                                     </select>
-                                                 </div> --> 
                                                  <div class="col-sm-6">
                                                     <label>*Industry</label>
                                                     <select class="form-control cmp_industry" name="industry">
@@ -333,10 +333,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-6">
-                                            <div class="col-sm-12">
-                                                <label>Payment Tearms</label>
-                                                <select name="payment_terms" class="form-control">
+                                        <div class="col-sm-5">
+                                            <label>Payment Tearms</label>
+                                            <select name="payment_terms" class="form-control">
                                                 <option value="">Select Payment Tearms</option>
                                                 <option value="Advance" <?= ($sales_contact->payment_terms == 'Advance') ?'selected' : ''; ?>>Advance</option>
                                                 <option value="50/50 Advance" <?= ($sales_contact->payment_terms == '50/50 Advance') ?'selected' : ''; ?>>50/50 Advance</option>
@@ -353,12 +352,11 @@
                                                 <option value="60 EOM" <?= ($sales_contact->payment_terms == '60 EOM') ?'selected' : ''; ?>>60 EOM</option>
                                                 <option value="90 EOM" <?= ($sales_contact->payment_terms == '90 EOM') ?'selected' : ''; ?>>90 EOM</option>
                                             </select>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <label>Invoice Reference Number</label>
-                                                <input class="form-control" type="text" name="invoice_ref_no" value="<?= $sales_contact->invoice_reference_number; ?>" placeholder="Invoice Reference Number">
-                                            </div>
-                                        </div> -->
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <label>Invoice Reference Number</label>
+                                            <input class="form-control" type="text" name="invoice_ref_no" value="<?= $sales_contact->invoice_reference_number; ?>" placeholder="Invoice Reference Number"><br />
+                                        </div>
                                         <div class="col-sm-5">
                                             <label>PSL & Portal Login Information</label>
                                             <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"><?= $sales_contact->pls_information; ?></textarea>
