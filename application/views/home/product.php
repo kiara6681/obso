@@ -86,6 +86,21 @@
 		    border-radius: 5px;
 		}
 	}
+	.product_contant {
+	    width: 100%;
+	}
+	.product_enquiry_abilitys {
+	    width: 25%;
+	}
+	.my_anchor li a:hover{
+		color:#000!important;
+	}
+	.my_anchor li a{
+		color:lightgray !important;
+	}
+	.my_anchor li.active a{
+		color:#000 !important;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -120,7 +135,6 @@
 	      		<form style="float:right;" method="post" id="per_page_form" action="<?= base_url(); ?>home/product/<?= $segment; ?>">
 	      			<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
 					<select id="per_page" name="per_page" style="width: 50px;border-radius: 5px;border: 1px solid #000;font-size: 12px;padding-left: 5px;background: none;">
-						<option value="5" <?= ($per_page == 5)?'selected':''; ?> >5</option>
 						<option value="10" <?= ($per_page == 10)?'selected':''; ?> >10</option>
 						<option value="25" <?= ($per_page == 25)?'selected':''; ?> >25</option>
 						<option value="50" <?= ($per_page == 50)?'selected':''; ?> >50</option>
@@ -138,10 +152,10 @@
 		<div class="col-md-3">		
 			<div class="form-product-search">
 				<form action="#">				
-					<div class="form-group" style="height: 600px;overflow-y: scroll;">
-						<ul class="v_menu">
+					<div class="form-group" style="height: 820px;overflow-y: scroll;">
+						<ul class="v_menu my_anchor">
 							<?php foreach ($allmanufacturer as $manufacturerall){ ?>
-							  	<li <?= (isset($manfecture)&&$manfecture==preg_replace('/\s+/', '_', $manufacturerall['manufacturer']))?'class=active':'' ?>>
+							  	<li  <?= (isset($manfecture)&&$manfecture==preg_replace('/\s+/', '_', $manufacturerall['manufacturer']))?'class=active':'' ?>>
 								  	<a href="<?php echo base_url(); ?>home/product/<?php echo preg_replace('/\s+/', '_', $manufacturerall['manufacturer']); ?>">
 								  		<?php echo $manufacturerall['manufacturer']; ?>
 								  	</a>
@@ -153,7 +167,7 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<div class="product_list_grid_view_tab_content">
+			<div class="product_list_grid_view_tab_content" style="height: 850px;overflow-y: scroll;">
 			  	<div class="tab-content">
 					<?php foreach ($product as $products){  ?>
 				    <a href="<?php echo base_url(); ?>home/manufacturer/<?php echo $products['part_number']; ?>">
@@ -171,14 +185,19 @@
 					    				</p>
 									</div>
 									<div class="col-md-12 pdl" style="float: left;">
-					    				<p class="text-sm-sm" style="margin-left: 10px;"><strong style="margin-left: 0px;">Description</strong> &nbsp;&nbsp; &nbsp; : <?php 
-					    				if(strlen($products['description']) > 200)
-					    				{
-					    					echo substr($products['description'],0, 100)."..."; 
-					    				}else{
-					    					echo $products['description'];
-					    				}
-					    				?>
+					    				<p class="text-sm-sm" style="margin-left: 10px;float: left; width: 15%;"><strong style="margin-left: 0px;">Description</strong> &nbsp;&nbsp; &nbsp; : 
+					    				</p>
+					    				<p style=" width: 83%;float: left;">
+					    				<span>
+						    				<?php 
+						    				if(strlen($products['description']) > 130)
+						    				{
+						    					echo substr($products['description'],0, 130)."..."; 
+						    				}else{
+						    					echo $products['description'];
+						    				}
+						    				?>
+					    				</span>
 					    				</p>
 				    				</div>
 					    		</div>
@@ -193,11 +212,13 @@
 			    			    		
 					<input type="hidden" id="next_content" value="11">
 					<input type="hidden" id="manufecture" value="<?= $manfecture; ?>">	
-					<div class="breadcrumb-c text-right">
-						<p><?= $links; ?></p>
-					</div>
 			    </div>
 		  	</div>
+		</div>
+		<div class="col-md-12">
+			<div class="breadcrumb-c text-right" style="padding: 30px 0px">
+				<p><?= $links; ?></p>
+			</div>
 		</div>
 	</div>
 </div>

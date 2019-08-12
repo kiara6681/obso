@@ -257,7 +257,7 @@
 	}	
 	.active {
 	  color: #333333;
-	  background-color: #3c3c3c!important;
+	  background-color: #3c3c3c;
 	  border-color: #ddd;
 	}
 	.panel-default > .panel-heading + .panel-collapse > .panel-body {

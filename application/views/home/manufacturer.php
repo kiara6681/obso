@@ -233,7 +233,7 @@ if(isset($product))
 				    		<br/>
 				    		<br/> -->
 				    		<br/>
-					    	<textarea placeholder="Notes" name="enquiry[lead2]" style="height: 105px;" class="form-control" required></textarea><br />
+					    	<textarea placeholder="Notes" name="enquiry[lead2]" style="height: 105px;" class="form-control"></textarea><br />
 					    	<input type="hidden" name="page" value="frontend">
 					    	<button type="submit" name="submit" class="btn btn-default btn-new form-control">Submit Enquiry</button>
 					    </div>

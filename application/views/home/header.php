@@ -532,8 +532,8 @@ foreach ($home as $home) {
                           <a class="dropdown-item" href="<?php echo base_url(); ?>home/product/" style="    background: #fee133;font-weight: 600;">View All</a>
                         </div>
                     </li>
-                    <li class="nav-item <?= ($page == 'ordering') ? 'active' : '';?>">
-        	           <a class="nav-link" href="javascript:;">Ordering</a>
+                    <li class="nav-item <?= ($page == 'payment') ? 'active' : '';?>">
+        	           <a class="nav-link" href="<?php echo base_url(); ?>home/payment">Ordering</a>
         	        </li>
                     <li class="nav-item <?= ($page == 'about') ? 'active' : '';?>">
                         <a class="nav-link" href="<?php echo base_url(); ?>home/about">About Us</a>
@@ -633,7 +633,7 @@ foreach ($home as $home) {
 
                             <div class="form-group w-100" id="form-group-budgets">
                               <!-- <input type="text" name="" placeholder="Notes: (Competition / Previous Prices/Budget)"> -->
-                              <textarea type="text" name="enquiry[lead2]"  class="form-control" placeholder="Notes" height="100px;" required></textarea>
+                              <textarea type="text" name="enquiry[lead2]"  class="form-control" placeholder="Notes" height="100px;"></textarea>
                           </div>
                         <div class="">
                             <input type="hidden" name="page" value="frontend">
@@ -793,7 +793,7 @@ foreach ($home as $home) {
 
                             <div class="form-group w-100" id="form-group-budgets">
                               <!-- <input type="text" name="" placeholder="Notes: (Competition / Previous Prices/Budget)"> -->
-                              <textarea type="text" name="enquiry[lead2]"  class="form-control" placeholder="Notes" height="100px;" required></textarea>
+                              <textarea type="text" name="enquiry[lead2]"  class="form-control" placeholder="Notes" height="100px;"></textarea>
                             </div>
 
         				<div class="">
@@ -953,12 +953,14 @@ $('#search_text').keyup(function(){
     top:0; left:0;
     width: 100%;
     }
-
+    #header-nav_bar li a:hover {
+      color:gray !important;
+    }
     .dropdown-item:focus, .dropdown-item:hover {
-    color: #16181b !important;
-    text-decoration: none !important;
-    background-color: #fee300 !important;
-    border-radius: 0px !important;
+      color: #16181b !important;
+      text-decoration: none !important;
+      background-color: #fee300 !important;
+      border-radius: 0px !important;
     }
     .dropdown-item.active, .dropdown-item:active{
     background-color: #f5cc1c !important;
