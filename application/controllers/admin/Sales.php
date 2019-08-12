@@ -546,49 +546,56 @@ class Sales extends CI_Controller {
                             {
                                 if(!empty($filesop[2]))
                                 {
-                                    if(in_array($filesop[6], $department))
+                                    if(in_array($filesop[7], $department))
                                     {
-                                        if(preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $filesop[8]))
+                                        if(preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $filesop[9]))
                                         {
-                                            if(in_array($filesop[11], $estimated_requirement))
+                                            if(preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $filesop[10]))
                                             {
-                                                if(in_array($filesop[12], $estimated_spend))
+                                                if(in_array($filesop[15], $estimated_requirement))
                                                 {
-                                                    if(in_array($filesop[13], $payment_tearms))
+                                                    if(in_array($filesop[16], $estimated_spend))
                                                     {
-                                                        if(in_array($filesop[22], $communication))
+                                                        if(in_array($filesop[17], $payment_tearms))
                                                         {
-                                                            if(in_array($filesop[23], $contact_status))
+                                                            if(in_array($filesop[27], $communication))
                                                             {
-                                                                $all_data[$j] = $filesop;
-                                                                $all_is_well = 1; 
+                                                                if(in_array($filesop[28], $contact_status))
+                                                                {
+                                                                    $all_data[$j] = $filesop;
+                                                                    $all_is_well = 1; 
 
+                                                                }else{
+                                                                    $all_is_well = 0; 
+                                                                    $msg = 'Contact Status is wrong in row number '.$j.'';
+                                                                    break;
+                                                                }
                                                             }else{
                                                                 $all_is_well = 0; 
-                                                                $msg = 'Contact Status is wrong in row number '.$j.'';
+                                                                $msg = 'Communication Detail is wrong in row number '.$j.'';
                                                                 break;
                                                             }
                                                         }else{
                                                             $all_is_well = 0; 
-                                                            $msg = 'Communication Detail is wrong in row number '.$j.'';
+                                                            $msg = 'Payment Tearms is wrong in row number '.$j.'';
                                                             break;
                                                         }
+
                                                     }else{
                                                         $all_is_well = 0; 
-                                                        $msg = 'Payment Tearms is wrong in row number '.$j.'';
+                                                        $msg = 'Estimated Spend is wrong in row number '.$j.'';
                                                         break;
                                                     }
-
                                                 }else{
                                                     $all_is_well = 0; 
-                                                    $msg = 'Estimated Spend is wrong in row number '.$j.'';
+                                                    $msg = 'Estimated Requirement name is wrong in row number '.$j.'';
                                                     break;
+
                                                 }
                                             }else{
                                                 $all_is_well = 0; 
-                                                $msg = 'Estimated Requirement name is wrong in row number '.$j.'';
+                                                $msg = 'email is not valid email in row number '.$j.'';
                                                 break;
-
                                             }
                                         }else{
                                             $all_is_well = 0; 
@@ -648,20 +655,26 @@ class Sales extends CI_Controller {
                         'fname'                    => (!empty($value[1])) ? $value[1] : "",
                         'lname'                    => (!empty($value[2])) ? $value[2] : "",
                         'gender'                   => (!empty($value[3])) ? $value[3] : "",
-                        'personal_info'            => (!empty($value[4])) ? $value[4] : "",
-                        'branch'                   => (!empty($value[5])) ? $value[5] : "",
-                        'department'               => (!empty($value[6])) ? $value[6] : "",
-                        'job_title'                => (!empty($value[7])) ? $value[7] : "",
-                        'email'                    => (!empty($value[8])) ? $value[8] : "",
-                        'mobile'                   => (!empty($value[9])) ? $value[9] : "",
-                        'direct_dial'              => (!empty($value[10])) ? $value[10] : "",
-                        'estimate_required'        => (!empty($value[11])) ? $value[11] : "",
-                        'estimate_spend'           => (!empty($value[12])) ? $value[12] : "",
-                        'payment_terms'            => (!empty($value[13])) ? $value[13] : "",
-                        'pls_information'          => (!empty($value[14])) ? $value[14] : "",
-                        'invoice_reference_number' => (!empty($value[15])) ? $value[15] : "",
-                        'communication'            => (!empty($value[22])) ? $value[22] : "",
-                        'contact_status'           => (!empty($value[23])) ? $value[23] : "",
+                        'contact_country'          => (!empty($value[4])) ? $value[4] : "",
+                        'personal_info'            => (!empty($value[5])) ? $value[5] : "",
+                        'branch'                   => (!empty($value[6])) ? $value[6] : "",
+                        'contact_location'         => (!empty($value[4])) ? $value[4] : "",
+                        'department'               => (!empty($value[7])) ? $value[7] : "",
+                        'job_title'                => (!empty($value[8])) ? $value[8] : "",
+                        'email'                    => (!empty($value[9])) ? $value[9] : "",
+                        'alternate_email'          => (!empty($value[10])) ? $value[10] : "",
+                        'mobile'                   => (!empty($value[11])) ? $value[11] : "",
+                        'linkedin'                 => (!empty($value[12])) ? $value[12] : "",
+                        'whatsapp'                 => (!empty($value[13])) ? $value[13] : "",
+                        'direct_dial'              => (!empty($value[14])) ? $value[14] : "",
+                        'estimate_required'        => (!empty($value[15])) ? $value[15] : "",
+                        'estimate_spend'           => (!empty($value[16])) ? $value[16] : "",
+                        'payment_terms'            => (!empty($value[17])) ? $value[17] : "",
+                        'pls_information'          => (!empty($value[18])) ? $value[18] : "",
+                        'competitor'               => (!empty($value[19])) ? $value[19] : "",
+                        'invoice_reference_number' => (!empty($value[20])) ? $value[20] : "",
+                        'communication'            => (!empty($value[27])) ? $value[27] : "",
+                        'contact_status'           => (!empty($value[28])) ? $value[28] : "",
                         'status'                   => 1,
                         'created_at'               => $date,
                         'updated_at'               => $date
@@ -672,7 +685,7 @@ class Sales extends CI_Controller {
                     $country_name = '';
 
                     foreach ($countries as $key => $country) {
-                        if($value[21] == $country['name'])
+                        if($value[26] == $country['name'])
                         {
                             $country_id = $country['id'];
                         }
@@ -682,11 +695,11 @@ class Sales extends CI_Controller {
                     $data = array(
                         'sales_contact_id' => $insert_id,
                         'address_type'     => 'head_office_address',
-                        'location'         => (!empty($value[16])) ? $value[16] : "",
-                        'street'           => (!empty($value[17])) ? $value[17] : "",
-                        'town'             => (!empty($value[18])) ? $value[18] : "",
-                        'state'            => (!empty($value[19])) ? $value[19] : "",
-                        'zip_code'         => (!empty($value[20])) ? $value[20] : "",
+                        'location'         => (!empty($value[21])) ? $value[21] : "",
+                        'street'           => (!empty($value[22])) ? $value[22] : "",
+                        'town'             => (!empty($value[23])) ? $value[23] : "",
+                        'state'            => (!empty($value[24])) ? $value[24] : "",
+                        'zip_code'         => (!empty($value[25])) ? $value[25] : "",
                         'country'          => (!empty($country_id)) ? $country_id : "",
                         'status'           => 1,
                         'created_at'       => $date,

@@ -298,7 +298,7 @@
 										</div>
 										<div class="col-md-4 col-xs-6" style="padding:0px;">
 											<div class="home_buttons">
-												<a href="#" class=""> Parts Enquiry </a>
+												<a href="javascript:;" class="open_enquiry"> Parts Enquiry </a>
 											</div>
 										</div>
 									</div>

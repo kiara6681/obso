@@ -1,8 +1,2 @@
-Company(*),First Name(*),Last Name(*),Gender,Personal Info,Branch Name,Department,Job Title,Email,Mobile,Direct Dial,Estimated Requirement ,Estimated Spend,Payment Terms,PSL Information ,Invoice Ref. Number,Location,Street,City / Town,State,Zip Code,Country,Communication,Contact Status
-Example Company,Abc,xyz,Male/Female/Other,About Contact,,Purchasing  |  /Workshop / Factory /Production / Engineering  |  Stores   | Finance  | Sales / Customer Service  | Reception   |  Unknown,Manager,example@company.om,9876543210,12345,Less then 1 year |Daily|Weekly|Monthly|Yearly,Less then 50k|50k+|100k+|500k+|1m+,Advance|50/50 Advance|75/25 Advance|Pay to ship|Pay on Delivery|7 Days DOI|14 Days DOI|30 Days DOI|60 Days DOI|90 Days DOI|EOM|30 EOM|60 EOM|90 EOM,Portal login Information,######,---------,----------,------------,-----------,-----------,----------,Email|SMS|Both,Active|Do not Contact|In-Active
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,
+Company(*),First Name(*),Last Name(*),Country,Gender,Personal Info,Contact Location,Department,Job Title,Email,Alternate Email Address,Mobile,Whatsapp,LinkedIn,Direct Dial,Estimated Requirement ,Estimated Spend,Payment Terms,PSL Information ,Competitor & Pricing/Discount Information,Invoice Ref. Number,Location,Street,City / Town,State,Zip Code,Country,Communication,Contact Status
+Example Company,Abc,xyz,,Male/Female/Other,About Contact,,Purchasing  |  /Workshop / Factory /Production / Engineering  |  Stores   | Finance  | Sales / Customer Service  | Reception   |  Unknown,Manager,example@company.om,example@company.om,9876543210,,,12345,Less then 1 year |Daily|Weekly|Monthly|Yearly,Less then 50k|50k+|100k+|500k+|1m+,Advance|50/50 Advance|75/25 Advance|Pay to ship|Pay on Delivery|7 Days DOI|14 Days DOI|30 Days DOI|60 Days DOI|90 Days DOI|EOM|30 EOM|60 EOM|90 EOM,Portal login Information,Competitor & Pricing/Discount Information,######,---------,----------,------------,-----------,-----------,----------,Email|SMS|Both,Active|Do not Contact|In-Active

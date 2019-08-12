@@ -84,7 +84,7 @@ foreach ($home as $home) {
 #enquiry_form_home_popup{
   background-color: #fee133 !important;
 }
-#mobile-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+#mobile-search-input::placeholder { 
     color: #000;
 }
 .navbar-nav .nav-item:hover{
@@ -315,6 +315,16 @@ foreach ($home as $home) {
         display: none;
     }
 
+    @media screen and  (max-width: 767px){
+        .navbar-nav .nav-item{
+            height: 35px;
+            padding-top: 0px;
+        }
+        #header-nav_bar li a {
+            padding: 5px 8px;
+        }
+    }
+
     @media screen and  (min-width: 767px){
         .header_enquery_form .dropdown {
             display: block;
@@ -359,7 +369,27 @@ foreach ($home as $home) {
       .header_call {
           font-size: 16px;
       }
-    }    
+    }   
+    .fields_form_product input::placeholder { 
+        color: gray;
+        font-size: 14px !important;
+    } 
+    .fields_form_product textarea::placeholder { 
+        color: gray;
+        font-size: 14px !important;
+    } 
+    .fields_form_product select{ 
+        color: gray !important;
+        font-size: 14px !important;
+    } 
+    .contact_form select{ 
+        color: gray !important;
+        font-size: 14px !important;
+    } 
+    .fields_form_product input{
+        color: #000 !important;
+        font-size: 14px !important;
+    } 
 </style>
 
 <div class="container-fluid" id="header_nav">
@@ -524,7 +554,7 @@ foreach ($home as $home) {
                             <div class="fields_form_product" style="padding-bottom: 0px;overflow-y: scroll;height: 450px;">
                             <!-- <?php $this->load->helper('form'); ?> -->
 
-                            <?php echo form_open('Home/save' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
+                                <?php echo form_open('Home/save' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
                                 <div class="input-parent">
                                     <input type="text" name="enquiry[full_name]"  class="form-control" placeholder="Full Name" required />
                                 </div>
@@ -601,7 +631,7 @@ foreach ($home as $home) {
                     
                                 </div>
 
-                          <div class="form-group w-100" id="form-group-budgets">
+                            <div class="form-group w-100" id="form-group-budgets">
                               <!-- <input type="text" name="" placeholder="Notes: (Competition / Previous Prices/Budget)"> -->
                               <textarea type="text" name="enquiry[lead2]"  class="form-control" placeholder="Notes" height="100px;" required></textarea>
                           </div>
@@ -633,7 +663,8 @@ foreach ($home as $home) {
           			$(".enquiry_form").hide();
 
           		    $(".open_enquiry").click(function(){
-          		        $(".enquiry_form").toggle();
+          		        $("#header-nav_bar").addClass('show');
+                        $(".enquiry_form").toggle();
           		    });
 
           		    $(".enquiry_form_close").click(function(){
