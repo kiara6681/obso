@@ -59,7 +59,7 @@ class Home extends CI_Controller
         //setting for pagination
         $config = array();
 
-        $config["per_page"] = $per_page = 5;
+        $config["per_page"] = $per_page = 10;
         if($this->input->post('per_page'))
         {
             $_SESSION['per_page'] = $this->input->post('per_page');
@@ -79,16 +79,14 @@ class Home extends CI_Controller
         $config['num_tag_close'] = '</li>&nbsp;&nbsp;';
         $config['cur_tag_open'] = '<li class="active btn btn-warning btn-theme"><a href="javascript:void(0);"><b>';
         $config['cur_tag_close'] = '</b></a></li>&nbsp;&nbsp;';
-        $config['next_link'] = '<i class="fa fa-angle-right"></i>&nbsp;&nbsp;';
-        $config['prev_link'] = '<i class="fa fa-angle-left"></i>&nbsp;&nbsp;';
+        $config['next_link'] = '<i class="fa fa-angle-right"></i>';
+        $config['prev_link'] = '<i class="fa fa-angle-left"></i>';
         $config['next_tag_open'] = '<li class="btn btn-danger btn-prev">';
         $config['next_tag_close'] = '</li>&nbsp;&nbsp;';
         $config['prev_tag_open'] = '<li class="btn btn-danger btn-prev">';
         $config['prev_tag_close'] = '</li>&nbsp;&nbsp;';
-        $config['first_tag_open'] = '<li class="btn btn-danger btn-prev">';
-        $config['first_tag_close'] = '</li>&nbsp;&nbsp;';
-        $config['last_tag_open'] = '<li class="btn btn-danger btn-prev">';
-        $config['last_tag_close'] = '</li>&nbsp;&nbsp;';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
 
         
         if (!empty($name) && !is_numeric($name)) 

@@ -90,6 +90,24 @@ foreach ($home as $home) {
 .navbar-nav .nav-item:hover{
   background-color: #fee300 !important;
 }
+.navbar-nav .nav-item a:hover{
+  transition: 0.0s ease-in-out !important;
+}
+#header_search_form input {
+    border-radius: 3px!important;
+}
+.search_buton input{
+    border-radius: 3px!important;
+}
+.mobile-search-input{
+    border-radius: 3px!important;
+}
+.fields_form_product input {
+    border-radius: 3px;
+}
+.form-input-parent input {
+    border-radius: 3px;
+}
 </style>
 </head>
 <body>

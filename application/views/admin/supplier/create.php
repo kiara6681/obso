@@ -9,6 +9,9 @@
     .col-sm-6{
         padding-bottom: 20px;
     }
+    .col-sm-4{
+        padding-bottom: 10px;
+    }
     .col-sm-12{
         padding-bottom: 20px;
     }
@@ -54,6 +57,11 @@
       color: #ddd;
       margin-bottom: 0px;
     }
+    input[type="radio"] {
+      -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+      -moz-appearance: checkbox;    /* Firefox */
+      -ms-appearance: checkbox;     /* not currently supported */
+    }
     /***** CSS to Highlight Stars on Hover *****/
 
     .ratingSelector input:checked ~ label,
@@ -77,6 +85,16 @@
     .ratingSelector input:checked ~ label:hover ~ label {
       color: #FFED85;
     }
+    .c-active{
+        height: calc(0.5em + 0.75rem + 0px);
+        width: 14%;
+    }
+    .c-gray{
+        color:gray;
+    }
+    .c-l-active{
+        font-weight: 700;
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -87,8 +105,8 @@
                     <div class="col-sm-10">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">Home</li>
-                            <li class="breadcrumb-item active"><a href="<?= base_url();?>admin/sales">Sales</a></li>
-                            <li class="breadcrumb-item "><a html="javascript:;">Add New Sales</a></li>
+                            <li class="breadcrumb-item active"><a href="<?= base_url();?>admin/suppliers">Suppliers</a></li>
+                            <li class="breadcrumb-item "><a html="javascript:;">Add New Suppliers</a></li>
                         </ol>
                     </div>
                 </div>
@@ -101,12 +119,12 @@
                         <div class="card-body">
                             <div id="sales_company_form">
 
-                                <form action="<?= base_url('admin/sales/create'); ?>" method="post"> 
+                                <form action="<?= base_url('admin/suppliers/create'); ?>" method="post"> 
 
                                     <div class="row">
                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
 
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <select class="form-control companies" style="height: 50px;" name="company" required="required">
                                                 <option value="">Company</option>
                                                 <?php
@@ -117,15 +135,15 @@
                                                 }
                                                 ?>
                                             </select>
-                                        </div> 
+                                        </div>  -->
                                         <div class="col-sm-6">
 
                                             <select class="form-control" style="height: 50px;" name="contact_database_status" required>
                                                 <option value="">Contacts Database Status</option>
-                                                <option value="1">Lead</option>
-                                                <option value="2">Suspects</option>
-                                                <option value="3">Prospects</option>
-                                                <option value="4">Account Contacts</option>     
+                                                <option value="1">Supplier Lead</option>
+                                                <option value="2">Unverified Suppliers</option>
+                                                <option value="3">Trusted Suppliers</option>
+                                                <option value="4">Partner Suppliers</option>     
                                             </select>
 
                                             <!-- <input class="form-control" type="hidden" name="trader" value="admin" readonly placeholder="Trader Name"> -->
@@ -140,28 +158,13 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <label>*Supplier Name</label>
-                                                    <input class="form-control" type="text" name="first_name" placeholder="Enter Company Name" required="required">
+                                                    <input class="form-control" type="text" name="company" placeholder="Enter Company Name" required="required">
                                                 </div>    
 
                                                 <div class="col-sm-12">
-                                                    <label>*Website</label>
-                                                    <input class="form-control" type="url" name="website" placeholder="http://website.com" required="required">
+                                                    <label>Website</label>
+                                                    <input class="form-control" type="url" name="website" placeholder="http://website.com">
                                                 </div>
-
-                                                <!-- <div class="col-sm-6">
-                                                    <label>Gender</label>
-                                                    <select class="form-control" name="gender">
-                                                        <option value="">Gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
-                                                </div> -->
-
-                                                <!-- <div class="col-sm-6">
-                                                    <label>Contact Location</label>
-                                                    <input type="text" name="contact_location" class="form-control" placeholder="Enter Contact Location">
-                                                </div>  -->
 
                                                 <div class="col-sm-12">
                                                     <label>Supplier Relationship Manager</label>
@@ -203,100 +206,35 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <label>Generic Supplier Information Notes</label>
-                                                    <textarea class="form-control" name="generic_supplier_info" cols="30" placeholder="Generic Supplier Information Notes" rows="5"></textarea>
+                                                    <textarea class="form-control" name="information_notes" cols="30" placeholder="Generic Supplier Information Notes" rows="5"></textarea>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <label>Other Names Supplier known as</label>
-                                                    <textarea class="form-control" name="other_supplier_known" cols="30" placeholder="Other Names Supplier known as" rows="5"></textarea>
+                                                    <textarea class="form-control" name="supplier_other_names" cols="30" placeholder="Other Names Supplier known as" rows="5"></textarea>
                                                 </div> 
                                             </div> 
                                         </div> 
 
                                         <div class="col-sm-5">
-                                            <label>*Next Day cut off delivery cut off Time</label>
-                                            <select name="delivery_cut_off_time" class="form-control"  required>
-                                                <option>(GMT-12:00) International Date Line West</option>
-                                                <option>(GMT-11:00) Midway Island, Samoa</option>
-                                                <option value="-10">(GMT-10:00) Hawaii</option>
-                                                <option value="-9">(GMT-09:00) Alaska</option>
-                                                <option value="-8">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                                <option value="-8">(GMT-08:00) Tijuana, Baja California</option>
-                                                <option value="-7">(GMT-07:00) Arizona</option>
-                                                <option value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                <option value="-7">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                                <option value="-6">(GMT-06:00) Central America</option>
-                                                <option value="-6">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                                <option value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                                                <option value="-6">(GMT-06:00) Saskatchewan</option>
-                                                <option value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-                                                <option value="-5">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                                <option value="-5">(GMT-05:00) Indiana (East)</option>
-                                                <option value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
-                                                <option value="-4">(GMT-04:00) Caracas, La Paz</option>
-                                                <option value="-4">(GMT-04:00) Manaus</option>
-                                                <option value="-4">(GMT-04:00) Santiago</option>
-                                                <option value="-3.5">(GMT-03:30) Newfoundland</option>
-                                                <option value="-3">(GMT-03:00) Brasilia</option>
-                                                <option value="-3">(GMT-03:00) Buenos Aires, Georgetown</option>
-                                                <option value="-3">(GMT-03:00) Greenland</option>
-                                                <option value="-3">(GMT-03:00) Montevideo</option>
-                                                <option value="-2">(GMT-02:00) Mid-Atlantic</option>
-                                                <option value="-1">(GMT-01:00) Cape Verde Is.</option>
-                                                <option value="-1">(GMT-01:00) Azores</option>
-                                                <option value="0">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
-                                                <option value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
-                                                <option value="1">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-                                                <option value="1">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-                                                <option value="1">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-                                                <option value="1">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
-                                                <option value="1">(GMT+01:00) West Central Africa</option>
-                                                <option value="2">(GMT+02:00) Amman</option>
-                                                <option value="2">(GMT+02:00) Athens, Bucharest, Istanbul</option>
-                                                <option value="2">(GMT+02:00) Beirut</option>
-                                                <option value="2">(GMT+02:00) Cairo</option>
-                                                <option value="2">(GMT+02:00) Harare, Pretoria</option>
-                                                <option value="2">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
-                                                <option value="2">(GMT+02:00) Jerusalem</option>
-                                                <option value="2">(GMT+02:00) Minsk</option>
-                                                <option value="2">(GMT+02:00) Windhoek</option>
-                                                <option value="3">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
-                                                <option value="3">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-                                                <option value="3">(GMT+03:00) Nairobi</option>
-                                                <option value="3">(GMT+03:00) Tbilisi</option>
-                                                <option value="3.5">(GMT+03:30) Tehran</option>
-                                                <option value="4">(GMT+04:00) Abu Dhabi, Muscat</option>
-                                                <option value="4">(GMT+04:00) Baku</option>
-                                                <option value="4">(GMT+04:00) Yerevan</option>
-                                                <option value="4.5">(GMT+04:30) Kabul</option>
-                                                <option value="5">(GMT+05:00) Yekaterinburg</option>
-                                                <option value="5">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
-                                                <option value="5.5">(GMT+05:30) Sri Jayawardenapura</option>
-                                                <option value="5.5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                                                <option value="5.75">(GMT+05:45) Kathmandu</option>
-                                                <option value="6">(GMT+06:00) Almaty, Novosibirsk</option>
-                                                <option value="6">(GMT+06:00) Astana, Dhaka</option>
-                                                <option value="6.5">(GMT+06:30) Yangon (Rangoon)</option>
-                                                <option value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-                                                <option value="7">(GMT+07:00) Krasnoyarsk</option>
-                                                <option value="8">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-                                                <option value="8">(GMT+08:00) Kuala Lumpur, Singapore</option>
-                                                <option value="8">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-                                                <option value="8">(GMT+08:00) Perth</option>
-                                                <option value="8">(GMT+08:00) Taipei</option>
-                                                <option value="9">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
-                                                <option value="9">(GMT+09:00) Seoul</option>
-                                                <option value="9">(GMT+09:00) Yakutsk</option>
-                                                <option value="9.5">(GMT+09:30) Adelaide</option>
-                                                <option value="9.5">(GMT+09:30) Darwin</option>
-                                                <option value="10">(GMT+10:00) Brisbane</option>
-                                                <option value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
-                                                <option value="10">(GMT+10:00) Hobart</option>
-                                                <option value="10">(GMT+10:00) Guam, Port Moresby</option>
-                                                <option value="10">(GMT+10:00) Vladivostok</option>
-                                                <option value="11">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
-                                                <option value="12">(GMT+12:00) Auckland, Wellington</option>
-                                                <option value="12">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-                                                <option value="13">(GMT+13:00) Nuku'alofa</option>    
+                                            <label>Next Day cut off delivery cut off Time</label>
+                                            <select name="cut_off_time" class="form-control" >
+                                                <option value="UK 2:00pm Latest Order">UK 2:00pm Latest Order</option>
+                                                <option value="UK 2:30pm Latest Order">UK 2:30pm Latest Order</option>
+                                                <option value="UK 3:00pm Latest Order">UK 3:00pm Latest Order</option>
+                                                <option value="UK 3:30pm Latest Order">UK 3:30pm Latest Order</option>
+                                                <option value="UK 4:00pm Latest Order">UK 4:00pm Latest Order</option>
+                                                <option value="UK 4:30pm Latest Order">UK 4:30pm Latest Order</option>
+                                                <option value="UK 5:00pm Latest Order">UK 5:00pm Latest Order</option>
+                                                <option value="UK 5:30pm Latest Order">UK 5:30pm Latest Order</option>
+                                                <option value="UK 6:00pm Latest Order">UK 6:00pm Latest Order</option>
+                                                <option value="UK 6:30pm Latest Order">UK 6:30pm Latest Order</option>
+                                                <option value="UK 7:00pm Latest Order">UK 7:00pm Latest Order</option>
+                                                <option value="UK 7:30pm Latest Order">UK 7:30pm Latest Order</option>
+                                                <option value="UK 8:00pm Latest Order">UK 8:00pm Latest Order</option>
+                                                <option value="UK 8:30pm Latest Order">UK 8:30pm Latest Order</option>
+                                                <option value="UK 9:00pm Latest Order">UK 9:00pm Latest Order</option>
+                                                <option value="UK 9:30pm Latest Order">UK 9:30pm Latest Order</option>
+                                                <option value="UK 10:00pm Latest Order">UK 10:00pm Latest Order</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-7">
@@ -307,16 +245,16 @@
                                                 <div class="card-body">
                                                    <div class="btn-group  btn-group-toggle" data-toggle="buttons" style="display: inline-block;">
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="same_day" value="Less then 1 year"> Same Day
+                                                            <input type="checkbox" name="express_options[]" value="Less then 1 year"> Same Day
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="pre_9am" value="Daily"> Pre 9am
+                                                            <input type="checkbox" name="express_options[]" value="Daily"> Pre 9am
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="next_day" value="Weekly"> Next Day
+                                                            <input type="checkbox" name="express_options[]" value="Weekly"> Next Day
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                         <label class="btn btn-primary btn-sm">
-                                                            <input type="radio" name="2_days" value="Monthly"> 2 days 
+                                                            <input type="checkbox" name="express_options[]" value="Monthly"> 2 days 
                                                         </label> &nbsp;&nbsp;&nbsp;
                                                     </div>
                                                 </div>
@@ -333,12 +271,18 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <label>*Standard Delivery Time</label>
-                                            <select name="standard_delivery_time" class="form-control"  required>
+                                            <select name="delivery_time" class="form-control"  required>
                                                 <option value="">Choose</option>
                                                 <option value="Next Day (by end of Day)">Next Day (by end of Day)</option>
                                                 <option value="2 Working Days">2 Working Days</option>
                                                 <option value="3 Working Days">3 Working Days</option>  
                                                 <option value="4 Working Days">4 Working Days</option>  
+                                                <option value="5 Working Days">5 Working Days</option>  
+                                                <option value="(1 Week) 5 Working Days">(1 Week) 5 Working Days</option>  
+                                                <option value="(2 Week) 10 Working Days">(2 Week) 10 Working Days</option>  
+                                                <option value="(3 Weeks) 15 Working Days">(3 Weeks) 15 Working Days</option>  
+                                                <option value="(4 Weeks) 21 Working Days">(4 Weeks) 21 Working Days</option>  
+                                                <option value="(4 Weeks +) 21+ Working Days">(4 Weeks +) 21+ Working Days</option> 
                                             </select>
                                         </div>
                                     </div>
@@ -356,22 +300,22 @@
                                             <ul class="rating">
                                                 <li> 
                                                     <span class="ratingSelector">
-                                                        <input type="radio" name="quality[]" id="Quality-1-5" value="1" class="radio"/>
+                                                        <input type="radio" name="quality_rating" id="Quality-1-5" value="1" class="radio"/>
                                                         <label class="full" for="Quality-1-5"></label>
-                                                        <input type="radio" name="quality[]" id="Quality-2-5" value="2" class="radio"/>
+                                                        <input type="radio" name="quality_rating" id="Quality-2-5" value="2" class="radio"/>
                                                         <label class="full" for="Quality-2-5"></label>
-                                                        <input type="radio" name="quality[]" id="Quality-3-5" value="3" class="radio"/>
+                                                        <input type="radio" name="quality_rating" id="Quality-3-5" value="3" class="radio"/>
                                                         <label class="full" for="Quality-3-5"></label>
-                                                        <input type="radio" name="quality[]" id="Quality-4-5" value="4" class="radio"/>
+                                                        <input type="radio" name="quality_rating" id="Quality-4-5" value="4" class="radio"/>
                                                         <label class="full" for="Quality-4-5"></label>
-                                                        <input type="radio" name="quality[]" id="Quality-5-5" value="5" class="radio"/>
+                                                        <input type="radio" name="quality_rating" id="Quality-5-5" value="5" class="radio"/>
                                                         <label class="full" for="Quality-5-5"></label>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Info on Quality</label>
+                                            <input type="text" placeholder="Enter brief Info on Quality" class="form-control" name="brief_info_quality">
                                         </div>
 
                                         <div class="col-sm-4">
@@ -381,22 +325,22 @@
                                             <ul class="rating">
                                             <li> 
                                                 <span class="ratingSelector">
-                                                    <input type="radio" name="pricing[]" id="Pricing-1-5" value="1" class="radio"/>
+                                                    <input type="radio" name="pricing_rating" id="Pricing-1-5" value="1" class="radio"/>
                                                     <label class="full" for="Pricing-1-5"></label>
-                                                    <input type="radio" name="pricing[]" id="Pricing-2-5" value="2" class="radio"/>
+                                                    <input type="radio" name="pricing_rating" id="Pricing-2-5" value="2" class="radio"/>
                                                     <label class="full" for="Pricing-2-5"></label>
-                                                    <input type="radio" name="pricing[]" id="Pricing-3-5" value="3" class="radio"/>
+                                                    <input type="radio" name="pricing_rating" id="Pricing-3-5" value="3" class="radio"/>
                                                     <label class="full" for="Pricing-3-5"></label>
-                                                    <input type="radio" name="pricing[]" id="Pricing-4-5" value="4" class="radio"/>
+                                                    <input type="radio" name="pricing_rating" id="Pricing-4-5" value="4" class="radio"/>
                                                     <label class="full" for="Pricing-4-5"></label>
-                                                    <input type="radio" name="pricing[]" id="Pricing-5-5" value="5" class="radio"/>
+                                                    <input type="radio" name="pricing_rating" id="Pricing-5-5" value="5" class="radio"/>
                                                     <label class="full" for="Pricing-5-5"></label>
                                                 </span>
                                             </li>
                                         </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Info on Pricing</label>
+                                            <input type="input" placeholder="Enter brief Info on Pricing" name="brief_info_pricing" class="form-control">
                                         </div>
 
                                         <div class="col-sm-4">
@@ -406,22 +350,22 @@
                                             <ul class="rating">
                                                 <li> 
                                                     <span class="ratingSelector">
-                                                        <input type="radio" name="accuracy[]" id="Accuracy-1-5" value="1" class="radio"/>
+                                                        <input type="radio" name="accuracy_rating" id="Accuracy-1-5" value="1" class="radio"/>
                                                     <label class="full" for="Accuracy-1-5"></label>
-                                                        <input type="radio" name="accuracy[]" id="Accuracy-2-5" value="2" class="radio"/>
+                                                        <input type="radio" name="accuracy_rating" id="Accuracy-2-5" value="2" class="radio"/>
                                                     <label class="full" for="Accuracy-2-5"></label>
-                                                        <input type="radio" name="accuracy[]" id="Accuracy-3-5" value="3" class="radio"/>
+                                                        <input type="radio" name="accuracy_rating" id="Accuracy-3-5" value="3" class="radio"/>
                                                     <label class="full" for="Accuracy-3-5"></label>
-                                                        <input type="radio" name="accuracy[]" id="Accuracy-4-5" value="4" class="radio"/>
+                                                        <input type="radio" name="accuracy_rating" id="Accuracy-4-5" value="4" class="radio"/>
                                                     <label class="full" for="Accuracy-4-5"></label>
-                                                        <input type="radio" name="accuracy[]" id="Accuracy-5-5" value="5" class="radio"/>
+                                                        <input type="radio" name="accuracy_rating" id="Accuracy-5-5" value="5" class="radio"/>
                                                     <label class="full" for="Accuracy-5-5"></label>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Info on delivery</label>
+                                            <input type="input" placeholder="Enter brief Info on delivery" name="brief_info_delivery" class="form-control">
                                         </div>
 
                                         <div class="col-sm-4">
@@ -431,22 +375,23 @@
                                             <ul class="rating">
                                                 <li> 
                                                     <span class="ratingSelector">
-                                                        <input type="radio" name="responce[]" id="Responce-1-5" value="1" class="radio"/>
+                                                        <input type="radio" name="responce_time_rating" id="Responce-1-5" value="1" class="radio"/>
                                                     <label class="full" for="Responce-1-5"></label>
-                                                        <input type="radio" name="responce[]" id="Responce-2-5" value="2" class="radio"/>
+                                                        <input type="radio" name="responce_time_rating" id="Responce-2-5" value="2" class="radio"/>
                                                     <label class="full" for="Responce-2-5"></label>
-                                                        <input type="radio" name="responce[]" id="Responce-3-5" value="3" class="radio"/>
+                                                        <input type="radio" name="responce_time_rating" id="Responce-3-5" value="3" class="radio"/>
                                                     <label class="full" for="Responce-3-5"></label>
-                                                        <input type="radio" name="responce[]" id="Responce-4-5" value="4" class="radio"/>
+                                                        <input type="radio" name="responce_time_rating" id="Responce-4-5" value="4" class="radio"/>
                                                     <label class="full" for="Responce-4-5"></label>
-                                                        <input type="radio" name="responce[]" id="Responce-5-5" value="5" class="radio"/>
+                                                        <input type="radio" name="responce_time_rating" id="Responce-5-5" value="5" class="radio"/>
                                                     <label class="full" for="Responce-5-5"></label>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Info on responce timey</label>
+                                            <input type="input" placeholder="Enter brief Info on responce time" name="brief_info_time" class="form-control">
+
                                         </div>
 
                                         <div class="col-sm-4">
@@ -456,22 +401,22 @@
                                             <ul class="rating">
                                                 <li> 
                                                     <span class="ratingSelector">
-                                                        <input type="radio" name="communication[]" id="Communication-1-5" value="1" class="radio"/>
+                                                        <input type="radio" name="communication_rating" id="Communication-1-5" value="1" class="radio"/>
                                                     <label class="full" for="Communication-1-5"></label>
-                                                        <input type="radio" name="communication[]" id="Communication-2-5" value="2" class="radio"/>
+                                                        <input type="radio" name="communication_rating" id="Communication-2-5" value="2" class="radio"/>
                                                     <label class="full" for="Communication-2-5"></label>
-                                                        <input type="radio" name="communication[]" id="Communication-3-5" value="3" class="radio"/>
+                                                        <input type="radio" name="communication_rating" id="Communication-3-5" value="3" class="radio"/>
                                                     <label class="full" for="Communication-3-5"></label>
-                                                        <input type="radio" name="communication[]" id="Communication-4-5" value="4" class="radio"/>
+                                                        <input type="radio" name="communication_rating" id="Communication-4-5" value="4" class="radio"/>
                                                     <label class="full" for="Communication-4-5"></label>
-                                                        <input type="radio" name="communication[]" id="Communication-5-5" value="5" class="radio"/>
+                                                        <input type="radio" name="communication_rating" id="Communication-5-5" value="5" class="radio"/>
                                                     <label class="full" for="Communication-5-5"></label>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Info on Communication</label>
+                                            <input type="input" placeholder="Enter brief Info on Communication" name="brief_info_communication" class="form-control">
                                         </div>
 
                                         <div class="col-sm-4">
@@ -480,23 +425,13 @@
                                         <div class="col-sm-4">
                                             <ul class="rating">
                                                 <li> 
-                                                    <span class="ratingSelectorOverall">
-                                                        <input type="radio" name="overall[]" id="Overall-1-5" value="1" class="radio"/>
-                                                        <label class="full" for="Overall-1-5" id="over-1"></label>
-                                                        <input type="radio" name="overall[]" id="Overall-2-5" value="2" class="radio"/>
-                                                        <label class="full" for="Overall-2-5" id="over-2"></label>
-                                                        <input type="radio" name="overall[]" id="Overall-3-5" value="3" class="radio"/>
-                                                        <label class="full" for="Overall-3-5" id="over-3"></label>
-                                                        <input type="radio" name="overall[]" id="Overall-4-5" value="4" class="radio"/>
-                                                        <label class="full" for="Overall-4-5" id="over-4"></label>
-                                                        <input type="radio" name="overall[]" id="Overall-5-5" value="5" class="radio"/>
-                                                        <label class="full" for="Overall-5-5" id="over-5"></label>
+                                                    <span class="ratingSelectorOverall"><input type="radio" name="overall_rating" id="Overall-1-5" value="1" class="radio"/><label class="full" for="Overall-1-5" id="over-1"></label><input type="radio" name="overall_rating" id="Overall-2-5" value="2" class="radio"/><label class="full" for="Overall-2-5" id="over-2"></label><input type="radio" name="overall_rating" id="Overall-3-5" value="3" class="radio"/><label class="full" for="Overall-3-5" id="over-3"></label><input type="radio" name="overall_rating" id="Overall-4-5" value="4" class="radio"/><label class="full" for="Overall-4-5" id="over-4"></label><input type="radio" name="overall_rating" id="Overall-5-5" value="5" class="radio"/><label class="full" for="Overall-5-5" id="over-5"></label>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label>Enter brief Overall info</label>
+                                            <input type="input" placeholder="Enter brief Overall info" name="brief_info_coverall" class="form-control">
                                         </div>
                                                                      
                                     </div>
@@ -522,8 +457,13 @@
                                         </div>    
                                     </div>
 
-                                    <div class="col-sm-12 text-right">
-                                        <button type="button" id="add_manufacturer" class="btn btn-primary waves-effect btn-md waves-light add_new_address" data-toggle="modal" data-target="#addManufacturerModal"> Add Manufacturer </button>  
+                                    <div class="col-sm-12 text-right" style="margin-top: 10px;">
+                                        <button type="button" id="add_manufacturer" class="btn btn-primary waves-effect btn-md waves-light" data-toggle="modal" data-target="#addManufacturerModal"> Add Manufacturer </button>  
+                                    </div>
+
+                                    <div class="col-sm-12 text-center">
+                                        <p>Alternate supplier conditions explaniation:</p>
+                                        <textarea class="form-control" name="alternate_supplier_conditions" placeholder="Alternate supplier conditions explaniation" rows="6"></textarea>
                                     </div>
                                     
                                     <br />
@@ -537,14 +477,60 @@
                                         </div>
                                     </div>
                                     <br />
+                                    <h4 class="mt-0 header-title">Supplier Financial information</h4>
+                                    <hr>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Payment Terms</label>  
+                                                    <select name="payment_terms" class="form-control">
+                                                        <option value="">Select Payment Tearms</option>
+                                                        <option value="Advance">Advance</option>
+                                                        <option value="50/50 Advance">50/50 Advance</option>
+                                                        <option value="75/25 Advance">75/25 Advance</option>
+                                                        <option value="Pay To Ship">Pay To Ship</option>
+                                                        <option value="Pay On Delivery">Pay On Delivery</option>
+                                                        <option value="7 Days DOI">7 Days DOI</option>
+                                                        <option value="14 Days DOI">14 Days DOI</option>
+                                                        <option value="30 Days DOI">30 Days DOI</option>
+                                                        <option value="60 Days DOI">60 Days DOI</option>
+                                                        <option value="90 Days DOI">90 Days DOI</option>
+                                                        <option value="EOM">EOM</option>
+                                                        <option value="30 EOM">30 EOM</option>
+                                                        <option value="60 EOM">60 EOM</option>
+                                                        <option value="90 EOM">90 EOM</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Ordering Status</label>   
+                                                    <select name="ordering_status" class="form-control">
+                                                        <option value="">Select Ordering Status</option>
+                                                        <option value="Free to order"> Free to order</option>
+                                                        <option value="Awaiting Payment">Awaiting Payment</option>
+                                                        <option value="On Hold">On Hold</option>
+                                                        <option value="Blacklist">Blacklist</option>                 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <label>Obso's unique supplier record Number</label>   
+                                            <input type="text" class="form-control" place
+                                             name="unique_number">
+                                        </div>
+                                    </div>
+                                    <br />
                                     <h4 class="mt-0 header-title">Supplier Contact  information</h4>
                                     <hr>
                                     <br />
 
-                                    <div class="row service_wrap">
+                                    <div class="row">
                                         <div class="col-sm-2">
                                             <label>Name</label>
-                                            <input type="text" name="contact_name[0]" class="form-control" value="" placeholder="Name" />
+                                            <input type="radio" name="as_manager" value="1" style="height: calc(0.5em + 0.75rem + 0px);width: 12%;float: left;margin-top: 38px;margin-left: 5px;">
+                                            <input type="text" name="contact_name[0]" class="form-control" style="width: 80%;float: right;" value="" placeholder="Name" />
                                         </div>
                                         <div class="col-sm-2">
                                             <label>Surname</label>
@@ -560,21 +546,41 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <label>Main Language</label>
-                                            <select name="address_type[0]" id="address_type" class="form-control">
-                                                <option value="">Address Type</option>
-                                                <option value="head_office_address">Head Office Location</option>
+                                            <select name="main_language[0]" id="main_language" class="form-control">
+                                                <option value="">Please Choose</option>
+                                                <option value="English">English</option>
+                                                <option value="Armenian">Armenian</option>
+                                                <option value="Danish">Danish</option>
+                                                <option value="Dutch">Dutch</option>
+                                                <option value="French">French</option>
+                                                <option value="German">German</option>
+                                                <option value="Greek">Greek</option>
+                                                <option value="Hindi">Hindi</option>
+                                                <option value="Italian">Italian</option>
+                                                <option value="Japanese">Japanese</option>
+                                                <option value="Urdu">Urdu</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
                                             <label>English</label>
-                                            <select name="address_type[0]" id="address_type" class="form-control">
-                                                <option value="">Address Type</option>
-                                                <option value="head_office_address">Head Office Location</option>
-                                            </select>
+                                            <select name="english[0]" id="english" class="form-control">
+                                                <option value="">Please Choose</option>
+                                                <option value="Yes Native">Yes Native</option>
+                                                <option value="Yes Fluent written & verbal">Yes Fluent written & verbal</option>
+                                                <option value="Yes Fluent verbal">Yes Fluent verbal</option>
+                                                <option value="Yes Broken written & verbal">Yes Broken written & verbal</option>
+                                                <option value="Yes Broken verbal">Yes Broken verbal</option>
+                                                <option value="No">No</option>
+                                            </select><br />
                                         </div>
-                                        <div class="col-sm-3" id="add_address">
-                                            <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add New Supplier Contact</button>
-                                        </div>                                      
+                                        
+                                    </div>
+                                    <div class="row supplier_wrap">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3 offset-md-9">
+                                            <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light" id="add_supplier" data-toggle="modal" data-target=".bs-example-modal-center">Add New Supplier Contact</button>
+                                        </div>
                                     </div>
 
                                     <br />
@@ -615,13 +621,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <label>Address Type</label>
-                                            <select name="address_type[0]" id="address_type" class="form-control">
-                                                <option value="">Address Type</option>
-                                                <option value="head_office_address">Head Office Location</option>
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-sm-3" id="add_address">
                                             <button type="button" style="margin-top: 28px;" class="btn btn-primary waves-effect btn-md btn-block waves-light add_new_address" data-toggle="modal" data-target=".bs-example-modal-center"><i class="fa fa-map-marker"></i>&nbsp;&nbsp; Add Other Address</button>
                                         </div>                                      
@@ -715,8 +715,8 @@
                                 <div class="col-sm-6">
                                     <label>Select</label>
                                     <br />
-                                    <input type="checkbox" name="current_line" class="current_line" value="current_line">  Current Line
-                                    <input type="checkbox" name="line_obsolete" class="line_obsolete" value="obsolete">  Obsolete
+                                    <input type="checkbox" style="height: calc(0.5em + 0.75rem + 0px); width: 10%;margin-top: 10px;" name="current_line" class="current_line" value="Current Line"> <span> Current Line</span>
+                                    <input type="checkbox" style="height: calc(0.5em + 0.75rem + 0px); width: 10%;margin-top: 10px;" name="line_obsolete" class="line_obsolete" value="Obsolete"> <span> Obsolete</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Condition information</label>
@@ -725,6 +725,10 @@
                                 <div class="col-sm-6">
                                     <label>Pricing & Discount information</label>
                                     <input type="text" name="pricing_discount_information" id="pricing_discount_information" class="form-control" placeholder="Enter Pricing & Discount information" required="required">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="checkbox" style="height: calc(0.5em + 0.75rem + 0px); width: 10%;" name="featured[]" id="featured" class="">
+                                    <label>Featured</label>
                                 </div>
                             </div>
 
@@ -834,7 +838,6 @@
         });
 
         // Create new manufacturer
-
         var menufacturer_wrap         = $("#append_new_manu"); //Fields wrapper
         var add_manufacturer      = $("#create_manu"); //Add button ID
 
@@ -852,7 +855,37 @@
             var condition_information = $("#condition_information").val();
             var pricing_discount_information = $("#pricing_discount_information").val();
 
-            var html = '<div class="col-md-12" style="background-color:gray;padding-bottom:0px;margin-bottom:10px;"><div class="row"><div class="col-sm-2 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-primary"> '+sup_info_manu+' </label><input type="hidden" name="manufacturer['+i+']" > </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-primary"> '+current_line+' / '+line_obsolete+' </label><input type="hidden" name="current_obsolate['+i+']" > </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-primary"> '+condition_information+' </label><input type="hidden" name="condition['+i+']" > </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-primary"> '+pricing_discount_information+' </label><input type="hidden" name="pricing_discount['+i+']"> </div><div class="col-sm-1 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-danger delete_menufecture"> X </label></div></div></div>';
+            var current = '';
+            var obsolete = '';
+            var a = 0;
+            var b = 0;
+            var cls2 = '';
+            var cls = 'c-gray';
+            var featured = '';
+            var green = 'btn-primary';
+            var featured_check = '';
+
+            if($("#featured").prop("checked") == true)
+            {
+                green = 'btn-success';
+                featured = 1;
+                featured_check = 'checked';
+            }
+
+            if($(".current_line").prop("checked") == true)
+            {
+                current = 'checked';
+                cls = 'c-l-active';
+                a=1;
+            }
+
+            if($(".line_obsolete").prop("checked") == true){
+                cls2 = 'c-l-active';
+                obsolete = 'checked';
+                b=1;
+            }
+
+            var html = '<div class="col-md-12" style="padding-bottom:0px;margin-bottom:10px;"><div class="row"><div class="col-sm-2 text-center" style="padding-bottom:0px;padding-top:10px;"><input class="c-active" style="float:right;margin-top:8px;" type="checkbox" name="featured_mnfr['+i+']" value="'+featured+'" '+featured_check+'><label style="width:80%;float:left;" class="btn '+green+' btn-block"> '+sup_info_manu+' </label><input type="hidden" value="'+manu_value+'" name="manufacturer['+i+']" > </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"> &nbsp;<input value="Current Line"  class="c-active"type="checkbox" name="current['+i+']" '+ current+'>&nbsp;<b class="'+cls+'"> '+current_line+'</b>   &nbsp;&nbsp;<input value="Obsolete" type="checkbox" class="c-active" name="obsolate['+i+']" '+ obsolete+' >&nbsp; <b class="'+cls2+'">'+line_obsolete+'</b> </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"><input class="form-control" type="text" name="condition_information['+i+']" value="'+condition_information+'"> </div><div class="col-sm-3 text-center" style="padding-bottom:0px;padding-top:10px;"><input value="'+pricing_discount_information+'" type="text" class="form-control" name="pricing_discount['+i+']"> </div><div class="col-sm-1 text-center" style="padding-bottom:0px;padding-top:10px;"><label class="btn btn-danger delete_menufecture"> X </label></div></div></div>';
 
             $(menufacturer_wrap).show('');
             $(menufacturer_wrap).append(html);
@@ -872,6 +905,31 @@
             i--;
         });
 
+        //Add New Suplier
+        var add_supplier = $('#add_supplier');
+        var supplier_wrap = $('.supplier_wrap');
+
+        var k = 1;
+        var m = 2;
+
+        $(add_supplier).click(function(e){ //on add input button click
+            e.preventDefault();
+
+            var html = '<div class="col-md-12"><div class="row"><div class="col-sm-2"> <label>Name</label><input type="radio" name="as_manager"  style="height: calc(0.5em + 0.75rem + 0px);width: 12%;float: left;margin-top: 38px;margin-left: 5px;"> <input type="text" name="contact_name['+k+']" class="form-control" style="width: 80%;float: right;" value="" placeholder="Name"/> </div><div class="col-sm-2"> <label>Surname</label> <input type="text" name="contact_surname['+k+']" class="form-control" value="" placeholder="Surname"/> </div><div class="col-sm-2"> <label>Phone Number</label> <input type="number" name="contact_phone['+k+']" class="form-control" value="" placeholder="Phone Number"> </div><div class="col-sm-2"> <label>Email Address</label> <input type="text" name="contact_email['+k+']" class="form-control" value="" placeholder="Email Address"/> </div><div class="col-sm-2"> <label>Main Language</label> <select name="main_language['+k+']" id="main_language" class="form-control"> <option value="">Please Choose</option> <option value="English">English</option> <option value="Armenian">Armenian</option> <option value="Danish">Danish</option> <option value="Dutch">Dutch</option> <option value="French">French</option> <option value="German">German</option> <option value="Greek">Greek</option> <option value="Hindi">Hindi</option> <option value="Italian">Italian</option> <option value="Japanese">Japanese</option> <option value="Urdu">Urdu</option> </select> </div><div class="col-sm-2"> <label>English</label> <select name="english['+k+']" id="english" class="form-control" style="width:80%;float:left;"> <option value="">Please Choose</option> <option value="Yes Native">Yes Native</option> <option value="Yes Fluent written & verbal">Yes Fluent written & verbal</option> <option value="Yes Fluent verbal">Yes Fluent verbal</option> <option value="Yes Broken written & verbal">Yes Broken written & verbal</option> <option value="Yes Broken verbal">Yes Broken verbal</option> <option value="No">No</option> </select><a class="delete_suplier" style="float:left;width20%;padding:10px;"><i class="fa fa-times"></i></a> </div></div></div>';
+
+            $(supplier_wrap).append(html);
+            k++;
+            m++;
+        });
+
+        $(supplier_wrap).on("click",".delete_suplier", function(e){ //user click on remove text
+            e.preventDefault();
+            $(this).parent('div').parent('div').remove();
+            k--;
+            m--;
+        });
+
+
         //Add new Address
         //var max_fields      = 10; //maximum input boxes allowed
         var service_wrap         = $(".service_wrap"); //Fields wrapper
@@ -888,7 +946,7 @@
                     $.each(countries, function (key, value) {
                         data += '<option value="'+value.id+'">'+value.name+'</option>';
                     });
-                data += '</select></div><div class="col-sm-3"><label>Address Type</label><select name="address_type['+j+']" id="address_type" class="form-control"><option value="">Address Type</option><option value="invoice_address">Invoice Address</option><option value="delivery_address">Delivery Address</option></select></div><div class="col-sm-3 text-right"><button style="margin-top: 30px;" class="btn btn-danger waves-effect btn-md btn-block waves-light delete_address">&nbsp; &nbsp; <i class="fa fa-trash"></i>&nbsp; &nbsp; </button></div></div></div>'; //add input box
+                data += '</select></div><div class="col-sm-3 text-right"><button style="margin-top: 30px;" class="btn btn-danger waves-effect btn-md btn-block waves-light delete_address">&nbsp; &nbsp; <i class="fa fa-trash"></i>&nbsp; &nbsp; </button></div></div></div>'; //add input box
 
                 $(service_wrap).append(data); //add input box
             //}
@@ -900,7 +958,6 @@
             $(this).parent('div').parent('div').remove();
             j--;
         });
-
 
         //Get Invtors using Company id
         $(document).on('change','.companies',function(){

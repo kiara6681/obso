@@ -27,26 +27,26 @@
         padding: 0px 10px;
     }
     .p-d-5 .h5-g{
-        background: #e6b8af;
-        color:#000;
+        background: #2a3142 ;
+        color:#e6b8af;
         padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-y{
-        background: #fffd77;
-        color:#000;
+        background: #2a3142;
+        color:#fffd77;
         padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-grn{
-        background: #b7d7a8;
-        color:#000;
+        background: #2a3142;
+        color:#b7d7a8;
         padding: 15px;
         margin: 5px;
     }
     .p-d-5 .h5-r{
-        background: #d9d2e9;
-        color:#000;
+        background: #2a3142;
+        color:#d9d2e9;
         padding: 15px;
         margin: 5px;
     }
@@ -67,16 +67,16 @@
         right: 20px;
     }
     .color-g{
-        background-color: #e6b8af !important;
+        background-color: #323a4e !important;
     }
     .color-y{
-        background-color: #fffd77 !important;
+        background-color: #323a4e !important;
     }
     .color-grn{
-        background-color: #b7d7a8 !important;
+        background-color: #323a4e !important;
     }
     .color-r{
-        background-color: #d9d2e9 !important;
+        background-color: #323a4e !important;
     }
     .f-w-400{
         font-weight: 400;
@@ -238,7 +238,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                <h5 class="text-center h5-g" >Lead </h5>
+                                                <h5 class="text-center h5-g" >Lead (<span id="lead_count"><?= count($sales_lead_block);?></span>)</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="lead_block" data-id="1">
                                                 <?php
@@ -287,7 +287,7 @@
                                                             </p>
                                                             <br />
                                                             <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
-                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
+                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
@@ -314,7 +314,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                <h5 class="text-center h5-y" >Suspects</h5>
+                                                <h5 class="text-center h5-y">Suspects (<span id="suspects_count"><?= count($sales_suspects_block);?></span>)</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="suspects_block" data-id="2">
                                                 <?php
@@ -363,8 +363,8 @@
                                                             </p>
                                                             <br />
         
-                                                           <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
-                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
+                                                            <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
@@ -391,7 +391,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
-                                                 <h5 class="text-center h5-grn" >Prospects</h5>
+                                                 <h5 class="text-center h5-grn" >Prospects (<span id="prospects_count"><?= count($sales_prospects_block);?></span>)</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="prospects_block" data-id="3">
                                                 <?php
@@ -427,8 +427,7 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
-                                                            <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -448,8 +447,8 @@
                                                             </p>
                                                             <br />
         
-                                                            <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
-                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
+                                                             <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
@@ -491,7 +490,7 @@
                                         <div class="row">
                                             <div class="col-md-12 p-d-5 text-center"> 
                                                 <h5 class="text-center h5-r
-                                                color:#000;" >Account Contacts</h5>
+                                                color:#000;" >Account Contacts (<span id="key_contacts_count"><?= count($sales_key_contact_block) ;?></span>)</h5>
                                             </div>
                                             <div class="connectedSortable col-md-12 p-0" id="key_contact_block" data-id="4">
                                                 <?php
@@ -539,8 +538,8 @@
                                                             </p>
                                                             <br />
         
-                                                           <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
-                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
+                                                             <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
+                                                            <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
@@ -650,7 +649,7 @@ $(document).ready(function(){
             url : "<?= base_url() ?>admin/sales/sales_filter",
             type : 'get',
             data : {'sort_by' : sort_by, 'show_only' : show_only},
-            success : function(data){                
+            success : function(data){
                 console.log(data);
                 var temp = data.split('|-|');
                 $('#lead_block').html(temp[0]);
@@ -660,7 +659,6 @@ $(document).ready(function(){
             }
         });
     }
-
 
     $('.import_csv').on('click', function(){
         $('#import_contact').modal('show');

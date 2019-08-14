@@ -292,30 +292,6 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
-                                                <label>Payment Tearms</label>
-                                                <select name="payment_terms" class="form-control">
-                                                    <option value="">Select Payment Tearms</option>
-                                                    <option value="Advance">Advance</option>
-                                                    <option value="50/50 Advance">50/50 Advance</option>
-                                                    <option value="75/25 Advance">75/25 Advance</option>
-                                                    <option value="Pay To Ship">Pay To Ship</option>
-                                                    <option value="Pay On Delivery">Pay On Delivery</option>
-                                                    <option value="7 Days DOI">7 Days DOI</option>
-                                                    <option value="14 Days DOI">14 Days DOI</option>
-                                                    <option value="30 Days DOI">30 Days DOI</option>
-                                                    <option value="60 Days DOI">60 Days DOI</option>
-                                                    <option value="90 Days DOI">90 Days DOI</option>
-                                                    <option value="EOM">EOM</option>
-                                                    <option value="30 EOM">30 EOM</option>
-                                                    <option value="60 EOM">60 EOM</option>
-                                                    <option value="90 EOM">90 EOM</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <label>Invoice Reference Number</label>
-                                            <input class="form-control" type="text" name="invoice_ref_no" placeholder="Invoice Reference Number"><br />
-                                        </div>
-                                        <div class="col-sm-5">
                                             <label>PSL & Portal Login Information</label>
                                             <textarea class="form-control" name="pls_info" placeholder="PSL & Portal Login Information" rows="5"></textarea>
                                         </div>
@@ -331,6 +307,49 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <img src="<?= base_url(); ?>uploads/coming-soon.jpg" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <h4 class="mt-0 header-title">Financial information</h4>
+                                    <hr>
+                                    <br />
+                                    <div class="row">
+                                         <div class="col-sm-5">
+                                            <div class="row">
+                                                 <div class="col-md-6">
+                                                    <label>Payment Tearms</label>
+                                                    <select name="payment_terms" class="form-control">
+                                                        <option value="">Select Payment Tearms</option>
+                                                        <option value="Advance">Advance</option>
+                                                        <option value="50/50 Advance">50/50 Advance</option>
+                                                        <option value="75/25 Advance">75/25 Advance</option>
+                                                        <option value="Pay To Ship">Pay To Ship</option>
+                                                        <option value="Pay On Delivery">Pay On Delivery</option>
+                                                        <option value="7 Days DOI">7 Days DOI</option>
+                                                        <option value="14 Days DOI">14 Days DOI</option>
+                                                        <option value="30 Days DOI">30 Days DOI</option>
+                                                        <option value="60 Days DOI">60 Days DOI</option>
+                                                        <option value="90 Days DOI">90 Days DOI</option>
+                                                        <option value="EOM">EOM</option>
+                                                        <option value="30 EOM">30 EOM</option>
+                                                        <option value="60 EOM">60 EOM</option>
+                                                        <option value="90 EOM">90 EOM</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Ordering Status</label>   
+                                                    <select name="ordering_status" class="form-control">
+                                                        <option value="">Select Ordering Status</option>
+                                                        <option value="Free to order"> Free to order</option>
+                                                        <option value="On Hold">On Hold</option>
+                                                        <option value="Blacklist">Blacklist</option>                 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <label>Invoice Reference Number</label>
+                                            <input class="form-control" type="text" name="invoice_ref_no" placeholder="Invoice Reference Number"><br />
                                         </div>
                                     </div>
                                     <br />

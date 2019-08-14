@@ -10,40 +10,35 @@ class Suppliers_Model extends CI_Model {
     }
 
     // show all sales companies
-    public function getAllSalesContacts($status = null, $id = null){
+    public function getAllSupplierContacts($status = null, $id = null){
 
-        $this->db->select('contact.*, company.company_name');
-        $this->db->from('sales_contacts contact');
-        $this->db->join('companies company','company.id = contact.company','left');
+        $this->db->select('*');
+        $this->db->from('suppliers');
         if(!is_null($status))
         {
-            $this->db->where('contact.status', $status);
+            $this->db->where('status', $status);
         }
 
         if(!is_null($id))
         {
-            $this->db->where('contact.id', $id);
-            $this->db->group_by('contact.id');
-            $query = $this->db->order_by('contact.id desc')->get();
+            $this->db->where('id', $id);
+            $this->db->group_by('id');
+            $query = $this->db->order_by('id desc')->get();
             $query = $query->row();  
 
         }else{
-            $this->db->group_by('contact.id');
-            $query = $this->db->order_by('contact.id desc')->get();
+            $this->db->group_by('id');
+            $query = $this->db->order_by('id desc')->get();
             $query = $query->result_array();  
         }
         return $query;
     }
 
     // get sales related companies
-    public function getSalesRelatedCompany($id){
+    public function getAllSupplierManufacturer(){
 
-        $this->db->select('company.*, indus.industry as industry_name');
-        $this->db->from('sales_contacts contact');
-        $this->db->join('companies company','company.id = contact.company');
-        $this->db->join('industry indus','indus.id = company.industry');
-        
-        $this->db->where('contact.id', $id);
+        $this->db->select('*');
+        $this->db->from('supplier_manufacturers');
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;

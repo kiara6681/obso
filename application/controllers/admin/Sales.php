@@ -97,8 +97,9 @@ class Sales extends CI_Controller {
             $contact_country     = $this->input->post('contact_country');
             $industry            = $this->input->post('industry');
             $competitor          = $this->input->post('competitor');
-            $payment_terms     = $this->input->post('payment_terms');
-            $invoice_ref_no    = $this->input->post('invoice_ref_no');
+            $payment_terms       = $this->input->post('payment_terms');
+            $ordering_status     = $this->input->post('ordering_status');
+            $invoice_ref_no      = $this->input->post('invoice_ref_no');
             $pls_info            = $this->input->post('pls_info');
             $estimated_frequency = $this->input->post('estimated_frequency');
             $estimated_spend     = $this->input->post('estimated_spend');
@@ -115,36 +116,37 @@ class Sales extends CI_Controller {
             $date                = date('Y-m-d H:i:s');
 
             $data = array(
-                'company'                    => $company,
-                'trader'                     => $trader,
-                'fname'                      => $fname,
-                'lname'                      => $lname,
-                'gender'                     => $gender,
-                'personal_info'              => $personal_info,
-                'industry'                   => $industry,
-                'contact_location'           => $contact_location,
-                'contact_country'            => $contact_country,
-                'competitor'                 => $competitor,
-                /*'branch'                   => $branch,*/
-                'department'                 => $department,
-                'job_title'                  => $job_title,
-                'email'                      => $email,
-                'alternate_email'            => $alternate_email,
-                'whatsapp'                   => $whatsapp,
-                'linkedin'                   => $linkedin,
-                'mobile'                     => $mobile,
-                'direct_dial'                => $direct_dial,
-                'payment_terms'              => $payment_terms,
-                'estimate_required'          => $estimated_frequency,
-                'estimate_spend'             => $estimated_spend,
-                'manufacturers'              => json_encode($manufacturers),
-                'invoice_reference_number'   => $invoice_ref_no,
-                'pls_information'            => $pls_info,
-                'communication'              => $communication,
-                'contact_status'             => $contact_status,
-                'status'                     => $contact_database_status,
-                'created_at'                 => $date,
-                'updated_at'                 => $date
+                'company'                  => $company,
+                'trader'                   => $trader,
+                'fname'                    => $fname,
+                'lname'                    => $lname,
+                'gender'                   => $gender,
+                'personal_info'            => $personal_info,
+                'industry'                 => $industry,
+                'contact_location'         => $contact_location,
+                'contact_country'          => $contact_country,
+                'competitor'               => $competitor,
+                /*'branch'                 => $branch,*/
+                'department'               => $department,
+                'job_title'                => $job_title,
+                'email'                    => $email,
+                'alternate_email'          => $alternate_email,
+                'whatsapp'                 => $whatsapp,
+                'linkedin'                 => $linkedin,
+                'mobile'                   => $mobile,
+                'direct_dial'              => $direct_dial,
+                'payment_terms'            => $payment_terms,
+                'ordering_status'          => $ordering_status,
+                'estimate_required'        => $estimated_frequency,
+                'estimate_spend'           => $estimated_spend,
+                'manufacturers'            => json_encode($manufacturers),
+                'invoice_reference_number' => $invoice_ref_no,
+                'pls_information'          => $pls_info,
+                'communication'            => $communication,
+                'contact_status'           => $contact_status,
+                'status'                   => $contact_database_status,
+                'created_at'               => $date,
+                'updated_at'               => $date
             );
 
             //Insert Sales Data
@@ -832,7 +834,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. ($contact["trader"] != '')?$contact["trader"]:"N/A".' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A</p>
                 </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
             }
 
@@ -860,7 +862,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
                 </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
             }
 
@@ -888,7 +890,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
                 </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
             }
 
@@ -916,7 +918,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
+                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
                 </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
             }
         }

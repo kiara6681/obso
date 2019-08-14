@@ -593,8 +593,9 @@ class CI_Pagination {
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 
+		}else{
+		    $output .= '<li class="btn btn-danger btn-prev">'.$this->prev_link.'</li>&nbsp;&nbsp;';
 		}
-
 		// Render the pages
 		if ($this->display_pages !== FALSE)
 		{
@@ -637,6 +638,8 @@ class CI_Pagination {
 
 			$output .= $this->next_tag_open.'<a href="'.$base_url.$this->prefix.$i.$this->suffix.'"'.$attributes
 				.$this->_attr_rel('next').'>'.$this->next_link.'</a>'.$this->next_tag_close;
+		}else{
+		    $output .= '<li class="btn btn-danger btn-prev">'.$this->next_link.'</li>&nbsp;&nbsp;';
 		}
 
 		// Render the "Last" link
