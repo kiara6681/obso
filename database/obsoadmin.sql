@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2019 at 08:39 AM
+-- Generation Time: Aug 18, 2019 at 11:09 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -33,6 +33,7 @@ CREATE TABLE `about` (
   `header_title` varchar(255) NOT NULL,
   `header_description` text NOT NULL,
   `image` varchar(255) NOT NULL,
+  `2_image` text,
   `middle_title` varchar(255) NOT NULL,
   `middle_description` text NOT NULL,
   `image1` varchar(255) NOT NULL,
@@ -60,8 +61,8 @@ CREATE TABLE `about` (
 -- Dumping data for table `about`
 --
 
-INSERT INTO `about` (`id`, `header_title`, `header_description`, `image`, `middle_title`, `middle_description`, `image1`, `middle_title_1`, `middle_description_1`, `image2`, `middle_title_2`, `middle_description_2`, `image3`, `middle_title_3`, `middle_description_3`, `image4`, `middle_title_4`, `middle_description_4`, `image5`, `middle_title_5`, `middle_description_5`, `image6`, `footer_title`, `footer_description`, `image7`) VALUES
-(1, 'We are a company that shares the frustrations of the engineering, maintenance and purchasing professionals; we are here to help.', ' <br> <br> \r\nWe have years of experience helping some of the world\'s leading and most recognisable brands when sourcing equipment for their industrial machinery.\r\n  <br> <br> \r\nManufacturing and production line machines often have components and equipment from multiple manufacturers. It is often the case that these machines also vary in age and condition. Budget and economical restraints do not always allow sites to be fully upgraded and keeping reliable and fully functioning machinery operating efficiently is a huge challenge.  If you do not have a reliable, quality purchase partner who specialises in this commodity it can become overbearing.\r\n  <br> <br> \r\nObso is built on a strong business ethos that focuses on helping manufacturing and purchasing professionals when it comes to sourcing solutions to the purchasing difficulties they face when trying to balance budgets whilst keeping sites running at optimum performance and uptime.\r\n  <br> <br> \r\nObso is a stockist and supplier of full lifecycle industrial automation equipment, meaning we stock and supply current line, rare and discontinued parts from the world\'s leading manufacturers. Obso also upcycles failing and failed parts to extend the life of your equipment.\r\n  <br> <br> \r\nWhen ordering equipment in personal life, companies concentrate on you as the consumer. Business to business purchases should be no different. Obso works tirelessly to make sure our customers receive a service that at the very least meets their expectations, and where possible exceeds them.\r\n  <br> <br> \r\nThe Manufacturing industry is the backbone of the world\'s economy and we are passionate about making sure manufacturing professionals are able to continue to do what they do best. Sourcing obsolete and hard to find parts need not be a headache and Obso people are here to help in any way we can. “Everything we do, every decision we make is about helping remove the headache caused by failing & hard to find parts”', 'IMG_0188.JPG', 'Your global, local supplier', 'We stock 1000\'s of items but should you need an item not stocked directly we have a global network of preferred suppliers who can deliver as early as the next day. ', 'FLat Location Icon.jpg', 'Assured quality', 'We only sell original equipment. Our stock goes through a rigorous quality check, as do our supplier partners making sure the equipment you order is of the highest quality.', 'thumb-up icon.png', 'Time critical enquiries', 'When you are in need of urgent equipment is when you need a reliable supplier most. Prices should be consistent regardless of urgency or situation. ', 'stop watch icon.png', 'Full Lifecycle Equipment', 'We offer current line, rare and obsolete equipment from the world\'s leading manufacturers in a variety of conditions from brand new to 24-month warrantied pre-owned equipment.', 'Recycle_256x256-32.png', 'Exchange & Upcycle', 'If a straight supply isn\'t the solution why not try part exchanging your equipment to obtain a discounted buy price or sending your equipment in to be reconditioned.', 'arrows_exchange-512.png', 'Warranty & Returns: ', 'Unfortunately, sometimes things do not work out as planned. When the unavoidable happens, Obso provides a no questions asked returns policy and a 24-month Obso warranty.', 'Warranty.png', 'Items ready to go', 'We have direct stock of 1000s of brand new and pre-owned obsolete and legacy automation equipment from the worlds leading brands.', 'IMG_4373.JPG');
+INSERT INTO `about` (`id`, `header_title`, `header_description`, `image`, `2_image`, `middle_title`, `middle_description`, `image1`, `middle_title_1`, `middle_description_1`, `image2`, `middle_title_2`, `middle_description_2`, `image3`, `middle_title_3`, `middle_description_3`, `image4`, `middle_title_4`, `middle_description_4`, `image5`, `middle_title_5`, `middle_description_5`, `image6`, `footer_title`, `footer_description`, `image7`) VALUES
+(1, 'We are a company that shares the frustrations of the engineering, maintenance and purchasing professionals; we are here to help.', ' <br> <br> \r\nWe have years of experience helping some of the world\'s leading and most recognisable brands when sourcing equipment for their industrial machinery.\r\n  <br> <br> \r\nManufacturing and production line machines often have components and equipment from multiple manufacturers. It is often the case that these machines also vary in age and condition. Budget and economical restraints do not always allow sites to be fully upgraded and keeping reliable and fully functioning machinery operating efficiently is a huge challenge.  If you do not have a reliable, quality purchase partner who specialises in this commodity it can become overbearing.\r\n  <br> <br> \r\nObso is built on a strong business ethos that focuses on helping manufacturing and purchasing professionals when it comes to sourcing solutions to the purchasing difficulties they face when trying to balance budgets whilst keeping sites running at optimum performance and uptime.\r\n  <br> <br> \r\nObso is a stockist and supplier of full lifecycle industrial automation equipment, meaning we stock and supply current line, rare and discontinued parts from the world\'s leading manufacturers. Obso also upcycles failing and failed parts to extend the life of your equipment.\r\n  <br> <br> \r\nWhen ordering equipment in personal life, companies concentrate on you as the consumer. Business to business purchases should be no different. Obso works tirelessly to make sure our customers receive a service that at the very least meets their expectations, and where possible exceeds them.\r\n  <br> <br> \r\nThe Manufacturing industry is the backbone of the world\'s economy and we are passionate about making sure manufacturing professionals are able to continue to do what they do best. Sourcing obsolete and hard to find parts need not be a headache and Obso people are here to help in any way we can. “Everything we do, every decision we make is about helping remove the headache caused by failing & hard to find parts”', 'IMG_0188.JPG', 'IMG_2.jpg', 'Your global, local supplier', 'We stock 1000\'s of items but should you need an item not stocked directly we have a global network of preferred suppliers who can deliver as early as the next day. ', 'FLat Location Icon.jpg', 'Assured quality', 'We only sell original equipment. Our stock goes through a rigorous quality check, as do our supplier partners making sure the equipment you order is of the highest quality.', 'thumb-up icon.png', 'Time critical enquiries', 'When you are in need of urgent equipment is when you need a reliable supplier most. Prices should be consistent regardless of urgency or situation. ', 'stop watch icon.png', 'Full Lifecycle Equipment', 'We offer current line, rare and obsolete equipment from the world\'s leading manufacturers in a variety of conditions from brand new to 24-month warrantied pre-owned equipment.', 'Recycle_256x256-32.png', 'Exchange & Upcycle', 'If a straight supply isn\'t the solution why not try part exchanging your equipment to obtain a discounted buy price or sending your equipment in to be reconditioned.', 'arrows_exchange-512.png', 'Warranty & Returns: ', 'Unfortunately, sometimes things do not work out as planned. When the unavoidable happens, Obso provides a no questions asked returns policy and a 24-month Obso warranty.', 'Warranty.png', 'Items ready to go', 'We have direct stock of 1000s of brand new and pre-owned obsolete and legacy automation equipment from the worlds leading brands.', 'IMG_4373.JPG');
 
 -- --------------------------------------------------------
 
@@ -625,12 +626,15 @@ CREATE TABLE `home_front` (
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` text NOT NULL,
+  `url_one` text,
   `title_1` varchar(255) NOT NULL,
   `image_1` varchar(255) NOT NULL,
   `description_1` text NOT NULL,
+  `url_two` text,
   `title_2` varchar(255) NOT NULL,
   `image_2` varchar(255) NOT NULL,
   `description_2` text NOT NULL,
+  `url_three` text,
   `category_title` varchar(255) NOT NULL,
   `category_description` varchar(255) NOT NULL,
   `part_title` varchar(255) NOT NULL,
@@ -645,8 +649,8 @@ CREATE TABLE `home_front` (
 -- Dumping data for table `home_front`
 --
 
-INSERT INTO `home_front` (`id`, `main_title`, `main_description`, `title`, `image`, `description`, `title_1`, `image_1`, `description_1`, `title_2`, `image_2`, `description_2`, `category_title`, `category_description`, `part_title`, `part_description`, `part_cat_title`, `part_cat_description`, `part_cat_heading`, `created_at`) VALUES
-(1, 'Obso are stockists & suppliers of Current Line, Phase out & Obsolete Industrial electronic equipment.', '', 'Find It', 'obso_logo just O .png', 'We stock thousands of obsolete and time-critical spares. Hard to source current line equipment can be sourced and supplied as early as the next day from our large network of fantastic suppliers. With the ability to get costs and solution to you within an hour.', 'Fix it', 'obso_logo just O .png', 'We only provide original equipment to not only get you up and running but to keep your machines running. We respect your engineering expertise, providing you with the correct original equipment so you can work on getting your equipment back and working. ', 'Faster', 'obso_logo just O .png', 'Items are delivered quickly. We know this equipment can be vital to your business and downtime costs dear. We have excellent relations and specific SLA\'s with our network of trusted couriers around the world, helping ensure you receive your items when promised.', 'Select a Part Category', 'Select a category to than find an appropriate manufacturer to make your part enquiry', 'Urgent Part Request?', 'We will act quickly to get you back up and running', 'Obso\'s Most Popular Items', 'Obso\'s most popular items from all manufacturers by part type .', 'Industrial Eletronics', '0000-00-00');
+INSERT INTO `home_front` (`id`, `main_title`, `main_description`, `title`, `image`, `description`, `url_one`, `title_1`, `image_1`, `description_1`, `url_two`, `title_2`, `image_2`, `description_2`, `url_three`, `category_title`, `category_description`, `part_title`, `part_description`, `part_cat_title`, `part_cat_description`, `part_cat_heading`, `created_at`) VALUES
+(1, 'Obso are stockists & suppliers of Current Line, Phase out & Obsolete Industrial electronic equipment.', '', 'Find It', 'obso_logo just O .png', 'We stock thousands of obsolete and time-critical spares. Hard to source current line equipment can be sourced and supplied as early as the next day from our large network of fantastic suppliers. With the ability to get costs and solution to you within an hour.', 'https://www.google.com', 'Fix it', 'obso_logo just O .png', 'We only provide original equipment to not only get you up and running but to keep your machines running. We respect your engineering expertise, providing you with the correct original equipment so you can work on getting your equipment back and working. ', 'https://www.google.com', 'Faster', 'obso_logo just O .png', 'Items are delivered quickly. We know this equipment can be vital to your business and downtime costs dear. We have excellent relations and specific SLA\'s with our network of trusted couriers around the world, helping ensure you receive your items when promised.', 'https://www.google.com', 'Select a Part Category', 'Select a category to than find an appropriate manufacturer to make your part enquiry', 'Urgent Part Request?', 'We will act quickly to get you back up and running', 'Obso\'s Most Popular Items', 'Obso\'s most popular items from all manufacturers by part type .', 'Industrial Eletronics', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -988,6 +992,7 @@ CREATE TABLE `sales_contacts` (
   `mobile` varchar(20) DEFAULT NULL,
   `direct_dial` varchar(20) DEFAULT NULL,
   `payment_terms` varchar(255) DEFAULT NULL,
+  `ordering_status` varchar(100) DEFAULT NULL,
   `estimate_required` varchar(255) DEFAULT NULL,
   `estimate_spend` varchar(255) DEFAULT NULL,
   `manufacturers` text,
@@ -1007,12 +1012,12 @@ CREATE TABLE `sales_contacts` (
 -- Dumping data for table `sales_contacts`
 --
 
-INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `contact_location`, `contact_country`, `competitor`, `branch`, `department`, `industry`, `job_title`, `email`, `alternate_email`, `whatsapp`, `linkedin`, `mobile`, `direct_dial`, `payment_terms`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `archieved_resoan`, `contact_prospect_status`, `closable_prospect_status`, `status`, `created_at`, `updated_at`) VALUES
-(6, 'admin', 3, 'Prem', 'Saini', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
-(7, 'admin', 3, 'Amit', 'Sharma', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, 'null', '', '', NULL, 'active', 'Reason A', 0, 0, 0, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
-(8, 'admin', 5, 'Ravi', 'Kumar', '', '', NULL, 76, NULL, 'Branch', 'Purchasing', NULL, 'Developer', 'ravi@gmail.com', NULL, NULL, NULL, '9549494175', '', '30 EOM', 'Less then 1 year', '50k+', '{\"1\":\"2\",\"2\":\"3\"}', '', 'asd', 'email', 'active', NULL, 0, 0, 2, '2019-08-10 12:49:14', '2019-08-10 12:53:41'),
-(9, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'this is my persoal info', NULL, 76, NULL, '', 'Workshop / Factory /Production / Engineering', NULL, 'Developer', 'ramramsark@gmail.com', 'ramramsark@gmail.com', '9549494175', 'linkedin.com/abhi123', '9602947878', '01254210', 'Pay On Delivery', 'Daily', '50k+', '{\"1\":\"2\",\"2\":\"3\",\"16\":\"17\",\"17\":\"18\"}', 'INC123N120', 'demo login information', 'email', 'do_not_contact', NULL, 1, 1, 3, '2019-08-10 14:48:26', '2019-08-10 22:35:04'),
-(10, 'admin', 3, 'Michel', 'Hussy', NULL, '', 'Jaipur', 76, 'Thisd is test message', NULL, 'Purchasing', 1, 'Developer', 'michel@gmail.com', 'hussy@gmail.com', '', '', '8560031312', '201201', NULL, 'Weekly', '50k+', '{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"8\":\"9\",\"11\":\"12\",\"12\":\"13\",\"15\":\"16\",\"20\":\"21\",\"21\":\"23\",\"22\":\"24\",\"23\":\"25\"}', NULL, 'Thisd is test message', 'email', 'active', NULL, 0, 0, 2, '2019-08-11 01:29:05', '2019-08-11 02:12:39');
+INSERT INTO `sales_contacts` (`id`, `trader`, `company`, `fname`, `lname`, `gender`, `personal_info`, `contact_location`, `contact_country`, `competitor`, `branch`, `department`, `industry`, `job_title`, `email`, `alternate_email`, `whatsapp`, `linkedin`, `mobile`, `direct_dial`, `payment_terms`, `ordering_status`, `estimate_required`, `estimate_spend`, `manufacturers`, `invoice_reference_number`, `pls_information`, `communication`, `contact_status`, `archieved_resoan`, `contact_prospect_status`, `closable_prospect_status`, `status`, `created_at`, `updated_at`) VALUES
+(6, 'admin', 3, 'Prem', 'Saini', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, 'null', '', '', NULL, 'active', NULL, 0, 0, 1, '2019-08-10 12:48:46', '2019-08-10 12:48:46'),
+(7, 'admin', 3, 'Amit', 'Sharma', '', '', NULL, 76, NULL, '', '', NULL, '', '', NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, 'null', '', '', NULL, 'active', 'Reason A', 0, 0, 0, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
+(8, 'admin', 5, 'Ravi', 'Kumar', '', '', NULL, 76, NULL, 'Branch', 'Purchasing', NULL, 'Developer', 'ravi@gmail.com', NULL, NULL, NULL, '9549494175', '', '30 EOM', NULL, 'Less then 1 year', '50k+', '{\"1\":\"2\",\"2\":\"3\"}', '', 'asd', 'email', 'active', NULL, 0, 0, 2, '2019-08-10 12:49:14', '2019-08-10 12:53:41'),
+(9, 'admin', 3, 'Ravi', 'Kumawat', 'Male', 'this is my persoal info', NULL, 76, NULL, '', 'Workshop / Factory /Production / Engineering', NULL, 'Developer', 'ramramsark@gmail.com', 'ramramsark@gmail.com', '9549494175', 'linkedin.com/abhi123', '9602947878', '01254210', 'Pay On Delivery', NULL, 'Daily', '50k+', '{\"1\":\"2\",\"2\":\"3\",\"16\":\"17\",\"17\":\"18\"}', 'INC123N120', 'demo login information', 'email', 'do_not_contact', NULL, 1, 1, 4, '2019-08-10 14:48:26', '2019-08-10 22:35:04'),
+(10, 'admin', 3, 'Michel', 'Hussy', '', '', 'Jaipur', 76, 'Thisd is test message', NULL, 'Purchasing', 1, 'Developer', 'michel@gmail.com', 'hussy@gmail.com', '', '', '8560031312', '201201', '', NULL, 'Weekly', '50k+', '{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"8\":\"9\",\"11\":\"12\",\"12\":\"13\",\"15\":\"16\",\"20\":\"21\",\"21\":\"23\",\"22\":\"24\",\"23\":\"25\"}', '', 'Thisd is test message', 'email', 'active', NULL, 0, 0, 1, '2019-08-11 01:29:05', '2019-08-12 14:51:55');
 
 -- --------------------------------------------------------
 
@@ -1047,9 +1052,7 @@ INSERT INTO `sales_contact_addresses` (`id`, `sales_contact_id`, `address_type`,
 (32, 7, '', '', '', '', '', '', '', 1, '2019-08-10 12:49:00', '2019-08-10 12:49:00'),
 (34, 8, '', 'ASD-41', 'vidhyadhar nagar', 'jaipur', 'vidhyadhar nagar', '302039', '76', 1, '2019-08-10 12:53:41', '2019-08-10 12:53:41'),
 (37, 9, 'head_office_address', 'B-53, balaji tower', 'padampura road', 'Jaipur', 'padampura road', '302039', '76', 1, '2019-08-10 22:35:04', '2019-08-10 22:35:04'),
-(41, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39'),
-(42, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39'),
-(43, 10, '', '', '', '', '', '', '', 1, '2019-08-11 02:12:39', '2019-08-11 02:12:39');
+(44, 10, '', '', '', '', '', '', '', 1, '2019-08-12 14:51:55', '2019-08-12 14:51:55');
 
 -- --------------------------------------------------------
 
@@ -1198,33 +1201,86 @@ INSERT INTO `subcategories` (`id`, `categories_name`, `subcategories`, `creation
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `website` varchar(100) DEFAULT NULL,
+  `trader` varchar(50) DEFAULT NULL,
+  `supplier_type` varchar(200) DEFAULT NULL,
+  `contact_country` int(11) DEFAULT NULL,
+  `cut_off_time` text,
+  `information_notes` text,
+  `supplier_other_names` text,
+  `express_options` varchar(50) DEFAULT NULL,
+  `conditions_offered` varchar(50) DEFAULT NULL,
+  `delivery_time` varchar(50) DEFAULT NULL,
+  `quality_rating` int(11) DEFAULT NULL,
+  `pricing_rating` int(11) DEFAULT NULL,
+  `accuracy_rating` int(11) DEFAULT NULL,
+  `responce_time_rating` int(11) DEFAULT NULL,
+  `communication_rating` int(11) DEFAULT NULL,
+  `overall_rating` decimal(10,0) DEFAULT NULL,
+  `brief_info_quality` text,
+  `brief_info_pricing` text,
+  `brief_info_delivery` text,
+  `brief_info_time` text,
+  `brief_info_communication` text,
+  `brief_info_coverall` text,
+  `alternate_supplier_conditions` text,
+  `payment_terms` varchar(50) DEFAULT NULL,
+  `ordering_status` varchar(100) DEFAULT NULL,
+  `unique_number` varchar(100) DEFAULT NULL,
+  `communication` varchar(20) DEFAULT NULL,
+  `contact_status` varchar(255) NOT NULL,
+  `mark_status` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `company`, `website`, `trader`, `supplier_type`, `contact_country`, `cut_off_time`, `information_notes`, `supplier_other_names`, `express_options`, `conditions_offered`, `delivery_time`, `quality_rating`, `pricing_rating`, `accuracy_rating`, `responce_time_rating`, `communication_rating`, `overall_rating`, `brief_info_quality`, `brief_info_pricing`, `brief_info_delivery`, `brief_info_time`, `brief_info_communication`, `brief_info_coverall`, `alternate_supplier_conditions`, `payment_terms`, `ordering_status`, `unique_number`, `communication`, `contact_status`, `mark_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Hastag Soft', 'http://www.dexusmedia.com', 'admin', 'OEM Manufacturer', 76, 'UK 6:30pm Latest Order', 'Generic Supplier Information Notes', 'Other Names Supplier known as', '[\"Less then 1 year\",\"Weekly\"]', 'All supply conditions check quote', '3 Working Days', 4, 3, 3, 3, 4, '3', NULL, NULL, NULL, NULL, NULL, NULL, 'Alternate supplier conditions explaniation:', NULL, NULL, NULL, 'sms', 'in_active', 0, '3', '2019-08-13 22:36:33', '2019-08-13 22:36:33'),
+(2, 'Hastag Soft', 'http://www.dexusmedia.com', 'admin', 'Indirect Official Distributor', 73, 'UK 8:30pm Latest Order', 'neric Supplier Information N', 'upplier known as', '[\"Less then 1 year\",\"Daily\"]', 'All supply conditions check quote', '2 Working Days', 3, 3, 3, 3, 4, '3', NULL, NULL, NULL, NULL, NULL, NULL, 'Alternate supplier conditions explaniatio', NULL, NULL, NULL, 'sms', 'active', 0, '3', '2019-08-13 22:42:11', '2019-08-13 22:42:11'),
+(3, 'BP Solutionss', 'http://www.dexusmedia.com', 'admin', 'Indirect Official Distributor', 76, 'UK 6:30pm Latest Order', 'Generic Supplier Information Notes', 'Other Names Supplier known as', '[\"Less then 1 year\",\"Monthly\"]', 'All supply conditions & Repair', '2 Working Days', 4, 4, 4, 4, 5, '4', NULL, NULL, NULL, NULL, NULL, NULL, 'Alternate supplier conditions explaniation:\r\n\r\n', NULL, NULL, NULL, 'both', 'in_active', 0, '1', '2019-08-13 22:54:11', '2019-08-13 22:54:11'),
+(4, 'Hastag Soft', 'http://www.itqwerty.com', 'admin', 'Direct Official Distributor', 73, 'UK 6:30pm Latest Order', 'Generic Supplier Information Notes', 'Other Names Supplier known as', 'null', 'Brand New supply only', '3 Working Days', NULL, NULL, NULL, NULL, NULL, '0', 'ogdfgdfg', 'sdfgdf', 'sgdfbgxcvb', 'dsfhdfhawer', 'tdf', 'sgsdfshysfdg', 'Alternate supplier conditions explaniation:\r\n\r\n', NULL, NULL, NULL, 'email', 'in_active', 0, '2', '2019-08-14 01:31:52', '2019-08-14 01:31:52');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `suppliers_contacts`
 --
 
 CREATE TABLE `suppliers_contacts` (
   `id` int(11) NOT NULL,
-  `trader` varchar(11) DEFAULT NULL COMMENT 'created_by',
-  `company` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `as_manager` int(11) DEFAULT NULL,
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
-  `gender` varchar(10) DEFAULT NULL,
-  `personal_info` longtext,
-  `branch` varchar(255) DEFAULT NULL,
-  `department` varchar(255) DEFAULT NULL,
-  `job_title` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL,
-  `direct_dial` varchar(20) DEFAULT NULL,
-  `payment_terms` varchar(255) DEFAULT NULL,
-  `delivery_lead_time` varchar(255) DEFAULT NULL,
-  `standard_delivery_lead_time` varchar(255) DEFAULT NULL,
-  `manufacturers` text,
-  `payment_reference` varchar(255) DEFAULT NULL,
-  `archieved_resoan` text,
+  `main_language` varchar(50) DEFAULT NULL,
+  `english` varchar(50) DEFAULT NULL,
   `status` tinyint(1) NOT NULL COMMENT '1 for active and 2 for inactive and 3 for archieve',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliers_contacts`
+--
+
+INSERT INTO `suppliers_contacts` (`id`, `supplier_id`, `as_manager`, `fname`, `lname`, `email`, `mobile`, `main_language`, `english`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Prem ', 'Saini', 'hastagsoftwares@gmail.com', '07014957469', 'Armenian', 'Yes Native', 1, '2019-08-13 22:36:33', '2019-08-13 22:36:33'),
+(2, 2, NULL, 'Prem', ' Saini', 'hastagsoftwares@gmail.com', '9602947878', 'English', 'Yes Native', 1, '2019-08-13 22:42:11', '2019-08-13 22:42:11'),
+(3, 3, NULL, 'Ravi ', 'Kumawat', 'ramramsark@gmail.com', '09549494175', 'Armenian', 'Yes Fluent written & verbal', 1, '2019-08-13 22:54:11', '2019-08-13 22:54:11'),
+(4, 4, NULL, 'Prem ', 'Saini', 'hastagsoftwares@gmail.com', '09549494175', 'Danish', 'Yes Fluent written & verbal', 1, '2019-08-14 01:31:52', '2019-08-14 01:31:52');
 
 -- --------------------------------------------------------
 
@@ -1234,26 +1290,30 @@ CREATE TABLE `suppliers_contacts` (
 
 CREATE TABLE `supplier_address` (
   `id` int(11) NOT NULL,
-  `session_id` int(5) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `street_address` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
-  `zip` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `address_type` varchar(255) NOT NULL,
-  `creation_date` datetime NOT NULL
+  `session_id` int(5) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `town` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `zip_code` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `address_type` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `supplier_address`
 --
 
-INSERT INTO `supplier_address` (`id`, `session_id`, `location`, `street_address`, `city`, `state`, `zip`, `country`, `address_type`, `creation_date`) VALUES
-(1, 8219, 'jklj', 'jlk', 'lkjklj', 'kljlk', '89767', 'usa', 'AE', '2019-06-16 22:25:37'),
-(2, 6205, 'asdfsad', 'asdfsa', 'asdf', 'sdsdfsad', 'sadfsad', 'india', 'AE', '2019-06-18 13:02:53'),
-(3, 4198, 'Unit 1 Summerhouse Place', 'Summerhouse Road', 'Moulton Park Industrail Estate', 'Northampton', 'NN3 6GL', 'uk', 'AE', '2019-07-03 22:49:24'),
-(4, 2863, 'gewwfff', 'wfegeg', 'Stoke on Trent', '', 'ST4 2TE', '', '', '2019-07-03 23:40:14');
+INSERT INTO `supplier_address` (`id`, `session_id`, `location`, `street`, `town`, `state`, `zip_code`, `country`, `address_type`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'B- 53,', ' Balaji Tower 1st', 'Jaipur', ' Balaji Tower 1st', '302039', '76', NULL, 1, '2019-08-13 22:07:02', '2019-08-13 22:07:02'),
+(2, 2, 'B- 53', ' Balaji Tower 1st', 'Jaipur', ' Balaji Tower 1st', '302039', '76', NULL, 1, '2019-08-13 22:29:49', '2019-08-13 22:29:49'),
+(3, 1, 'B- 53,', ' Balaji Tower 1st', 'Jaipur', ' Balaji Tower 1st', '302039', '76', NULL, 1, '2019-08-13 22:36:33', '2019-08-13 22:36:33'),
+(4, 2, 'Jaipur', 'B- 53, Balaji Tower 1st', 'Jaipur', 'B- 53, Balaji Tower 1st', '302039', '76', NULL, 1, '2019-08-13 22:42:11', '2019-08-13 22:42:11'),
+(5, 3, 'Jaipur', 'padampura road', 'Jaipur', 'padampura road', '302039', '76', NULL, 1, '2019-08-13 22:54:11', '2019-08-13 22:54:11'),
+(6, 4, 'Jaipur', 'B- 53, Balaji Tower 1st', 'Jaipur', 'B- 53, Balaji Tower 1st', '302039', '76', NULL, 1, '2019-08-14 01:31:52', '2019-08-14 01:31:52');
 
 -- --------------------------------------------------------
 
@@ -1283,16 +1343,6 @@ CREATE TABLE `supplier_contact` (
   `creation_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `supplier_contact`
---
-
-INSERT INTO `supplier_contact` (`id`, `company_id`, `session_id`, `fname`, `lname`, `gender`, `department`, `job_title`, `branch`, `email`, `mobile`, `direct_dial`, `phone`, `key_personal_info`, `mkt_preferance`, `contact_status`, `mark_status`, `status`, `creation_date`) VALUES
-(1, 1, 8219, 'jlkjl', 'jhj', 'male', 'jkhjk', 'jkhjkh', 'hj', 'jj@kk.com', 677, 6664, 0, '664', 'use_sms', '', 0, '', '2019-06-16 19:58:35'),
-(2, 2, 6205, 'Virendra', 'Meshram', 'male', 'asdfs', 'sdfas', 'asdf', 'virendrameshram60@gmail.com', 879797979, 2147483647, 0, 'sdfasdasdf', 'use_email', '', 0, '', '2019-06-18 13:03:22'),
-(3, 3, 4198, 'Dario', 'Amanovic', 'male', '', 'Account Manager', 'Northampton UK', 'uksales@unisgroup.com', 2147483647, 1604499777, 0, '', '', '', 0, '', '2019-07-03 22:52:21'),
-(4, 4, 2863, 'gthgergg', 'gergegg', 'male', '', 'eggeeg', '', '', 383625583, 0, 0, '', 'use_email', '', 0, '', '2019-07-03 23:40:35');
-
 -- --------------------------------------------------------
 
 --
@@ -1316,6 +1366,36 @@ INSERT INTO `supplier_industry` (`id`, `industry`, `creation_date`, `status`) VA
 (6, 'Indirect Official Distributor', '2019-07-10 23:32:14', 0),
 (7, 'Repair with Stock & Supply (independent)', '2019-07-10 23:32:29', 0),
 (8, 'Independent 3rd Party Stockist & Supplier', '2019-07-10 23:32:45', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplier_manufacturers`
+--
+
+CREATE TABLE `supplier_manufacturers` (
+  `id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `manufacturer` varchar(50) DEFAULT NULL,
+  `featured` int(11) DEFAULT NULL,
+  `current` varchar(50) DEFAULT NULL,
+  `obsolate` varchar(50) DEFAULT NULL,
+  `condition_information` text,
+  `pricing_discount` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplier_manufacturers`
+--
+
+INSERT INTO `supplier_manufacturers` (`id`, `supplier_id`, `manufacturer`, `featured`, `current`, `obsolate`, `condition_information`, `pricing_discount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, '4', NULL, NULL, NULL, '', 'Pricing & Discount information', 1, '2019-08-13 22:36:33', '2019-08-13 22:36:33'),
+(2, 2, '2', NULL, NULL, NULL, 'ondition information', 'ricing & Discount infor', 1, '2019-08-13 22:42:11', '2019-08-13 22:42:11'),
+(3, 3, '5', NULL, 'Current Line', NULL, 'information', 'Discount ', 1, '2019-08-13 22:54:11', '2019-08-13 22:54:11'),
+(4, 4, '4', NULL, 'Current Line', NULL, 'n information', 'ng & Discount inf', 1, '2019-08-14 01:31:52', '2019-08-14 01:31:52');
 
 -- --------------------------------------------------------
 
@@ -1700,6 +1780,12 @@ ALTER TABLE `subcategories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suppliers_contacts`
 --
 ALTER TABLE `suppliers_contacts`
@@ -1721,6 +1807,12 @@ ALTER TABLE `supplier_contact`
 -- Indexes for table `supplier_industry`
 --
 ALTER TABLE `supplier_industry`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supplier_manufacturers`
+--
+ALTER TABLE `supplier_manufacturers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1905,7 +1997,7 @@ ALTER TABLE `sales_contacts`
 -- AUTO_INCREMENT for table `sales_contact_addresses`
 --
 ALTER TABLE `sales_contact_addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1932,28 +2024,40 @@ ALTER TABLE `subcategories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `suppliers_contacts`
 --
 ALTER TABLE `suppliers_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `supplier_address`
 --
 ALTER TABLE `supplier_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supplier_contact`
 --
 ALTER TABLE `supplier_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `supplier_industry`
 --
 ALTER TABLE `supplier_industry`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `supplier_manufacturers`
+--
+ALTER TABLE `supplier_manufacturers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `supplier_records`
