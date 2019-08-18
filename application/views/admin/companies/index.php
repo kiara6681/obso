@@ -150,7 +150,7 @@
                                 }
 
                                 // show supplier companies
-                                foreach ($supplier_companies as $key => $company) {
+                                /*foreach ($supplier_companies as $key => $company) {
 
                                     // Get company contact
                                     $company_contacts = $this->Companies_Model->getCompanyContacts($company['id']);
@@ -237,7 +237,7 @@
                                         </div>
                                     </div>
                                     <?php
-                                }
+                                }*/
                                 ?>
                             </div>
                         </div>
@@ -254,8 +254,8 @@
                                             <select id="show_only_companies" name="show_only_companies" class="form-control">
                                                 <option value="">Only Show</option>
                                                 <option value="1">All Company</option>
-                                                <option value="2">Sales Company</option>
-                                                <option value="3">Supplier Company</option>
+                                                <!-- <option value="2">Sales Company</option>
+                                                <option value="3">Supplier Company</option> -->
                                                 <option value="4">Number of contact 10-99</option>
                                                 <option value="5">Number of contact 100+</option>
                                                 <option value="6">10-99 Enquiry Record</option>

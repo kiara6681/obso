@@ -37,10 +37,10 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <input type="radio" name="comp_type" class="company_type" value="1" checked="checked"> &nbsp; 
+                            <!-- <input type="radio" name="comp_type" class="company_type" value="1" checked="checked"> &nbsp; 
                             Sales Company &nbsp;&nbsp;
                             <input type="radio" name="comp_type" class="company_type" value="2"> &nbsp; 
-                            Supplier Company
+                            Supplier Company -->
 
                             <br />
                             <br />

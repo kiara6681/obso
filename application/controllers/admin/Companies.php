@@ -272,7 +272,7 @@ class Companies extends CI_Controller {
         $all_sales_companies = $this->Companies_Model->sortBySalesCompanies($sort_by, $country_by, $show_only);
 
         // Get all supplier companies
-        $supplier_companies = $this->Companies_Model->sortBySupplierCompanies($sort_by, $country_by, $show_only);
+        //$supplier_companies = $this->Companies_Model->sortBySupplierCompanies($sort_by, $country_by, $show_only);
 
         $sales_companies = array();
 
@@ -326,7 +326,7 @@ class Companies extends CI_Controller {
 
         // sory by (show only sales company)
         // show only sales companies
-        if($show_only == 2){
+        /*if($show_only == 2){
 
             $supplier_companies = array();
         }
@@ -334,7 +334,7 @@ class Companies extends CI_Controller {
         if($show_only == 3){
 
             $sales_companies = array();
-        }
+        }*/
 
         // check if number of contact are between 10 to 99
         if($show_only == 4 || $show_only == 5){
@@ -458,7 +458,7 @@ class Companies extends CI_Controller {
                     </div>';
         }
 
-        foreach ($supplier_companies as $key => $sup_comp) {
+        /*foreach ($supplier_companies as $key => $sup_comp) {
             
             // Get company contact
             $company_contacts = $this->Companies_Model->getCompanyContacts($sup_comp['id']);
@@ -544,7 +544,7 @@ class Companies extends CI_Controller {
                             </div>
                         </div>
                     </div>';
-        }
+        }*/
 
         echo $html;
     }
