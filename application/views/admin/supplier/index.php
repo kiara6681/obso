@@ -287,7 +287,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_supplier/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -360,7 +360,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_supplier/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -443,7 +443,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_supplier/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -530,7 +530,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_supplier/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
