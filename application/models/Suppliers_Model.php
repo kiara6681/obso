@@ -218,4 +218,56 @@ class Suppliers_Model extends CI_Model {
         return $query;
     }
 
+    // sort and show only suppliers
+    public function sortBySuppliers($sort_by = null, $show_only = null)
+    {
+        $this->db->select('sups.*');
+        $this->db->from('suppliers sups');
+
+        if($show_only == 15 || $show_only == 16 || $show_only == 17 || $show_only == 18 || $show_only == 19 || $show_only == 20){ 
+
+            $manufacturer = 0;
+            if($show_only == 15){ $manufacturer = 21; }
+            if($show_only == 16){ $manufacturer = 2; }
+            if($show_only == 17){ $manufacturer = 14; }
+            if($show_only == 18){ $manufacturer = 15; }
+            if($show_only == 19){ $manufacturer = 13; }
+            if($show_only == 20){ $manufacturer = 4; }
+
+            $this->db->join('supplier_manufacturers sup_man','sup_man.supplier_id = sups.id', 'LEFT');
+            //$this->db->join('manufacturer man','man.id = sup_man.manufacturer', 'LEFT');
+            $this->db->where('sup_man.manufacturer', $manufacturer);
+        }
+
+        $this->db->where('sups.status !=', 0);
+
+        if(!is_null($sort_by)){
+            if($sort_by == 1){
+                $this->db->order_by('sups.company', 'asc');
+            }
+            if($sort_by == 2){
+                $this->db->order_by('sups.company', 'desc');
+            }
+            if($sort_by == 13){
+                $this->db->order_by('sups.created_at', 'asc');
+            }
+            if($sort_by == 14){
+                $this->db->order_by('sups.created_at', 'desc');
+            }
+        }
+
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    // Get contact records of this supplier
+    public function getContactRecords($supplier_id){
+        $this->db->select('*');
+        $this->db->from('suppliers_contacts');
+        $this->db->where('supplier_id', $supplier_id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
 } 

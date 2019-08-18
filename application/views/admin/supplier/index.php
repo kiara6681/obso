@@ -126,9 +126,9 @@
                             <a href="<?= base_url(); ?>admin/suppliers/create" class="btn btn-primary waves-effect btn-md waves-light">
                                 Add New Supplier
                             </a>
-                            <a href="javascript:;" class="import_csv btn btn-primary waves-effect btn-md waves-light">
+                            <!-- <a href="javascript:;" class="import_csv btn btn-primary waves-effect btn-md waves-light">
                                 Import Contacts
-                            </a>
+                            </a> -->
                             <a href="<?= base_url(); ?>admin/suppliers/archieved" class="btn btn-danger waves-effect btn-md waves-light">
                                 Archieved Contacts
                             </a>
@@ -179,11 +179,6 @@
                                             <option value="4">100+ Order contacts</option>
                                             <option value="5">Account customer contacts</option>
                                             <option value="6">Advance payment Contacts</option>
-                                            <option value="7">Never Enquired</option>
-                                            <option value="8">Single Enquiry Records</option>
-                                            <option value="9">Repeat Enquiry Records 2-9</option>
-                                            <option value="10">10-99 Enquiry Records</option>
-                                            <option value="11">100+ Enquiry Records</option>
                                             <option value="12">Single Contact Records</option>
                                             <option value="13">Companies over 50% Quote to Order</option>
                                             <option value="14">Companies under 50% Quote to Order</option>
@@ -205,11 +200,7 @@
                                         <select class="form-control" id="sort_by" >
                                             <option value="">Sort By</option>
                                             <option value="1">Contact Name A-Z</option>
-                                            <option value="2">Contact Name Z-A</option>
-                                            <option value="3">No. of Enquries High to Low</option>
-                                            <option value="4">No. of Enquries Low to High</option>
-                                            <option value="5">Last Enquiry (earliest to latest)</option>
-                                            <option value="6">Last Enquiry( latest to earliest)</option>
+                                            <option value="2">Contact Name Z-A</option> 
                                             <option value="7">No. of Orders High to Low</option>
                                             <option value="8">No. of Orders Low to High</option>
                                             <option value="9">Last Order (earliest to latest)</option>
@@ -218,8 +209,6 @@
                                             <option value="12">GP Low to High</option>
                                             <option value="13">Account Status Longest Terms First</option>
                                             <option value="14">Account Status Shortest Terms First</option>
-                                            <option value="15">Industry A-Z</option>
-                                            <option value="16">Industry Z-A</option>
                                             <option value="17">Hottest to Coldest Data</option>
                                             <option value="18">Coldest to Hottest Data</option>
                                             <option value="19">Last Sales Note (earliest to latest)</option>
@@ -560,7 +549,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title mt-0">Import Sales Contact</h5>
+                <h5 class="modal-title mt-0">Import Suppliers</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="card">
@@ -574,7 +563,7 @@
                         <button type="submit" name="import" class="btn btn-primary btn-block waves-effect waves-light">Import CSV</button>
                         <?php echo form_close();?>
                         <div class="download-sample text-center">
-                            <a download class="btn btn-link" href="<?= base_url() ?>uploads/sample/samplesalescontact.csv">Download Sample CSV</a>
+                            <a download class="btn btn-link" href="<?= base_url() ?>uploads/sample/samplesupplierscontact.csv">Download Sample CSV</a>
                         </div>
                     </div>
                 </div>
@@ -618,7 +607,7 @@ $(document).ready(function(){
 
         var show_only = $(this).val();
         var sort_by = $('#sort_by').val();
-        sort_by_companies(sort_by, show_only);
+        sort_by_suppliers(sort_by, show_only);
     });
 
     // Sort companies by country
@@ -626,27 +615,8 @@ $(document).ready(function(){
 
         var sort_by = $(this).val();
         var show_only = $('#show_only').val();
-        sort_by_companies(sort_by, show_only);
+        sort_by_suppliers(sort_by, show_only);
     });
-
-    // Sorting function
-    function sort_by_companies(sort_by, show_only){
-
-        $.ajax({
-            url : "<?= base_url() ?>admin/suppliers/sales_filter",
-            type : 'get',
-            data : {'sort_by' : sort_by, 'show_only' : show_only},
-            success : function(data){                
-                console.log(data);
-                var temp = data.split('|-|');
-                $('#lead_block').html(temp[0]);
-                $('#suspects_block').html(temp[1]);
-                $('#prospects_block').html(temp[2]);
-                $('#key_contact_block').html(temp[3]);
-            }
-        });
-    }
-
 
     $('.import_csv').on('click', function(){
         $('#import_contact').modal('show');
@@ -721,6 +691,25 @@ $(document).ready(function(){
 
     });
 });
+
+// Sorting function
+function sort_by_suppliers(sort_by, show_only){
+
+    $.ajax({
+        url : "<?= base_url() ?>admin/Suppliers/supplier_filter",
+        type : 'get',
+        data : {'sort_by' : sort_by, 'show_only' : show_only},
+        success : function(data){                
+            console.log(data);
+            // var temp = data.split('|-|');
+            // $('#lead_block').html(temp[0]);
+            // $('#suspects_block').html(temp[1]);
+            // $('#prospects_block').html(temp[2]);
+            // $('#key_contact_block').html(temp[3]);
+        }
+    });
+}
+
 $(document).ready(function(){
 
     // search sales contact
@@ -735,23 +724,23 @@ $(document).ready(function(){
     });
 
     // sort sales by country
-    $(document).on('change', '#sort_by_country', function(){
+   /* $(document).on('change', '#sort_by_country', function(){
 
         var country_by = $(this).val();
         var sort_by = $('#sort_by').val();
 
         sort_by_companies(sort_by, country_by);
         //sort_by_companies(country_by);
-    });
+    });*/
 
     // sort by sales
-    $(document).on('change','#sort_by' ,function(){
+   /* $(document).on('change','#sort_by' ,function(){
                             
         var sort_by = $(this).val();
         var country_by = $('#sort_by_country').val();
 
         sort_by_companies(sort_by, country_by);
-    });
+    });*/
 
     $("#search_contact").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -775,7 +764,7 @@ $(document).ready(function(){
 });
 
 // sort function
-function sort_by_companies(sort_by, country_by){
+/*function sort_by_companies(sort_by, country_by){
 
     $.ajax({
         url : "<?= base_url() ?>admin/suppliers/sort_by_companies",
@@ -788,5 +777,5 @@ function sort_by_companies(sort_by, country_by){
             $('#show_searched_results').html(data);
         }
     });
-}
+}*/
 </script>
