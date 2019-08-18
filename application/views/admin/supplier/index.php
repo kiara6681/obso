@@ -287,7 +287,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -360,7 +360,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -443,20 +443,20 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Archieve</li>
                                                            </a>
-                                                           <a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
+                                                           <a href="<?= base_url(); ?>admin/suppliers/contactQualifiedProspect/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Qualified Prospect</li>
                                                             </a>
                                                             <?php
                                                             if($contact['contact_prospect_status'] == 1)
                                                             {
                                                                 ?>
-                                                                <a href="<?= base_url(); ?>admin/sales/contactClosableProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1" id="closable_id_<?= $contact['id'] ; ?>">
+                                                                <a href="<?= base_url(); ?>admin/suppliers/contactClosableProspect/<?= $contact["id"]; ?>" role="menuitem" tabindex="-1" id="closable_id_<?= $contact['id'] ; ?>">
                                                                     <li role="presentation">Closable Prospect</li>
                                                                 </a>
 
@@ -530,7 +530,7 @@
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
-                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
+                                                            <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
@@ -567,7 +567,7 @@
                 <div class="col-xl-12 col-md-4 col-sm-6 sup-bg">
                     <div class="button-items">
                     <?php $this->load->helper('form'); ?>
-                    <?php echo form_open(base_url() . 'admin/sales/uploadCSV' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
+                    <?php echo form_open(base_url() . 'admin/suppliers/uploadCSV' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
                         <div class="form-group">
                             <input type="file" name="file"  class="form-control" style="background: none;padding: 0;margin-top: 15px;" required>
                         </div>
@@ -591,7 +591,7 @@
                 <h6 class="modal-title mt-0">Are you sure ?  you want to archieve this contact !</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="<?= base_url('admin/sales/archieve'); ?>" method="post">
+            <form action="<?= base_url('admin/suppliers/archieve'); ?>" method="post">
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <input type="hidden" class="contact_id" name="id">
                 <div class="modal-body">
@@ -633,7 +633,7 @@ $(document).ready(function(){
     function sort_by_companies(sort_by, show_only){
 
         $.ajax({
-            url : "<?= base_url() ?>admin/sales/sales_filter",
+            url : "<?= base_url() ?>admin/suppliers/sales_filter",
             type : 'get',
             data : {'sort_by' : sort_by, 'show_only' : show_only},
             success : function(data){                
@@ -670,7 +670,7 @@ $(document).ready(function(){
                 var drop_status = $('#'+id).parent().attr('data-id');
 
                 $.ajax({
-                    url : '<?= base_url(); ?>admin/sales/checkInformation',
+                    url : '<?= base_url(); ?>admin/suppliers/checkInformation',
                     type : 'get',
                     csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
                     data : {"id" : id, "drop_status" : drop_status, 'status' : status},
@@ -691,7 +691,7 @@ $(document).ready(function(){
                     if(drop_status != status)
                     {
                         $.ajax({
-                            url : '<?= base_url(); ?>admin/sales/updateSalesStatus',
+                            url : '<?= base_url(); ?>admin/suppliers/updateSalesStatus',
                             type : 'get',
                             csrf_test_name: '<?= $this->security->get_csrf_hash();?>',
                             data : {"id" : id, "status" : drop_status},
@@ -704,7 +704,7 @@ $(document).ready(function(){
                         
                         if(drop_status == 3)
                         {
-                            var html = '<a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/'+id+'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>';
+                            var html = '<a href="<?= base_url(); ?>admin/suppliers/contactQualifiedProspect/'+id+'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>';
                             $('#sub_menu_'+id).append(html);
 
                         }else{
@@ -778,7 +778,7 @@ $(document).ready(function(){
 function sort_by_companies(sort_by, country_by){
 
     $.ajax({
-        url : "<?= base_url() ?>admin/sales/sort_by_companies",
+        url : "<?= base_url() ?>admin/suppliers/sort_by_companies",
         type : 'get',
         data : {'sort_by' : sort_by, 'country_by' : country_by},
         success : function(data){
