@@ -77,21 +77,45 @@ class Suppliers_Model extends CI_Model {
     }
     
     public function deleteAddress($id, $table){
-        return $this->db->delete($table, array('sales_contact_id' => $id));
+        return $this->db->delete($table, array('session_id' => $id));
+    }
+    
+    public function deleteSupplierData($id, $table){
+        return $this->db->delete($table, array('supplier_id' => $id));
     }
 
-    // get Sales Address
+    // get Supplier Address
     public function getContactsAddress($id){
         $this->db->select('*');
-        $this->db->from('sales_contact_addresses');
-        $this->db->where('sales_contact_id', $id);
+        $this->db->from('supplier_address');
+        $this->db->where('session_id', $id);
         $query = $this->db->get();
         $query = $query->result_array();  
         return $query;
     }
 
-    // get Enqury by Sales Contact ID
-    public function getSalesEnqury($contact_id){
+    // get Supplier Contacts
+    public function getSupplierContact($id){
+        $this->db->select('*');
+        $this->db->from('suppliers_contacts');
+        $this->db->where('supplier_id', $id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    // get Supplier Menufacturer
+    public function getSupplierManufacturers($id){
+        $this->db->select('*');
+        $this->db->from('supplier_manufacturers');
+        $this->db->where('supplier_id', $id);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
+    // get Enqury by Supplier Contact ID
+    public function getSupplierEnqury($contact_id){
         $this->db->select('*');
         $this->db->from('enquiry');
         $this->db->where('contact_id', $contact_id);
@@ -122,7 +146,7 @@ class Suppliers_Model extends CI_Model {
     public function updateContact($data, $id){
 
         $this->db->where('id', $id);
-        $this->db->update('sales_contacts', $data);
+        $this->db->update('suppliers', $data);
         return;
     }
 
@@ -184,7 +208,7 @@ class Suppliers_Model extends CI_Model {
     }
 
     // Sort By sales companies
-    public function sortBySalesContacts($sort_by = null, $show_only = null)
+    public function sortBySupplierContacts($sort_by = null, $show_only = null)
     {
 
         $this->db->select('contacts.*, indus.industry as industry_name, company.company_name');

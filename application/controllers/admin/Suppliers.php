@@ -250,140 +250,209 @@ class suppliers extends CI_Controller {
         $this->load->view('admin/layout/footer', $data);
     }
     
-    // Add new supplier
+    // edit supplier
     public function edit_supplier()
     {
         if($this->input->post())
         {
-            $id                  = $this->input->post('id');
-            $company             = $this->input->post('company');
-            $trader              = $this->input->post('trader');
-            $fname               = $this->input->post('first_name');
-            $lname               = $this->input->post('last_name');
-            $gender              = $this->input->post('gender');
-            $personal_info       = $this->input->post('personal_info');
-            /*$branch              = $this->input->post('branch');*/
-            $department          = $this->input->post('department');
-            $job_title           = $this->input->post('job_title');
-            $email               = $this->input->post('email');
-            $alternate_email     = $this->input->post('alternate_email');
-            $linkedin            = $this->input->post('linkedin');
-            $whatsapp            = $this->input->post('whatsapp');
-            $mobile              = $this->input->post('phone');
-            $direct_dial         = $this->input->post('direct_dial');
-            $contact_location    = $this->input->post('contact_location');
-            $contact_country     = $this->input->post('contact_country');
-            $industry            = $this->input->post('industry');
-            $competitor          = $this->input->post('competitor');
-            $payment_terms       = $this->input->post('payment_terms');
-            $invoice_ref_no      = $this->input->post('invoice_ref_no');
-            $pls_info            = $this->input->post('pls_info');
-            $estimated_frequency = $this->input->post('estimated_frequency');
-            $estimated_spend     = $this->input->post('estimated_spend');
-            $manufacturer        = $this->input->post('menufecturer');
-            $communication       = $this->input->post('communication');
-            $contact_status      = $this->input->post('contact_status');
-            $location            = $this->input->post('location');
-            $street_address      = $this->input->post('street_address');
-            $city                = $this->input->post('city');
-            $state               = $this->input->post('state');
-            $zip                 = $this->input->post('zip');
-            $country             = $this->input->post('country');
-            $address_type        = $this->input->post('address_type');
-            $date                = date('Y-m-d H:i:s');
+            if($this->input->post('contact_database_status')){
+
+                $contact_database_status = $this->input->post('contact_database_status');
+            }else{
+                $contact_database_status = 1;
+            }
+
+            $id                            = $this->input->post('id');
+            $company                       = $this->input->post('company');
+            $trader                        = $this->input->post('trader');
+            $website                       = $this->input->post('website');
+            $supplier_type                 = $this->input->post('supplier_type');
+            $contact_country               = $this->input->post('contact_country');
+            $cut_off_time                  = $this->input->post('cut_off_time');
+            $information_notes             = $this->input->post('information_notes');
+            $supplier_other_names          = $this->input->post('supplier_other_names');
+            $express_options               = $this->input->post('express_options');
+            $conditions_offered            = $this->input->post('conditions_offered');
+            $delivery_time                 = $this->input->post('delivery_time');
+            $quality_rating                = $this->input->post('quality_rating');
+            $pricing_rating                = $this->input->post('pricing_rating');
+            $brief_info_quality            = $this->input->post('brief_info_quality');
+            $brief_info_pricing            = $this->input->post('brief_info_pricing');
+            $brief_info_delivery           = $this->input->post('brief_info_delivery');
+            $brief_info_time               = $this->input->post('brief_info_time');
+            $brief_info_communication      = $this->input->post('brief_info_communication');
+            $brief_info_coverall           = $this->input->post('brief_info_coverall');
+            $accuracy_rating               = $this->input->post('accuracy_rating');
+            $responce_time_rating          = $this->input->post('responce_time_rating');
+            $communication_rating          = $this->input->post('communication_rating');
+            $alternate_supplier_conditions = $this->input->post('alternate_supplier_conditions');
+            $payment_terms                 = $this->input->post('payment_terms');
+            $ordering_status               = $this->input->post('ordering_status');
+            $unique_number                 = $this->input->post('unique_number');
+            $communication                 = $this->input->post('communication');
+            $contact_status                = $this->input->post('contact_status');
+            $date                          = date('Y-m-d H:i:s');
+            
+            //Supliers Persons
+            $as_manager                    = $this->input->post('as_manager');
+            $fname                         = $this->input->post('contact_name');
+            $lname                         = $this->input->post('contact_surname');
+            $email                         = $this->input->post('contact_email');
+            $mobile                        = $this->input->post('contact_phone');
+            $main_language                 = $this->input->post('main_language');
+            $english                       = $this->input->post('english');
+            
+            //Supliers Menufacturers
+            $manufacturers                 = $this->input->post('manufacturer');
+            $current                       = $this->input->post('current');
+            $obsolate                      = $this->input->post('obsolate');
+            $condition_information         = $this->input->post('condition_information');
+            $pricing_discount              = $this->input->post('pricing_discount');
+            $featured                      = $this->input->post('featured_mnfr');
+            
+            //Address 
+            $location                      = $this->input->post('location');
+            $street_address                = $this->input->post('street_address');
+            $city                          = $this->input->post('city');
+            $state                         = $this->input->post('state');
+            $zip                           = $this->input->post('zip');
+            $country                       = $this->input->post('country');
+
+            $overall_rating = ($quality_rating +$pricing_rating + $accuracy_rating + $responce_time_rating + $communication_rating)/5;
 
             $data = array(
-                'company'                  => $company,
-                'trader'                   => $trader,
-                'fname'                    => $fname,
-                'lname'                    => $lname,
-                'gender'                   => $gender,
-                'personal_info'            => $personal_info,
-                /*'branch'                   => $branch,*/
-                'department'               => $department,
-                'job_title'                => $job_title,
-                'industry'                 => $industry,
-                'contact_location'         => $contact_location,
-                'contact_country'          => $contact_country,
-                'competitor'               => $competitor,
-                'email'                    => $email,
-                'alternate_email'          => $alternate_email,
-                'linkedin'                 => $linkedin,
-                'whatsapp'                 => $whatsapp,
-                'mobile'                   => $mobile,
-                'direct_dial'              => $direct_dial,
-                'payment_terms'            => $payment_terms,
-                'estimate_required'        => $estimated_frequency,
-                'estimate_spend'           => $estimated_spend,
-                'manufacturers'            => json_encode($manufacturer),
-                'invoice_reference_number' => $invoice_ref_no,
-                'pls_information'          => $pls_info,
-                'communication'            => $communication,
-                'contact_status'           => $contact_status,
-                'updated_at'               => $date
+                'company'                       => $company,
+                'trader'                        => $trader,
+                'website'                       => $website,
+                'supplier_type'                 => $supplier_type,
+                'contact_country'               => $contact_country,
+                'cut_off_time'                  => $cut_off_time,
+                'information_notes'             => $information_notes,
+                'supplier_other_names'          => $supplier_other_names,
+                'express_options'               => json_encode($express_options),
+                'conditions_offered'            => $conditions_offered,
+                'delivery_time'                 => $delivery_time,
+                'quality_rating'                => $quality_rating,
+                'pricing_rating'                => $pricing_rating,
+                'accuracy_rating'               => $accuracy_rating,
+                'responce_time_rating'          => $responce_time_rating,
+                'communication_rating'          => $communication_rating,
+                'overall_rating'                => $overall_rating,
+                'brief_info_quality'            => $brief_info_quality,
+                'brief_info_pricing'            => $brief_info_pricing,
+                'brief_info_delivery'           => $brief_info_delivery,
+                'brief_info_time'               => $brief_info_time,
+                'brief_info_communication'      => $brief_info_communication,
+                'brief_info_coverall'           => $brief_info_coverall,
+                'alternate_supplier_conditions' => $alternate_supplier_conditions,
+                'payment_terms'                 => $payment_terms,
+                'ordering_status'               => $ordering_status,
+                'unique_number'                 => $unique_number,
+                'communication'                 => $communication,
+                'contact_status'                => $contact_status,
+                'status'                        => $contact_database_status,
+                'updated_at'                    => $date
             );
 
             //Insert Sales Data
-            $insert_id = $this->Sales_Model->updateContact($data, $id);
+            $update = $this->Suppliers_Model->updateContact($data, $id);
 
             //Delete Address 
-            $delete = $this->Sales_Model->deleteAddress($id,'sales_contact_addresses'); 
+            $delete = $this->Suppliers_Model->deleteAddress($id,'supplier_address');
+
+            //Delete Supplier Contacts 
+            $delete = $this->Suppliers_Model->deleteSupplierData($id, 'suppliers_contacts'); 
+
+            //Delete Supplier Menufacturer 
+            $delete = $this->Suppliers_Model->deleteSupplierData($id, 'supplier_manufacturers'); 
+
+            //Insert Address
+            foreach ($fname as $key => $name) {
+                $data = array(
+                    'supplier_id'   => $id,
+                    'as_manager'    => $as_manager[$key],
+                    'fname'         => $name,
+                    'lname'         => $lname[$key],
+                    'email'         => $email[$key],
+                    'mobile'        => $mobile[$key],
+                    'main_language' => $main_language[$key],
+                    'english'       => $english[$key],
+                    'status'        => 1,
+                    'created_at'    => $date,
+                    'updated_at'    => $date
+                );
+
+                $insert = $this->Sales_Model->insert($data, 'suppliers_contacts');
+
+            }
+
+            //Insert manufacturer
+            foreach ($manufacturers as $key => $manufacturer) {
+                $data = array(
+                    'supplier_id'           => $id,
+                    'manufacturer'          => $manufacturer,
+                    'current'               => $current[$key],
+                    'obsolate'              => $obsolate[$key],
+                    'condition_information' => $condition_information[$key],
+                    'pricing_discount'      => $pricing_discount[$key],
+                    'featured'              => $featured[$key],
+                    'status'                => 1,
+                    'created_at'            => $date,
+                    'updated_at'            => $date
+                );
+
+                $insert = $this->Sales_Model->insert($data, 'supplier_manufacturers');
+            }
 
             //Insert Address
             foreach ($location as $key => $value) {
                 $data = array(
-                    'sales_contact_id' => $id,
-                    'address_type'     => $address_type[$key],
-                    'location'         => $value,
-                    'street'           => $street_address[$key],
-                    'town'             => $city[$key],
-                    'state'            => $street_address[$key],
-                    'zip_code'         => $zip[$key],
-                    'country'          => $country[$key],
-                    'status'           => 1,
-                    'created_at'       => $date,
-                    'updated_at'       => $date
+                    'session_id' => $id,
+                    'location'   => $value,
+                    'street'     => $street_address[$key],
+                    'town'       => $city[$key],
+                    'state'      => $street_address[$key],
+                    'zip_code'   => $zip[$key],
+                    'country'    => $country[$key],
+                    'status'     => 1,
+                    'created_at' => $date,
+                    'updated_at' => $date
                 );
 
-                $insert = $this->Sales_Model->insert($data, 'sales_contact_addresses');
-
+                $insert = $this->Sales_Model->insert($data, 'supplier_address');
             }
 
-            $this->session->set_flashdata('message', 'Sales Updated Successfully');
+            $this->session->set_flashdata('message', 'Supplier Updated Successfully');
 
             //redirect to some function
-            redirect("admin/sales");
+            redirect("admin/suppliers");
         }
 
         $id = $this->uri->segment(4);
 
         $data = array();
-        $data['page_title'] = 'Edit Sales';
+        $data['page_title'] = 'Edit Suplier';
 
-        // Get all sales companies
-        $data['sales_contact'] = $contact = $this->Suppliers_Model->getAllSupplierContacts(null, $id);
+        // Get supplier
+        $data['supplier'] = $supplier = $this->Suppliers_Model->getAllSupplierContacts(null, $id);
 
-        // Get all sales companies
+        // Get all supplier address
         $data['contact_address'] = $contact_address = $this->Suppliers_Model->getContactsAddress($id);
 
-        // Get all sales companies
-        $data['sales_companies'] = $sales_companies = $this->Companies_Model->getAllSalesCompanies();
+        // Get all supplier contact
+        $data['supplier_contacts'] = $supplier_contacts = $this->Suppliers_Model->getSupplierContact($id);
 
-        //Get Enquiry 
-        $data['enquires'] = $enquires = $this->Suppliers_Model->getSalesEnqury($contact->id);
+        // Get all supplier menufacturer
+        $data['supplier_manufacturers'] = $supplier_manufacturers = $this->Suppliers_Model->getSupplierManufacturers($id);
 
         // Get all countries
         $data['countries'] = $countries = $this->common_model->select('country');
 
         // Get all Menufecturer
-        $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
-
-        // echo '<pre>';
-        // print_r($countries);
-        // exit;
+        $data['menufecturers'] = $menufecturers = $this->common_model->select('manufacturer');
         
         $this->load->view('admin/layout/header', $data);
-        $this->load->view('admin/sales/edit', $data);
+        $this->load->view('admin/supplier/edit', $data);
         $this->load->view('admin/layout/footer', $data);
     }
 
