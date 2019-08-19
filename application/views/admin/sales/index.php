@@ -14,7 +14,7 @@
         background-color: #2a3142 !important;
         color: #fff;
         padding: 0px 4px;
-        min-height: 300px;
+        min-height: 280px;
     }
     .c-b p{
         font-size: 13px;
@@ -93,6 +93,9 @@
         padding: 5px !important;
         left: -160px !important;
     }
+    .cstm-l.dropdown-menu.show {
+        left: -40px !important;
+    }
     .p-0{
         padding: 0px;
     }
@@ -106,6 +109,10 @@
     .closable
     {
         border: 4px solid #b7d7a8;
+    }
+    .hot_suspacts
+    {
+        border: 4px solid #fffd77;
     }
     .key_account
     {
@@ -339,9 +346,15 @@
                                                             $flag = $country['flag'];
                                                         }
                                                     }
+                                                    $hot_suspacts = '';
+                                                    if($contact['hot_suspacts'] == 1)
+                                                    {
+                                                        $hot_suspacts = '';
+                                                        $hot_suspacts = 'hot_suspacts';
+                                                    }
                                                     ?>
                                                     <div class="col-md-12 m-b-3 move ui-state-default" data-id="2" id="<?= $contact['id']; ?>">
-                                                        <div class="col-md-12 c-b">
+                                                        <div class="col-md-12 c-b <?= $hot_suspacts; ?>">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" /> 
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : 
@@ -382,9 +395,12 @@
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">View / Edit</li>
                                                             </a>
-                                                           <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
+                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Archive</li>
-                                                           </a>
+                                                            </a>
+                                                            <a href="<?= base_url(); ?>admin/sales/hotSuspects/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
+                                                                <li role="presentation">Hot Suspect</li>
+                                                            </a>
                                                        </ul>
                                                     </div>
                                                     <?php
@@ -519,9 +535,14 @@
                                                             $flag = $country['flag'];
                                                         }
                                                     }
+                                                    $key_contact = '';
+                                                    if($contact['key_contact'] == 1)
+                                                    {
+                                                        $key_contact = 'key_account';
+                                                    }
                                                     ?>
                                                     <div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="<?= $contact['id']; ?>">
-                                                        <div class="col-md-12 c-b key_account" id="key_account">
+                                                        <div class="col-md-12 c-b <?= $key_contact; ?>" id="key_account">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" />  
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : 
@@ -558,13 +579,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
+                                                        <ul class="dropdown-menu cstm-l" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
                                                                 <li role="presentation">View / Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Archive</li>
                                                            </a>
+                                                           <a href="<?= base_url(); ?>admin/sales/keyAccount/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
+                                                                <li role="presentation">Key Account</li>
+                                                            </a>
                                                        </ul>
                                                     </div>
                                                     <?php

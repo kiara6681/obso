@@ -17,6 +17,9 @@
 	.footer_logo_titles {
 	    padding: 100px 0px;
 	}
+	.footer_logo_titles h1{
+	    color: #000;
+	}
 	.color-gray{
 		color:gray !important;
 	}

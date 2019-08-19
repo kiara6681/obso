@@ -483,6 +483,27 @@ class Sales extends CI_Controller {
             $this->common_model->update($data, $id,'sales_contacts');
         }
 
+        if($status < 4)
+        {
+            //Update status
+            $data = array(
+                'key_contact' => 0
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'sales_contacts');
+        }
+        if($status < 2)
+        {
+            //Update status
+            $data = array(
+                'hot_suspacts' => 0
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'sales_contacts');
+        }
+
         echo $status;
     }
 	 
@@ -876,7 +897,7 @@ class Sales extends CI_Controller {
                     }
                 }
                 
-                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="2" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -890,7 +911,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
+                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a><a href="<?= base_url(); ?>admin/sales/hotSuspects/'.$contact["id"].'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Hot Suspect</li></a></ul></div>';
             }
 
             if($contact['status'] == 3)
@@ -903,7 +924,7 @@ class Sales extends CI_Controller {
                     }
                 }
                 
-                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -930,7 +951,7 @@ class Sales extends CI_Controller {
                     }
                 }
                 
-                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -944,12 +965,46 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
+                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a><a href="<?= base_url(); ?>admin/sales/keyAccount/'.$contact["id"].'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Key Account</li></a></ul></div>';
             }
         }
 
         $html = $lead_block."|-|".$suspects_block."|-|".$prospects_block.'|-|'.$key_contact_block;
         echo $html;
+    }
+
+    //Contact Hot Suspects
+    public function hotSuspects()
+    {
+        $id = $this->uri->segment(4);
+
+        $data = array(
+            'hot_suspacts' => 1
+        );
+
+        //Change Contact Prospect Status
+        $this->common_model->update($data, $id,'sales_contacts');
+
+        $this->session->set_flashdata('msg', 'Hot Suspect Successfully.');
+       
+        redirect('admin/sales');
+    }
+
+    //Contact Key Account
+    public function keyAccount()
+    {
+        $id = $this->uri->segment(4);
+
+        $data = array(
+            'key_contact' => 1
+        );
+
+        //Change Contact Prospect Status
+        $this->common_model->update($data, $id,'sales_contacts');
+
+        $this->session->set_flashdata('msg', 'Key Account Successfully.');
+       
+        redirect('admin/sales');
     }
 
     //Contact Qualified Prospect
@@ -963,7 +1018,8 @@ class Sales extends CI_Controller {
         if(!empty($data->estimate_required) && !empty($data->estimate_spend) && !empty($data->manufacturers) && !empty($data->pls_information))
         {
              $data = array(
-                'contact_prospect_status' => 1
+                'contact_prospect_status' => 1,
+                'closable_prospect_status' => null
             );
 
             //Change Contact Prospect Status

@@ -277,7 +277,7 @@
 
 <div class="container-fluid c-b-img" style="background: #fee300;">
 	<div class="row banner-img">
-		<div class="container">
+		<div class="container" style="z-index: 0;">
 			<div id="slider" class="owl-carousel owl-theme">				
 				<?php
 				$slider=$this->common_model->get_all_slider();
@@ -288,7 +288,7 @@
 						<div class="container">
 							<div class="">
 								<div class="row">
-									<div class="col-md-6 p-md">
+									<div class="col-md-6 p-md" style="z-index: 0;">
 										<h2><?php echo $slider['title'];?></h2>
 										<p><?php echo $slider['description'];?></p>
 										<div class="col-md-4 col-xs-6 pdl" style="padding:0px;">

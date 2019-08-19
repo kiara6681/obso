@@ -42,6 +42,16 @@ foreach ($home as $home) {
 	box-shadow: 2px 5px 11px -5px rgba(0,0,0,0.6);
 	display: none;
 }
+.mobile-search-form {
+  position: absolute;
+  z-index: 100;
+  background: #fff;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid #eee;
+  box-shadow: 2px 5px 11px -5px rgba(0,0,0,0.6);
+  display: none;
+}
 
 .form-controls {
     display: block;
@@ -257,9 +267,12 @@ foreach ($home as $home) {
     <div class="container">
         <form action="javascript:;" method="post">
             <div class="input">
-                <input type="text" name="search" class="header-search-input" id="mobile-search-input" placeholder="Enter Part Number" autocomplete="off" style="">
+                <input type="text" name="search" class="header-search-input search_text" id="mobile-search-input" placeholder="Enter Part Number" autocomplete="off" style="">
             </div>
         </form>
+        <div class="mobile-search-form">
+            <div class="search-inner" id="mobile-result"></div>
+          </div>
     </div>
 </div>
 <style type="text/css">
@@ -341,6 +354,10 @@ foreach ($home as $home) {
         #header-nav_bar li a {
             padding: 5px 8px;
         }
+        .dropdown .dropdown-menu{
+          position: inherit;
+          margin-top: -30px !important;
+        }
     }
 
     @media screen and  (min-width: 767px){
@@ -407,7 +424,7 @@ foreach ($home as $home) {
     .fields_form_product input{
         color: #000 !important;
         font-size: 14px !important;
-    } 
+    }
 </style>
 
 <div class="container-fluid" id="header_nav">
@@ -843,6 +860,7 @@ foreach ($home as $home) {
 $(document).ready(function(){
 	$(document).on('click',function(){
 		jQuery('.search-form').hide();	
+    jQuery('.mobile-search-form').hide();  
 	})
 })
 $('#search_text').keyup(function(){
@@ -861,6 +879,28 @@ $('#search_text').keyup(function(){
           }else{
             jQuery('#result').html('');
             jQuery('.search-form').hide();
+          }
+        }
+    });
+  }
+  
+});
+$('#mobile-search-input').keyup(function(){
+  var searchvl = $(this).val();
+  if(searchvl == ""){
+    jQuery('.mobile-search-form').hide();
+  }else{
+      $.ajax({
+        url: '<?php echo base_url();?>home/ajaxpartnumber/' + searchvl ,
+        success: function(response)
+        {
+          if(response)
+          {
+            jQuery('#mobile-result').html(response);
+            jQuery('.mobile-search-form').show();
+          }else{
+            jQuery('#mobile-result').html('');
+            jQuery('.mobile-search-form').hide();
           }
         }
     });
@@ -972,7 +1012,7 @@ $('#search_text').keyup(function(){
     width: 100%;
     }
     #header-nav_bar li a:hover {
-      color:gray !important;
+      color:#000 !important;
     }
     .dropdown-item:focus, .dropdown-item:hover {
       color: #16181b !important;
