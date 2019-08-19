@@ -26,12 +26,9 @@ class suppliers extends CI_Controller {
 
         $data['sales_key_contact_block'] = $sales_key_contact_block = $this->Suppliers_Model->getAllSupplierContacts(4);
 
+        $data['supplier_main_contacts'] = $supplier_main_contacts = $this->Suppliers_Model->getSupplierMainContact();
         //get Suppliers Menufaturer
         $data['manufacturer'] = $manufacturer = $this->Suppliers_Model->getAllSupplierManufacturer();
-
-        // Get all countries
-        $data['countries'] = $countries = $this->common_model->select('country');
-
 
         $data['page_title'] = 'Sales Contact';
         $this->load->view('admin/layout/header', $data);
@@ -54,9 +51,6 @@ class suppliers extends CI_Controller {
 
         // Get all Menufecturer
         $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
-
-        // Get all sales companies
-        $data['sales_address'] = $sales_address = $this->Sales_Model->getAllSalesAddress();
 
         $data['page_title'] = 'Sales Contact';
         $this->load->view('admin/layout/header', $data);
@@ -498,134 +492,632 @@ class suppliers extends CI_Controller {
             }
         }
 
-        echo '<pre>';
-        print_r($all_suppliers);
-        exit;
-
         $lead_block = '';
         $suspects_block = '';
         $prospects_block = '';
         $key_contact_block = '';
 
-        $sales_address = $this->Sales_Model->getAllSalesAddress();
-        $flag = 'us.png';
+        $supplier_main_contacts = $this->Suppliers_Model->getSupplierMainContact();
 
-        foreach ($all_sales_contacts as $key => $contact) 
+        //get Suppliers Menufaturer
+        $manufacturer = $this->Suppliers_Model->getAllSupplierManufacturer();
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+
+        $flag = 'flag.png';
+
+        foreach ($all_suppliers as $key => $contact) 
         {
             if($contact['status'] == 1)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
+                }
+                $blanklist = '';
+                $risk = '';
+
+                if($contact['blacklisted'] == 1)
+                {
+                    $blanklist = 'blanklist';
+                }
+                if($contact['risk'] == 1)
+                {
+                    $risk = 'risk';
                 }
                 
-                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b '.$blanklist." ".$risk.'"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['company'].'</b> Score: ';
                             
-                $add_count = 0;
-                foreach($sales_address as $address)
+                if($contact['overall_rating'] == 1)
                 {
-                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
-                    {
-                        $lead_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    $lead_block .= '<i class="fa fa-star yellow"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
                     
-                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                }else if($contact['overall_rating'] == 2){
+                    $lead_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 3){
+                    $lead_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 4){
+                    $lead_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 5){
+                    $lead_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>';
+                }else{
+                    $lead_block .= '
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }
+
+                $lead_block .= ' </h5> Website :<a href="website"><b class="f-w-700">'.$contact['website'].'</b></a><p>Supplier Type: <strong>'.$contact['supplier_type'].'</strong></p><p>Conditions Offered: <strong>'.$contact['conditions_offered'].'</strong></p><p>Express Options:';
+                $option = json_encode($contact['express_options']);
+                $temp = json_decode($contact['express_options']);
+                $res = (array)$temp;
+
+                foreach($res as $dd)
+                {
+                    $lead_block .= $dd.'...';
+                    break;
+                }
+
+                $lead_block .= '| Express Order Cut off Time:';
+
+                if(strlen($contact['cut_off_time']) > 10)
+                {
+                    $lead_block .= substr($contact['cut_off_time'],0, 10)."..."; 
+                }else{
+                    $lead_block .= $contact['cut_off_time'];
+                }
+
+                $lead_block .= ' </p><p>Payment Terms: '.$contact['payment_terms'].' | Supplier Status: '.$contact['contact_status'].' </p><p> Email: ';
+                $email = '';
+                $mobile = '';
+                foreach($supplier_main_contacts as $main_contact)
+                {
+                    if($main_contact['supplier_id'] == $contact['id'])
                     {
-                        $add_count++;
+                        $email = $main_contact['email'];
+                        $mobile = $main_contact['mobile'];
                     }
                 }
-                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. ($contact["trader"] != '')?$contact["trader"]:"N/A".' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $lead_block .= '<a href="mailto:'.$email.'" style="color:coral !important;">'.$email.'</a> | Number: '.$mobile.'</p><p> Enquiry"s Sent N/A (Active) | Quoted N/A | Supplier Orders : N/A (Active)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_'.$contact['id'].'"><a role="menuitem" tabindex="-1" href="'.base_url("admin/suppliers/edit_supplier/".$contact["id"]).'."><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a><a href="javascript:;" id="'.$contact['id'].'" class="blanklist_supplier" role="menuitem" tabindex="-1"><li role="presentation">Blanklist Supplier</li></a><a href="javascript:;" id="'.$contact['id'].'" class="risk_supplier" role="menuitem" tabindex="-1"><li role="presentation">Risk Supplier</li></a></ul></div>';
             }
 
             if($contact['status'] == 2)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
+                }
+                $blanklist = '';
+                $risk = '';
+
+                if($contact['blacklisted'] == 1)
+                {
+                    $blanklist = 'blanklist';
+                }
+                if($contact['risk'] == 1)
+                {
+                    $risk = 'risk';
                 }
                 
-                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b '.$blanklist." ".$risk.'"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['company'].'</b> Score: ';
                             
-                $add_count = 0;
-                foreach($sales_address as $address)
+                if($contact['overall_rating'] == 1)
                 {
-                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
-                    {
-                        $suspects_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    $suspects_block .= '<i class="fa fa-star yellow"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
                     
-                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                }else if($contact['overall_rating'] == 2){
+                    $suspects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 3){
+                    $suspects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 4){
+                    $suspects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 5){
+                    $suspects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>';
+                }else{
+                    $suspects_block .= '
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }
+
+                $suspects_block .= ' </h5> Website :<a href="website"><b class="f-w-700">'.$contact['website'].'</b></a><p>Supplier Type: <strong>'.$contact['supplier_type'].'</strong></p><p>Conditions Offered: <strong>'.$contact['conditions_offered'].'</strong></p><p>Express Options:';
+                $option = json_encode($contact['express_options']);
+                $temp = json_decode($contact['express_options']);
+                $res = (array)$temp;
+
+                foreach($res as $dd)
+                {
+                    $suspects_block .= $dd.'...';
+                    break;
+                }
+
+                $suspects_block .= '| Express Order Cut off Time:';
+
+                if(strlen($contact['cut_off_time']) > 10)
+                {
+                    $suspects_block .= substr($contact['cut_off_time'],0, 10)."..."; 
+                }else{
+                    $suspects_block .= $contact['cut_off_time'];
+                }
+
+                $suspects_block .= ' </p><p>Payment Terms: '.$contact['payment_terms'].' | Supplier Status: '.$contact['contact_status'].' </p><p> Email: ';
+                $email = '';
+                $mobile = '';
+                foreach($supplier_main_contacts as $main_contact)
+                {
+                    if($main_contact['supplier_id'] == $contact['id'])
                     {
-                        $add_count++;
+                        $email = $main_contact['email'];
+                        $mobile = $main_contact['mobile'];
                     }
                 }
-                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $suspects_block .= '<a href="mailto:'.$email.'" style="color:coral !important;">'.$email.'</a> | Number: '.$mobile.'</p><p> Enquiry"s Sent N/A (Active) | Quoted N/A | Supplier Orders : N/A (Active)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_'.$contact['id'].'"><a role="menuitem" tabindex="-1" href="'.base_url("admin/suppliers/edit_supplier/".$contact["id"]).'."><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
             }
 
             if($contact['status'] == 3)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
+                }
+                $blanklist = '';
+                $risk = '';
+
+                if($contact['blacklisted'] == 1)
+                {
+                    $blanklist = 'blanklist';
+                }
+                if($contact['risk'] == 1)
+                {
+                    $risk = 'risk';
                 }
                 
-                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b '.$blanklist." ".$risk.'"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['company'].'</b> Score: ';
                             
-                $add_count = 0;
-                foreach($sales_address as $address)
+                if($contact['overall_rating'] == 1)
                 {
-                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
-                    {
-                        $prospects_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    $prospects_block .= '<i class="fa fa-star yellow"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
                     
-                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                }else if($contact['overall_rating'] == 2){
+                    $prospects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 3){
+                    $prospects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 4){
+                    $prospects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 5){
+                    $prospects_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>';
+                }else{
+                    $prospects_block .= '
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }
+
+                $prospects_block .= ' </h5> Website :<a href="website"><b class="f-w-700">'.$contact['website'].'</b></a><p>Supplier Type: <strong>'.$contact['supplier_type'].'</strong></p><p>Conditions Offered: <strong>'.$contact['conditions_offered'].'</strong></p><p>Express Options:';
+                $option = json_encode($contact['express_options']);
+                $temp = json_decode($contact['express_options']);
+                $res = (array)$temp;
+
+                foreach($res as $dd)
+                {
+                    $prospects_block .= $dd.'...';
+                    break;
+                }
+
+                $prospects_block .= '| Express Order Cut off Time:';
+
+                if(strlen($contact['cut_off_time']) > 10)
+                {
+                    $prospects_block .= substr($contact['cut_off_time'],0, 10)."..."; 
+                }else{
+                    $prospects_block .= $contact['cut_off_time'];
+                }
+
+                $prospects_block .= ' </p><p>Payment Terms: '.$contact['payment_terms'].' | Supplier Status: '.$contact['contact_status'].' </p><p> Email: ';
+                $email = '';
+                $mobile = '';
+                foreach($supplier_main_contacts as $main_contact)
+                {
+                    if($main_contact['supplier_id'] == $contact['id'])
                     {
-                        $add_count++;
+                        $email = $main_contact['email'];
+                        $mobile = $main_contact['mobile'];
                     }
                 }
-                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $prospects_block .= '<a href="mailto:'.$email.'" style="color:coral !important;">'.$email.'</a> | Number: '.$mobile.'</p><p> Enquiry"s Sent N/A (Active) | Quoted N/A | Supplier Orders : N/A (Active)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_'.$contact['id'].'"><a role="menuitem" tabindex="-1" href="'.base_url("admin/suppliers/edit_supplier/".$contact["id"]).'."><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a><a href="'.base_url('admin/suppliers/tech_sources/'.$contact['id']).'" class="tech-sources" id="'.$contact['id'].'" role="menuitem" tabindex="-1"><li role="presentation">Tech Sources</li></a></ul></div>';
             }
 
             if($contact['status'] == 4)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
+                }
+                $blanklist = '';
+                $risk = '';
+
+                if($contact['blacklisted'] == 1)
+                {
+                    $blanklist = 'blanklist';
+                }
+                if($contact['risk'] == 1)
+                {
+                    $risk = 'risk';
                 }
                 
-                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b '.$blanklist." ".$risk.'"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['company'].'</b> Score: ';
                             
-                $add_count = 0;
-                foreach($sales_address as $address)
+                if($contact['overall_rating'] == 1)
                 {
-                    if($address["address_type"] == "head_office_address" && $address["sales_contact_id"] == $contact["id"])
-                    {
-                        $key_contact_block .=  $address["location"].', '.$address["street"].', '.$address["town"].', '.$address["state"].', '.$address["country_name"].' '.$address["zip_code"];
+                    $key_contact_block .= '<i class="fa fa-star yellow"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
                     
-                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                }else if($contact['overall_rating'] == 2){
+                    $key_contact_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 3){
+                    $key_contact_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 4){
+                    $key_contact_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star"></i>';
+                }else if($contact['overall_rating'] == 5){
+                    $key_contact_block .= '
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>
+                    <i class="fa fa-star yellow"></i>';
+                }else{
+                    $key_contact_block .= '
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>';
+                }
+
+                $key_contact_block .= ' </h5> Website :<a href="website"><b class="f-w-700">'.$contact['website'].'</b></a><p>Supplier Type: <strong>'.$contact['supplier_type'].'</strong></p><p>Conditions Offered: <strong>'.$contact['conditions_offered'].'</strong></p><p>Express Options:';
+                $option = json_encode($contact['express_options']);
+                $temp = json_decode($contact['express_options']);
+                $res = (array)$temp;
+
+                foreach($res as $dd)
+                {
+                    $key_contact_block .= $dd.'...';
+                    break;
+                }
+
+                $key_contact_block .= '| Express Order Cut off Time:';
+
+                if(strlen($contact['cut_off_time']) > 10)
+                {
+                    $key_contact_block .= substr($contact['cut_off_time'],0, 10)."..."; 
+                }else{
+                    $key_contact_block .= $contact['cut_off_time'];
+                }
+
+                $key_contact_block .= ' </p><p>Payment Terms: '.$contact['payment_terms'].' | Supplier Status: '.$contact['contact_status'].' </p><p> Email: ';
+                $email = '';
+                $mobile = '';
+                foreach($supplier_main_contacts as $main_contact)
+                {
+                    if($main_contact['supplier_id'] == $contact['id'])
                     {
-                        $add_count++;
+                        $email = $main_contact['email'];
+                        $mobile = $main_contact['mobile'];
                     }
                 }
-                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $key_contact_block .= '<a href="mailto:'.$email.'" style="color:coral !important;">'.$email.'</a> | Number: '.$mobile.'</p><p> Enquiry"s Sent N/A (Active) | Quoted N/A | Supplier Orders : N/A (Active)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_'.$contact['id'].'"><a role="menuitem" tabindex="-1" href="'.base_url("admin/suppliers/edit_supplier/".$contact["id"]).'."><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a><a href="'.base_url('admin/suppliers/premier_partners/'.$contact['id']).'" class="premier_partners" id="'.$contact['id'].'" role="menuitem" tabindex="-1"><li role="presentation">Premier Partnerss</li></a></ul></div>';
             }
         }
 
         $html = $lead_block."|-|".$suspects_block."|-|".$prospects_block.'|-|'.$key_contact_block;
         echo $html;
+    }
+
+     //Contact Blanklist
+    public function blanklist_supplier()
+    {
+        $id = $this->input->post('id');
+
+        $blanklist_resoan = $this->input->post('blanklist_resoan');
+
+        $data = array(
+            'blacklisted_reason' => $blanklist_resoan,
+            'blacklisted' => 1,
+            'risk_reason' => null,
+            'risk' => 0
+        );
+
+        //Update Reason
+        $update = $this->Suppliers_Model->updateContact($data, $id);
+
+        $this->session->set_flashdata('msg', 'Supplier Contact Blacklisted Successfully');
+        redirect('admin/suppliers');        
+    }
+
+    //Contact Risk
+    public function risk_supplier()
+    {
+        $id = $this->input->post('id');
+
+        $risk_resoan = $this->input->post('risk_resoan');
+
+        $data = array(
+            'risk_reason' => $risk_resoan,
+            'risk' => 1,
+            'blacklisted_reason' => null,
+            'blacklisted' => 0,
+        );
+
+        //Update Reason
+        $update = $this->Suppliers_Model->updateContact($data, $id);
+
+        $this->session->set_flashdata('msg', 'Supplier Contact move on Risk Successfully');
+        redirect('admin/suppliers');        
+    }
+
+    //Contact Tech Sources
+    public function tech_sources()
+    {
+        $id = $this->uri->segment(4);
+
+        $data = array(
+            'tech_sources' => 1
+        );
+
+        //Update Reason
+        $update = $this->Suppliers_Model->updateContact($data, $id);
+
+        $this->session->set_flashdata('msg', 'Supplier Contact Tech Sources Successfully');
+        redirect('admin/suppliers');        
+    }
+
+    //Contact Premier Partners
+    public function premier_partners()
+    {
+        $id = $this->uri->segment(4);
+
+        $data = array(
+            'premier_partners' => 1
+        );
+
+        //Update Reason
+        $update = $this->Suppliers_Model->updateContact($data, $id);
+
+        $this->session->set_flashdata('msg', 'Supplier Contact Premier Partners Successfully');
+        redirect('admin/suppliers');        
+    }
+
+    // Check Supplier Profile Information by AJAX
+    public function checkInformation()
+    {
+        $id = $_GET['id'];
+        $status = $_GET['drop_status'];
+
+        //Get user details
+        $data = $this->Suppliers_Model->getAllSupplierContacts(null, $id);
+
+        if($status == 1)
+        {
+            echo 1;
+        }else if($status == 2)
+        {
+            if($data->risk == 1 || $data->blacklisted == 1)
+            {
+                echo 0;
+            }else{
+                echo 1;
+            }
+        }else if($status == 3)
+        {
+            if($data->risk == 1 || $data->blacklisted == 1)
+            {
+                echo 0;
+            }else{
+                echo 3;
+            }
+        }else if($status == 4)
+        {
+            if($data->risk == 1 || $data->blacklisted == 1)
+            {
+                echo 0;
+            }else{
+                
+                echo 1;
+            }
+        }
+    }
+
+        // Update Supplier Status by AJAX
+    public function updateSupplierStatus()
+    {
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+       
+        //Get user details
+        $update = $this->Suppliers_Model->updateStatus($id, $status);
+
+        if($status < 3)
+        {
+            //Update status
+            $data = array(
+                'tech_sources' => 0
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'suppliers');
+        }
+
+        if($status < 4)
+        {
+            //Update status
+            $data = array(
+                'premier_partners' => 0
+            );
+
+            //Change Contact Prospect Status
+            $this->common_model->update($data, $id,'suppliers');
+        }
+        echo $status;
+    }
+    // Archived
+    public function archived(){
+
+        // Get all countries
+        $data['countries'] = $countries = $this->common_model->select('country');
+
+        $status = 0;
+
+        // get All supplier
+        $data['archived_contacts'] = $archived_contacts = $this->Suppliers_Model->getAllSupplierContacts($status);
+
+        // Get all Menufecturer
+        $data['menufecturer'] = $menufecturer = $this->common_model->select('manufacturer');
+
+        $data['supplier_main_contacts'] = $supplier_main_contacts = $this->Suppliers_Model->getSupplierMainContact();
+
+        // Get all supplier
+        $data['sales_address'] = $sales_address = $this->Suppliers_Model->getAllSalesAddress();
+
+        $data['page_title'] = 'Archived Suppliers';
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/supplier/archived', $data);
+        $this->load->view('admin/layout/footer', $data);
+    }
+
+    //Archive
+    public function archive()
+    {
+        $id = $this->input->post('id');
+
+        $archieved_resoan = $this->input->post('archieved_resoan');
+
+        $data = array(
+            'archieved_resoan' => $archieved_resoan
+        );
+
+        //Update Reason
+        $update = $this->Suppliers_Model->updateContact($data, $id);
+
+        //Update Status
+        $data = $this->Suppliers_Model->updateStatus($id, 0);
+
+        $this->session->set_flashdata('msg', 'Supplier contact Archived successfully');
+        redirect('admin/suppliers');        
+    }
+
+    // Back To Supplier Lead
+    public function backToLeads()
+    {
+        $id = $this->uri->segment(4);
+
+        //Update Status
+        $data = $this->Suppliers_Model->updateStatus($id, 1);
+        $this->session->set_flashdata('msg', 'Supplier contact back on lead successfully.');
+        redirect(base_url('admin/suppliers'));        
+    }
+
+
+    // Delete Suppliers
+    public function deleteContact()
+    {
+        $id = $this->uri->segment(4);
+
+        //Update Status
+        $this->common_model->delete($id,'suppliers'); 
+        $this->session->set_flashdata('msg', 'Supplier permanently deleted successfully.');
+        redirect(base_url('admin/suppliers'));        
     }
 }

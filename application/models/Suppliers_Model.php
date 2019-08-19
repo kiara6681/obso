@@ -72,7 +72,7 @@ class Suppliers_Model extends CI_Model {
     public function updateStatus($id, $status){
 
         $this->db->where('id', $id);
-        $this->db->update('sales_contacts', array('status' => $status));
+        $this->db->update('suppliers', array('status' => $status));
         return true;
     }
     
@@ -82,6 +82,16 @@ class Suppliers_Model extends CI_Model {
     
     public function deleteSupplierData($id, $table){
         return $this->db->delete($table, array('supplier_id' => $id));
+    }
+
+    // get Supplier Main Contacts
+    public function getSupplierMainContact(){
+        $this->db->select('*');
+        $this->db->from('suppliers_contacts');
+        $this->db->where('as_manager', 1);
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
     }
 
     // get Supplier Address

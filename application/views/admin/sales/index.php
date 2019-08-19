@@ -104,19 +104,19 @@
     }
     .qualified
     {
-        border: 4px solid lightgreen;
+        border: 2px solid lightgreen;
     }
     .closable
     {
-        border: 4px solid #b7d7a8;
+        border: 2px solid #b7d7a8;
     }
     .hot_suspacts
     {
-        border: 4px solid #fffd77;
+        border: 2px solid #fffd77;
     }
     .key_account
     {
-        border: 4px solid #d9d2e9;
+        border: 2px solid #d9d2e9;
     }
 </style>
 
@@ -284,7 +284,22 @@
 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
+                                                            <p>Position: <strong><?php
+                                                            if(strlen($contact['job_title']) > 10)
+                                                            {
+                                                                echo substr($contact['job_title'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['job_title'];
+                                                            }
+                                                            ?></strong> | Department: <strong><?php 
+
+                                                            if(strlen($contact['department']) > 10)
+                                                            {
+                                                                echo substr($contact['department'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['department'];
+                                                            }
+                                                            ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                             <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -368,7 +383,22 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b>
                                                                 </a> 
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
+                                                            <p>Position: <strong><?php
+                                                            if(strlen($contact['job_title']) > 10)
+                                                            {
+                                                                echo substr($contact['job_title'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['job_title'];
+                                                            }
+                                                            ?></strong> | Department: <strong><?php 
+
+                                                            if(strlen($contact['department']) > 10)
+                                                            {
+                                                                echo substr($contact['department'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['department'];
+                                                            }
+                                                            ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -460,7 +490,22 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
+                                                            <p>Position: <strong><?php
+                                                            if(strlen($contact['job_title']) > 10)
+                                                            {
+                                                                echo substr($contact['job_title'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['job_title'];
+                                                            }
+                                                            ?></strong> | Department: <strong><?php 
+
+                                                            if(strlen($contact['department']) > 10)
+                                                            {
+                                                                echo substr($contact['department'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['department'];
+                                                            }
+                                                            ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -556,7 +601,22 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
+                                                            <p>Position: <strong><?php
+                                                            if(strlen($contact['job_title']) > 10)
+                                                            {
+                                                                echo substr($contact['job_title'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['job_title'];
+                                                            }
+                                                            ?></strong> | Department: <strong><?php 
+
+                                                            if(strlen($contact['department']) > 10)
+                                                            {
+                                                                echo substr($contact['department'],0, 10)."..."; 
+                                                            }else{
+                                                                echo $contact['department'];
+                                                            }
+                                                            ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;

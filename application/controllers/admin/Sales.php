@@ -869,8 +869,21 @@ class Sales extends CI_Controller {
                         $flag = $country['flag'];
                     }
                 }
+
+                if(strlen($contact['job_title']) > 10)
+                {
+                    $job_title = substr($contact['job_title'],0, 10)."..."; 
+                }else{
+                    $job_title =  $contact['job_title'];
+                }
+                if(strlen($contact['department']) > 10)
+                {
+                    $department =  substr($contact['department'],0, 10)."..."; 
+                }else{
+                    $department = $contact['department'];
+                }
                 
-                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $job_title.'</strong> | Department: <strong>'. $department.'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -896,8 +909,21 @@ class Sales extends CI_Controller {
                         $flag = $country['flag'];
                     }
                 }
+
+                if(strlen($contact['job_title']) > 10)
+                {
+                    $job_title = substr($contact['job_title'],0, 10)."..."; 
+                }else{
+                    $job_title =  $contact['job_title'];
+                }
+                if(strlen($contact['department']) > 10)
+                {
+                    $department =  substr($contact['department'],0, 10)."..."; 
+                }else{
+                    $department = $contact['department'];
+                }
                 
-                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="2" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="2" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $job_title.'</strong> | Department: <strong>'. $department.'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -923,8 +949,21 @@ class Sales extends CI_Controller {
                         $flag = $country['flag'];
                     }
                 }
+
+                if(strlen($contact['job_title']) > 10)
+                {
+                    $job_title = substr($contact['job_title'],0, 10)."..."; 
+                }else{
+                    $job_title =  $contact['job_title'];
+                }
+                if(strlen($contact['department']) > 10)
+                {
+                    $department =  substr($contact['department'],0, 10)."..."; 
+                }else{
+                    $department = $contact['department'];
+                }
                 
-                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="3" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $job_title.'</strong> | Department: <strong>'. $department.'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -950,8 +989,21 @@ class Sales extends CI_Controller {
                         $flag = $country['flag'];
                     }
                 }
+
+                if(strlen($contact['job_title']) > 10)
+                {
+                    $job_title = substr($contact['job_title'],0, 10)."..."; 
+                }else{
+                    $job_title =  $contact['job_title'];
+                }
+                if(strlen($contact['department']) > 10)
+                {
+                    $department =  substr($contact['department'],0, 10)."..."; 
+                }else{
+                    $department = $contact['department'];
+                }
                 
-                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
+                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $job_title.'</strong> | Department: <strong>'. $department.'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -1062,11 +1114,6 @@ class Sales extends CI_Controller {
 
         redirect('admin/sales');
     }
-
-
-
-
-    
 
 
     /*End Customer List*/ 

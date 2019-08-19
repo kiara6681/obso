@@ -75,10 +75,10 @@
                         <div class="col-md-12">                                
                             <?php
                             $flag = 'us.png';
-                            if(count($archieved_contacts) > 0)
+                            if(count($archived_contacts) > 0)
                             {
                                 // show sales companies
-                                foreach ($archieved_contacts as $key => $contact)
+                                foreach ($archived_contacts as $key => $contact)
                                 {
                                     foreach($sales_address as $address)
                                     {
@@ -96,30 +96,84 @@
                                                         <div class="col-md-9 c-b" style="padding-bottom: 10px;">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" /> 
-                                                                Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b> | Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
-                                                            </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> | Location:
+                                                                Name  : <b class="f-w-700"><?= $contact['company']; ?> </b> | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Score : 
                                                                 <?php
-                                                                $add_count = 0;
-                                                                foreach($sales_address as $address)
-                                                                {
-                                                                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                                    if($contact['overall_rating'] == 1)
                                                                     {
-                                                                        echo  $address['location'].', '.$address['street'].', '.$address['town'].', '.$address['state'].', '.$address['country_name'].' '.$address['zip_code']; ?>
-                                                                    
+                                                                        ?>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <?php
+                                                                    }else if($contact['overall_rating'] == 2){
+                                                                        ?>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <?php
+                                                                    }else if($contact['overall_rating'] == 3){
+                                                                        ?>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <?php
+                                                                    }else if($contact['overall_rating'] == 4){
+                                                                        ?>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <?php
+                                                                    }else if($contact['overall_rating'] == 5){
+                                                                        ?>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <i class="fa fa-star yellow"></i>
+                                                                        <?php
+                                                                    }else{
+                                                                        ?>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <?php
+                                                                    }
+                                                                ?>
+                                                            </h5>
+                                                             Website :
+                                                                <a href="website"> 
+                                                                    <b class="f-w-700"><?=  $contact['website']; ?></b>
 
-                                                                    <?php
-                                                                    }else if($address['address_type'] != 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                                                                </a>
+                                                            <p>Supplier Type: <strong><?=  $contact['supplier_type']; ?></strong></p>
+                                                            <p>Conditions Offered: <strong><?=  $contact['conditions_offered']; ?></strong></p>     
+                                                             </p>
+                                                            <p>Payment Terms: <?=  $contact['payment_terms']; ?> | Supplier Status: <?=  $contact['contact_status']; ?> </p>      
+                                                            <p> Email: 
+                                                                <?php
+                                                                $email = '';
+                                                                $mobile = '';
+                                                                foreach($supplier_main_contacts as $main_contact)
+                                                                {
+                                                                    if($main_contact['supplier_id'] == $contact['id'])
                                                                     {
-                                                                        $add_count++;
+                                                                        $email = $main_contact['email'];
+                                                                        $mobile = $main_contact['mobile'];
                                                                     }
                                                                 }
                                                                 ?>
-                                                                <a class="badge badge-success badge-pill" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>"><?= $add_count; ?></a>
-                                                            </p>
-                                                            <br />
-                                                            <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
-                                                            <p>Trader: <strong><?=  $contact['trader']; ?></strong> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
+                                                                <a href="mailto:<?= $email; ?>" style="color:coral !important;"><?= $email; ?></a> | Number: <?=  $mobile; ?></p>
+                                                            <p>Spend: N/A | Enquiry: N/A | Quoted: N/A | Order: N/A</p>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <h6>Reason :</h6>
@@ -132,10 +186,10 @@
                                                         <div class="col-md-1 text-center c-b">
                                                             <div class="test action_button" id="menu1" data-toggle="dropdown"></div>
                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/backToLeads/'.$contact['id']) ?>">
+                                                                <a role="menuitem" tabindex="-1" href="<?= base_url('admin/suppliers/backToLeads/'.$contact['id']) ?>">
                                                                     <li role="presentation">Back to Lead</li>
                                                                 </a>
-                                                               <a href="<?= base_url('admin/sales/deleteContact/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to permanently delete this contact?')" role="menuitem" tabindex="-1">
+                                                               <a href="<?= base_url('admin/suppliers/deleteContact/'.$contact['id']) ?>" onclick="return confirm('Are you sure you want to permanently delete this contact?')" role="menuitem" tabindex="-1">
                                                                     <li role="presentation">Permanently Delete</li>
                                                                </a>
                                                            </ul>
