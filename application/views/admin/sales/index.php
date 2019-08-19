@@ -134,9 +134,6 @@
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-2">                    
                         <div class="float-right d-none d-md-block">
-                            <a href="javascript:;" class="btn btn-danger waves-effect btn-md waves-light multipal_archive">
-                                Archive Multiple
-                            </a>
                             <a href="<?= base_url(); ?>admin/sales/create" class="btn btn-primary waves-effect btn-md waves-light">
                                 Add New Contact
                             </a>
@@ -171,6 +168,15 @@
                     }
                     ?>
                     <div class="row">
+                        <div class="col-md-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a href="javascript:;" class="btn btn-danger waves-effect btn-md waves-light multipal_archive" style="width: 100%;">
+                                         Archive Multiple 
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
@@ -180,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-body">
                                     <form role="search">
@@ -212,7 +218,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-body">
                                     <form role="search">

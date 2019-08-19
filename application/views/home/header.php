@@ -265,14 +265,15 @@ foreach ($home as $home) {
 </div>
 <div class="search active" id="mobile-search">
     <div class="container">
-        <form action="javascript:;" method="post">
+        <form action='<?= base_url('home/manufacturer'); ?>' method="post">
             <div class="input">
-                <input type="text" name="search" class="header-search-input search_text" id="mobile-search-input" placeholder="Enter Part Number" autocomplete="off" style="">
+                <input type="text" name="search" class="header-search-input search_text" onkeyup="get_partnumber(val=this.val)" id="mobile-search-input" placeholder="Enter Part Number" autocomplete="off" style="">
             </div>
+            <a class="search_buton" href="javascript:;" id="search_button" style="position: absolute;right: 0;top: 10px;"><span class="fa fa-search"></span></a>
         </form>
         <div class="mobile-search-form">
-            <div class="search-inner" id="mobile-result"></div>
-          </div>
+          <div class="search-inner" id="mobile-result"></div>
+        </div>
     </div>
 </div>
 <style type="text/css">
@@ -862,7 +863,15 @@ $(document).ready(function(){
 		jQuery('.search-form').hide();	
     jQuery('.mobile-search-form').hide();  
 	})
-})
+});
+
+$('#search_button').on('click', function(){
+    var data = $('#mobile-search-input').val();
+    var url = "<?= base_url('home/manufacturer'); ?>"+'?search_text='+data;
+    window.location.href = url;
+
+});
+
 $('#search_text').keyup(function(){
 	var searchvl = $(this).val();
 	if(searchvl == ""){
@@ -885,6 +894,7 @@ $('#search_text').keyup(function(){
   }
   
 });
+
 $('#mobile-search-input').keyup(function(){
   var searchvl = $(this).val();
   if(searchvl == ""){
