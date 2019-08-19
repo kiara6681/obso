@@ -12,9 +12,10 @@ class Sales_Model extends CI_Model {
     // show all sales companies
     public function getAllSalesContacts($status = null, $id = null){
 
-        $this->db->select('contact.*, company.company_name');
+        $this->db->select('contact.*, company.company_name, industries.industry');
         $this->db->from('sales_contacts contact');
         $this->db->join('companies company','company.id = contact.company','left');
+        $this->db->join('industry industries','industries.id = company.industry','left');
         if(!is_null($status))
         {
             $this->db->where('contact.status', $status);

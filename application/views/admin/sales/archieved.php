@@ -35,10 +35,10 @@
         margin-bottom: 0px;
     }
     .red-box{
-        background-color: red;
-        color: #fff;
+        color: coral;
         padding: 10px;
         border-radius: 1px;
+        border: 1px solid coral;
     }
 </style>
 
@@ -52,7 +52,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Home</li>
                             <li class="breadcrumb-item active"><a href="<?= base_url(); ?>admin/sales">All Sales Contact</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:;">All Archieved Contact</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:;">All Archived Contact</a></li>
                         </ol>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                                             <div class="row">
                                                 <div class="col-md-12  c-b-gray">
                                                     <div class="row">
-                                                        <div class="col-md-9 c-b" style="padding-bottom: 10px;">
+                                                        <div class="col-md-8 c-b" style="padding-bottom: 10px;">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" /> 
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b> | Company : <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
@@ -121,13 +121,13 @@
                                                             <p>Email: <a href="javascript:;" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <strong><?=  $contact['trader']; ?></strong> | Spend: <?=  0; ?> </p><p> Enquiry: <?=  0; ?> | Quoted: <?=  0; ?> | Order: <?=  0; ?></p>
                                                         </div>
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-3">
                                                             <h6>Reason :</h6>
-                                                            <div class="red-box">
+                                                            <p class="red-box">
                                                             <?php
                                                                 echo $contact['archieved_resoan'];
                                                             ?>
-                                                            </div>
+                                                            </p>
                                                         </div>
                                                         <div class="col-md-1 text-center c-b">
                                                             <div class="test action_button" id="menu1" data-toggle="dropdown"></div>

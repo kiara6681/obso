@@ -60,7 +60,7 @@ class Sales extends CI_Controller {
         // Get all sales companies
         $data['sales_address'] = $sales_address = $this->Sales_Model->getAllSalesAddress();
 
-        $data['page_title'] = 'Sales Contact';
+        $data['page_title'] = 'Sales Contact Archived';
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/sales/archieved', $data);
         $this->load->view('admin/layout/footer', $data);
@@ -409,7 +409,34 @@ class Sales extends CI_Controller {
         //Update Status
         $data = $this->Sales_Model->updateStatus($id, 0);
 
-        $this->session->set_flashdata('msg', 'Sales contact archieved successfully');
+        $this->session->set_flashdata('msg', 'Sales contact Archived successfully');
+        redirect('admin/sales');        
+    }
+
+    // Archieve Sales
+    public function multiple_archieve()
+    {
+        $temp = $this->input->post('ids');
+
+        $ids = explode(',', $temp);
+
+        $archieved_resoan = $this->input->post('archieved_resoan');
+
+        foreach ($ids as $key => $id) 
+        {
+            $data = array(
+                'archieved_resoan' => $archieved_resoan
+            );
+
+            //Update Reason
+            $update = $this->Sales_Model->updateContact($data, $id);
+            
+            //Update Status
+            $data = $this->Sales_Model->updateStatus($id, 0);
+        }
+
+
+        $this->session->set_flashdata('msg', 'Sales contact Archived successfully');
         redirect('admin/sales');        
     }
 
@@ -806,21 +833,23 @@ class Sales extends CI_Controller {
         $key_contact_block = '';
 
         $sales_address = $this->Sales_Model->getAllSalesAddress();
-        $flag = 'us.png';
+
+        $countries = $this->common_model->select('country');
+        $flag = 'flag.png';
 
         foreach ($all_sales_contacts as $key => $contact) 
         {
             if($contact['status'] == 1)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
                 }
                 
-                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $lead_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -834,21 +863,20 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. ($contact["trader"] != '')?$contact["trader"]:"N/A".' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $lead_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
             }
 
             if($contact['status'] == 2)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
                 }
                 
-                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $suspects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -862,21 +890,20 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $suspects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
             }
 
             if($contact['status'] == 3)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
                 }
                 
-                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $prospects_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -890,21 +917,20 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $prospects_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
             }
 
             if($contact['status'] == 4)
             {
-                foreach($sales_address as $address)
+                foreach($countries as $country)
                 {
-                    if($address['address_type'] == 'head_office_address' && $address['sales_contact_id'] == $contact['id'])
+                    if($country['id'] == $contact['contact_country'])
                     {
-                        $flag = $address['flag'];
+                        $flag = $country['flag'];
                     }
                 }
                 
-                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong></p><p>Department: <strong>'. $contact['department'].'</strong></p><p>Location:';
+                $key_contact_block .= '<div class="col-md-12 m-b-3 move ui-state-default" data-id="1" id="'.$contact['id'].'"><div class="col-md-12 c-b"><h5 class="f-w-400"><img style="max-width: 32px;padding: 1px; " src="'.base_url().'uploads/flags/'.$flag.'" />Name  : <b class="f-w-700">'.$contact['fname'].' '.$contact['lname'].' </b><br/>Company : <b class="f-w-700">'. $contact['company_name'].'</b></h5><p>Position: <strong>'. $contact['job_title'].'</strong> | Department: <strong>'. $contact['department'].'</strong></p><p>Industry: <strong>'.$contact['industry_name'].'</strong></p><p>Location:';
                             
                 $add_count = 0;
                 foreach($sales_address as $address)
@@ -918,8 +944,7 @@ class Sales extends CI_Controller {
                         $add_count++;
                     }
                 }
-                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i>` 0 </p><p> Enquiry: 0 | Quoted: 0 | Order: 0</p>
-                </div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archieve</li></a></ul></div>';
+                $key_contact_block .= '<a class="badge badge-success badge-pill" href="'.base_url('admin/sales/edit_sales/'.$contact["id"].'">'.$add_count.'</a></p><br /><p>Email: <a href="mailto:'.$contact["email"].'" style="color:coral !important;">'. $contact["email"].'</a> | Mobile : '. $contact["mobile"].'</p><p>Trader: '. $contact["trader"].' | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> N/A </p><p> Enquiry: N/A | Quoted: N/A | Order: N/A (0%)</p></div><div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div><ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><a role="menuitem" tabindex="-1" href="'.base_url()."admin/sales/edit_sales/".$contact["id"]).'"><li role="presentation">Edit</li></a><a href="javascript:;" id="'.$contact["id"].'" class="archieve" role="menuitem" tabindex="-1"><li role="presentation">Archive</li></a></ul></div>';
             }
         }
 

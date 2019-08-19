@@ -101,11 +101,15 @@
     }
     .qualified
     {
-        border: 4px solid red;
+        border: 4px solid lightgreen;
     }
     .closable
     {
-        border: 4px solid blue;
+        border: 4px solid #b7d7a8;
+    }
+    .key_account
+    {
+        border: 4px solid #d9d2e9;
     }
 </style>
 
@@ -123,6 +127,9 @@
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-2">                    
                         <div class="float-right d-none d-md-block">
+                            <a href="javascript:;" class="btn btn-danger waves-effect btn-md waves-light multipal_archive">
+                                Archive Multiple
+                            </a>
                             <a href="<?= base_url(); ?>admin/sales/create" class="btn btn-primary waves-effect btn-md waves-light">
                                 Add New Contact
                             </a>
@@ -130,7 +137,7 @@
                                 Import Contacts
                             </a>
                             <a href="<?= base_url(); ?>admin/sales/archieved" class="btn btn-danger waves-effect btn-md waves-light">
-                                Archieved Contacts
+                                Archived Contacts
                             </a>
                         </div>
                     </div>
@@ -264,8 +271,7 @@
 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
-                                                            <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                             <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -288,14 +294,17 @@
                                                             <br />
                                                             <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
+                                                            <div style="width:100%;text-align:right;">
+                                                                <input type="checkbox" style="height:calc(0.5em + 0.75rem + 0px);width:6%" name="archive[]" class="archive_multiple" value="<?= $contact['id']; ?>">
+                                                            </div>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
-                                                                <li role="presentation">Edit</li>
+                                                                <li role="presentation">View / Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
-                                                                <li role="presentation">Archieve</li>
+                                                                <li role="presentation">Archive</li>
                                                            </a>
                                                        </ul>
                                                     </div>
@@ -340,8 +349,7 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b>
                                                                 </a> 
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
-                                                            <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -365,14 +373,17 @@
         
                                                             <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
+                                                            <div style="width:100%;text-align:right;">
+                                                                <input type="checkbox" style="height:calc(0.5em + 0.75rem + 0px);width:6%" name="archive[]" class="archive_multiple" value="<?= $contact['id']; ?>">
+                                                            </div>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
-                                                                <li role="presentation">Edit</li>
+                                                                <li role="presentation">View / Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
-                                                                <li role="presentation">Archieve</li>
+                                                                <li role="presentation">Archive</li>
                                                            </a>
                                                        </ul>
                                                     </div>
@@ -427,7 +438,7 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -449,14 +460,17 @@
         
                                                              <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
+                                                            <div style="width:100%;text-align:right;">
+                                                                <input type="checkbox" style="height:calc(0.5em + 0.75rem + 0px);width:6%" name="archive[]" class="archive_multiple" value="<?= $contact['id']; ?>">
+                                                            </div>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
-                                                                <li role="presentation">Edit</li>
+                                                                <li role="presentation">View / Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
-                                                                <li role="presentation">Archieve</li>
+                                                                <li role="presentation">Archive</li>
                                                            </a>
                                                            <a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/<?= $contact["id"]; ?>" class="qualified_prospect" role="menuitem" tabindex="-1">
                                                                 <li role="presentation">Qualified Prospect</li>
@@ -507,7 +521,7 @@
                                                     }
                                                     ?>
                                                     <div class="col-md-12 m-b-3 move ui-state-default" data-id="4" id="<?= $contact['id']; ?>">
-                                                        <div class="col-md-12 c-b">
+                                                        <div class="col-md-12 c-b key_account" id="key_account">
                                                             <h5 class="f-w-400">
                                                                 <img style="max-width: 32px;padding: 1px; " src="<?= base_url(); ?>uploads/flags/<?= $flag; ?>" />  
                                                                 Name  : <b class="f-w-700"><?= $contact['fname'].' '.$contact['lname']; ?> </b><br/>Company : 
@@ -515,8 +529,7 @@
                                                                     <b class="f-w-700"><?=  $contact['company_name']; ?></b> 
                                                                 </a>
                                                             </h5>
-                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong></p>
-                                                            <p>Department: <strong><?=  $contact['department']; ?></strong></p>
+                                                            <p>Position: <strong><?=  $contact['job_title']; ?></strong> | Department: <strong><?=  $contact['department']; ?></strong> </p><p>Industry: <strong><?= $contact['industry']; ?></strong></p>
                                                              <p>Location:
                                                                 <?php
                                                                 $add_count = 0;
@@ -540,14 +553,17 @@
         
                                                              <p>Email: <a href="mailto:<?= $contact['email']; ?>" style="color:coral !important;"><?=  $contact['email']; ?></a> | Mobile : <?=  $contact['mobile']; ?></p>
                                                             <p>Trader: <?=  $contact['trader']; ?> | Spend: <i class="fas fa-pound-sign" style="color: #fff;"> </i> <?=  "N/A"; ?> </p><p> Enquiry: <?=  "N/A"; ?> | Quoted: <?=  "N/A"; ?> | Order: <?=  "N/A"; ?> (0%)</p>
+                                                            <div style="width:100%;text-align:right;">
+                                                                <input type="checkbox" style="height:calc(0.5em + 0.75rem + 0px);width:6%" name="archive[]" class="archive_multiple" value="<?= $contact['id']; ?>">
+                                                            </div>
                                                         </div>
                                                         <div class="action_button" id="menu1" data-toggle="dropdown"><i class="fa fa-ellipsis-v "></i> </div>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" id="sub_menu_<?= $contact['id']; ?>">
                                                             <a role="menuitem" tabindex="-1" href="<?= base_url('admin/sales/edit_sales/'.$contact['id']) ?>">
-                                                                <li role="presentation">Edit</li>
+                                                                <li role="presentation">View / Edit</li>
                                                             </a>
                                                            <a href="javascript:;" id="<?= $contact['id']; ?>" class="archieve" role="menuitem" tabindex="-1">
-                                                                <li role="presentation">Archieve</li>
+                                                                <li role="presentation">Archive</li>
                                                            </a>
                                                        </ul>
                                                     </div>
@@ -601,7 +617,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title mt-0">Are you sure ?  you want to archieve this contact !</h6>
+                <h6 class="modal-title mt-0">Are you sure ?  you want to Archive this contact !</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form action="<?= base_url('admin/sales/archieve'); ?>" method="post">
@@ -610,13 +626,48 @@
                 <div class="modal-body">
                     <label>Resoan</label>
                     <select class="form-control" name="archieved_resoan" required>
-                        <option value="">Select Archieve Reason</option>
-                        <option value="Record not Available">Record not Available</option>
+                        <option value="">Select Archive Reason</option>
+                        <option value="No Manufacturing">No Manufacturing</option>
+                        <option value="No longer works for the Company">No longer works for the Company</option>
+                        <option value="No requirments for the items we sell">No requirments for the items we sell</option>
+                        <option value="We cannot sell to">We cannot sell to</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Archieve</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Archive</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Multiple Archive Modal -->
+<div class="modal fade bs-example-modal-center" id="multipel_archieved_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title mt-0">Are you sure ?  you want to Archive these contact !</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form action="<?= base_url('admin/sales/multiple_archieve'); ?>" method="post">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                <input type="hidden" id="contact_ids" name="ids">
+                <div class="modal-body">
+                    <label>Resoan</label>
+                    <select class="form-control" name="archieved_resoan" required>
+                        <option value="">Select Archive Reason</option>
+                        <option value="No Manufacturing">No Manufacturing</option>
+                        <option value="No longer works for the Company">No longer works for the Company</option>
+                        <option value="No requirments for the items we sell">No requirments for the items we sell</option>
+                        <option value="We cannot sell to">We cannot sell to</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Archive</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -713,9 +764,60 @@ $(document).ready(function(){
                                 $(ui.item[0]).attr("data-id", drop_status);
                             },
                         }); 
+
+                        var lead_count  = 0;
+                        var suspects_count  = 0;
+                        var prospects_count  = 0;
+                        var key_contacts_count  = 0;
+
+                        $('#lead_count').html();
+                        $('#suspects_count').html();
+                        $('#prospects_count').html();
                         
+                        if(drop_status == 1){
+                            lead_count = 1 + parseInt($('#lead_count').html());
+                            $('#lead_count').html(lead_count);
+
+                            if(status == 2){ suspects_count = parseInt($('#suspects_count').html()) - 1; $('#suspects_count').html(suspects_count);}
+                            if(status == 3){ prospects_count = parseInt($('#prospects_count').html()) - 1; $('#prospects_count').html(prospects_count);}
+                            if(status == 4){ key_contacts_count = parseInt($('#key_contacts_count').html()) - 1; $('#key_contacts_count').html(key_contacts_count);}
+                        }
+
+                        if(drop_status == 2){
+                            suspects_count = 1 + parseInt($('#suspects_count').html());
+                            $('#suspects_count').html(suspects_count);
+
+                            if(status == 1){ lead_count = parseInt($('#lead_count').html()) - 1; $('#lead_count').html(lead_count);}
+                            if(status == 3){ prospects_count = parseInt($('#prospects_count').html()) - 1; $('#prospects_count').html(prospects_count);}
+                            if(status == 4){ key_contacts_count = parseInt($('#key_contacts_count').html()) - 1; $('#key_contacts_count').html(key_contacts_count);}
+                        }
+
+                        if(drop_status == 4)
+                        {
+                            key_contacts_count = 1 + parseInt($('#key_contacts_count').html());
+                            $('#key_contacts_count').html(key_contacts_count);
+
+                            if(status == 1){ lead_count = parseInt($('#lead_count').html()) - 1; $('#lead_count').html(lead_count);}
+                            if(status == 2){ suspects_count = parseInt($('#suspects_count').html()) - 1; $('#suspects_count').html(suspects_count);}
+                            if(status == 3){ prospects_count = parseInt($('#prospects_count').html()) - 1; $('#prospects_count').html(prospects_count);}
+
+                            $('#key_account').addClass('key_account');
+                        }
+                        else
+                        {
+                            $('#key_account').removeClass('key_account');
+                        }
+
                         if(drop_status == 3)
                         {
+                            prospects_count = 1 + parseInt($('#prospects_count').html());
+                            $('#prospects_count').html(prospects_count);
+
+                            if(status == 1){ lead_count = parseInt($('#lead_count').html()) - 1; $('#lead_count').html(lead_count);}
+                            if(status == 2){ suspects_count = parseInt($('#suspects_count').html()) - 1; $('#suspects_count').html(suspects_count);}
+                            if(status == 4){ key_contacts_count = parseInt($('#key_contacts_count').html()) - 1; $('#key_contacts_count').html(key_contacts_count);}
+
+
                             var html = '<a href="<?= base_url(); ?>admin/sales/contactQualifiedProspect/'+id+'" class="qualified_prospect" role="menuitem" tabindex="-1"><li role="presentation">Qualified Prospect</li></a>';
                             $('#sub_menu_'+id).append(html);
 
@@ -782,6 +884,24 @@ $(document).ready(function(){
         $("#key_contact_block .move").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
+    });
+
+    // Multipal Archive
+    $('.multipal_archive').on('click', function(){
+        var archive = [];
+        $(".archive_multiple:checked").each(function() {
+            archive.push(this.value);
+        });
+
+        if(archive.length == 0)
+        {
+            alert('Please select contact for Archive.');
+        }
+        else
+        {
+            $('#contact_ids').val(archive);
+            $('#multipel_archieved_modal').modal('show');           
+        }
     });
 
 });

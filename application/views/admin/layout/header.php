@@ -288,7 +288,7 @@ $system_title = $this->db->get_where('settings', array('type' => 'system_title')
                             </li>
 
                             <li>
-                                <a href="<?php echo base_url(); ?>admin/sales"><i class="far fa-address-card"></i> Sales </a>
+                                <a href="<?php echo base_url(); ?>admin/sales"><i class="far fa-address-card"></i> Sales Contacts List </a>
                             </li>
 
                             <li>
