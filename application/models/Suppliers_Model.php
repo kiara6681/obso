@@ -44,6 +44,17 @@ class Suppliers_Model extends CI_Model {
         return $query;
     }
 
+    // Get Menufacturer
+    public function getSupplierManufacturer(){
+
+        $this->db->select('supplier_mnfr.*, mnfr.manufacturer as mnfr_name');
+        $this->db->from('supplier_manufacturers supplier_mnfr');
+        $this->db->join('manufacturer mnfr','mnfr.id = supplier_mnfr.manufacturer');
+        $query = $this->db->get();
+        $query = $query->result_array();  
+        return $query;
+    }
+
     // Show All Contact Address
     public function getAllSalesAddress(){
 
